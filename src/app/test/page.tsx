@@ -9,13 +9,13 @@ import Category from './_component/Category';
 export default async function Test() {
   return (
     <Layout>
-      <Layout.FullContent>
+      <Layout.Content>
         <Suspense fallback={<div>로딩중</div>}>
           <Prefetch prefetchQueries={[usePrefetchCategory]}>
             <Category />
           </Prefetch>
         </Suspense>
-      </Layout.FullContent>
+      </Layout.Content>
     </Layout>
   );
 }
