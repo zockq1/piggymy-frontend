@@ -212,3 +212,5 @@
 ![Alt text](ui/search/search2.png)
 ![Alt text](ui/search/search3.png)
 ![Alt text](ui/search/search4.png)
+
+- form의 props에 수직, 수평 선택을 추가해서 사용
