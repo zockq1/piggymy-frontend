@@ -1,3 +1,5 @@
+# 실행법
+
 npm i
 
 //프로젝트 실행<br>
@@ -9,9 +11,12 @@ npm run mock
 //스토리북 실행<br>
 npm run storybook
 
-[UI 문서](docs/ui.md)
+# 설계 문서
 
-디렉토리
+[UI 문서](docs/ui.md)</br>
+[Layout 문서](docs/layout.md)
+
+# 디렉토리 구조
 
 ```
 ┌─ src
