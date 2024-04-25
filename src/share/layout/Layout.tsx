@@ -25,6 +25,7 @@ function Content({ children }: { children?: ReactNode }) {
         gridArea: 'content',
         display: 'grid',
         gridTemplateColumns: '380px auto',
+        gridTemplateRows: 'max-content',
       }}
     >
       {children}
@@ -33,7 +34,7 @@ function Content({ children }: { children?: ReactNode }) {
 }
 
 function FullContent({ children }: { children?: ReactNode }) {
-  return <div className="col-span-2">{children}</div>;
+  return <div className="col-start-1 col-end-3">{children}</div>;
 }
 
 function LeftContent({ children }: { children?: ReactNode }) {
