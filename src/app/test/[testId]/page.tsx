@@ -10,7 +10,7 @@ export default function CertificateBoardPage({
     <Layout>
       <Layout>
         {params.certificateId}
-        <Button variant="outline">버튼</Button>
+        <Button>버튼</Button>
       </Layout>
     </Layout>
   );
