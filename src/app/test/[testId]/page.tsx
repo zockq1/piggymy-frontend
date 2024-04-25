@@ -8,10 +8,10 @@ export default function CertificateBoardPage({
 }) {
   return (
     <Layout>
-      <Layout.FullContent>
+      <Layout>
         {params.certificateId}
         <Button variant="outline">버튼</Button>
-      </Layout.FullContent>
+      </Layout>
     </Layout>
   );
 }

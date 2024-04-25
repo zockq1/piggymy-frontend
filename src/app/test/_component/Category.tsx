@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 
-import { useGetCategory } from '../../../query/test/useGetCategory';
+import { useGetCategory } from '@/share/query/test/useGetCategory';
+
 import CategorySelect from './CategorySelect';
 
 export default function Category() {

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { useCreatePosts } from '@/query/test/useCreatePost';
+import { useCreatePosts } from '@/share/query/test/useCreatePost';
 
 export default function Test() {
   const [count, setCount] = useState(0);
