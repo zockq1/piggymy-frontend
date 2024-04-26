@@ -1,7 +1,8 @@
-import { cva, VariantProps } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
 import { ButtonHTMLAttributes } from 'react';
 
 import { cn } from '@/utils/cn';
+import { ExcludeNullVariantProp } from '@/utils/ExcludeNullVariantProp';
 
 export const ButtonVariants = cva(
   `
@@ -28,7 +29,7 @@ export const ButtonVariants = cva(
 
 interface ButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'color'>,
-    VariantProps<typeof ButtonVariants> {}
+    ExcludeNullVariantProp<typeof ButtonVariants> {}
 
 export default function Button({
   color,
