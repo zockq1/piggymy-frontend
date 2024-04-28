@@ -15,7 +15,7 @@ const config: Config = {
       },
     },
     colors: {
-      wite: '#FFFFFF',
+      white: '#FFFFFF',
       black: '#000000',
       error: '#FF3257',
       warning: '#EE706B',
