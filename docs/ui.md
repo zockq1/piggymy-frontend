@@ -56,7 +56,7 @@
      - `<Title underbar>테마별 카드 모음집</Title>`
      - `<Title underbar>카드 모음집 <Title.H>2</Title.H>건</Title>`
 
-2. `<PathTitle/>`<br/>
+2. `<Breadcrumb/>`<br/>
    ![Alt text](ui/title/route-title.png)
    - Props:
      - path: string[] - 경로를 순차적으로 전달, 마지막 index가 현재 페이지
