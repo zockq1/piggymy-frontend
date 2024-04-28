@@ -6,7 +6,7 @@
 import Image from 'next/image';
 import { DOMAttributes, ReactNode } from 'react';
 
-import arrow from '/public/img/Icon/Name=Arrowback-R@3x.png';
+import arrow from '/public/img/icon/next.svg';
 
 interface BreadcrumbProps extends DOMAttributes<HTMLHeadingElement> {
   path: string[];
@@ -22,7 +22,7 @@ function Breadcrumb({ path }: BreadcrumbProps) {
           {p}
         </span>,
       );
-      temp.push(<Image src={arrow} alt="next" width={20} height={20} />);
+      temp.push(<Image src={arrow} alt="next" width={5} />);
     } else {
       temp.push(
         <span className="font-inter text-left text-lg font-bold leading-5 tracking-tighter">
