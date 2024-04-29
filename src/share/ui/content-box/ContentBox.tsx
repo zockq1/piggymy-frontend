@@ -15,7 +15,7 @@ function ContentBox({
   return (
     <div
       className={twMerge(
-        `relative flex w-full flex-col items-center justify-center rounded-[16px] bg-white p-4`,
+        `relative m-4 flex w-full flex-col items-center justify-center rounded-[16px] bg-white p-4`,
         className,
       )}
     >
