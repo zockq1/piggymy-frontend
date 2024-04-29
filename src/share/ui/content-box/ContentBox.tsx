@@ -1,27 +1,23 @@
-import React, { FC, ReactNode, useEffect, useState } from 'react';
+import React, { HTMLAttributes, ReactNode } from 'react';
+import { twMerge } from 'tailwind-merge';
 
-interface ContentBoxProps {
+interface ContentBoxProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   topLeft?: ReactNode;
   topRight?: ReactNode;
-  height?: string | number;
 }
-const ContentBox: FC<ContentBoxProps> = ({
+function ContentBox({
   children,
   topLeft,
   topRight,
-  height,
-}) => {
-  const [heightClass, setHeightClass] = useState('h-max');
-
-  useEffect(() => {
-    // NOTE: h-[${height}px]를 div className에 직접 꽂으면 동작하지 않는데, 이때에 이렇게 useEffect로 처리하지 않고 더 깔끔하게 처리할 좋은 방법에 대해서 고민이 필요함
-    setHeightClass(`h-[${height}px]`);
-  }, [height]);
-
+  className,
+}: ContentBoxProps) {
   return (
     <div
-      className={`relative flex flex-col items-center justify-center ${height ? heightClass : 'h-full'} w-full bg-white p-4`}
+      className={twMerge(
+        `relative flex w-full flex-col items-center justify-center rounded-[16px] bg-white p-4`,
+        className,
+      )}
     >
       {(topLeft || topRight) && (
         <div className="flex w-full justify-between">
@@ -34,6 +30,6 @@ const ContentBox: FC<ContentBoxProps> = ({
       </div>
     </div>
   );
-};
+}
 
 export default ContentBox;

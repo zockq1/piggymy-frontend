@@ -48,7 +48,11 @@ export const InTheLayout: Story = {
           <div className="h-[100px] bg-primary">라우팅 타이틀</div>
         </Layout.Content.Full>
         <Layout.Content.Full>
-          <ContentBox topLeft={<div>left</div>} topRight={<div>Right</div>}>
+          <ContentBox
+            topLeft={<div>left</div>}
+            topRight={<div>Right</div>}
+            className="h-[240px]"
+          >
             <div className="h-full w-full bg-warning ">children</div>
           </ContentBox>
         </Layout.Content.Full>
