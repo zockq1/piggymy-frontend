@@ -4,36 +4,35 @@
  *  */
 
 import Image from 'next/image';
-import { DOMAttributes, ReactNode } from 'react';
+import { DOMAttributes } from 'react';
 
-import arrow from '/public/img/icon/next.svg';
+import arrow from '/public/img/Icon/next.svg';
 
 interface BreadcrumbProps extends DOMAttributes<HTMLHeadingElement> {
   path: string[];
 }
 
 function Breadcrumb({ path }: BreadcrumbProps) {
-  const temp: ReactNode[] = [];
-
-  path.forEach((p, i) => {
-    if (i < path.length - 1) {
-      temp.push(
-        <span className="font-inter text-left text-lg font-bold leading-5 tracking-tighter text-[#999]">
-          {p}
-        </span>,
-      );
-      temp.push(<Image src={arrow} alt="next" width={5} />);
-    } else {
-      temp.push(
-        <span className="font-inter text-left text-lg font-bold leading-5 tracking-tighter">
-          {p}
-        </span>,
-      );
-    }
-  });
-
   return (
-    <div className="inline-flex items-center justify-center gap-3">{temp}</div>
+    <div className="inline-flex items-center justify-center gap-3">
+      {path.map((p, i) =>
+        i < path.length - 1 ? (
+          <>
+            <span className="font-inter text-left text-lg font-bold leading-5 tracking-tighter text-[#999]">
+              {p}
+            </span>
+            <Image src={arrow} alt="next" width={5} />
+          </>
+        ) : (
+          <span
+            key={'breadcrumb' + i}
+            className="font-inter text-left text-lg font-bold leading-5 tracking-tighter"
+          >
+            {p}
+          </span>
+        ),
+      )}
+    </div>
   );
 }
 
