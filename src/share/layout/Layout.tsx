@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export default function Layout({ children }: { children?: ReactNode }) {
+function Layout({ children }: { children?: ReactNode }) {
   return (
     <div
       style={{
@@ -49,3 +49,5 @@ Layout.Content = Content;
 Content.Left = LeftContent;
 Content.Right = RightContent;
 Content.Full = FullContent;
+
+export default Layout;

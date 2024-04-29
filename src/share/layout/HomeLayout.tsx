@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-export default function HomeLayout({ children }: { children?: ReactNode }) {
+function HomeLayout({ children }: { children?: ReactNode }) {
   return (
     <div
       style={{
@@ -72,3 +72,5 @@ HomeLayout.Top = Top;
 HomeLayout.Center = Center;
 HomeLayout.Bottom = Bottom;
 HomeLayout.Right = Right;
+
+export default HomeLayout;
