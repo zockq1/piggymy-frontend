@@ -18,7 +18,7 @@ function Title({ children, hasUnderbar = false }: TitleProps) {
 }
 
 export function Highlight({ children }: { children: ReactNode }) {
-  return <span className="mx-[3px] text-[#2264DC]">{children}</span>;
+  return <span className="mx-[3px] text-primary">{children}</span>;
 }
 
 Title.H = Highlight;
