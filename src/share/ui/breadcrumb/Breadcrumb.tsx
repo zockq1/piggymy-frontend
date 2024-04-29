@@ -4,11 +4,10 @@
  *  */
 
 import Image from 'next/image';
-import { DOMAttributes } from 'react';
 
 import arrow from '/public/img/Icon/next.svg';
 
-interface BreadcrumbProps extends DOMAttributes<HTMLHeadingElement> {
+interface BreadcrumbProps {
   path: string[];
 }
 
