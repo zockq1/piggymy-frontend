@@ -1,3 +1,5 @@
+import HeaderComponent from '@/share/ui/header/Header';
+
 export default function Header() {
   return (
     <div
@@ -5,7 +7,9 @@ export default function Header() {
         gridArea: 'header',
       }}
     >
-      <div className="">header</div>
+      <div className="h-full">
+        <HeaderComponent />
+      </div>
     </div>
   );
 }
