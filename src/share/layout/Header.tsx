@@ -8,7 +8,7 @@ export default function Header() {
       }}
     >
       <div className="h-full">
-        <HeaderComponent />
+        <HeaderComponent user={null} headerList={[]} />
       </div>
     </div>
   );
