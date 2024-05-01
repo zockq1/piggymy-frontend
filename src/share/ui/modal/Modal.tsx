@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom';
+import { createPortal } from 'react-dom';
 import { useRecoilValue } from 'recoil';
 
 import { useModalHook } from '@/share/hooks/useModalHook';
@@ -8,7 +8,7 @@ import {
   modalPowerState,
 } from '@/share/state/modal';
 
-const ModalContainer = () => {
+const Modal = () => {
   const modalPower = useRecoilValue(modalPowerState);
   const modals = useRecoilValue(modalChildrenState);
   const { closeModal } = useModalHook();
@@ -60,9 +60,9 @@ const ModalContainer = () => {
   if (!modal) return <></>;
 
   if (modalPower) {
-    return ReactDOM.createPortal(modalContent, modal);
+    return createPortal(modalContent, modal);
   }
   return null;
 };
 
-export default ModalContainer;
+export default Modal;

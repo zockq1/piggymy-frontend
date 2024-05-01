@@ -1,6 +1,8 @@
 import React from 'react';
 import type { Preview } from '@storybook/react';
 import '../src/app/globals.css';
+import Modal from '../src/share/ui/modal/Modal';
+import { RecoilRoot } from 'recoil';
 
 const preview: Preview = {
   parameters: {
@@ -12,7 +14,15 @@ const preview: Preview = {
       },
     },
   },
-  decorators: [(Story) => <Story />],
+  decorators: [
+    (Story) => (
+      <RecoilRoot>
+        <Story />
+        <div id={'modal'} />
+        <Modal />
+      </RecoilRoot>
+    ),
+  ],
 };
 
 export default preview;

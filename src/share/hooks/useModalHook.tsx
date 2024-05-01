@@ -16,11 +16,11 @@ export const useModalHook = () => {
   };
 
   const closeModal = (id: string) => {
-    setModals((prev) => {
-      return prev.filter((m) => {
+    setModals((prev) =>
+      prev.filter((m) => {
         return m.id !== id;
-      });
-    });
+      }),
+    );
   };
 
   return {
