@@ -15,18 +15,25 @@ function ContentBox({
   return (
     <div
       className={twMerge(
-        `relative m-4 flex w-full flex-col items-center justify-center rounded-[16px] bg-white p-4`,
+        `relative m-4 flex flex-col items-center justify-center rounded-[16px] bg-white p-4`,
         className,
       )}
     >
-      {(topLeft || topRight) && (
-        <div className="flex w-full justify-between">
-          {topLeft && <div>{topLeft}</div>}
-          {topRight && <div>{topRight}</div>}
+      <div
+        className={twMerge(
+          `flex w-full flex-col items-center justify-center`,
+          className,
+        )}
+      >
+        {(topLeft || topRight) && (
+          <div className="flex w-full justify-between">
+            {topLeft && <div>{topLeft}</div>}
+            {topRight && <div>{topRight}</div>}
+          </div>
+        )}
+        <div className="flex h-full w-full items-center justify-center">
+          {children}
         </div>
-      )}
-      <div className="flex h-full w-full items-center justify-center">
-        {children}
       </div>
     </div>
   );
