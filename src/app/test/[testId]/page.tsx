@@ -11,7 +11,7 @@ export default function CertificateBoardPage({
     <Layout>
       <Layout>
         <Layout.LeftSideMenu>
-          <SidebarComponent />
+          <SidebarComponent sidebarList={[]} />
         </Layout.LeftSideMenu>
         {params.certificateId}
         <Button>버튼</Button>

@@ -81,8 +81,9 @@ export default function HeaderComponent({
         </div>
       </div>
       <div
-        className={`absolute ml-32 mt-48 flex h-auto w-10/12 justify-center bg-gray-3 ${dropdownDisplayState ? 'block' : 'hidden'}`}
+        className={`absolute top-20 ml-32 flex h-auto w-10/12 justify-center bg-white p-4 pt-2 ${dropdownDisplayState ? 'block' : 'hidden'}`}
       >
+        {/* TODO 리스트 받아오기 */}
         <HeaderDetail headerList={[]} />
       </div>
     </div>
