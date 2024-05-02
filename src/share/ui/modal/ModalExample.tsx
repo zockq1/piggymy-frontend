@@ -10,18 +10,27 @@ const ModalExample = () => {
     <Button
       onClick={() => {
         openModal(
-          'modal',
+          'modal1',
           <Button
             onClick={() => {
-              closeModal('modal');
+              openModal(
+                'modal2',
+                <Button
+                  onClick={() => {
+                    closeModal('modal2');
+                  }}
+                >
+                  2차 모달 닫기
+                </Button>,
+              );
             }}
           >
-            모달 닫기
+            2차 모달 열기
           </Button>,
         );
       }}
     >
-      모달 열기
+      1차 모달 열기
     </Button>
   );
 };
