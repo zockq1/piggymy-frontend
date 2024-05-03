@@ -25,8 +25,8 @@ export default function HeaderComponent({
   };
 
   return (
-    <div className="flex h-full w-full flex-row items-center justify-between pl-3 pr-3">
-      <div className="title w-1/6 text-xl font-bold">
+    <div className="border-indigo-500 flex h-full w-full flex-row items-center justify-between border-b-2 pl-3 pr-3">
+      <div className="title w-1/6 pl-1 text-2xl font-bold">
         <span>피기미 piggyme</span>
       </div>
       <div className="flex h-full w-8/12 flex-row">
@@ -62,7 +62,7 @@ export default function HeaderComponent({
             </Link>
           </li>
           <li
-            className="text-xs"
+            className="text-xs hover:cursor-pointer"
             onClick={() => {
               allDisplay(dropdownDisplayState);
             }}
