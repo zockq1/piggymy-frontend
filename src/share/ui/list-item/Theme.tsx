@@ -35,12 +35,12 @@ export default function Theme({
   route,
 }: ThemeProps) {
   return (
-    <div className="flex h-[153px] w-[318px] flex-col justify-between">
+    <div className="mx-4 flex h-[153px] w-[318px] flex-col justify-between">
       <Link
         href={route}
         className={cn(
           ThemeVariants({ status: isSelected ? 'selected' : 'unselected' }),
-          'mx-4 h-[123px] rounded-2xl px-[23px] py-3',
+          'h-[123px] rounded-2xl px-[23px] py-3',
         )}
       >
         <h1 className="h-[36px] text-lg font-bold">{title}</h1>
