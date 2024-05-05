@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 interface Segment {
   id: string | number;
-  path: string;
+  route: string;
   name: string;
 }
 
@@ -21,7 +21,7 @@ function Segmented({ segments, currentPath }: SegmentedProps) {
   }) => (
     <li className={'list-none'}>
       <Link
-        href={segment.path}
+        href={segment.route}
         className={`font-inter text-left text-lg font-bold leading-5 tracking-tighter ${selected ? 'text-black' : 'text-[#999]'}`}
       >
         {segment.name}
@@ -34,11 +34,15 @@ function Segmented({ segments, currentPath }: SegmentedProps) {
       {segments.map((s, i) =>
         i < segments.length - 1 ? (
           <>
-            <Segment key={s.id} segment={s} selected={s.path === currentPath} />
+            <Segment
+              key={s.id}
+              segment={s}
+              selected={s.route === currentPath}
+            />
             <i className={'h-[13px] border-r-2 border-[#999]'} />
           </>
         ) : (
-          <Segment key={s.id} segment={s} selected={s.path === currentPath} />
+          <Segment key={s.id} segment={s} selected={s.route === currentPath} />
         ),
       )}
     </div>

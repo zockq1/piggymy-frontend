@@ -14,10 +14,10 @@ export const Default: Story = {
   render: () => (
     <Segmented
       segments={[
-        { id: 0, path: '/', name: '회원 정보' },
-        { id: 1, path: '/a', name: '받은 배지' },
-        { id: 2, path: '/b', name: '북마크' },
-        { id: 3, path: '/c', name: '보낸 의견' },
+        { id: 0, route: '/', name: '회원 정보' },
+        { id: 1, route: '/a', name: '받은 배지' },
+        { id: 2, route: '/b', name: '북마크' },
+        { id: 3, route: '/c', name: '보낸 의견' },
       ]}
       currentPath={'/'}
     />
