@@ -10,6 +10,7 @@ const config: StorybookConfig = {
     '@storybook/addon-interactions',
     'storybook-addon-recoil-flow',
   ],
+  staticDirs: ['../public'], //👈 Configures the static asset folder in Storybook
   framework: {
     name: '@storybook/nextjs',
     options: {},

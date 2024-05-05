@@ -5,6 +5,7 @@ import { v1 } from 'uuid';
 export interface ModalObjectModal {
   id: string;
   component: ReactNode;
+  options: { clickableOverlay: boolean };
 }
 
 export const modalPowerState = atom<boolean>({

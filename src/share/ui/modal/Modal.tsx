@@ -35,7 +35,12 @@ const Modal = () => {
     <>
       {modals.map((m) => {
         return (
-          <Overlay key={m.id} onClose={() => onClose(m.id)}>
+          <Overlay
+            key={m.id}
+            onClose={
+              m.options.clickableOverlay ? () => onClose(m.id) : undefined
+            }
+          >
             {getModal(m)}
           </Overlay>
         );

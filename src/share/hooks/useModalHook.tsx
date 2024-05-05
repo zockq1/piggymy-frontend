@@ -7,8 +7,12 @@ export const useModalHook = () => {
   const [, setModalPower] = useRecoilState(modalPowerState);
   const [, setModals] = useRecoilState(modalChildrenState);
 
-  const openModal = (id: string, component: ReactNode) => {
-    const newModal = { id, component };
+  const openModal = (
+    id: string,
+    component: ReactNode,
+    options: { clickableOverlay: boolean } = { clickableOverlay: true },
+  ) => {
+    const newModal = { id, component, options };
     setModalPower(true);
     setModals((modals) => {
       return [...modals, newModal];

@@ -4,5 +4,5 @@ export interface OverlayProps extends HTMLAttributes<HTMLDivElement> {
   isTransparent?: boolean;
   zIndex?: number;
   children?: ReactElement | ReactElement[] | ReactNode | ReactNode[];
-  onClose: () => void;
+  onClose?: () => void;
 }
