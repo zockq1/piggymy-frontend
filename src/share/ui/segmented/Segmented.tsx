@@ -8,10 +8,10 @@ interface Segment {
 
 interface SegmentedProps {
   segments: Segment[];
-  currentPath: string;
+  currentRoute: string;
 }
 
-function Segmented({ segments, currentPath }: SegmentedProps) {
+function Segmented({ segments, currentRoute }: SegmentedProps) {
   const Segment = ({
     segment,
     selected = false,
@@ -37,12 +37,12 @@ function Segmented({ segments, currentPath }: SegmentedProps) {
             <Segment
               key={s.id}
               segment={s}
-              selected={s.route === currentPath}
+              selected={s.route === currentRoute}
             />
             <i className={'h-[13px] border-r-2 border-[#999]'} />
           </>
         ) : (
-          <Segment key={s.id} segment={s} selected={s.route === currentPath} />
+          <Segment key={s.id} segment={s} selected={s.route === currentRoute} />
         ),
       )}
     </div>

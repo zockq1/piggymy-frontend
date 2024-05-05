@@ -19,7 +19,7 @@ export const Default: Story = {
         { id: 2, route: '/b', name: '북마크' },
         { id: 3, route: '/c', name: '보낸 의견' },
       ]}
-      currentPath={'/'}
+      currentRoute={'/'}
     />
   ),
 };
