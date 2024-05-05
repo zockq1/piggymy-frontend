@@ -7,6 +7,7 @@ import {
   ModalObjectModal,
   modalPowerState,
 } from '@/share/state/modal';
+import Overlay from '@/share/ui/modal/overlay/Overlay';
 
 const Modal = () => {
   const modalPower = useRecoilValue(modalPowerState);
@@ -34,21 +35,9 @@ const Modal = () => {
     <>
       {modals.map((m) => {
         return (
-          <div
-            key={m.id}
-            style={{ zIndex: INDEX + modals.length - 1 }}
-            className="bg-gray-400 fixed inset-0 flex items-center justify-center bg-opacity-50"
-          >
-            <div className="relative">
-              {getModal(m)}
-              <button
-                onClick={() => onClose(m.id)}
-                className="text-gray-600 absolute right-3 top-2 flex aspect-square w-4"
-              >
-                X
-              </button>
-            </div>
-          </div>
+          <Overlay key={m.id} onClose={() => onClose(m.id)}>
+            {getModal(m)}
+          </Overlay>
         );
       })}
     </>

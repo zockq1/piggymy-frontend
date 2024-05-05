@@ -12,6 +12,6 @@ const meta: Meta<typeof Modal> = {
 export default meta;
 type Story = StoryObj<typeof Modal>;
 
-export const DefaultModal: Story = {
+export const ModalSystemOverview: Story = {
   render: () => <ModalExample />,
 };
