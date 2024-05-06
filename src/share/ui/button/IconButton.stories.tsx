@@ -6,7 +6,7 @@ import search from '/public/img/Icon/Name=Search.png';
 import IconButton from './IconButton';
 
 const meta: Meta<typeof IconButton> = {
-  title: 'IconButton',
+  title: 'UI/Button/IconButton',
   component: IconButton,
 };
 
