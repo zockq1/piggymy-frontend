@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import PostList from './PostList';
 
 const meta: Meta<typeof PostList> = {
-  title: 'PostList',
+  title: 'UI/Post/PostList',
   component: PostList,
 };
 

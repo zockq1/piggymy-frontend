@@ -5,7 +5,7 @@ import pig from '/public/img/piggy/Basic-Face.png';
 import Banner from './Banner';
 
 const meta: Meta<typeof Banner> = {
-  title: 'Banner',
+  title: 'UI/List-Item/Banner',
   component: Banner,
 };
 

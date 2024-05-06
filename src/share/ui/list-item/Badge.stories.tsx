@@ -5,7 +5,7 @@ import pig from '/public/img/piggy/Basic-Face.png';
 import Badge from './Badge';
 
 const meta: Meta<typeof Badge> = {
-  title: 'Badge',
+  title: 'UI/List-Item/Badge',
   component: Badge,
 };
 

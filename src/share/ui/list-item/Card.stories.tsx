@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Card from './Card';
 
 const meta: Meta<typeof Card> = {
-  title: 'Card',
+  title: 'UI/List-Item/Card',
   component: Card,
 };
 

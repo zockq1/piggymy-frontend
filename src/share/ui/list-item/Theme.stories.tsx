@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import Theme from './Theme';
 
 const meta: Meta<typeof Theme> = {
-  title: 'Theme',
+  title: 'UI/List-Item/Theme',
   component: Theme,
 };
 
