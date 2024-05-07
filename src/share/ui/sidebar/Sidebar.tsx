@@ -4,13 +4,13 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 
-import { contentList } from '@/share/ui/header/headerList';
+import { contentList } from '@/share/layout/header/headerList';
 
-export default function SidebarComponent({
-  sidebarList,
-}: {
+interface SidebarProps {
   sidebarList: unknown[];
-}) {
+}
+
+export default function Sidebar({ sidebarList }: SidebarProps) {
   const router = usePathname();
   const activeSegments = router.split('/')[3];
   const linkQuery: string[] = ['1', '2', '3', '4', '5'];

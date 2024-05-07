@@ -7,7 +7,7 @@ import {
   settingList,
   userList,
   vocaQuizList,
-} from '@/share/ui/header/headerList';
+} from '@/share/layout/header/headerList';
 
 export default function HeaderDetail({
   headerList,

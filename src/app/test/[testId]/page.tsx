@@ -1,6 +1,7 @@
+import Header from '@/share/layout/header/Header';
 import Layout from '@/share/layout/Layout';
 import Button from '@/share/ui/button/Button';
-import SidebarComponent from '@/share/ui/sidebar/Sidebar';
+import Sidebar from '@/share/ui/sidebar/Sidebar';
 
 export default function CertificateBoardPage({
   params,
@@ -9,13 +10,12 @@ export default function CertificateBoardPage({
 }) {
   return (
     <Layout>
-      <Layout>
-        <Layout.LeftSideMenu>
-          <SidebarComponent sidebarList={[]} />
-        </Layout.LeftSideMenu>
-        {params.certificateId}
-        <Button>버튼</Button>
-      </Layout>
+      <Header user="" headerList={[]} />
+      <Layout.LeftSideMenu>
+        <Sidebar sidebarList={[]} />
+      </Layout.LeftSideMenu>
+      {params.certificateId}
+      <Button>버튼</Button>
     </Layout>
   );
 }

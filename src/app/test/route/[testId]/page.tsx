@@ -1,6 +1,6 @@
+import Header from '@/share/layout/header/Header';
 import TestLayout from '@/share/layout/TestLayout';
-import HeaderComponent from '@/share/ui/header/Header';
-import SidebarComponent from '@/share/ui/sidebar/Sidebar';
+import Sidebar from '@/share/ui/sidebar/Sidebar';
 
 export default function CertificateBoardPage({
   params,
@@ -11,10 +11,10 @@ export default function CertificateBoardPage({
     <TestLayout>
       {params.certificateId}
       <TestLayout.Header>
-        <HeaderComponent user="" headerList={[]} />
+        <Header headerList={[]} user="" />
       </TestLayout.Header>
       <TestLayout.SideBar>
-        <SidebarComponent sidebarList={[]} />
+        <Sidebar sidebarList={[]} />
       </TestLayout.SideBar>
     </TestLayout>
   );

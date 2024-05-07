@@ -16,6 +16,18 @@ function HomeLayout({ children }: { children?: ReactNode }) {
   );
 }
 
+function Header({ children }: { children: ReactNode }) {
+  return (
+    <div
+      style={{
+        gridArea: 'header',
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
 function Top({ children }: { children: ReactNode }) {
   return (
     <div
@@ -72,5 +84,6 @@ HomeLayout.Top = Top;
 HomeLayout.Center = Center;
 HomeLayout.Bottom = Bottom;
 HomeLayout.Right = Right;
+HomeLayout.Header = Header;
 
 export default HomeLayout;

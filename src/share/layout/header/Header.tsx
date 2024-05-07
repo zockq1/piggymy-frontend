@@ -3,22 +3,19 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import HeaderDetail from '@/share/ui/header/HeaderDetail';
+import HeaderDetail from '@/share/layout/header/HeaderDetail';
 
-export default function HeaderComponent({
-  user,
-  headerList,
-}: {
-  user: unknown;
-  headerList: unknown[];
-}) {
+interface HeaderPropsType {
+  user: { id: string; userName: string }; // TODO 추후 user 반환값으로 변경
+}
+
+export default function Header({ user }: HeaderPropsType) {
   const [dropdownDisplayState, setDropdownDisplayState] =
     useState<boolean>(false);
 
   useEffect(() => {
-    //TODO 데이터 변경 필요
-    console.log(user, headerList);
-  }, []);
+    console.log(user);
+  });
 
   const allDisplay = (state: boolean) => {
     setDropdownDisplayState(!state);
@@ -32,32 +29,32 @@ export default function HeaderComponent({
       <div className="flex h-full w-8/12 flex-row">
         <ul className="flex w-full flex-row items-center justify-around">
           <li>
-            <Link className="hover:text-blue-500 text-sm" href="/">
+            <Link className="hover:text-blue-500 text-sm" href="/public">
               홈
             </Link>
           </li>
           <li>
-            <Link className="hover:text-blue-500 text-sm" href="/">
+            <Link className="hover:text-blue-500 text-sm" href="/public">
               콘텐츠
             </Link>
           </li>
           <li>
-            <Link className="hover:text-blue-500 text-sm" href="/">
+            <Link className="hover:text-blue-500 text-sm" href="/public">
               용어/퀴즈
             </Link>
           </li>
           <li>
-            <Link className="hover:text-blue-500 text-sm" href="/">
+            <Link className="hover:text-blue-500 text-sm" href="/public">
               설정
             </Link>
           </li>
           <li>
-            <Link className="hover:text-blue-500 text-sm" href="/">
+            <Link className="hover:text-blue-500 text-sm" href="/public">
               회원
             </Link>
           </li>
           <li>
-            <Link className="hover:text-blue-500 text-sm" href="/">
+            <Link className="hover:text-blue-500 text-sm" href="/public">
               관리자
             </Link>
           </li>
@@ -83,7 +80,6 @@ export default function HeaderComponent({
       <div
         className={`absolute top-20 ml-32 flex h-auto w-10/12 justify-center bg-white p-4 pt-2 ${dropdownDisplayState ? 'block' : 'hidden'}`}
       >
-        {/* TODO 리스트 받아오기 */}
         <HeaderDetail headerList={[]} />
       </div>
     </div>
