@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 import HeaderDetail from '@/share/layout/header/HeaderDetail';
 
@@ -10,17 +9,6 @@ interface HeaderPropsType {
 }
 
 export default function Header({ user }: HeaderPropsType) {
-  const [dropdownDisplayState, setDropdownDisplayState] =
-    useState<boolean>(false);
-
-  useEffect(() => {
-    console.log(user);
-  });
-
-  const allDisplay = (state: boolean) => {
-    setDropdownDisplayState(!state);
-  };
-
   return (
     <div className="border-indigo-500 flex h-full w-full flex-row items-center justify-between border-b-2 pl-3 pr-3">
       <div className="title w-1/6 pl-1 text-2xl font-bold">
@@ -58,13 +46,8 @@ export default function Header({ user }: HeaderPropsType) {
               관리자
             </Link>
           </li>
-          <li
-            className="text-xs hover:cursor-pointer"
-            onClick={() => {
-              allDisplay(dropdownDisplayState);
-            }}
-          >
-            전체보기
+          <li className="text-xs hover:cursor-pointer">
+            <HeaderDetail />
           </li>
         </ul>
       </div>
@@ -74,13 +57,10 @@ export default function Header({ user }: HeaderPropsType) {
         </div>
         <div className="h-2/3 w-1/2 pl-1">
           <p className="h-1/2 w-full text-sm leading-7">관리자</p>
-          <p className="h-1/2 w-full text-sm leading-5">관리자명</p>
+          <p className="h-1/2 w-full text-sm leading-5">
+            {user.userName ? user.userName : 'test'}
+          </p>
         </div>
-      </div>
-      <div
-        className={`absolute top-20 ml-32 flex h-auto w-10/12 justify-center bg-white p-4 pt-2 ${dropdownDisplayState ? 'block' : 'hidden'}`}
-      >
-        <HeaderDetail headerList={[]} />
       </div>
     </div>
   );

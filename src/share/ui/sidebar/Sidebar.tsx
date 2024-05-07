@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 
-import { contentList } from '@/share/layout/header/headerList';
+import { contentList } from '@/share/layout/header/headerListData';
 
 interface SidebarProps {
   sidebarList: unknown[];
