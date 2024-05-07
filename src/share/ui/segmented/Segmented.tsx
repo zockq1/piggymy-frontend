@@ -7,7 +7,7 @@ interface Segment {
 }
 
 interface SegmentedProps {
-  segments: Segment[];
+  segmentList: Segment[];
   currentRoute: string;
 }
 
@@ -28,21 +28,28 @@ const Segment = ({
   </li>
 );
 
-function Segmented({ segments, currentRoute }: SegmentedProps) {
+function Segmented({ segmentList, currentRoute }: SegmentedProps) {
   return (
     <div className="inline-flex items-center justify-center gap-[18px]">
-      {segments.map((s, i) =>
-        i < segments.length - 1 ? (
+      {segmentList.map((segment, i) =>
+        i < segmentList.length - 1 ? (
           <>
             <Segment
-              key={s.id}
-              segment={s}
-              selected={s.route === currentRoute}
+              key={segment.id}
+              segment={segment}
+              selected={segment.route === currentRoute}
             />
-            <i className={'h-[13px] border-r-2 border-[#999]'} />
+            <i
+              key={'separator' + segment.id}
+              className={'h-[13px] border-r-2 border-[#999]'}
+            />
           </>
         ) : (
-          <Segment key={s.id} segment={s} selected={s.route === currentRoute} />
+          <Segment
+            key={segment.id}
+            segment={segment}
+            selected={segment.route === currentRoute}
+          />
         ),
       )}
     </div>

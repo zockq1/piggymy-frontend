@@ -13,7 +13,7 @@ type Story = StoryObj<typeof Segmented>;
 export const Default: Story = {
   render: () => (
     <Segmented
-      segments={[
+      segmentList={[
         { id: 0, route: '/', name: '회원 정보' },
         { id: 1, route: '/a', name: '받은 배지' },
         { id: 2, route: '/b', name: '북마크' },
