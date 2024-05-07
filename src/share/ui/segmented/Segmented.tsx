@@ -11,24 +11,24 @@ interface SegmentedProps {
   currentRoute: string;
 }
 
-function Segmented({ segments, currentRoute }: SegmentedProps) {
-  const Segment = ({
-    segment,
-    selected = false,
-  }: {
-    segment: Segment;
-    selected?: boolean;
-  }) => (
-    <li className={'list-none'}>
-      <Link
-        href={segment.route}
-        className={`font-inter text-left text-lg font-bold leading-5 tracking-tighter ${selected ? 'text-black' : 'text-[#999]'}`}
-      >
-        {segment.name}
-      </Link>
-    </li>
-  );
+const Segment = ({
+  segment,
+  selected = false,
+}: {
+  segment: Segment;
+  selected?: boolean;
+}) => (
+  <li className={'list-none'}>
+    <Link
+      href={segment.route}
+      className={`font-inter text-left text-lg font-bold leading-5 tracking-tighter ${selected ? 'text-black' : 'text-[#999]'}`}
+    >
+      {segment.name}
+    </Link>
+  </li>
+);
 
+function Segmented({ segments, currentRoute }: SegmentedProps) {
   return (
     <div className="inline-flex items-center justify-center gap-[18px]">
       {segments.map((s, i) =>
