@@ -1,5 +1,6 @@
 import React, { HTMLAttributes, ReactNode } from 'react';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '@/utils/cn';
 
 interface ContentBoxProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
@@ -14,26 +15,19 @@ function ContentBox({
 }: ContentBoxProps) {
   return (
     <div
-      className={twMerge(
+      className={cn(
         `relative m-4 flex flex-col items-center justify-center rounded-[16px] bg-white p-4`,
         className,
       )}
     >
-      <div
-        className={twMerge(
-          `flex w-full flex-col items-center justify-center`,
-          className,
-        )}
-      >
-        {(topLeft || topRight) && (
-          <div className="flex w-full justify-between">
-            {topLeft && <div>{topLeft}</div>}
-            {topRight && <div>{topRight}</div>}
-          </div>
-        )}
-        <div className="flex h-full w-full items-center justify-center">
-          {children}
+      {(topLeft || topRight) && (
+        <div className="flex w-full justify-between">
+          {topLeft && <div>{topLeft}</div>}
+          {topRight && <div>{topRight}</div>}
         </div>
+      )}
+      <div className="flex h-full w-full items-center justify-center">
+        {children}
       </div>
     </div>
   );
