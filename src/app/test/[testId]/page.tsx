@@ -1,7 +1,7 @@
 import Header from '@/share/layout/header/Header';
 import Layout from '@/share/layout/Layout';
+import Sidebar from '@/share/layout/sidebar/Sidebar';
 import Button from '@/share/ui/button/Button';
-import Sidebar from '@/share/ui/sidebar/Sidebar';
 
 export default function CertificateBoardPage({
   params,

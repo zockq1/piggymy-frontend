@@ -1,6 +1,6 @@
 import Header from '@/share/layout/header/Header';
+import Sidebar from '@/share/layout/sidebar/Sidebar';
 import TestLayout from '@/share/layout/TestLayout';
-import Sidebar from '@/share/ui/sidebar/Sidebar';
 
 export default function CertificateBoardPage({
   params,

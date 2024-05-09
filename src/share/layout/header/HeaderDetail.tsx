@@ -33,10 +33,6 @@ export default function HeaderDetail() {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(isDropdownOpen);
-  }, [isDropdownOpen]);
-
   return (
     <>
       <button onClick={toggleDropdown}>전체 보기</button>
