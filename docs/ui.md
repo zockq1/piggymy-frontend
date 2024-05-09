@@ -60,7 +60,7 @@
    ![Alt text](ui/title/route-title.png)
    - Props:
      - path: string[] - 경로를 순차적으로 전달, 마지막 index가 현재 페이지
-3. `<Category/>`<br/>
+3. `<Segmented/>`<br/>
    ![Alt text](ui/title/category.png)
    - Props:
      - categoryList: {title: string, onClick: () => void, current: boolean}[] - 카테고리 목록과 클릭 이벤트, 현재 페이지를 전달
