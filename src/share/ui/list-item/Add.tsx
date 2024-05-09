@@ -1,3 +1,5 @@
+'use client';
+
 import { cva } from 'class-variance-authority';
 import Link from 'next/link';
 
@@ -34,7 +36,7 @@ export default function Badge({ route, type, isSelected }: BadgeProps) {
       href={route}
       className={cn(
         BadgeVariants({ type, status: isSelected ? 'selected' : 'unselected' }),
-        'm-4 flex items-center justify-center',
+        'flex items-center justify-center',
       )}
     >
       <svg

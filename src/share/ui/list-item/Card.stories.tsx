@@ -55,23 +55,24 @@ function StoryCardList() {
   };
 
   return (
-    <>
+    <ul className="space-y-4">
       {cardList.map((card) => {
         return (
-          <Card
-            key={card.id}
-            id={card.id}
-            title={card.title}
-            registrationDate={card.registrationDate}
-            isActive={card.isActive}
-            isChecked={card.isChecked}
-            route={card.route}
-            isSelected={card.isSelected}
-            onChangeChecked={toggleCheck}
-          />
+          <li key={card.id}>
+            <Card
+              id={card.id}
+              title={card.title}
+              registrationDate={card.registrationDate}
+              isActive={card.isActive}
+              isChecked={card.isChecked}
+              route={card.route}
+              isSelected={card.isSelected}
+              onChangeChecked={toggleCheck}
+            />
+          </li>
         );
       })}
-    </>
+    </ul>
   );
 }
 

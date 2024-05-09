@@ -1,3 +1,5 @@
+'use client';
+
 import { cva } from 'class-variance-authority';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
@@ -41,7 +43,7 @@ export default function Banner({
   image,
 }: BannerProps) {
   return (
-    <div className="mx-4 flex h-[234px] w-[390px] flex-col justify-between">
+    <div className="flex h-[234px] w-[390px] flex-col justify-between">
       <Link
         href={route}
         className={cn(

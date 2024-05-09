@@ -1,3 +1,5 @@
+'use client';
+
 import { cva } from 'class-variance-authority';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
@@ -36,7 +38,7 @@ export default function Badge({
   route,
 }: BadgeProps) {
   return (
-    <div className="mx-4 flex h-[199px] w-[170px] flex-col justify-between">
+    <div className="flex h-[199px] w-[170px] flex-col justify-between">
       <Link
         href={route}
         className={cn(

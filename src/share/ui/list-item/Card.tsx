@@ -1,3 +1,5 @@
+'use client';
+
 import { cva } from 'class-variance-authority';
 import Link from 'next/link';
 
@@ -42,7 +44,7 @@ export default function Card({
     <div
       className={cn(
         CardVariants({ status: isSelected ? 'selected' : 'unselected' }),
-        'my-4 flex h-[78px] w-[308px] items-center justify-between rounded-2xl px-3 py-3',
+        'flex h-[78px] w-[308px] items-center justify-between rounded-2xl px-3 py-3',
       )}
     >
       <input

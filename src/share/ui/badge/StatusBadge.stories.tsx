@@ -11,7 +11,7 @@ export default meta;
 type Story = StoryObj<typeof StatusBadge>;
 
 export const ActiveBadge: Story = {
-  args: { isActive: true },
+  args: { isActive: true, className: 'w-16' },
 };
 
 export const InactiveBadge: Story = {

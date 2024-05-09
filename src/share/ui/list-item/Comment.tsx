@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 
 import feedbackIcon from '/public/img/Icon/Feedback.svg';
@@ -21,7 +23,7 @@ export default function Comment({
   return (
     <button
       onClick={onClick}
-      className="relative mx-4 flex h-[397px] w-[258px] flex-col rounded-2xl bg-[#4676FB33] p-6 shadow-[4px_4px_10px_2px_rgba(191,191,191,0.25)]"
+      className="relative flex h-[397px] w-[258px] flex-col rounded-2xl bg-[#4676FB33] p-6 shadow-[4px_4px_10px_2px_rgba(191,191,191,0.25)]"
     >
       <p className="w-full text-end text-[15px] font-bold">의견 보내기</p>
       <p className="mb-1 h-[32px] text-lg font-bold">{user} 회원님</p>

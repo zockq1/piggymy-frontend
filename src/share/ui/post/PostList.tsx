@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 
 interface PostListProps {
@@ -19,13 +21,10 @@ export default function PostList({ postList }: PostListProps) {
             key={title}
             className="grid h-[65px] w-[330px] grid-cols-[190px_140px] items-center"
           >
-            <Link
-              href={route}
-              className="inline-block truncate text-[15px] font-bold"
-            >
+            <Link href={route} className="truncate text-[15px] font-bold">
               {title}
             </Link>
-            <span className="inline-block divide-x text-end text-[9px]">
+            <span className="h-2 divide-x divide-[#d9d9d9] text-end text-[9px]">
               {author && <span className="break-keep px-2">{author}</span>}
               <span className=" break-keep px-2 text-end">
                 {registrationDate}

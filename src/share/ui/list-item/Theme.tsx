@@ -1,3 +1,5 @@
+'use client';
+
 import { cva } from 'class-variance-authority';
 import Link from 'next/link';
 
@@ -35,7 +37,7 @@ export default function Theme({
   route,
 }: ThemeProps) {
   return (
-    <div className="mx-4 flex h-[153px] w-[318px] flex-col justify-between">
+    <div className="flex h-[153px] w-[318px] flex-col justify-between">
       <Link
         href={route}
         className={cn(
