@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Preview } from '@storybook/react';
 import '../src/app/globals.css';
-import Modal from '../src/share/ui/modal/Modal';
+import ModalProvider from '../src/share/modal/ModalProvider';
 import { RecoilRoot } from 'recoil';
 
 const preview: Preview = {
@@ -18,8 +18,7 @@ const preview: Preview = {
     (Story) => (
       <RecoilRoot>
         <Story />
-        <div id={'modal'} />
-        <Modal />
+        <ModalProvider />
       </RecoilRoot>
     ),
   ],

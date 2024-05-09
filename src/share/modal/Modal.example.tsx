@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react';
 
-import { useModalHook } from '@/share/hooks/useModalHook';
+import DefaultModal from '@/share/modal/DefaultModal';
+import { useModalHook } from '@/share/modal/useModalHook';
 import Button from '@/share/ui/button/Button';
-import DefaultModal from '@/share/ui/modal/DefaultModal';
 
 const ModalExample = ({ children }: { children: ReactNode }) => {
   return <>{children}</>;
@@ -53,11 +53,11 @@ export function DefaultModalSystem({
 }) {
   const { openModal, closeModal } = useModalHook();
 
-  const onConfirm = () => {
+  const handleConfirm = () => {
     // Do something
     closeModal('default-modal');
   };
-  const onCancel = () => {
+  const handleCancel = () => {
     closeModal('default-modal');
   };
 
@@ -68,8 +68,8 @@ export function DefaultModalSystem({
           'default-modal',
           <DefaultModal
             message={'삭제하시겠습니까?'}
-            onConfirm={onConfirm}
-            onCancel={onCancel}
+            onConfirm={handleConfirm}
+            onCancel={handleCancel}
           />,
           { clickableOverlay },
         );
@@ -87,7 +87,7 @@ export function CustomModalSystem({
 }) {
   const { openModal, closeModal } = useModalHook();
 
-  const onConfirm = () => {
+  const handleConfirm = () => {
     // Do something
     closeModal('default-modal');
   };
@@ -98,7 +98,7 @@ export function CustomModalSystem({
         openModal(
           'default-modal',
           <div className={'bg-warning'}>
-            <button onClick={onConfirm}>버튼</button>
+            <button onClick={handleConfirm}>버튼</button>
           </div>,
           { clickableOverlay },
         );

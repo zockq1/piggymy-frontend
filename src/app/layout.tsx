@@ -2,9 +2,10 @@ import './globals.css';
 
 import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
-import { RecoilRoot } from 'recoil';
 
 import ReactQueryProvider from '@/app/_component/ReactQueryProvider';
+
+import RecoilRootProvider from './_component/RecoilRootProvider';
 
 const notoSansKr = Noto_Sans_KR({
   preload: false,
@@ -24,7 +25,7 @@ export default function RootLayout({
     <html lang="ko">
       <body className={notoSansKr.className}>
         <ReactQueryProvider>
-          <RecoilRoot>{children}</RecoilRoot>
+          <RecoilRootProvider>{children}</RecoilRootProvider>
         </ReactQueryProvider>
       </body>
     </html>

@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import ModalExample from '@/share/ui/modal/ModalExample';
+import ModalExample from '@/share/modal/Modal.example';
 
-import Modal from './Modal';
+import ModalProvider from './ModalProvider';
 
-const meta: Meta<typeof Modal> = {
+const meta: Meta<typeof ModalProvider> = {
   title: 'Modal',
-  component: Modal,
+  component: ModalProvider,
 };
 
 export default meta;
-type Story = StoryObj<typeof Modal>;
+type Story = StoryObj<typeof ModalProvider>;
 
 export const Overview: Story = {
   args: { clickableOverlay: true },
