@@ -1,11 +1,23 @@
-import React, { MouseEventHandler } from 'react';
+import React, {
+  HTMLAttributes,
+  MouseEventHandler,
+  ReactElement,
+  ReactNode,
+} from 'react';
 
-import { OverlayProps } from './OverlayProps';
+interface OverlayProps extends HTMLAttributes<HTMLDivElement> {
+  isTransparent?: boolean;
+  zIndex?: number;
+  children?: ReactElement | ReactElement[] | ReactNode | ReactNode[];
+  onClose?: () => void;
+}
 
-function Overlay(props: OverlayProps) {
+function Overlay({ onClose, ...props }: OverlayProps) {
   const onClick: MouseEventHandler<HTMLDivElement> = (e) => {
+    if (!onClose) return;
+
     if (e.currentTarget === e.target) {
-      props.onClose();
+      onClose();
     }
   };
 
