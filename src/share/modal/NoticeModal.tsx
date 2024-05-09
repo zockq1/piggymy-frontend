@@ -10,7 +10,7 @@ interface DefaultModalProps {
   onCancel?: () => void;
 }
 
-function DefaultModal({
+function NoticeModal({
   type = 'confirm',
   message,
   onConfirm,
@@ -47,4 +47,4 @@ function DefaultModal({
   );
 }
 
-export default DefaultModal;
+export default NoticeModal;

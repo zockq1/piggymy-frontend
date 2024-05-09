@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-import DefaultModal from '@/share/modal/DefaultModal';
+import NoticeModal from '@/share/modal/NoticeModal';
 import { useModalHook } from '@/share/modal/useModalHook';
 import Button from '@/share/ui/button/Button';
 
@@ -66,7 +66,7 @@ export function DefaultModalSystem({
       onClick={() => {
         openModal(
           'default-modal',
-          <DefaultModal
+          <NoticeModal
             message={'삭제하시겠습니까?'}
             onConfirm={handleConfirm}
             onCancel={handleCancel}
