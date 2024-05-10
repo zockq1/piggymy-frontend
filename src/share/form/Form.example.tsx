@@ -1,12 +1,7 @@
 'use client';
 
-import { DatePicker, Form, Input, Select } from 'antd';
-
-const { RangePicker } = DatePicker;
-const { TextArea } = Input;
-
-import dayjs from 'dayjs';
-import { ReactNode } from 'react';
+import { DatePicker, Form, Input, Select, UploadFile } from 'antd';
+import dayjs, { Dayjs } from 'dayjs';
 
 import Button from '../ui/button/Button';
 import ContentBox from '../ui/content-box/ContentBox';
@@ -14,16 +9,33 @@ import { ActiveCheckbox } from './item/ActiveCheckbox';
 import ChoiceList from './item/ChoiceList';
 import CreatedDate from './item/CreatedDate';
 import ImageUpload from './item/ImageUpload';
+import Label from './item/Label';
 
-function Label({ children }: { children: ReactNode }) {
-  return <span className="text-sm font-bold">{children}</span>;
+const { RangePicker } = DatePicker;
+const { TextArea } = Input;
+
+interface FormExampleValue {
+  answer: number;
+  datePicker: Dayjs;
+  image: UploadFile;
+  input: string;
+  option1: string;
+  option2: string;
+  option3: string;
+  option4: string;
+  rangePicker: Dayjs[];
+  select: string;
+  textArea: string;
+  useYn: true;
 }
 
 export default function FormExample() {
   const createdDate = dayjs('2024-10-2');
 
-  const onFinish = (value: unknown) => {
-    console.log(value);
+  const onFinish = (formValue: FormExampleValue) => {
+    for (const [key, value] of Object.entries(formValue)) {
+      console.log(`${key}: ${value}`);
+    }
   };
 
   return (
@@ -82,7 +94,3 @@ export default function FormExample() {
     </div>
   );
 }
-
-// 관련 링크
-// 용어 카드 선택
-// 4지선다형
