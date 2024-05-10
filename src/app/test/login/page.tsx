@@ -1,4 +1,4 @@
-import Login from '@/share/ui/login/Login';
+import Login from '@/app/(beforeLogin)/login/_component/Login';
 
 export default function LoginPage() {
   return (

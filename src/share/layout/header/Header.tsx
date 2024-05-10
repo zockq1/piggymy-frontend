@@ -17,32 +17,50 @@ export default function Header({ user }: HeaderPropsType) {
       <div className="flex h-full w-8/12 flex-row">
         <ul className="flex w-full flex-row items-center justify-around">
           <li>
-            <Link className="hover:text-blue-500 text-sm" href="/public">
+            <Link
+              className="hover:text-blue-500 text-sm font-bold"
+              href="/public"
+            >
               홈
             </Link>
           </li>
           <li>
-            <Link className="hover:text-blue-500 text-sm" href="/public">
+            <Link
+              className="hover:text-blue-500 text-sm font-bold"
+              href="/public"
+            >
               콘텐츠
             </Link>
           </li>
           <li>
-            <Link className="hover:text-blue-500 text-sm" href="/public">
+            <Link
+              className="hover:text-blue-500 text-sm font-bold"
+              href="/public"
+            >
               용어/퀴즈
             </Link>
           </li>
           <li>
-            <Link className="hover:text-blue-500 text-sm" href="/public">
+            <Link
+              className="hover:text-blue-500 text-sm font-bold"
+              href="/public"
+            >
               설정
             </Link>
           </li>
           <li>
-            <Link className="hover:text-blue-500 text-sm" href="/public">
+            <Link
+              className="hover:text-blue-500 text-sm font-bold"
+              href="/public"
+            >
               회원
             </Link>
           </li>
           <li>
-            <Link className="hover:text-blue-500 text-sm" href="/public">
+            <Link
+              className="hover:text-blue-500 text-sm font-bold"
+              href="/public"
+            >
               관리자
             </Link>
           </li>

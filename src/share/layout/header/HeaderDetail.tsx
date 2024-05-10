@@ -14,7 +14,7 @@ export default function HeaderDetail() {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+    setIsDropdownOpen((prevIsDropdownOpen: boolean) => !prevIsDropdownOpen);
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -39,7 +39,7 @@ export default function HeaderDetail() {
       {isDropdownOpen && (
         <div
           ref={dropdownRef}
-          className="absolute left-40 top-20 flex h-auto w-10/12 flex-row justify-center bg-white p-3 pb-6 text-sm"
+          className="absolute left-40 top-20 flex h-auto w-10/12 flex-row justify-center border-2 border-black bg-white p-3 pb-6 text-sm"
         >
           <HeaderList items={contentList} title="콘텐츠" />
           <HeaderList items={vocaQuizList} title="용어/퀴즈" />
