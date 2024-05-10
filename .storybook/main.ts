@@ -9,6 +9,7 @@ const config: StorybookConfig = {
     '@storybook/addon-onboarding',
     '@storybook/addon-interactions',
     'storybook-addon-recoil-flow',
+    '@storybook/preset-ant-desig',
   ],
   framework: {
     name: '@storybook/nextjs',
