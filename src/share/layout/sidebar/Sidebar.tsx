@@ -24,7 +24,7 @@ export default function Sidebar({ sidebarList }: SidebarProps) {
               return (
                 <li
                   key={index}
-                  className={`p-2 font-bold ${isActive ? 'bg-primary' : 'bg-white'}`}
+                  className={`p-2 font-bold ${isActive ? 'bg-primary text-white' : 'bg-white'}`}
                 >
                   <Link href={`/test/route/${item.query}`} className="pl-2">
                     {item.title}
@@ -39,7 +39,7 @@ export default function Sidebar({ sidebarList }: SidebarProps) {
           return (
             <li
               key={index}
-              className={`p-2 font-bold ${isActive ? 'bg-primary' : 'bg-white'}`}
+              className={`p-2 font-bold ${isActive ? 'bg-primary text-white' : 'bg-white'}`}
             >
               <Link href={`/test/route/${item.query}`} className="pl-2">
                 {item.title}
