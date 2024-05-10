@@ -35,10 +35,14 @@ export default function Button({
   color,
   size,
   children,
+  className,
   ...props
 }: ButtonProps) {
   return (
-    <button className={cn(ButtonVariants({ color, size }))} {...props}>
+    <button
+      className={cn(ButtonVariants({ color, size }), className)}
+      {...props}
+    >
       {children && children}
     </button>
   );
