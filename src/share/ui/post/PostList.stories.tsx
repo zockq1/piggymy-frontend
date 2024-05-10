@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import dayjs from 'dayjs';
 
 import PostList from './PostList';
 
@@ -16,19 +17,19 @@ export const PostListWithAuthor: Story = {
       {
         title: '공지사항1공지사항1공지사항1공지사항1',
         author: '작성자1',
-        registrationDate: '2023.12.15 금요일',
+        createdDate: dayjs('2023-11-01'),
         route: '/123',
       },
       {
         title: '공지사항2',
         author: '작성자2',
-        registrationDate: '2023.12.15 금요일',
+        createdDate: dayjs('2023-11-01'),
         route: '/123',
       },
       {
         title: '공지사항3',
         author: '작성자3',
-        registrationDate: '2023.12.15 금요일',
+        createdDate: dayjs('2023-11-01'),
         route: '/123',
       },
     ],
@@ -40,17 +41,17 @@ export const PostListWithoutAuthor: Story = {
     postList: [
       {
         title: '공지사항1공지사항1공지사항1공지사항1',
-        registrationDate: '2023.12.15 금요일',
+        createdDate: dayjs('2023-11-01'),
         route: '/123',
       },
       {
         title: '공지사항2',
-        registrationDate: '2023.12.15 금요일',
+        createdDate: dayjs('2023-11-01'),
         route: '/123',
       },
       {
         title: '공지사항3',
-        registrationDate: '2023.12.15 금요일',
+        createdDate: dayjs('2023-11-01'),
         route: '/123',
       },
     ],

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import dayjs from 'dayjs';
 
 import pig from '/public/img/piggy/Basic-Face.png';
 
@@ -15,7 +16,7 @@ type Story = StoryObj<typeof Badge>;
 export const SelectedBadge: Story = {
   args: {
     title: `11월 출첵 완료`,
-    registrationDate: '2023.11.01',
+    createdDate: dayjs('2023-11-01'),
     isActive: true,
     isSelected: true,
     route: '/123',
@@ -26,7 +27,7 @@ export const SelectedBadge: Story = {
 export const UnselectedBadge: Story = {
   args: {
     title: `12월 출첵 완료`,
-    registrationDate: '2023.11.01',
+    createdDate: dayjs('2023-11-01'),
     isActive: false,
     isSelected: false,
     route: '/123',

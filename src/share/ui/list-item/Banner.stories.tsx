@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import dayjs from 'dayjs';
 
 import pig from '/public/img/piggy/Basic-Face.png';
 
@@ -18,7 +19,7 @@ export const SelectedBanner: Story = {
     용어를 들어보셨나요?
     용어를 들어보셨나요?`,
     category: `오늘의 용어`,
-    registrationDate: '2023.11.01',
+    createdDate: dayjs('2023-11-01'),
     isActive: true,
     isSelected: true,
     route: '/123',
@@ -33,7 +34,7 @@ export const UnselectedBanner: Story = {
     인사와 자금 운용에
     직접 개입하는 금융 형태는?`,
     category: `오늘의 퀴즈`,
-    registrationDate: '2023.11.01',
+    createdDate: dayjs('2023-11-01'),
     isActive: false,
     isSelected: false,
     route: '/123',

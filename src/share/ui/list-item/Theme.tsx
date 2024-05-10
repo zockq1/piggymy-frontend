@@ -1,6 +1,7 @@
 'use client';
 
 import { cva } from 'class-variance-authority';
+import { Dayjs } from 'dayjs';
 import Link from 'next/link';
 
 import { cn } from '@/utils/cn';
@@ -22,7 +23,7 @@ export const ThemeVariants = cva('', {
 interface ThemeProps {
   title: string;
   description: string;
-  registrationDate: string;
+  createdDate: Dayjs;
   isActive: boolean;
   isSelected: boolean;
   route: string;
@@ -31,7 +32,7 @@ interface ThemeProps {
 export default function Theme({
   title,
   description,
-  registrationDate,
+  createdDate,
   isActive,
   isSelected,
   route,
@@ -52,7 +53,7 @@ export default function Theme({
       </Link>
       <div className="flex items-center justify-between px-4">
         <div className="text-xs">
-          등록일: <i>{registrationDate}</i>
+          등록일: <i>{createdDate.format('YYYY.MM.DD')}</i>
         </div>
         <StatusBadge isActive={isActive} />
       </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { cva } from 'class-variance-authority';
+import { Dayjs } from 'dayjs';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 
@@ -23,7 +24,7 @@ export const BadgeVariants = cva('', {
 interface BadgeProps {
   title: string;
   image: string | StaticImageData;
-  registrationDate: string;
+  createdDate: Dayjs;
   isActive: boolean;
   isSelected: boolean;
   route: string;
@@ -32,7 +33,7 @@ interface BadgeProps {
 export default function Badge({
   title,
   image,
-  registrationDate,
+  createdDate,
   isActive,
   isSelected,
   route,
@@ -51,7 +52,7 @@ export default function Badge({
       </Link>
       <div className="flex items-center justify-between">
         <div className="text-xs">
-          등록일: <i>{registrationDate}</i>
+          등록일: <i>{createdDate.format('YYYY.MM.DD')}</i>
         </div>
         <StatusBadge isActive={isActive} />
       </div>

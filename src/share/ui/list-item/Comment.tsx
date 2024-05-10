@@ -1,5 +1,6 @@
 'use client';
 
+import { Dayjs } from 'dayjs';
 import Image from 'next/image';
 
 import feedbackIcon from '/public/img/Icon/Feedback.svg';
@@ -8,7 +9,7 @@ import pig from '/public/img/piggy/Basic-Face.png';
 interface CommentProps {
   user: string;
   description: string;
-  registrationDate: string;
+  createdDate: Dayjs;
   onClick: () => void;
   feedback: string;
 }
@@ -16,7 +17,7 @@ interface CommentProps {
 export default function Comment({
   user,
   description,
-  registrationDate,
+  createdDate,
   onClick,
   feedback,
 }: CommentProps) {
@@ -30,7 +31,7 @@ export default function Comment({
       <p className="h-[116px] truncate whitespace-pre-line text-start  text-[22px] font-bold leading-[28px]">
         {description}
       </p>
-      <p className="mt-1">{registrationDate} 작성</p>
+      <p className="mt-1">{createdDate.format('YYYY.MM.DD')} 작성</p>
       <div className="mt-4 flex w-[55px] flex-col items-center justify-center text-xs">
         <Image src={feedbackIcon} alt="feedbackIcon" width={40} height={40} />
         <div className="mt-2 text-gray-3">{feedback}</div>

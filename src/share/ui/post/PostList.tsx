@@ -1,12 +1,15 @@
 'use client';
 
+import 'dayjs/locale/ko';
+
+import { Dayjs } from 'dayjs';
 import Link from 'next/link';
 
 interface PostListProps {
   postList: {
     title: string;
     author?: string;
-    registrationDate: string;
+    createdDate: Dayjs;
     route: string;
   }[];
 }
@@ -15,7 +18,7 @@ export default function PostList({ postList }: PostListProps) {
   return (
     <ul className=" divide-y divide-[#d9d9d9]">
       {postList.map((post) => {
-        const { title, author, registrationDate, route } = post;
+        const { title, author, createdDate, route } = post;
         return (
           <li
             key={title}
@@ -27,7 +30,7 @@ export default function PostList({ postList }: PostListProps) {
             <span className="h-2 divide-x divide-[#d9d9d9] text-end text-[9px]">
               {author && <span className="break-keep px-2">{author}</span>}
               <span className=" break-keep px-2 text-end">
-                {registrationDate}
+                {createdDate.locale('ko').format('YYYY.MM.DD ddd요일')}
               </span>
             </span>
           </li>

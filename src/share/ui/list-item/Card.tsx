@@ -1,6 +1,7 @@
 'use client';
 
 import { cva } from 'class-variance-authority';
+import { Dayjs } from 'dayjs';
 import Link from 'next/link';
 
 import { cn } from '@/utils/cn';
@@ -22,7 +23,7 @@ export const CardVariants = cva('', {
 interface CardProps {
   id: string;
   title: string;
-  registrationDate: string;
+  createdDate: Dayjs;
   isActive: boolean;
   isSelected: boolean;
   route: string;
@@ -33,7 +34,7 @@ interface CardProps {
 export default function Card({
   id,
   title,
-  registrationDate,
+  createdDate,
   isActive,
   isSelected,
   route,
@@ -57,7 +58,7 @@ export default function Card({
       />
       <Link href={route} className="w-[190px]">
         <div className="break-keep font-bold">{title}</div>
-        <div className="text-xs">{registrationDate}</div>
+        <div className="text-xs">{createdDate.format('YYYY.MM.DD')}</div>
       </Link>
       <StatusBadge isActive={isActive} />
     </div>
