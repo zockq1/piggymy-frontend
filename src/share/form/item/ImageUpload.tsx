@@ -5,6 +5,13 @@ import { Form, Upload } from 'antd';
 
 import Label from './Label';
 
+/**
+ * antd form onFinish의 value 매개변수에 추가되는 값
+ * @example
+ *  {
+ *    image: UploadFile[];
+ *  }
+ */
 export default function ImageUpload({
   initialImage,
 }: {
@@ -12,8 +19,6 @@ export default function ImageUpload({
 }) {
   /* eslint-disable  @typescript-eslint/no-explicit-any */
   const getFile = (e: any) => {
-    console.log('Upload event:', e);
-
     if (Array.isArray(e)) {
       return e;
     }
@@ -23,7 +28,7 @@ export default function ImageUpload({
   return (
     <Form.Item
       label={<Label>이미지</Label>}
-      name="upload"
+      name="image"
       valuePropName="fileList"
       getValueFromEvent={getFile}
       initialValue={initialImage ? [{ url: initialImage }] : null}

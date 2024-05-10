@@ -11,6 +11,7 @@ import { ReactNode } from 'react';
 import Button from '../ui/button/Button';
 import ContentBox from '../ui/content-box/ContentBox';
 import { ActiveCheckbox } from './item/ActiveCheckbox';
+import ChoiceList from './item/ChoiceList';
 import CreatedDate from './item/CreatedDate';
 import ImageUpload from './item/ImageUpload';
 
@@ -52,6 +53,7 @@ export default function FormExample() {
           >
             <Input placeholder="내용을 입력해주세요." className="w-[200px]" />
           </Form.Item>
+          <ChoiceList />
           <Form.Item label={<Label>드롭다운</Label>} name="select">
             <Select>
               <Select.Option value="demo">Demo</Select.Option>
@@ -62,6 +64,9 @@ export default function FormExample() {
           </Form.Item>
           <Form.Item label={<Label>날짜 선택</Label>} name="rangePicker">
             <RangePicker />
+          </Form.Item>
+          <Form.Item label={<Label>날짜 선택</Label>} name="datePicker">
+            <DatePicker />
           </Form.Item>
           <ImageUpload initialImage="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" />
           <Form.Item className="flex w-full justify-center">

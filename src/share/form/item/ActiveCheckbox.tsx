@@ -6,11 +6,18 @@ import StatusBadge from '@/share/ui/badge/StatusBadge';
 
 import Label from './Label';
 
+/**
+ * antd form onFinish의 value 매개변수에 추가되는 값
+ * @example
+ *  {
+ *    useYn: boolean;
+ *  }
+ */
 export function ActiveCheckbox() {
   return (
     <Form.Item
       label={<Label>사용여부</Label>}
-      name="status"
+      name="useYn"
       rules={[{ required: true }]}
       initialValue={true}
     >
