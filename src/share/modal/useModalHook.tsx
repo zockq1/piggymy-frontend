@@ -1,7 +1,10 @@
 import { ReactNode } from 'react';
 import { useRecoilState } from 'recoil';
 
-import { modalChildrenState, modalPowerState } from '@/share/modal/modal';
+import {
+  modalChildrenState,
+  modalPowerState,
+} from '@/share/modal/Modal.recoil';
 
 export const useModalHook = () => {
   const [, setModalPower] = useRecoilState(modalPowerState);

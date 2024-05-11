@@ -5,7 +5,7 @@ import React, {
   ReactNode,
 } from 'react';
 
-import { ModalObjectModal } from '@/share/modal/modal';
+import { ModalObjectModal } from '@/share/modal/Modal.recoil';
 
 interface OverlayProps extends HTMLAttributes<HTMLDivElement> {
   isTransparent?: boolean;

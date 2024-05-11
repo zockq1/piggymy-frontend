@@ -9,8 +9,8 @@ import {
   modalChildrenState,
   ModalObjectModal,
   modalPowerState,
-} from '@/share/modal/modal';
-import Overlay from '@/share/modal/overlay/Overlay';
+} from '@/share/modal/Modal.recoil';
+import Overlay from '@/share/modal/Overlay';
 
 const ModalProvider = () => {
   const modalPower = useRecoilValue(modalPowerState);
