@@ -32,7 +32,7 @@ export default function StatusBadge({
         StatusBadgeVariants({
           status: isActive ? 'active' : 'inactive',
         }),
-        'h-max w-max whitespace-nowrap rounded px-[10px] text-center text-[11px] font-semibold leading-[22px]',
+        'inline-block h-max w-max whitespace-nowrap rounded px-[10px] text-center text-[11px] font-semibold leading-[22px]',
         className,
       )}
       {...props}
