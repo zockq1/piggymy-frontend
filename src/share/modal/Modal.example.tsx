@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 
+import CardSettingModal from '@/share/modal/CardSettingModal';
 import NoticeModal from '@/share/modal/NoticeModal';
 import { useModalHook } from '@/share/modal/useModalHook';
 import Button from '@/share/ui/button/Button';
@@ -87,19 +88,19 @@ export function CustomModalSystem({
 }) {
   const { openModal, closeModal } = useModalHook();
 
-  const handleConfirm = () => {
-    // Do something
-    closeModal('default-modal');
-  };
-
   return (
     <Button
       onClick={() => {
         openModal(
-          'default-modal',
-          <div className={'bg-warning'}>
-            <button onClick={handleConfirm}>버튼</button>
-          </div>,
+          'custom-modal',
+          <CardSettingModal
+            onConfirm={() => {
+              closeModal('custom-modal');
+            }}
+            onCancel={() => {
+              closeModal('custom-modal');
+            }}
+          />,
           { clickableOverlay },
         );
       }}
