@@ -105,7 +105,7 @@ export function CustomModalSystem({
         );
       }}
     >
-      커스텀 모달 열기
+      용어/퀴즈 카드 설정 모달 열기
     </Button>
   );
 }

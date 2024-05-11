@@ -38,6 +38,7 @@ const columns: AntdTableProps<DataType>['columns'] = [
     dataIndex: 'quiz',
     key: 'quiz',
     width: 300,
+    ellipsis: true,
   },
 ];
 
