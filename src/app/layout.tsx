@@ -5,6 +5,8 @@ import { Noto_Sans_KR } from 'next/font/google';
 
 import ReactQueryProvider from '@/app/_component/ReactQueryProvider';
 
+import RecoilRootProvider from './_component/RecoilRootProvider';
+
 const notoSansKr = Noto_Sans_KR({
   preload: false,
 });
@@ -22,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={notoSansKr.className}>
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+        <ReactQueryProvider>
+          <RecoilRootProvider>{children}</RecoilRootProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );
