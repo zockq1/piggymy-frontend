@@ -3,6 +3,7 @@ import React, { ReactNode } from 'react';
 import CardSettingModal from '@/share/modal/CardSettingModal';
 import NoticeModal from '@/share/modal/NoticeModal';
 import { useModalHook } from '@/share/modal/useModalHook';
+import UserFeedbackModal from '@/share/modal/UserFeedbackModal';
 import Button from '@/share/ui/button/Button';
 
 const ModalExample = ({ children }: { children: ReactNode }) => {
@@ -89,24 +90,44 @@ export function CustomModalSystem({
   const { openModal, closeModal } = useModalHook();
 
   return (
-    <Button
-      onClick={() => {
-        openModal(
-          'custom-modal',
-          <CardSettingModal
-            onConfirm={() => {
-              closeModal('custom-modal');
-            }}
-            onCancel={() => {
-              closeModal('custom-modal');
-            }}
-          />,
-          { clickableOverlay },
-        );
-      }}
-    >
-      용어/퀴즈 카드 설정 모달 열기
-    </Button>
+    <>
+      <Button
+        onClick={() => {
+          openModal(
+            'card-setting-modal',
+            <CardSettingModal
+              onConfirm={() => {
+                closeModal('card-setting-modal');
+              }}
+              onCancel={() => {
+                closeModal('card-setting-modal');
+              }}
+            />,
+            { clickableOverlay },
+          );
+        }}
+      >
+        용어/퀴즈 카드 설정 모달 열기
+      </Button>
+      <Button
+        onClick={() => {
+          openModal(
+            'user-feedback--modal',
+            <UserFeedbackModal
+              onConfirm={() => {
+                closeModal('user-feedback--modal');
+              }}
+              onCancel={() => {
+                closeModal('user-feedback--modal');
+              }}
+            />,
+            { clickableOverlay },
+          );
+        }}
+      >
+        회원 의견 상세 모달 열기
+      </Button>
+    </>
   );
 }
 
