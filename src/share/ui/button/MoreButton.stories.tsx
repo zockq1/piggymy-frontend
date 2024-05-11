@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import MoreButton from './MoreButton';
 
 const meta: Meta<typeof MoreButton> = {
-  title: 'MoreButton',
+  title: 'UI/Button/MoreButton',
   component: MoreButton,
 };
 
