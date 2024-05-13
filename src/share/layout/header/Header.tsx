@@ -10,7 +10,7 @@ interface HeaderPropsType {
 
 export default function Header({ user }: HeaderPropsType) {
   return (
-    <div className="border-indigo-500 flex h-full w-full flex-row items-center justify-between border-b-2 pl-3 pr-3">
+    <div className="border-indigo-500 flex h-full w-full flex-row items-center justify-between pl-3 pr-3 shadow-md">
       <div className="title w-1/6 pl-1 text-2xl font-bold">
         <span>피기미 piggyme</span>
       </div>
@@ -18,7 +18,7 @@ export default function Header({ user }: HeaderPropsType) {
         <ul className="flex w-full flex-row items-center justify-around">
           <li>
             <Link
-              className="hover:text-blue-500 text-sm font-bold"
+              className="text-sm font-bold hover:text-blue-5"
               href="/public"
             >
               홈
@@ -26,7 +26,7 @@ export default function Header({ user }: HeaderPropsType) {
           </li>
           <li>
             <Link
-              className="hover:text-blue-500 text-sm font-bold"
+              className="text-sm font-bold hover:text-blue-5"
               href="/public"
             >
               콘텐츠
@@ -34,7 +34,7 @@ export default function Header({ user }: HeaderPropsType) {
           </li>
           <li>
             <Link
-              className="hover:text-blue-500 text-sm font-bold"
+              className="text-sm font-bold hover:text-blue-5"
               href="/public"
             >
               용어/퀴즈
@@ -42,7 +42,7 @@ export default function Header({ user }: HeaderPropsType) {
           </li>
           <li>
             <Link
-              className="hover:text-blue-500 text-sm font-bold"
+              className="text-sm font-bold hover:text-blue-5"
               href="/public"
             >
               설정
@@ -50,7 +50,7 @@ export default function Header({ user }: HeaderPropsType) {
           </li>
           <li>
             <Link
-              className="hover:text-blue-500 text-sm font-bold"
+              className="text-sm font-bold hover:text-blue-5"
               href="/public"
             >
               회원
@@ -58,7 +58,7 @@ export default function Header({ user }: HeaderPropsType) {
           </li>
           <li>
             <Link
-              className="hover:text-blue-500 text-sm font-bold"
+              className="text-sm font-bold hover:text-blue-5"
               href="/public"
             >
               관리자

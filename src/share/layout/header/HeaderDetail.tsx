@@ -1,5 +1,7 @@
+import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
+import bottomArrow from '/public/img/Icon/Name=Chevron-off@3x.png';
 import HeaderList from '@/share/layout/header/HeaderList';
 import {
   contentList,
@@ -35,11 +37,13 @@ export default function HeaderDetail() {
 
   return (
     <>
-      <button onClick={toggleDropdown}>전체 보기</button>
+      <button onClick={toggleDropdown} className="flex flex-row">
+        전체 보기 <Image src={bottomArrow} alt="arrow" width={20} height={20} />
+      </button>
       {isDropdownOpen && (
         <div
           ref={dropdownRef}
-          className="absolute left-40 top-20 flex h-auto w-10/12 flex-row justify-center border-2 border-black bg-white p-3 pb-6 text-sm"
+          className="absolute left-40 top-20 flex h-auto w-10/12 flex-row justify-center rounded-b-lg bg-white p-3 pb-6 text-sm shadow-xl"
         >
           <HeaderList items={contentList} title="콘텐츠" />
           <HeaderList items={vocaQuizList} title="용어/퀴즈" />

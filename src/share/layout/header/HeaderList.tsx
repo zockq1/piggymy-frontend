@@ -19,9 +19,11 @@ export default function HeaderList({ items, title }: HeaderListProps) {
       {items.map((item: HeaderItem, index: number) => (
         <li
           key={index}
-          className="border-b-[1.2px] border-black pb-1.5 pl-2 pt-1"
+          className="border-b-[1.2px] border-black pb-2 pl-2 pt-2 hover:text-blue-5"
         >
-          <Link href={item.route}>{item.title}</Link>
+          <Link href={item.route} className="hover:text-blue-500">
+            {item.title}
+          </Link>
         </li>
       ))}
     </ul>
