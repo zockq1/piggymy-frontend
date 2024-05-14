@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-import { contentList } from '@/share/layout/header/headerListData';
 import Layout from '@/share/layout/Layout';
 import Sidebar from '@/share/layout/sidebar/Sidebar';
+import { contentList } from '@/share/route/routes';
 
 export default async function ThemeCard() {
   return (

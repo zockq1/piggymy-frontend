@@ -9,7 +9,7 @@ import {
   settingList,
   userList,
   vocaQuizList,
-} from '@/share/layout/header/headerListData';
+} from '@/share/route/routes';
 
 export default function HeaderDetail() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);

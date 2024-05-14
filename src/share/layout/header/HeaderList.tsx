@@ -1,12 +1,9 @@
 import Link from 'next/link';
 
-interface HeaderItem {
-  route: string;
-  title: string;
-}
+import { HeaderType } from '@/type/routeType';
 
 interface HeaderListProps {
-  items: HeaderItem[];
+  items: HeaderType[];
   title: string;
 }
 
@@ -16,7 +13,7 @@ export default function HeaderList({ items, title }: HeaderListProps) {
       <li className="bottom-1 border-b-2 border-black pb-1.5 text-center text-lg font-bold">
         {title}
       </li>
-      {items.map((item: HeaderItem, index: number) => (
+      {items.map((item: HeaderType, index: number) => (
         <li
           key={index}
           className="border-b-[1.2px] border-black pb-2 pl-2 pt-2 hover:text-blue-5"

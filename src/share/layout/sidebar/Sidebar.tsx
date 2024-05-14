@@ -3,10 +3,10 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { ListType } from '@/type/testType';
+import { HeaderType } from '@/type/routeType';
 
 interface SidebarProps {
-  sidebarList: ListType[];
+  sidebarList: HeaderType[];
 }
 
 export default function Sidebar({ sidebarList }: SidebarProps) {
@@ -17,7 +17,7 @@ export default function Sidebar({ sidebarList }: SidebarProps) {
       <ul>
         <li className="pb-2 pl-4 text-lg text-gray-4">Route에 따라 변경</li>
         {sidebarList
-          ? sidebarList.map((item: ListType) => {
+          ? sidebarList.map((item: HeaderType) => {
               const isActive = routes.includes(item.route);
               return (
                 <li

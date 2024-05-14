@@ -1,4 +1,4 @@
-export type ListType = {
+export type HeaderType = {
   title: string;
   route: string;
 };
