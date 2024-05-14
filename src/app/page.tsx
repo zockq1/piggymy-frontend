@@ -5,7 +5,7 @@ export default async function Home() {
   return (
     <HomeLayout>
       <HomeLayout.Header>
-        <Header user="" headerList={[]} />
+        <Header user="" />
       </HomeLayout.Header>
       <HomeLayout.Top>
         <div className="h-full bg-gray-1">top</div>
