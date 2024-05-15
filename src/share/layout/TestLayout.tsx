@@ -1,26 +1,14 @@
 import React, { ReactNode } from 'react';
 
-function HomeLayout({ children }: { children?: ReactNode }) {
+function TestLayout({ children }: { children?: ReactNode }) {
   return (
     <div
       style={{
         display: 'grid',
-        gridTemplate: `'header header' 70px
-                       'top    right ' 180px
-                       'center right ' 528px
-                       'bottom right ' 190px / 70% 30%`,
-      }}
-    >
-      {children}
-    </div>
-  );
-}
-
-function Header({ children }: { children: ReactNode }) {
-  return (
-    <div
-      style={{
-        gridArea: 'header',
+        gridTemplate: `'header header header' 70px
+                       'sidebar top    right ' 180px
+                       'sidebar center right ' 528px
+                       'sidebar bottom right ' 190px / 15% 70% 15%`,
       }}
     >
       {children}
@@ -80,10 +68,35 @@ function Right({ children }: { children: ReactNode }) {
   );
 }
 
-HomeLayout.Top = Top;
-HomeLayout.Center = Center;
-HomeLayout.Bottom = Bottom;
-HomeLayout.Right = Right;
-HomeLayout.Header = Header;
+function SideBar({ children }: { children: ReactNode }) {
+  return (
+    <div
+      style={{
+        gridArea: 'sidebar',
+      }}
+    >
+      {children}
+    </div>
+  );
+}
 
-export default HomeLayout;
+function Header({ children }: { children: ReactNode }) {
+  return (
+    <div
+      style={{
+        gridArea: 'header',
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+TestLayout.Top = Top;
+TestLayout.Center = Center;
+TestLayout.Bottom = Bottom;
+TestLayout.Right = Right;
+TestLayout.SideBar = SideBar;
+TestLayout.Header = Header;
+
+export default TestLayout;
