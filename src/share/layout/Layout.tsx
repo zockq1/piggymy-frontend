@@ -35,9 +35,6 @@ function Content({ children }: { children?: ReactNode }) {
     <div
       style={{
         gridArea: 'content',
-        display: 'grid',
-        gridTemplateColumns: '380px auto',
-        gridTemplateRows: 'max-content',
       }}
     >
       {children}
@@ -45,23 +42,8 @@ function Content({ children }: { children?: ReactNode }) {
   );
 }
 
-function FullContent({ children }: { children?: ReactNode }) {
-  return <div className="col-start-1 col-end-3">{children}</div>;
-}
-
-function LeftContent({ children }: { children?: ReactNode }) {
-  return <div className="col-start-1 col-end-2">{children}</div>;
-}
-
-function RightContent({ children }: { children?: ReactNode }) {
-  return <div className="col-start-2 col-end-3">{children}</div>;
-}
-
+Layout.Header = Header;
 Layout.LeftSideMenu = LeftSideMenu;
 Layout.Content = Content;
-Layout.Header = Header;
-Content.Left = LeftContent;
-Content.Right = RightContent;
-Content.Full = FullContent;
 
 export default Layout;
