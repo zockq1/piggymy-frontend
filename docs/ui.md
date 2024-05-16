@@ -4,7 +4,7 @@
 
 1. [Button](#button)
 2. [Title](#title)
-3. [Content Box](#content-box)
+3. [ContentLayout Box](#content-box)
 4. [Modal](#modal)
 5. [Dropdown](#dropdown)
 6. [Table](#table)
@@ -65,7 +65,7 @@
    - Props:
      - categoryList: {title: string, onClick: () => void, current: boolean}[] - 카테고리 목록과 클릭 이벤트, 현재 페이지를 전달
 
-## Content Box
+## ContentLayout Box
 
 1. `<ContentBox/>`
    ![Alt text](ui/content-box/content-box.png)

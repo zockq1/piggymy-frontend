@@ -15,20 +15,20 @@
   <Layout.LeftSideMenu>
     <div className="h-[500px] bg-gray-1">sideMenu</div>
   </Layout.LeftSideMenu>
-  <Layout.Content>
-    <Layout.Content.Full>
+  <Layout.ContentLayout>
+    <Layout.ContentLayout.Full>
       <div className="h-[100px] bg-primary">title</div>
-    </Layout.Content.Full>
-    <Layout.Content.Full>
+    </Layout.ContentLayout.Full>
+    <Layout.ContentLayout.Full>
       <div className="h-[100px] bg-warning">search</div>
-    </Layout.Content.Full>
-    <Layout.Content.Left>
+    </Layout.ContentLayout.Full>
+    <Layout.ContentLayout.Left>
       <div className="h-[700px] bg-secondary">menu</div>
-    </Layout.Content.Left>
-    <Layout.Content.Right>
+    </Layout.ContentLayout.Left>
+    <Layout.ContentLayout.Right>
       <div className="h-[200px] bg-error">form</div>
-    </Layout.Content.Right>
-  </Layout.Content>
+    </Layout.ContentLayout.Right>
+  </Layout.ContentLayout>
 </Layout>
 ```
 
