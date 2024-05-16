@@ -1,7 +1,8 @@
 'use client';
 
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
+import { notification } from 'antd';
+import axios, { AxiosError } from 'axios';
 import { setCookie } from 'cookies-next';
 
 import { LoginRequestModel, LoginResponseModel } from '@/type/authType';
@@ -36,6 +37,15 @@ export function useLogin() {
       setCookie('memberName', data.data.memberName, {
         maxAge: 30 * 24 * 60 * 60,
       });
+    },
+    onError: (error: AxiosError<Response<unknown>, unknown>) => {
+      if (axios.isAxiosError(error)) {
+        notification.error({
+          message: '에러 발생',
+          description: `${error.response?.data.code}: ${error.response?.data.message}`,
+        });
+        console.log(error.response);
+      }
     },
   });
 }
