@@ -1,4 +1,3 @@
-import { Input } from 'antd';
 import Image from 'next/image';
 import React, { useState } from 'react';
 
@@ -22,7 +21,7 @@ function ContentSearchExample() {
     setIsExpand((prev) => !prev);
   };
 
-  const handleSearch = (formValue: FormExampleValue) => {
+  const handleFinish = (formValue: FormExampleValue) => {
     for (const [key, value] of Object.entries(formValue)) {
       console.log(`${key}: ${value}`);
     }
@@ -34,11 +33,12 @@ function ContentSearchExample() {
         <div
           className={`${isExpand ? '' : 'mb-[-24px]'} flex w-full flex-col gap-6`}
         >
-          <Search>
+          <Search onFinish={handleFinish}>
             <div className={'flex w-full items-start justify-between gap-x-10'}>
               <Search.SearchRangePicker
                 label={'등록일자'}
                 className={'w-[379px]'}
+                name={'range'}
               />
               <Search.SearchText
                 label={'링크 타이틀/URL'}
@@ -52,7 +52,7 @@ function ContentSearchExample() {
                     <Button onClick={handleExpand}>
                       <Image src={down} alt="검색" width={18} height={18} />
                     </Button>
-                    <Button onClick={handleSearch}>
+                    <Button type={'submit'}>
                       <div className={'flex items-center justify-center gap-1'}>
                         <Image src={search} alt="검색" width={18} height={18} />
                       </div>
@@ -98,7 +98,7 @@ function ContentSearchExample() {
                 <Button onClick={handleExpand}>
                   <Image src={up} alt="검색" width={18} height={18} />
                 </Button>
-                <Button onClick={handleSearch}>
+                <Button type={'submit'}>
                   <div className={'flex items-center justify-center gap-1'}>
                     <Image src={search} alt="검색" width={18} height={18} />
                     검색하기
@@ -114,7 +114,7 @@ function ContentSearchExample() {
 }
 
 function WordSearchExample() {
-  const handleSearch = (formValue: FormExampleValue) => {
+  const handleFinish = (formValue: FormExampleValue) => {
     for (const [key, value] of Object.entries(formValue)) {
       console.log(`${key}: ${value}`);
     }
@@ -123,20 +123,22 @@ function WordSearchExample() {
   return (
     <div className={'bg-gray-5 p-4'}>
       <ContentBox>
-        <Search className={'mb-[-24px] w-full'}>
+        <Search className={'mb-[-24px] w-full'} onFinish={handleFinish}>
           <div className={'flex w-full items-start justify-between gap-x-10'}>
             <div className={'flex gap-x-10'}>
               <Search.SearchRangePicker
                 label={'등록일자'}
                 className={'w-[379px]'}
+                name={'range'}
               />
               <Search.SearchDropdown
                 label={'사용여부'}
                 placeholder={'전체'}
                 className="max-w-[250px]"
+                name={'use'}
               />
             </div>
-            <Button onClick={handleSearch}>
+            <Button type={'submit'}>
               <div className={'flex items-center justify-center gap-1'}>
                 <Image src={search} alt="검색" width={18} height={18} />
               </div>
@@ -155,7 +157,7 @@ function ManagerSearchExample() {
     setIsExpand((prev) => !prev);
   };
 
-  const handleSearch = (formValue: FormExampleValue) => {
+  const handleFinish = (formValue: FormExampleValue) => {
     for (const [key, value] of Object.entries(formValue)) {
       console.log(`${key}: ${value}`);
     }
@@ -167,11 +169,12 @@ function ManagerSearchExample() {
         <div
           className={`${isExpand ? '' : 'mb-[-24px]'}  flex w-full flex-col gap-6`}
         >
-          <Search>
+          <Search onFinish={handleFinish}>
             <div className={'flex w-full items-start justify-between gap-x-10'}>
               <Search.SearchRangePicker
                 label={'등록일자'}
                 className={'w-[379px]'}
+                name={'range'}
               />
               <Search.SearchText
                 label={'관리자명'}
@@ -183,6 +186,7 @@ function ManagerSearchExample() {
                 label={'탈퇴여부'}
                 placeholder={'전체'}
                 className="w-[180px]"
+                name={'isSeceded'}
               />
               <div className={'flex min-w-[88px] gap-4'}>
                 {!isExpand && (
@@ -190,7 +194,7 @@ function ManagerSearchExample() {
                     <Button onClick={handleExpand}>
                       <Image src={down} alt="검색" width={18} height={18} />
                     </Button>
-                    <Button onClick={handleSearch}>
+                    <Button type={'submit'}>
                       <div className={'flex items-center justify-center gap-1'}>
                         <Image src={search} alt="검색" width={18} height={18} />
                       </div>
@@ -204,34 +208,34 @@ function ManagerSearchExample() {
                 <Search.SearchText
                   label={'로그인ID'}
                   placeholder={'검색'}
-                  name={'source'}
+                  name={'id'}
                   className="max-w-[300px]"
                 />
                 <Search.SearchText
                   label={'이메일'}
                   placeholder={'검색'}
-                  name={'word'}
+                  name={'email'}
                   className="max-w-[600px]"
                 />
               </div>
             )}
-          </Search>
-          {isExpand && (
-            <>
-              <hr className={'w-full border-[#b5b5b5]'} />
-              <div className={'flex w-full justify-center gap-2'}>
-                <Button onClick={handleExpand}>
-                  <Image src={up} alt="검색" width={18} height={18} />
-                </Button>
-                <Button onClick={handleSearch}>
-                  <div className={'flex items-center justify-center gap-1'}>
-                    <Image src={search} alt="검색" width={18} height={18} />
-                    검색하기
-                  </div>
-                </Button>
+            {isExpand && (
+              <div className={'flex flex-col gap-4'}>
+                <hr className={'w-full border-[#b5b5b5]'} />
+                <div className={'flex w-full justify-center gap-2'}>
+                  <Button onClick={handleExpand}>
+                    <Image src={up} alt="검색" width={18} height={18} />
+                  </Button>
+                  <Button type={'submit'}>
+                    <div className={'flex items-center justify-center gap-1'}>
+                      <Image src={search} alt="검색" width={18} height={18} />
+                      검색하기
+                    </div>
+                  </Button>
+                </div>
               </div>
-            </>
-          )}
+            )}
+          </Search>
         </div>
       </ContentBox>
     </div>
@@ -239,7 +243,7 @@ function ManagerSearchExample() {
 }
 
 function TextSearchExample() {
-  const handleSearch = (formValue: FormExampleValue) => {
+  const handleFinish = (formValue: FormExampleValue) => {
     for (const [key, value] of Object.entries(formValue)) {
       console.log(`${key}: ${value}`);
     }
@@ -248,10 +252,15 @@ function TextSearchExample() {
   return (
     <div className={'bg-gray-5 p-4'}>
       <ContentBox>
-        <Search>
-          <div className={'flex w-full items-center justify-between gap-x-3'}>
-            <Input placeholder="검색" className={'w-full'} />
-            <Button onClick={handleSearch}>
+        <Search className={'mb-[-24px] w-full'} onFinish={handleFinish}>
+          <div className={'flex w-full items-start justify-between gap-x-3'}>
+            <Search.SearchText
+              label={''}
+              placeholder={'검색'}
+              name={'keyword'}
+              className={'w-full'}
+            />
+            <Button type={'submit'}>
               <Image src={search} alt="검색" width={18} height={18} />
             </Button>
           </div>

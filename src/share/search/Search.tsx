@@ -1,26 +1,21 @@
-import { DatePicker, Form, Input, Select } from 'antd';
+import { DatePicker, Form, FormProps, Input, Select } from 'antd';
+import { type } from 'doctrine';
 import React, { HTMLAttributes } from 'react';
 
 import Label from '@/share/form/item/Label';
+import FieldType = type.FieldType;
 
-interface FormExampleValue {
-  title?: string;
+interface SearchProps extends HTMLAttributes<HTMLFormElement> {
+  onFinish?: FormProps<FieldType>['onFinish'];
 }
-interface SearchProps extends HTMLAttributes<HTMLFormElement> {}
 
-function Search({ children, ...props }: SearchProps) {
-  const handleSubmit = (formValue: FormExampleValue) => {
-    for (const [key, value] of Object.entries(formValue)) {
-      console.log(`${key}: ${value}`);
-    }
-  };
-
+function Search({ children, onFinish, ...props }: SearchProps) {
   return (
     <Form
       labelCol={{}}
       layout="horizontal"
       className="w-full"
-      onFinish={handleSubmit}
+      onFinish={onFinish}
       {...props}
     >
       {children}
@@ -47,10 +42,15 @@ function SearchRangePicker({ label, name, ...props }: SearchRangePickerProps) {
 
 interface SearchTextProps extends FormItemProps {}
 
-function SearchText({ label, name, ...props }: SearchTextProps) {
+function SearchText({ label, placeholder, name, ...props }: SearchTextProps) {
   return (
-    <Form.Item label={<Label>{label}</Label>} name={name} rules={[]} {...props}>
-      <Input placeholder="검색" className={'w-full'} />
+    <Form.Item
+      label={label ? <Label>{label}</Label> : null}
+      name={name}
+      rules={[]}
+      {...props}
+    >
+      <Input placeholder={placeholder} className={'w-full'} />
     </Form.Item>
   );
 }
