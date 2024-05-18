@@ -10,7 +10,6 @@ import WordBadge from '@/share/ui/badge/WordBadge';
 import Button from '@/share/ui/button/Button';
 import Table from '@/share/ui/table/Table';
 import Title from '@/share/ui/title/Title';
-import { cn } from '@/utils/cn';
 
 export interface DataType {
   [key: string]: number | string | ReactNode;
@@ -119,9 +118,9 @@ function CardSettingModal({ onConfirm, onCancel }: CardSettingProps) {
 
   return (
     <div
-      className={cn(
-        'flex w-[760px] flex-col items-start justify-center gap-5 text-center',
-      )}
+      className={
+        'flex w-[760px] flex-col items-start justify-center gap-5 text-center'
+      }
     >
       <Title>용어/퀴즈카드 설정</Title>
       <div className={'block w-full bg-warning'}>SEARCH UI</div>

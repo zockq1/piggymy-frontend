@@ -8,7 +8,6 @@ import feedbackIcon from '/public/img/Icon/Feedback.svg';
 import closeIcon from '/public/img/Icon/Name=Close-Outlined@3x.png';
 import Button from '@/share/ui/button/Button';
 import Title from '@/share/ui/title/Title';
-import { cn } from '@/utils/cn';
 
 interface CardSettingProps {
   onConfirm?: () => void;
@@ -46,9 +45,9 @@ function UserFeedbackModal({ onConfirm, onCancel }: CardSettingProps) {
 
   return (
     <div
-      className={cn(
-        'relative flex w-[620px] flex-col items-start justify-center gap-4 text-center',
-      )}
+      className={
+        'relative flex w-[620px] flex-col items-start justify-center gap-4 text-center'
+      }
     >
       <Image
         src={closeIcon}
