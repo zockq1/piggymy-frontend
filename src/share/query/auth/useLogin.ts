@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { notification } from 'antd';
 import axios, { AxiosError } from 'axios';
 import { setCookie } from 'cookies-next';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 import { LoginRequestModel, LoginResponseModel } from '@/type/authType';
 import Response from '@/type/responseType';
@@ -46,7 +46,6 @@ export function useLogin() {
           message: '로그인 실패',
           description: `${error.response?.data.code}: ${error.response?.data.message}`,
         });
-        console.log(error.response);
       }
     },
   });
