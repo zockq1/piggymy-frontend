@@ -54,12 +54,7 @@ function UserFeedbackModal({ onConfirm, onCancel }: CardSettingProps) {
         alt="feedbackIcon"
         width={40}
         height={40}
-        style={{
-          position: 'absolute',
-          top: '-16px',
-          right: '-16px',
-          cursor: 'pointer',
-        }}
+        className={'absolute right-[-16px] top-[-16px] cursor-pointer'}
         onClick={onCancel}
       />
       <Title>회원 의견 상세</Title>
