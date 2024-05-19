@@ -1,6 +1,8 @@
 import Link from 'next/link';
 
 import Layout from '@/share/layout/Layout';
+import Sidebar from '@/share/layout/sidebar/Sidebar';
+import { contentList } from '@/share/route/routes';
 
 export default async function LinkPage() {
   return (
@@ -18,19 +20,7 @@ export default async function LinkPage() {
         <Link href="/admin/management/basicInfo">관리자</Link>
       </div>
       <Layout.LeftSideMenu>
-        <div className="h-full bg-gray-5">
-          <Link href="/admin/content/greetingMessage">그리팅 메시지 관리</Link>
-          <br />
-          <Link href="/admin/content/rollingBanner">롤링 배너 관리</Link>
-          <br />
-          <Link href="/admin/content/themeCard">테마별 카드 모음집 관리</Link>
-          <br />
-          <Link href="/admin/content/badge">뱃지 관리</Link>
-          <br />
-          <Link href="/admin/content/link">링크 관리</Link>
-          <br />
-          <Link href="/admin/content/link/createWriting">신규 링크 등록</Link>
-        </div>
+        <Sidebar sidebarList={contentList} />
       </Layout.LeftSideMenu>
       <Layout.Content>
         <Layout.Content.Full>

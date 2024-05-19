@@ -1,10 +1,12 @@
-import Header from '@/share/layout/Header';
+import Header from '@/share/layout/header/Header';
 import HomeLayout from '@/share/layout/HomeLayout';
 
 export default async function Home() {
   return (
     <HomeLayout>
-      <Header />
+      <HomeLayout.Header>
+        <Header user="" />
+      </HomeLayout.Header>
       <HomeLayout.Top>
         <div className="h-full bg-gray-1">top</div>
       </HomeLayout.Top>
