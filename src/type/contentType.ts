@@ -1,6 +1,6 @@
-import { VocaCommonRequest } from '@/type/vocaType';
+import { VocaModel } from '@/type/vocaType';
 
-export interface ContentCommonRequest {
+export interface ContentModel {
   category: number;
   title: string;
   sourceLink: string;
@@ -9,7 +9,7 @@ export interface ContentCommonRequest {
   useYn: boolean;
 }
 
-export interface ContentCommonResponse {
+export interface ContentResponseModel {
   description: string;
 }
 
@@ -17,11 +17,11 @@ export interface ContentCommonResponse {
  *  POST /api/content/add
  */
 
-export interface ContentAddRequest extends ContentCommonRequest {
+export interface ContentAddRequest extends ContentModel {
   vocaIds: number[];
 }
 
-export interface ContentAddResponse extends ContentCommonResponse {}
+export interface ContentAddResponse extends ContentResponseModel {}
 
 /*
  *  POST /api/content/delete
@@ -29,16 +29,16 @@ export interface ContentAddResponse extends ContentCommonResponse {}
 
 export type ContentDeleteRequest = number[];
 
-export interface ContentDeleteResponse extends ContentCommonResponse {}
+export interface ContentDeleteResponse extends ContentResponseModel {}
 
 /*
  *  GET /api/content/detail
  */
 
-export interface ContentDetailResponse extends ContentCommonRequest {
+export interface ContentDetailResponse extends ContentModel {
   id: number;
   memberId: number;
-  vocaList: VocaCommonRequest[];
+  vocaList: VocaModel[];
 }
 
 /*
@@ -53,7 +53,7 @@ export type ContentDownloadResponse = string;
  *  GET /api/content/list
  */
 
-export interface ContentListModel extends ContentCommonRequest {
+export interface ContentListModel extends ContentModel {
   id: number;
   categoryName: string;
   memberName: string;
@@ -72,12 +72,12 @@ export interface ContentListResponse {
  *  FormData { thumbnail, content }
  */
 
-export interface ContentUpdateRequest extends ContentCommonRequest {
+export interface ContentUpdateRequest extends ContentModel {
   id: number;
   vocaIds: number[];
 }
 
-export interface ContentUpdateResponse extends ContentCommonResponse {}
+export interface ContentUpdateResponse extends ContentResponseModel {}
 
 /*
  *  POST /api/content/upload
@@ -86,4 +86,4 @@ export interface ContentUpdateResponse extends ContentCommonResponse {}
 
 export type ContentUploadRequest = FormData;
 
-export interface ContentUploadResponse extends ContentCommonResponse {}
+export interface ContentUploadResponse extends ContentResponseModel {}

@@ -1,4 +1,4 @@
-export interface QuizCommonRequest {
+export interface QuizModel {
   title: string;
   answer: 1 | 2 | 3 | 4;
   option1: string;
@@ -9,7 +9,7 @@ export interface QuizCommonRequest {
   vocaId: number;
 }
 
-export interface QuizCommonResponse {
+export interface QuizResponseModel {
   description: string;
 }
 
@@ -17,9 +17,9 @@ export interface QuizCommonResponse {
  *  POST /api/quiz/add
  */
 
-export interface QuizAddRequest extends QuizCommonRequest {}
+export interface QuizAddRequest extends QuizModel {}
 
-export interface QuizAddResponse extends QuizCommonResponse {}
+export interface QuizAddResponse extends QuizResponseModel {}
 
 /*
  *  POST /api/quiz/delete
@@ -27,13 +27,13 @@ export interface QuizAddResponse extends QuizCommonResponse {}
 
 export type QuizDeleteRequest = number[];
 
-export interface QuizDeleteResponse extends QuizCommonResponse {}
+export interface QuizDeleteResponse extends QuizResponseModel {}
 
 /*
  *  GET /api/quiz/detail
  */
 
-export interface QuizDetailResponse extends Omit<QuizCommonRequest, 'vocaId'> {
+export interface QuizDetailResponse extends Omit<QuizModel, 'vocaId'> {
   id: number;
   quizHistoryCount: number;
   isBookmark: boolean;
@@ -64,11 +64,11 @@ export interface QuizListResponse {
  *  PUT /api/quiz/update
  */
 
-export interface QuizUpdateRequest extends QuizCommonRequest {
+export interface QuizUpdateRequest extends QuizModel {
   id: number;
 }
 
-export interface QuizUpdateResponse extends QuizCommonResponse {}
+export interface QuizUpdateResponse extends QuizResponseModel {}
 
 /*
  *  PATCH /api/quiz/update/useyn
@@ -79,7 +79,7 @@ export interface QuizUpdateUseYnRequest {
   useYn: boolean;
 }
 
-export interface QuizUpdateUseYnResponse extends QuizCommonResponse {}
+export interface QuizUpdateUseYnResponse extends QuizResponseModel {}
 
 /*
  *  POST /api/quiz/upload
@@ -88,4 +88,4 @@ export interface QuizUpdateUseYnResponse extends QuizCommonResponse {}
 
 export type QuizUploadRequest = FormData;
 
-export interface QuizUploadResponse extends QuizCommonResponse {}
+export interface QuizUploadResponse extends QuizResponseModel {}

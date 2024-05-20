@@ -1,4 +1,4 @@
-export interface VocaCommonRequest {
+export interface VocaModel {
   id: number;
   koreanTitle: string;
   englishTitle: string;
@@ -7,7 +7,7 @@ export interface VocaCommonRequest {
   modifiedDate: string;
 }
 
-export interface VocaCommonResponse {
+export interface VocaResponseModel {
   description: string;
 }
 
@@ -18,7 +18,7 @@ export interface VocaCommonResponse {
 
 export type VocaAddRequest = FormData;
 
-export interface VocaAddResponse extends VocaCommonResponse {}
+export interface VocaAddResponse extends VocaResponseModel {}
 
 /*
  *  POST /api/voca/delete
@@ -26,13 +26,13 @@ export interface VocaAddResponse extends VocaCommonResponse {}
 
 export type VocaDeleteRequest = number[];
 
-export interface VocaDeleteResponse extends VocaCommonResponse {}
+export interface VocaDeleteResponse extends VocaResponseModel {}
 
 /*
  *  GET /api/voca/detail
  */
 
-export interface VocaDetailResponse extends VocaCommonRequest {
+export interface VocaDetailResponse extends VocaModel {
   koreanCategory: string;
   englishCategory: string;
   content: string;
@@ -62,7 +62,7 @@ export type VocaDownloadResponse = string;
 
 export interface VocaListResponse {
   totalCount: number;
-  list: VocaCommonRequest[];
+  list: VocaModel[];
 }
 
 /*
@@ -72,7 +72,7 @@ export interface VocaListResponse {
 
 export type VocaUpdateRequest = FormData;
 
-export interface VocaUpdateResponse extends VocaCommonResponse {}
+export interface VocaUpdateResponse extends VocaResponseModel {}
 
 /*
  *  PATCH /api/voca/update/useyn
@@ -83,7 +83,7 @@ export interface VocaUpdateUseYnRequest {
   useYn: boolean;
 }
 
-export interface VocaUpdateUseYnResponse extends VocaCommonResponse {}
+export interface VocaUpdateUseYnResponse extends VocaResponseModel {}
 
 /*
  *  POST /api/voca/upload
@@ -92,4 +92,4 @@ export interface VocaUpdateUseYnResponse extends VocaCommonResponse {}
 
 export type VocaUploadRequest = FormData;
 
-export interface VocaUploadResponse extends VocaCommonResponse {}
+export interface VocaUploadResponse extends VocaResponseModel {}
