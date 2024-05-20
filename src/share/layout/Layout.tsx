@@ -14,6 +14,18 @@ function Layout({ children }: { children?: ReactNode }) {
   );
 }
 
+function Header({ children }: { children?: ReactNode }) {
+  return (
+    <div
+      style={{
+        gridArea: 'header',
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
 function LeftSideMenu({ children }: { children?: ReactNode }) {
   return <div style={{ gridArea: 'side' }}>{children}</div>;
 }
@@ -45,6 +57,7 @@ function RightContent({ children }: { children?: ReactNode }) {
   return <div className="col-start-2 col-end-3">{children}</div>;
 }
 
+Layout.Header = Header;
 Layout.LeftSideMenu = LeftSideMenu;
 Layout.Content = Content;
 Content.Left = LeftContent;

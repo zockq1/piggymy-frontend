@@ -12,11 +12,11 @@ interface HeaderUserType {
 export default function Header({ user }: HeaderUserType) {
   const headerRouteList: HeaderType[] = [
     { title: '홈', route: '/admin' },
-    { title: '콘텐츠', route: '/admin/content' },
-    { title: '용어/퀴즈', route: '/admin/quiz' },
-    { title: '설정', route: '/admin/setting' },
-    { title: '회원', route: '/admin/user' },
-    { title: '관리자', route: '/admin/management' },
+    { title: '콘텐츠', route: '/admin/content/greetingMessage' },
+    { title: '용어/퀴즈', route: '/admin/quiz/termManagement' },
+    { title: '설정', route: '/admin/setting/privacyPolicy' },
+    { title: '회원', route: '/admin/user/basicInfo' },
+    { title: '관리자', route: '/admin/management/basicInfo' },
   ];
 
   return (
