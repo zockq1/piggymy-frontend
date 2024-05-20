@@ -5,11 +5,7 @@ import Link from 'next/link';
 import HeaderDetail from '@/share/layout/header/HeaderDetail';
 import { HeaderType } from '@/type/routeType';
 
-interface HeaderUserType {
-  user: { id: string; userName: string }; // TODO 추후 user 반환값으로 변경
-}
-
-export default function Header({ user }: HeaderUserType) {
+export default function Header() {
   const headerRouteList: HeaderType[] = [
     { title: '홈', route: '/admin' },
     { title: '콘텐츠', route: '/admin/content/greetingMessage' },
@@ -47,9 +43,7 @@ export default function Header({ user }: HeaderUserType) {
         </div>
         <div className="h-2/3 w-1/2 pl-1">
           <p className="h-1/2 w-full text-sm leading-7">관리자</p>
-          <p className="h-1/2 w-full text-sm leading-5">
-            {user.userName ? user.userName : 'test'}
-          </p>
+          <p className="h-1/2 w-full text-sm leading-5">{'유저이름'}</p>
         </div>
       </div>
     </div>
