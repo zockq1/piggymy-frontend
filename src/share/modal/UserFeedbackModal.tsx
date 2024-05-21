@@ -1,5 +1,7 @@
 'use client';
 
+import { Form } from 'antd';
+import TextArea from 'antd/es/input/TextArea';
 import dayjs from 'dayjs';
 import Image from 'next/image';
 import React, { useState } from 'react';
@@ -64,12 +66,18 @@ function UserFeedbackModal({ onConfirm, onCancel }: CardSettingProps) {
           <UserFeedbackInfo key={info.title} info={info} />
         ))}
       </div>
-      <div className={'w-full rounded-[8px] bg-gray-6 px-[30px] py-[22px]'}>
+      <div
+        className={
+          'flex w-full items-start gap-3 rounded-[8px] bg-gray-6 px-[30px] py-[22px]'
+        }
+      >
         <div className="flex w-[55px] flex-col items-center justify-center text-xs">
           <Image src={feedbackIcon} alt="feedbackIcon" width={40} height={40} />
           <div className="mt-2 text-gray-3">도움됨</div>
         </div>
-        {/* FROM textarea*/}
+        <Form.Item label={null} name="textArea" className={'h-full w-full'}>
+          <TextArea rows={10} placeholder={'많은 도움이 되었어요.'} />
+        </Form.Item>
       </div>
       <ul className={'flex items-center justify-between'}></ul>
       {onConfirm && (
