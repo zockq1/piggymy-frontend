@@ -163,7 +163,9 @@ function CardSettingModal({ onConfirm, onCancel }: CardSettingProps) {
           </div>
         </Search>
       </div>
-      <div className={'flex flex-wrap items-center justify-start gap-3'}>
+      <div
+        className={'z-[2000] flex flex-wrap items-center justify-start gap-3'}
+      >
         <button>
           <Image src={refreshIcon} alt="feedbackIcon" width={20} height={20} />
         </button>

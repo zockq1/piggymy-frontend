@@ -24,23 +24,24 @@ const ModalProvider = () => {
     closeModal(modal.id);
   };
 
-  const modalContent = (
-    <>
-      {modalList.map((modal) => {
-        return (
-          <Overlay key={modal.id} onClose={() => onClose(modal)}>
-            <div
-              key={modal.id}
-              className="w-fit min-w-[343px] rounded-[12px] bg-white p-6 shadow-[0_20px_24px_rgba(0,0,0,0.12)]"
-              style={{ zIndex: INDEX + modalList.length - 1 }}
-            >
-              {modal.component}
-            </div>
-          </Overlay>
-        );
-      })}
-    </>
-  );
+  const modalContent =
+    modalList.length > 0 ? (
+      <div className={''}>
+        {modalList.map((modal) => {
+          return (
+            <Overlay key={modal.id} onClose={() => onClose(modal)}>
+              <div
+                key={modal.id}
+                className="w-fit min-w-[343px] rounded-[12px] bg-white p-6 shadow-[0_20px_24px_rgba(0,0,0,0.12)]"
+                style={{ zIndex: INDEX + modalList.length - 1 }}
+              >
+                {modal.component}
+              </div>
+            </Overlay>
+          );
+        })}
+      </div>
+    ) : null;
 
   if (!modalPower) return null;
 
