@@ -1,13 +1,16 @@
+import { Form } from 'antd';
 import Image from 'next/image';
 import React, { useState } from 'react';
 
 import down from '/public/img/Icon/down.png';
 import search from '/public/img/Icon/search.png';
 import up from '/public/img/Icon/up.png';
+import Text from '@/share/form/item/Text';
 import Button from '@/share/ui/button/IconButton';
 import ContentBox from '@/share/ui/content-box/ContentBox';
 
-import Search from './Search';
+import Dropdown from './item/Dropdown';
+import RangePicker from './item/RangePicker';
 
 interface FormExampleValue {}
 
@@ -33,14 +36,19 @@ function ContentSearchExample() {
         <div
           className={`${isExpand ? '' : 'mb-[-24px]'} flex w-full flex-col gap-6`}
         >
-          <Search onFinish={handleFinish}>
+          <Form
+            labelCol={{}}
+            layout="horizontal"
+            className="w-full"
+            onFinish={handleFinish}
+          >
             <div className={'flex w-full items-start justify-between gap-x-10'}>
-              <Search.SearchRangePicker
+              <RangePicker
                 label={'등록일자'}
                 className={'w-[379px]'}
                 name={'range'}
               />
-              <Search.SearchText
+              <Text
                 label={'링크 타이틀/URL'}
                 placeholder={'검색'}
                 name={'title'}
@@ -65,24 +73,24 @@ function ContentSearchExample() {
               <div
                 className={'flex w-full items-start justify-between gap-x-10'}
               >
-                <Search.SearchDropdown
+                <Dropdown
                   label={'구분'}
                   placeholder={'전체'}
                   className="max-w-[180px]"
                 />
-                <Search.SearchText
+                <Text
                   label={'출처'}
                   placeholder={'검색'}
                   name={'source'}
                   className="max-w-[180px]"
                 />
-                <Search.SearchText
+                <Text
                   label={'등록자'}
                   placeholder={'검색'}
                   name={'author'}
                   className="max-w-[180px]"
                 />
-                <Search.SearchText
+                <Text
                   label={'연결된 용어카드'}
                   placeholder={'검색'}
                   name={'word'}
@@ -90,7 +98,7 @@ function ContentSearchExample() {
                 />
               </div>
             )}
-          </Search>
+          </Form>
           {isExpand && (
             <>
               <hr className={'w-full border-[#b5b5b5]'} />
@@ -123,15 +131,20 @@ function WordSearchExample() {
   return (
     <div className={'bg-gray-5 p-4'}>
       <ContentBox>
-        <Search className={'mb-[-24px] w-full'} onFinish={handleFinish}>
+        <Form
+          labelCol={{}}
+          layout="horizontal"
+          className={'mb-[-24px] w-full'}
+          onFinish={handleFinish}
+        >
           <div className={'flex w-full items-start justify-between gap-x-10'}>
             <div className={'flex gap-x-10'}>
-              <Search.SearchRangePicker
+              <RangePicker
                 label={'등록일자'}
                 className={'w-[379px]'}
                 name={'range'}
               />
-              <Search.SearchDropdown
+              <Dropdown
                 label={'사용여부'}
                 placeholder={'전체'}
                 className="max-w-[250px]"
@@ -144,7 +157,7 @@ function WordSearchExample() {
               </div>
             </Button>
           </div>
-        </Search>
+        </Form>
       </ContentBox>
     </div>
   );
@@ -169,20 +182,25 @@ function ManagerSearchExample() {
         <div
           className={`${isExpand ? '' : 'mb-[-24px]'}  flex w-full flex-col gap-6`}
         >
-          <Search onFinish={handleFinish}>
+          <Form
+            labelCol={{}}
+            layout="horizontal"
+            className="w-full"
+            onFinish={handleFinish}
+          >
             <div className={'flex w-full items-start justify-between gap-x-10'}>
-              <Search.SearchRangePicker
+              <RangePicker
                 label={'등록일자'}
                 className={'w-[379px]'}
                 name={'range'}
               />
-              <Search.SearchText
+              <Text
                 label={'관리자명'}
                 placeholder={'검색'}
                 name={'title'}
                 className="w-[180px]"
               />
-              <Search.SearchDropdown
+              <Dropdown
                 label={'탈퇴여부'}
                 placeholder={'전체'}
                 className="w-[180px]"
@@ -205,13 +223,13 @@ function ManagerSearchExample() {
             </div>
             {isExpand && (
               <div className={'flex w-full items-start justify-start gap-x-10'}>
-                <Search.SearchText
+                <Text
                   label={'로그인ID'}
                   placeholder={'검색'}
                   name={'id'}
                   className="max-w-[300px]"
                 />
-                <Search.SearchText
+                <Text
                   label={'이메일'}
                   placeholder={'검색'}
                   name={'email'}
@@ -235,7 +253,7 @@ function ManagerSearchExample() {
                 </div>
               </div>
             )}
-          </Search>
+          </Form>
         </div>
       </ContentBox>
     </div>
@@ -252,9 +270,14 @@ function TextSearchExample() {
   return (
     <div className={'bg-gray-5 p-4'}>
       <ContentBox>
-        <Search className={'mb-[-24px] w-full'} onFinish={handleFinish}>
+        <Form
+          labelCol={{}}
+          layout="horizontal"
+          className={'mb-[-24px] w-full'}
+          onFinish={handleFinish}
+        >
           <div className={'flex w-full items-start justify-between gap-x-3'}>
-            <Search.SearchText
+            <Text
               label={''}
               placeholder={'검색'}
               name={'keyword'}
@@ -264,7 +287,7 @@ function TextSearchExample() {
               <Image src={search} alt="검색" width={18} height={18} />
             </Button>
           </div>
-        </Search>
+        </Form>
       </ContentBox>
     </div>
   );
