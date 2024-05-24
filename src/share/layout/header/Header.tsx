@@ -5,7 +5,11 @@ import Link from 'next/link';
 import HeaderDetail from '@/share/layout/header/HeaderDetail';
 import { HeaderType } from '@/type/routeType';
 
-export default function Header() {
+interface HeaderProps {
+  user: string;
+}
+
+export default function Header({ user }: HeaderProps) {
   const headerRouteList: HeaderType[] = [
     { title: '홈', route: '/admin' },
     { title: '콘텐츠', route: '/admin/content/greetingMessage' },
@@ -43,7 +47,7 @@ export default function Header() {
         </div>
         <div className="h-2/3 w-1/2 pl-1">
           <p className="h-1/2 w-full text-sm leading-7">관리자</p>
-          <p className="h-1/2 w-full text-sm leading-5">{'유저이름'}</p>
+          <p className="h-1/2 w-full text-sm leading-5">{user}</p>
         </div>
       </div>
     </div>
