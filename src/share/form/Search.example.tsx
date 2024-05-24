@@ -74,6 +74,11 @@ function ContentSearchExample() {
                 className={'flex w-full items-start justify-between gap-x-10'}
               >
                 <Dropdown
+                  optionList={[
+                    { id: 0, value: 'ALL', label: '전체' },
+                    { id: 1, value: 'ARTICLE', label: '글/칼럼/뉴스레터' },
+                    { id: 2, value: 'MEDIA', label: '영상 콘텐츠' },
+                  ]}
                   label={'구분'}
                   placeholder={'전체'}
                   className="max-w-[180px]"
@@ -145,6 +150,10 @@ function WordSearchExample() {
                 name={'range'}
               />
               <Dropdown
+                optionList={[
+                  { id: 0, value: 'used', label: '사용중' },
+                  { id: 1, value: 'unused', label: '미사용' },
+                ]}
                 label={'사용여부'}
                 placeholder={'전체'}
                 className="max-w-[250px]"
@@ -201,6 +210,10 @@ function ManagerSearchExample() {
                 className="w-[180px]"
               />
               <Dropdown
+                optionList={[
+                  { id: 0, value: 'Y', label: '탈퇴' },
+                  { id: 1, value: 'N', label: '탈퇴X' },
+                ]}
                 label={'탈퇴여부'}
                 placeholder={'전체'}
                 className="w-[180px]"

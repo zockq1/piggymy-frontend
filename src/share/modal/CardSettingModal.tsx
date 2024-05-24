@@ -159,6 +159,10 @@ function CardSettingModal({ onConfirm, onCancel }: CardSettingProps) {
             placeholder={'전체'}
             className="min-w-[180px]"
             name={'inUse'}
+            optionList={[
+              { id: 0, value: 'used', label: '사용중' },
+              { id: 1, value: 'unused', label: '미사용' },
+            ]}
           />
           <IconButton type={'submit'}>
             <div className={'flex items-center justify-center gap-1'}>
