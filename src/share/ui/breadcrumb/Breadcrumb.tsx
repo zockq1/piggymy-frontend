@@ -1,8 +1,3 @@
-/*
- * TODO : Antd 컴포넌트로 리펙토링 필요.
- * (https://ant.design/components/breadcrumb)
- *  */
-
 import Image from 'next/image';
 
 import arrow from '/public/img/Icon/next.svg';
@@ -17,7 +12,7 @@ function Breadcrumb({ path }: BreadcrumbProps) {
       {path.map((p, i) =>
         i < path.length - 1 ? (
           <>
-            <span className="font-inter text-left text-lg font-bold leading-5 tracking-tighter text-[#999]">
+            <span className="font-inter text-left text-[13px] font-bold leading-5 tracking-tighter text-[#999]">
               {p}
             </span>
             <Image src={arrow} alt="next" width={5} />
@@ -25,7 +20,7 @@ function Breadcrumb({ path }: BreadcrumbProps) {
         ) : (
           <span
             key={'breadcrumb' + i}
-            className="font-inter text-left text-lg font-bold leading-5 tracking-tighter"
+            className="font-inter text-left text-[13px] font-bold leading-5 tracking-tighter"
           >
             {p}
           </span>

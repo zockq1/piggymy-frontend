@@ -1,44 +1,29 @@
-import Link from 'next/link';
+'use client';
 
+import React from 'react';
+
+import CardFilter from '@/app/(afterLogin)/admin/quiz/_components/CardFilter';
+import CardInfoForm from '@/app/(afterLogin)/admin/quiz/_components/CardInfoForm';
+import CardSearchList from '@/app/(afterLogin)/admin/quiz/_components/CardSearchList';
+import WordPageInfo from '@/app/(afterLogin)/admin/quiz/_components/WordPageInfo';
 import Layout from '@/share/layout/Layout';
 
 export default async function TermManagement() {
   return (
-    <Layout>
-      <div
-        style={{
-          gridArea: 'header',
-        }}
-      >
-        <Link href="/admin">홈</Link>&nbsp;&nbsp;
-        <Link href="/admin/content/greetingMessage">콘텐츠</Link>&nbsp;&nbsp;
-        <Link href="/admin/quiz/termManagement">용어/퀴즈</Link>&nbsp;&nbsp;
-        <Link href="/admin/setting/termsOfUse">설정</Link>&nbsp;&nbsp;
-        <Link href="/admin/user/basicInfo">회원</Link>&nbsp;&nbsp;
-        <Link href="/admin/management/basicInfo">관리자</Link>
-      </div>
-      <Layout.LeftSideMenu>
-        <div className="h-full bg-gray-5">
-          <Link href="/admin/quiz/termManagement">용어 카드 관리</Link>
-          <br />
-          <Link href="/admin/quiz/quizManagement">퀴즈 카드 관리</Link>
-        </div>
-      </Layout.LeftSideMenu>
-      <Layout.Content>
-        <Layout.Content.Full>
-          <div className=" h-[50px] bg-primary">라우팅 타이틀</div>
-        </Layout.Content.Full>
-        <Layout.Content.Full>
-          <div className=" h-[100px] bg-secondary">용어 카드 검색</div>
-        </Layout.Content.Full>
+    <>
+      <Layout.Content.Full>
+        <WordPageInfo />
+      </Layout.Content.Full>
+      <Layout.Content.Full>
+        <CardFilter />
+      </Layout.Content.Full>
 
-        <Layout.Content.Left>
-          <div className=" h-[700px] bg-gray-3">용어 카드 검색</div>
-        </Layout.Content.Left>
-        <Layout.Content.Right>
-          <div className=" h-[800px] bg-warning">용어 카드 폼</div>
-        </Layout.Content.Right>
-      </Layout.Content>
-    </Layout>
+      <Layout.Content.Left>
+        <CardSearchList />
+      </Layout.Content.Left>
+      <Layout.Content.Right>
+        <CardInfoForm />
+      </Layout.Content.Right>
+    </>
   );
 }
