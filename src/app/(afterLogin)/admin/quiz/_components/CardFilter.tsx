@@ -1,10 +1,12 @@
 'use client';
 
+import { Form } from 'antd';
 import Image from 'next/image';
 import React from 'react';
 
 import search from '/public/img/Icon/search.png';
-import Search from '@/share/search/Search';
+import Dropdown from '@/share/form/item/Dropdown';
+import RangePicker from '@/share/form/item/RangePicker';
 import Button from '@/share/ui/button/IconButton';
 import ContentBox from '@/share/ui/content-box/ContentBox';
 
@@ -19,19 +21,23 @@ function CardFilter() {
 
   return (
     <ContentBox>
-      <Search className={'mb-[-24px] w-full'} onFinish={handleFinish}>
+      <Form className={'mb-[-24px] w-full'} onFinish={handleFinish}>
         <div className={'flex w-full items-start justify-between gap-x-10'}>
           <div className={'flex gap-x-10'}>
-            <Search.SearchRangePicker
+            <RangePicker
               label={'등록일자'}
               className={'w-[379px]'}
               name={'range'}
             />
-            <Search.SearchDropdown
+            <Dropdown
               label={'사용여부'}
               placeholder={'전체'}
               className="max-w-[250px]"
               name={'use'}
+              optionList={[
+                { id: 0, value: 'used', label: '사용중' },
+                { id: 1, value: 'unused', label: '미사용중' },
+              ]}
             />
           </div>
           <Button type={'submit'}>
@@ -40,7 +46,7 @@ function CardFilter() {
             </div>
           </Button>
         </div>
-      </Search>
+      </Form>
     </ContentBox>
   );
 }

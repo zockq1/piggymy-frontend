@@ -1,11 +1,12 @@
 'use client';
 
+import { Form } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
 import Image from 'next/image';
 import React, { useState } from 'react';
 
 import search from '/public/img/Icon/search.png';
-import Search from '@/share/search/Search';
+import Text from '@/share/form/item/Text';
 import Button from '@/share/ui/button/IconButton';
 import ContentBox from '@/share/ui/content-box/ContentBox';
 import Dropdown from '@/share/ui/dropdown/Dropdown';
@@ -101,10 +102,13 @@ function CardSearchList() {
   };
 
   return (
-    <ContentBox>
-      <Search className={'flex w-full flex-col gap-4'} onFinish={handleFinish}>
+    <ContentBox className={'flex h-full items-start'}>
+      <Form
+        className={'flex h-full w-full flex-col gap-4'}
+        onFinish={handleFinish}
+      >
         <div className={'flex w-full items-start justify-between gap-x-3'}>
-          <Search.SearchText
+          <Text
             label={''}
             placeholder={'검색'}
             name={'keyword'}
@@ -146,7 +150,7 @@ function CardSearchList() {
           })}
           <Add type={'card'} isSelected={false} route={'/123'} />
         </ul>
-      </Search>
+      </Form>
     </ContentBox>
   );
 }

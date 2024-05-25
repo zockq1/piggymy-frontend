@@ -42,6 +42,7 @@ function Content({ children }: { children?: ReactNode }) {
                            calc(100vh - 240px)`,
         gap: '20px',
         padding: '20px',
+        overflowY: 'hidden',
       }}
     >
       {children}
