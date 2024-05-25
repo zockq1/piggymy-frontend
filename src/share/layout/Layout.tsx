@@ -6,9 +6,7 @@ function Layout({ children }: { children?: ReactNode }) {
       style={{
         display: 'grid',
         gridTemplate: `'header header ' 70px
-                       'side   content' minmax(calc(100vh - 70px), max-content) / 240px`,
-        gap: '20px',
-        background: '#EFEFF4',
+                       'side   content' minmax(calc(100vh - 70px), max-content) / 240px auto`,
       }}
     >
       {children}
@@ -38,11 +36,10 @@ function Content({ children }: { children?: ReactNode }) {
       style={{
         gridArea: 'content',
         display: 'grid',
-        gridTemplateColumns: '355px 100fr',
-        gridTemplateRows: '28px 60px 100fr',
-        width: '100%',
-        paddingRight: '16px',
+        gridTemplateColumns: '355px auto',
+        gridTemplateRows: '28px 60px auto',
         gap: '20px',
+        padding: '20px',
       }}
     >
       {children}
