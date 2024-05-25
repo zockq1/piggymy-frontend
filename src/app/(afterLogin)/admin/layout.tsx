@@ -16,7 +16,7 @@ export default function AfterLoginLayout({
   return (
     <Layout>
       <Layout.Header>
-        <Header user="홍길동" />
+        <Header />
       </Layout.Header>
       {children}
     </Layout>

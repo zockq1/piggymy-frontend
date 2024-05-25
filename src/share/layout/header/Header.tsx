@@ -5,11 +5,7 @@ import Link from 'next/link';
 import HeaderDetail from '@/share/layout/header/HeaderDetail';
 import { HeaderType } from '@/type/routeType';
 
-interface HeaderProps {
-  user: string;
-}
-
-export default function Header({ user }: HeaderProps) {
+export default function Header() {
   const headerRouteList: HeaderType[] = [
     { title: '홈', route: '/admin' },
     { title: '콘텐츠', route: '/admin/content/greetingMessage' },
@@ -20,7 +16,7 @@ export default function Header({ user }: HeaderProps) {
   ];
 
   return (
-    <div className="border-indigo-500 flex h-full w-full flex-row items-center justify-between pl-3 pr-3 shadow-md">
+    <div className="border-indigo-500 flex h-full w-full flex-row items-center justify-between bg-white pl-3 pr-3 shadow-md">
       <div className="title w-1/6 pl-1 text-2xl font-bold">
         <span>피기미 piggyme</span>
       </div>
@@ -47,7 +43,7 @@ export default function Header({ user }: HeaderProps) {
         </div>
         <div className="h-2/3 w-1/2 pl-1">
           <p className="h-1/2 w-full text-sm leading-7">관리자</p>
-          <p className="h-1/2 w-full text-sm leading-5">{user}</p>
+          <p className="h-1/2 w-full text-sm leading-5">asd</p>
         </div>
       </div>
     </div>
