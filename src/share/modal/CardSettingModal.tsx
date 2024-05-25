@@ -1,18 +1,21 @@
 'use client';
 
+import { Form } from 'antd';
 import { TableProps as AntdTableProps } from 'antd/es/table/InternalTable';
 import Image from 'next/image';
 import React, { ReactNode, useState } from 'react';
 
 import refreshIcon from '/public/img/Icon/refresh.svg';
 import search from '/public/img/Icon/search.png';
-import Search from '@/share/search/Search';
+import Text from '@/share/form/item/Text';
 import StatusBadge from '@/share/ui/badge/StatusBadge';
 import WordBadge from '@/share/ui/badge/WordBadge';
 import Button from '@/share/ui/button/Button';
 import IconButton from '@/share/ui/button/IconButton';
 import Table from '@/share/ui/table/Table';
 import Title from '@/share/ui/title/Title';
+
+import Dropdown from '../form/item/Dropdown';
 
 interface FormExampleValue {}
 
@@ -134,35 +137,40 @@ function CardSettingModal({ onConfirm, onCancel }: CardSettingProps) {
       }
     >
       <Title>용어/퀴즈카드 설정</Title>
-      <div className={`mb-[-24px] flex w-full flex-col gap-6`}>
-        <Search onFinish={handleFinish}>
-          <div className={'flex w-full items-start justify-between gap-x-2'}>
-            <Search.SearchText
-              label={'용어카드'}
-              placeholder={'검색'}
-              name={'word'}
-              className="max-w-[330px]"
-            />
-            <Search.SearchText
-              label={'퀴즈카드'}
-              placeholder={'검색'}
-              name={'quiz'}
-              className="max-w-[330px]"
-            />
-            <Search.SearchDropdown
-              label={'사용여부'}
-              placeholder={'전체'}
-              className="min-w-[180px]"
-              name={'inUse'}
-            />
-            <IconButton type={'submit'}>
-              <div className={'flex items-center justify-center gap-1'}>
-                <Image src={search} alt="검색" width={18} height={18} />
-              </div>
-            </IconButton>
-          </div>
-        </Search>
-      </div>
+      <Form
+        className={`mb-[-24px] flex w-full flex-col gap-6`}
+        onFinish={handleFinish}
+      >
+        <div className={'flex w-full items-start justify-between gap-x-2'}>
+          <Text
+            label={'용어카드'}
+            placeholder={'검색'}
+            name={'word'}
+            className="max-w-[330px]"
+          />
+          <Text
+            label={'퀴즈카드'}
+            placeholder={'검색'}
+            name={'quiz'}
+            className="max-w-[330px]"
+          />
+          <Dropdown
+            label={'사용여부'}
+            placeholder={'전체'}
+            className="min-w-[180px]"
+            name={'inUse'}
+            optionList={[
+              { id: 0, value: 'used', label: '사용중' },
+              { id: 1, value: 'unused', label: '미사용' },
+            ]}
+          />
+          <IconButton type={'submit'}>
+            <div className={'flex items-center justify-center gap-1'}>
+              <Image src={search} alt="검색" width={18} height={18} />
+            </div>
+          </IconButton>
+        </div>
+      </Form>
       <div
         className={'z-[2000] flex flex-wrap items-center justify-start gap-3'}
       >
