@@ -6,16 +6,17 @@ import { usePathname } from 'next/navigation';
 import { HeaderType } from '@/type/routeType';
 
 interface SidebarProps {
+  title: string;
   sidebarList: HeaderType[];
 }
 
-export default function Sidebar({ sidebarList }: SidebarProps) {
+export default function Sidebar({ sidebarList, title }: SidebarProps) {
   const routes = usePathname();
 
   return (
-    <div className="mt-4 h-full w-full min-w-48 bg-white pt-2">
+    <div className="h-full w-full min-w-48 bg-white pt-2">
       <ul>
-        <li className="pb-2 pl-4 text-lg text-gray-4">Route에 따라 변경</li>
+        <li className="pb-2 pl-4 text-lg font-bold text-gray-4">{title}</li>
         {sidebarList
           ? sidebarList.map((item: HeaderType) => {
               const isActive = routes.includes(item.route);
