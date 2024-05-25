@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 
 import CardFilter from '@/app/(afterLogin)/admin/quiz/_components/CardFilter';

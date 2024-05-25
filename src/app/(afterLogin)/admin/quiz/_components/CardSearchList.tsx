@@ -1,3 +1,5 @@
+'use client';
+
 import dayjs, { Dayjs } from 'dayjs';
 import Image from 'next/image';
 import React, { useState } from 'react';
