@@ -6,7 +6,7 @@ function Layout({ children }: { children?: ReactNode }) {
       style={{
         display: 'grid',
         gridTemplate: `'header header ' 70px
-                       'side   content' calc(100vh - 70px) / 240px auto`,
+                       'side   content' minmax(calc(100vh - 70px), max-content) / 240px auto`,
       }}
     >
       {children}
@@ -37,12 +37,9 @@ function Content({ children }: { children?: ReactNode }) {
         gridArea: 'content',
         display: 'grid',
         gridTemplateColumns: `355px auto`,
-        gridTemplateRows: `auto
-                           auto
-                           calc(100vh - 240px)`,
+        gridTemplateRows: `repeat(auto-fit, max-content)`,
         gap: '20px',
         padding: '20px',
-        overflowY: 'hidden',
       }}
     >
       {children}
