@@ -39,11 +39,11 @@ export default function CardInfoForm() {
   };
 
   return (
-    <ContentBox>
+    <ContentBox className={'flex h-full items-start'}>
       <Form
         labelCol={{ span: 4 }}
         layout="horizontal"
-        className="w-full"
+        className="h-full w-full overflow-y-auto"
         onFinish={onFinish}
       >
         <CreatedDate createdDate={createdDate} />

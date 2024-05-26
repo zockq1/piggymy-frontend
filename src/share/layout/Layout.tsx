@@ -36,8 +36,8 @@ function Content({ children }: { children?: ReactNode }) {
       style={{
         gridArea: 'content',
         display: 'grid',
-        gridTemplateColumns: '355px auto',
-        gridTemplateRows: 'max-content',
+        gridTemplateColumns: `355px auto`,
+        gridTemplateRows: `repeat(5, max-content)`,
         gap: '20px',
         padding: '20px',
       }}

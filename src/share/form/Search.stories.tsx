@@ -1,17 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import SearchExample from '@/share/search/Search.example';
+import SearchExample from '@/share/form/Search.example';
 
-import Search from './Search';
-
-const meta: Meta<typeof Search> = {
+const meta: Meta<typeof SearchExample> = {
   title: 'Search',
-  component: Search,
+  component: SearchExample,
 };
 
 export default meta;
-type Story = StoryObj<typeof Search>;
+type Story = StoryObj<typeof SearchExample>;
 
 export const ContentSearch: Story = {
   args: {},
