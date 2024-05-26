@@ -43,7 +43,7 @@ export default function HeaderDetail() {
       {isDropdownOpen && (
         <div
           ref={dropdownRef}
-          className="absolute left-40 top-20 flex h-auto w-10/12 flex-row justify-center rounded-b-lg bg-white p-3 pb-6 text-sm shadow-xl"
+          className="absolute left-40 top-20 z-50 flex h-auto w-10/12 flex-row justify-center rounded-b-lg bg-white p-3 pb-6 text-sm shadow-xl"
         >
           <HeaderList items={contentList} title="콘텐츠" />
           <HeaderList items={vocaQuizList} title="용어/퀴즈" />

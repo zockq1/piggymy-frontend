@@ -16,7 +16,7 @@ function ContentBox({
   return (
     <div
       className={cn(
-        `relative m-4 flex flex-col items-center justify-center rounded-[16px] bg-white p-4`,
+        `relative flex flex-col items-center justify-center rounded-[16px] bg-white p-4`,
         className,
       )}
     >
