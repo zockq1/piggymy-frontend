@@ -39,7 +39,7 @@ export default function UserCommentBoard() {
     <ContentBox
       className="h-full px-8 py-5"
       topLeft={<Title hasUnderbar>회원 의견 관리</Title>}
-      topRight={<MoreButton />}
+      topRight={<MoreButton href="/admin/user/comment" />}
     >
       <div className="flex h-full w-full items-center justify-around">
         {dummy.slice(0, 3).map((item, index) => {

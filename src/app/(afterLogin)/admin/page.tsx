@@ -5,7 +5,7 @@ import NoticeBoard from './_components/NoticeBoard';
 import QuickLink from './_components/QuickLink';
 import TermCardBoard from './_components/TermCardBoard';
 import ThemeCardBoard from './_components/ThemeCardBoard';
-import UserFeedbackBoard from './_components/UserFeedbackBoard';
+import UserCommentBoard from './_components/UserCommentBoard';
 
 export default async function Admin() {
   return (
@@ -14,7 +14,7 @@ export default async function Admin() {
         <Greeting />
       </HomeLayout.Top>
       <HomeLayout.Center>
-        <UserFeedbackBoard />
+        <UserCommentBoard />
       </HomeLayout.Center>
       <HomeLayout.Bottom>
         <ThemeCardBoard />

@@ -25,7 +25,7 @@ export default function TermCardBoard() {
     <ContentBox
       className="h-full px-8 py-5"
       topLeft={<Title hasUnderbar>최근 등록된 용어 카드</Title>}
-      topRight={<MoreButton />}
+      topRight={<MoreButton href="/admin/quiz/termManagement" />}
     >
       <PostList postList={dummy} />
     </ContentBox>
