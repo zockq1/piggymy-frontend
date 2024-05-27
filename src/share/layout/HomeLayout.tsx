@@ -7,10 +7,10 @@ function HomeLayout({ children }: { children?: ReactNode }) {
         display: 'grid',
         gridTemplate: `'top    right ' 120px
                        'center right ' 528px
-                       'bottom right ' 210px / 3fr 1fr`,
+                       'bottom right ' 210px / auto 400px`,
         gap: '20px',
       }}
-      className="col-start-1 col-end-3 p-10"
+      className="col-start-1 col-end-3 mx-auto  p-10"
     >
       {children}
     </div>

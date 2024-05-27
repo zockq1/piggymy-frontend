@@ -41,7 +41,7 @@ export default function UserCommentBoard() {
       topLeft={<Title hasUnderbar>회원 의견 관리</Title>}
       topRight={<MoreButton href="/admin/user/comment" />}
     >
-      <div className="flex h-full w-full items-center justify-around">
+      <div className="flex h-full w-full items-center justify-around space-x-7">
         {dummy.slice(0, 3).map((item, index) => {
           const { user, description, createdDate, feedback, onClick } = item;
           return (

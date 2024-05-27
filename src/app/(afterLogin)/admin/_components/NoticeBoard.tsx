@@ -49,7 +49,7 @@ export default function NoticeBoard() {
 
   return (
     <ContentBox
-      className="h-full w-[400px] px-8 py-5"
+      className="h-full px-8 py-5"
       topLeft={<Title hasUnderbar>공지사항</Title>}
       topRight={<MoreButton href="/admin" />}
     >
