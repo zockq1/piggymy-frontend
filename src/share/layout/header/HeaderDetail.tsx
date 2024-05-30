@@ -36,15 +36,12 @@ export default function HeaderDetail() {
   }, []);
 
   return (
-    <>
+    <div ref={dropdownRef}>
       <button onClick={toggleDropdown} className="flex flex-row">
         전체 보기 <Image src={bottomArrow} alt="arrow" width={20} height={20} />
       </button>
       {isDropdownOpen && (
-        <div
-          ref={dropdownRef}
-          className="absolute left-40 top-20 z-50 flex h-auto w-10/12 flex-row justify-center rounded-b-lg bg-white p-3 pb-6 text-sm shadow-xl"
-        >
+        <div className="z-100 absolute left-40 top-20 flex h-auto w-10/12 flex-row justify-center rounded-b-lg bg-white p-3 pb-6 text-sm shadow-xl">
           <HeaderList items={contentList} title="콘텐츠" />
           <HeaderList items={vocaQuizList} title="용어/퀴즈" />
           <HeaderList items={settingList} title="설정" />
@@ -52,6 +49,6 @@ export default function HeaderDetail() {
           <HeaderList items={managerList} title="관리자" />
         </div>
       )}
-    </>
+    </div>
   );
 }
