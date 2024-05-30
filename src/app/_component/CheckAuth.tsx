@@ -8,7 +8,7 @@ export default function CheckAuth() {
   const router = useRouter();
   const pathname = usePathname();
   useEffect(() => {
-    const token = getCookie('accessToken');
+    const token = getCookie('refreshToken');
 
     if (token && pathname === '/') {
       router.push('/admin');
