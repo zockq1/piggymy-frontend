@@ -16,19 +16,24 @@ export default function QuickLink({
   route,
 }: QuickLinkProps) {
   return (
-    <ContentBox className="h-full ">
-      <div className="flex w-full items-center justify-start">
-        <Image className="mx-2" src={pig} width={100} height={100} alt="pig" />
-        <div className="ml-3">
-          <Link href={route} className="text-[17px] font-bold">
-            {title}
-          </Link>
-          <div className="h-2"></div>
-          <p className="whitespace-pre-line text-sm font-semibold text-[#999]">
-            {description}
-          </p>
+    <Link href={route}>
+      <ContentBox className="h-full ">
+        <div className="flex w-full items-center justify-start">
+          <Image
+            className="mx-2"
+            src={pig}
+            width={100}
+            height={100}
+            alt="pig"
+          />
+          <div className="ml-3">
+            <h1 className="text-[17px] font-bold">{title}</h1>
+            <p className="whitespace-pre-line text-sm font-semibold text-[#999]">
+              {description}
+            </p>
+          </div>
         </div>
-      </div>
-    </ContentBox>
+      </ContentBox>
+    </Link>
   );
 }
