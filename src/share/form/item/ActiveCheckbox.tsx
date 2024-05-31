@@ -20,6 +20,7 @@ export function ActiveCheckbox() {
       name="useYn"
       rules={[{ required: true }]}
       initialValue={true}
+      className={'m-0'}
     >
       <Radio.Group>
         <Radio value={true}>

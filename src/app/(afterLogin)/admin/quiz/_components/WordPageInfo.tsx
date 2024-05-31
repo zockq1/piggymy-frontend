@@ -13,7 +13,7 @@ function WordPageInfo() {
         <div className="flex justify-start py-1">
           <Title>용어카드 관리</Title>
         </div>
-        <Breadcrumb path={['콘텐츠', '테마별 카드모음집 관리']} />
+        <Breadcrumb path={['용어 퀴즈', '용어카드 관리']} />
       </div>
       <div className="flex items-center justify-start gap-4">
         <Button type="button" size="small" color="blue" onClick={() => {}}>
