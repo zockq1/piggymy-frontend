@@ -16,7 +16,7 @@ export default function Header() {
   ];
 
   return (
-    <div className=" border-indigo-500 fixed top-0 z-[100] flex h-[70px] w-full flex-row items-center justify-between bg-white pl-3 pr-3 shadow-md">
+    <header className=" border-indigo-500 fixed top-0 z-[200] flex h-[70px] w-full flex-row items-center justify-between bg-white pl-3 pr-3 shadow-md">
       <div className="title w-1/6 pl-1 text-2xl font-bold">
         <span>피기미 piggyme</span>
       </div>
@@ -46,6 +46,6 @@ export default function Header() {
           <p className="h-1/2 w-full text-sm leading-5">asd</p>
         </div>
       </div>
-    </div>
+    </header>
   );
 }
