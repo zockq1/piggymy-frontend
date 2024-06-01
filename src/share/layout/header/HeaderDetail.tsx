@@ -41,7 +41,7 @@ export default function HeaderDetail() {
         전체 보기 <Image src={bottomArrow} alt="arrow" width={20} height={20} />
       </button>
       {isDropdownOpen && (
-        <div className="absolute left-40 top-20 z-[200] flex h-auto w-10/12 flex-row justify-center rounded-b-lg bg-white p-3 pb-6 text-sm shadow-xl">
+        <div className="absolute left-1/2 top-20 z-[200] flex h-auto w-[1064px] -translate-x-1/2 transform flex-row justify-center rounded-b-lg bg-white p-3 pb-6 text-sm shadow-xl">
           <HeaderList items={contentList} title="콘텐츠" />
           <HeaderList items={vocaQuizList} title="용어/퀴즈" />
           <HeaderList items={settingList} title="설정" />
