@@ -6,13 +6,23 @@ import axios, { AxiosError } from 'axios';
 import { setCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 
-import { LoginRequestModel, LoginResponseModel } from '@/type/authType';
-import Response from '@/type/responseType';
+import { Request, Response } from '@/type/apiType';
 
-export const login = async (loginData: LoginRequestModel) => {
+export interface LoginRequestModel {
+  memberId: string;
+  password: string;
+}
+
+export interface LoginResponseModel {
+  accessToken: string;
+  refreshToken: string;
+  memberName: string;
+}
+
+export const login = async (loginData: Request<LoginRequestModel>) => {
   const response = await axios.post<Response<LoginResponseModel>>(
     `${process.env.NEXT_PUBLIC_BACK_API}/api/member/login`,
-    loginData,
+    loginData.data,
     {
       headers: {
         'Content-Type': 'application/json',
