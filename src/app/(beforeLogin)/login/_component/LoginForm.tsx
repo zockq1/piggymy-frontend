@@ -25,7 +25,7 @@ export default function LoginForm() {
     }
 
     if (id && password) {
-      mutate({ memberId: id, password: password });
+      mutate({ data: { memberId: id, password: password } });
     }
   };
 
