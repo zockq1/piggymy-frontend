@@ -8,19 +8,19 @@ import { useRouter } from 'next/navigation';
 
 import { Request, Response } from '@/type/apiType';
 
-export interface LoginRequestModel {
+export interface LoginRequestJson {
   memberId: string;
   password: string;
 }
 
-export interface LoginResponseModel {
+export interface LoginResponse {
   accessToken: string;
   refreshToken: string;
   memberName: string;
 }
 
-export const login = async (loginData: Request<LoginRequestModel>) => {
-  const response = await axios.post<Response<LoginResponseModel>>(
+export const login = async (loginData: Request<LoginRequestJson>) => {
+  const response = await axios.post<Response<LoginResponse>>(
     `${process.env.NEXT_PUBLIC_BACK_API}/api/member/login`,
     loginData.data,
     {
