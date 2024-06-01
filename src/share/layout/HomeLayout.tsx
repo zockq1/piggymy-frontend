@@ -5,23 +5,12 @@ function HomeLayout({ children }: { children?: ReactNode }) {
     <div
       style={{
         display: 'grid',
-        gridTemplate: `'header header' 70px
-                       'top    right ' 180px
+        gridTemplate: `'top    right ' 120px
                        'center right ' 528px
-                       'bottom right ' 190px / 70% 30%`,
+                       'bottom right ' 210px / auto 400px`,
+        gap: '20px',
       }}
-    >
-      {children}
-    </div>
-  );
-}
-
-function Header({ children }: { children: ReactNode }) {
-  return (
-    <div
-      style={{
-        gridArea: 'header',
-      }}
+      className="col-start-1 col-end-3 mx-auto  p-10"
     >
       {children}
     </div>
@@ -59,6 +48,7 @@ function Bottom({ children }: { children: ReactNode }) {
         gridArea: 'bottom',
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
+        gap: '20px',
       }}
     >
       {children}
@@ -73,6 +63,7 @@ function Right({ children }: { children: ReactNode }) {
         gridArea: 'right',
         display: 'grid',
         gridTemplateRows: '2fr 2fr 7fr',
+        gap: '20px',
       }}
     >
       {children}
@@ -84,6 +75,5 @@ HomeLayout.Top = Top;
 HomeLayout.Center = Center;
 HomeLayout.Bottom = Bottom;
 HomeLayout.Right = Right;
-HomeLayout.Header = Header;
 
 export default HomeLayout;

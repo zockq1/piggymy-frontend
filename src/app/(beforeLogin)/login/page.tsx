@@ -6,8 +6,8 @@ import LoginForm from './_component/LoginForm';
 
 export default async function LoginHome() {
   return (
-    <div className="flex h-screen flex-row items-center justify-center">
-      <div className="flex h-4/6 w-[800px] flex-row overflow-auto rounded-3xl shadow-xl">
+    <div className="flex h-screen flex-row items-center justify-center bg-white">
+      <div className="flex h-[500px] w-[800px] flex-row overflow-auto rounded-3xl shadow-xl">
         <div className="h-full w-1/2 bg-primary p-12 pt-16">
           <div className="mb-12 h-auto w-full">
             <p className="text-3xl font-bold text-white">피기미</p>

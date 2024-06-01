@@ -11,5 +11,5 @@ export default meta;
 type Story = StoryObj<typeof MoreButton>;
 
 export const Button: Story = {
-  args: {},
+  args: { href: '/' },
 };

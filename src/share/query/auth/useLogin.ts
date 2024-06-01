@@ -30,7 +30,7 @@ export function useLogin() {
     mutationFn: login,
     onSuccess: (data) => {
       setCookie('accessToken', data.data.accessToken, {
-        maxAge: 6 * 60 * 60,
+        maxAge: 30 * 24 * 60 * 60,
       });
       setCookie('refreshToken', data.data.refreshToken, {
         maxAge: 30 * 24 * 60 * 60,

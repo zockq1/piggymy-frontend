@@ -38,6 +38,7 @@ function Content({ children }: { children?: ReactNode }) {
         display: 'grid',
         gridTemplateColumns: `355px auto`,
         gridTemplateRows: `repeat(5, max-content)`,
+        maxWidth: '1400px',
         gap: '20px',
         padding: '20px',
       }}

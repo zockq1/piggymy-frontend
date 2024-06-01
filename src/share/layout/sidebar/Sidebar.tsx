@@ -14,7 +14,7 @@ export default function Sidebar({ sidebarList, title }: SidebarProps) {
   const routes = usePathname();
 
   return (
-    <div className="h-full w-full min-w-48 bg-white pt-2">
+    <div className="fixed z-[100] h-screen w-[240px] min-w-48 bg-white pt-2">
       <ul>
         <li className="pb-2 pl-4 text-lg font-bold text-gray-4">{title}</li>
         {sidebarList
