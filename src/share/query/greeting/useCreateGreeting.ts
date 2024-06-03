@@ -17,7 +17,7 @@ export const createGreeting = async (
   greetingData: Request<CreateGreetingRequestJson>,
 ) => {
   const response = await axiosInstance.post<Response<null>>(
-    `${process.env.NEXT_PUBLIC_BACK_API}/api/greetings`,
+    `/api/greetings`,
     {
       message: greetingData.data.message,
       exposureStartDate:
