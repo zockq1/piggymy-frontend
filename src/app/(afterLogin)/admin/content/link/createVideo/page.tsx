@@ -1,6 +1,8 @@
 import Link from 'next/link';
 
+import Header from '@/share/layout/header/Header';
 import Layout from '@/share/layout/Layout';
+import Breadcrumb from '@/share/ui/breadcrumb/Breadcrumb';
 
 export default async function CreateVideo() {
   return (
@@ -10,17 +12,14 @@ export default async function CreateVideo() {
           gridArea: 'header',
         }}
       >
-        <Link href="/admin">홈</Link>&nbsp;&nbsp;
-        <Link href="/admin/content/greetingMessage">콘텐츠</Link>&nbsp;&nbsp;
-        <Link href="/admin/quiz/termManagement">용어/퀴즈</Link>&nbsp;&nbsp;
-        <Link href="/admin/setting/termsOfUse">설정</Link>&nbsp;&nbsp;
-        <Link href="/admin/user/basicInfo">회원</Link>&nbsp;&nbsp;
-        <Link href="/admin/management/basicInfo">관리자</Link>
+        <Header />
       </div>
       <Layout.LeftSideMenu></Layout.LeftSideMenu>
       <Layout.Content>
         <Layout.Content.Full>
-          <div className="h-[100px] bg-primary">라우팅 타이틀</div>
+          <div className="flex h-[100px] items-center pl-4">
+            <Breadcrumb path={['콘텐츠', '링크 관리']} />
+          </div>
         </Layout.Content.Full>
         <Layout.Content.Full>
           <div className="h-[200px] bg-secondary">

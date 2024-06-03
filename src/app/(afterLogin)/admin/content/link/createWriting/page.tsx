@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import Header from '@/share/layout/header/Header';
 import Layout from '@/share/layout/Layout';
 
 export default async function CreateWriting() {
@@ -10,12 +11,7 @@ export default async function CreateWriting() {
           gridArea: 'header',
         }}
       >
-        <Link href="/admin">홈</Link>&nbsp;&nbsp;
-        <Link href="/admin/content/greetingMessage">콘텐츠</Link>&nbsp;&nbsp;
-        <Link href="/admin/quiz/termManagement">용어/퀴즈</Link>&nbsp;&nbsp;
-        <Link href="/admin/setting/termsOfUse">설정</Link>&nbsp;&nbsp;
-        <Link href="/admin/user/basicInfo">회원</Link>&nbsp;&nbsp;
-        <Link href="/admin/management/basicInfo">관리자</Link>
+        <Header />
       </div>
       <Layout.LeftSideMenu></Layout.LeftSideMenu>
       <Layout.Content>
