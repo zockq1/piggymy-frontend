@@ -21,7 +21,7 @@ export interface LoginResponse {
 
 export const login = async (loginData: Request<LoginRequestJson>) => {
   const response = await axios.post<Response<LoginResponse>>(
-    `${process.env.NEXT_PUBLIC_BACK_API}/api/member/login`,
+    `${process.env.NEXT_PUBLIC_BACK_API}/api/members/login`,
     loginData.data,
     {
       headers: {
