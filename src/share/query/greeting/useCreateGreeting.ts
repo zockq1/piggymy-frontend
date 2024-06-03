@@ -16,13 +16,13 @@ interface CreateGreetingRequestJson {
 export const createGreeting = async (
   greetingData: Request<CreateGreetingRequestJson>,
 ) => {
+  const { message, exposureEndDate, exposureStartDate } = greetingData.data;
   const response = await axiosInstance.post<Response<null>>(
     `/api/greetings`,
     {
-      message: greetingData.data.message,
-      exposureStartDate:
-        greetingData.data.exposureStartDate.format('YYYY-MM-DD'),
-      exposureEndDate: greetingData.data.exposureEndDate.format('YYYY-MM-DD'),
+      message: message,
+      exposureStartDate: exposureStartDate.format('YYYY-MM-DD'),
+      exposureEndDate: exposureEndDate.format('YYYY-MM-DD'),
     },
     {
       headers: {
