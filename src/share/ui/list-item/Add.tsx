@@ -32,13 +32,13 @@ interface BadgeProps {
   isSelected: boolean;
 }
 
-export default function Badge({ route, type, isSelected }: BadgeProps) {
+export default function Add({ route, type, isSelected }: BadgeProps) {
   return (
     <Link
       href={route}
       className={cn(
         BadgeVariants({ type, status: isSelected ? 'selected' : 'unselected' }),
-        'flex items-center justify-center',
+        'flex shrink-0 items-center justify-center',
       )}
     >
       <Icon icon="plus" size={40} />
