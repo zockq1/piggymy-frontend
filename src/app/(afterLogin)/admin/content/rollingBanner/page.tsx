@@ -23,15 +23,6 @@ export default async function RollingBanner() {
       <Layout.Content.Full>
         <RollingBannerPageInfo />
       </Layout.Content.Full>
-
-      {/* <Prefetch prefetchQueries={[usePrefetchBannerList, usePrefetchVocaList]}>
-      <Layout.Content.Full>
-        <RollingBannerList />
-      </Layout.Content.Full>
-      <Layout.Content.Full>
-        <RollingBannerForm />
-      </Layout.Content.Full>
-    </Prefetch> */}
       <HydrationBoundary state={dehydrate(queryClient)}>
         <Layout.Content.Full>
           <RollingBannerList />
