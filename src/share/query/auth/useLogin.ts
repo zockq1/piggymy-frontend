@@ -6,13 +6,23 @@ import axios, { AxiosError } from 'axios';
 import { setCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 
-import { LoginRequestModel, LoginResponseModel } from '@/type/authType';
-import Response from '@/type/responseType';
+import { Request, Response } from '@/type/apiType';
 
-export const login = async (loginData: LoginRequestModel) => {
-  const response = await axios.post<Response<LoginResponseModel>>(
-    `${process.env.NEXT_PUBLIC_BACK_API}/api/member/login`,
-    loginData,
+export interface LoginRequestJson {
+  memberId: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  accessToken: string;
+  refreshToken: string;
+  memberName: string;
+}
+
+export const login = async (loginData: Request<LoginRequestJson>) => {
+  const response = await axios.post<Response<LoginResponse>>(
+    `${process.env.NEXT_PUBLIC_BACK_API}/api/members/login`,
+    loginData.data,
     {
       headers: {
         'Content-Type': 'application/json',
@@ -30,7 +40,7 @@ export function useLogin() {
     mutationFn: login,
     onSuccess: (data) => {
       setCookie('accessToken', data.data.accessToken, {
-        maxAge: 6 * 60 * 60,
+        maxAge: 30 * 24 * 60 * 60,
       });
       setCookie('refreshToken', data.data.refreshToken, {
         maxAge: 30 * 24 * 60 * 60,

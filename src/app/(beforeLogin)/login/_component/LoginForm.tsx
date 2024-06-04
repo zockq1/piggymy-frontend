@@ -25,15 +25,15 @@ export default function LoginForm() {
     }
 
     if (id && password) {
-      mutate({ memberId: id, password: password });
+      mutate({ data: { memberId: id, password: password } });
     }
   };
 
   return (
-    <div className="flex h-full w-1/2 items-center p-12 pl-20 pr-20">
-      <div className="h-5/6 w-full">
-        <p className="text-4xl font-bold">관리자 로그인</p>
-        <form className="mt-10" onSubmit={handleSubmit}>
+    <div className="flex h-full items-center justify-center bg-white  pl-20 pr-20">
+      <div className="w-full">
+        <p className="text-2xl font-bold">관리자 로그인</p>
+        <form className="mt-5" onSubmit={handleSubmit}>
           <div className="flex w-full flex-row">
             <input
               type="text"

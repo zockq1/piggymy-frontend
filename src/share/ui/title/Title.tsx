@@ -11,7 +11,9 @@ function Title({ children, hasUnderbar = false }: TitleProps) {
         <h2 className="font-inter text-left text-lg font-bold leading-5 tracking-tighter">
           {children}
         </h2>
-        {hasUnderbar && <hr className="h-[6px] rounded-[2px] bg-primary" />}
+        {hasUnderbar && (
+          <div className="mt-2 h-[6px] rounded-[2px] bg-primary" />
+        )}
       </div>
     </div>
   );
