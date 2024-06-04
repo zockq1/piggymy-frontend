@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Image from 'next/image';
 
-import search from '/public/img/Icon/Name=Search.png';
-
+import Icon from '../icon/Icon';
 import IconButton from './IconButton';
 
 const meta: Meta<typeof IconButton> = {
@@ -15,6 +13,6 @@ type Story = StoryObj<typeof IconButton>;
 
 export const SearchButton: Story = {
   args: {
-    children: <Image src={search} alt="검색" width={22} height={22} />,
+    children: <Icon icon="search" size={22} color="#666666" />,
   },
 };
