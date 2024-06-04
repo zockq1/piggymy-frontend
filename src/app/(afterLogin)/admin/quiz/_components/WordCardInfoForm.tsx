@@ -42,7 +42,7 @@ export default function WordCardInfoForm() {
   };
 
   return (
-    <ContentBox className={'flex h-full items-start'}>
+    <ContentBox className={'flex h-full max-h-[calc(100vh-400px)] items-start'}>
       <Form
         labelCol={{ span: 2 }}
         layout="horizontal"
