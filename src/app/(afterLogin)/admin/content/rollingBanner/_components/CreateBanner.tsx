@@ -5,7 +5,7 @@ import { useForm } from 'antd/es/form/Form';
 import { useCreateBanner } from '@/share/query/banner/useCreateBanner';
 import { BannerFormValue } from '@/type/bannerType';
 
-import RollingBannerForm from './RollingBannerForm';
+import RollingBannerForm from './BannerForm';
 
 export default function CreateBanner() {
   const [form] = useForm();
