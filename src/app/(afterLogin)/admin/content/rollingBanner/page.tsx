@@ -8,11 +8,11 @@ import Layout from '@/share/layout/Layout';
 import { usePrefetchBannerList } from '@/share/query/banner/useGetBannerList';
 import { usePrefetchVocaList } from '@/share/query/voca/useGetVocaList';
 
+import BannerList from './_components/BannerList';
+import BannerPageInfo from './_components/BannerPageInfo';
 import CreateBanner from './_components/CreateBanner';
-import RollingBannerList from './_components/RollingBannerList';
-import RollingBannerPageInfo from './_components/RollingBannerPageInfo';
 
-export default async function RollingBanner() {
+export default async function Banner() {
   const queryClient = new QueryClient();
   await Promise.all([
     usePrefetchBannerList(queryClient),
@@ -21,11 +21,11 @@ export default async function RollingBanner() {
   return (
     <>
       <Layout.Content.Full>
-        <RollingBannerPageInfo />
+        <BannerPageInfo />
       </Layout.Content.Full>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <Layout.Content.Full>
-          <RollingBannerList />
+          <BannerList />
         </Layout.Content.Full>
         <Layout.Content.Full>
           <CreateBanner />

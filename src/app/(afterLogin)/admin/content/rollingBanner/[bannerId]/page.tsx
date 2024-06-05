@@ -9,14 +9,14 @@ import { usePrefetchBanner } from '@/share/query/banner/useGetBanner';
 import { usePrefetchBannerList } from '@/share/query/banner/useGetBannerList';
 import { usePrefetchVocaList } from '@/share/query/voca/useGetVocaList';
 
-import RollingBannerList from '../_components/RollingBannerList';
-import RollingBannerPageInfo from '../_components/RollingBannerPageInfo';
+import BannerList from '../_components/BannerList';
+import BannerPageInfo from '../_components/BannerPageInfo';
 import UpdateBanner from '../_components/UpdateBanner';
 
-export default async function RollingBanner({
+export default async function Banner({
   params,
 }: {
-  params: { bannerId: string };
+  params: { bannerId: number };
 }) {
   const queryClient = new QueryClient();
   await Promise.all([
@@ -31,14 +31,14 @@ export default async function RollingBanner({
   return (
     <>
       <Layout.Content.Full>
-        <RollingBannerPageInfo />
+        <BannerPageInfo />
       </Layout.Content.Full>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <Layout.Content.Full>
-          <RollingBannerList currentBannerId={Number(params.bannerId)} />
+          <BannerList currentBannerId={params.bannerId} />
         </Layout.Content.Full>
         <Layout.Content.Full>
-          <UpdateBanner currentBannerId={Number(params.bannerId)} />
+          <UpdateBanner currentBannerId={params.bannerId} />
         </Layout.Content.Full>
       </HydrationBoundary>
     </>

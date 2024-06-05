@@ -8,7 +8,7 @@ import { useGetBanner } from '@/share/query/banner/useGetBanner';
 import { useUpdateBanner } from '@/share/query/banner/useUpdateBanner';
 import { BannerFormValue } from '@/type/bannerType';
 
-import RollingBannerForm from './RollingBannerForm';
+import RollingBannerForm from './BannerForm';
 
 interface UpdateBannerProps {
   currentBannerId: number;
