@@ -7,10 +7,14 @@ import { BannerRequestJson } from '@/type/bannerType';
 
 import axiosInstance from '../axios';
 
-interface CreateBannerRequestJson extends BannerRequestJson {}
+interface UpdateBannerId {
+  bannerId: number;
+}
 
-export const createBanner = async (
-  bannerData: Request<CreateBannerRequestJson>,
+interface UpdateBannerRequestJson extends BannerRequestJson {}
+
+export const updateBanner = async (
+  bannerData: Request<UpdateBannerRequestJson, UpdateBannerId>,
 ) => {
   const {
     title,
@@ -38,7 +42,7 @@ export const createBanner = async (
     }),
   );
 
-  const response = await axiosInstance.post<Response<null>>(
+  const response = await axiosInstance.put<Response<null>>(
     `/api/banners`,
     formData,
     {
@@ -51,26 +55,26 @@ export const createBanner = async (
   return response.data;
 };
 
-interface UseCreateBannerProps {
+interface UseUpdateBannerProps {
   onSuccess?: () => void;
 }
 
-export function useCreateBanner({ onSuccess }: UseCreateBannerProps) {
+export function useUpdateBanner({ onSuccess }: UseUpdateBannerProps) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: createBanner,
+    mutationFn: updateBanner,
     onSuccess: () => {
       onSuccess && onSuccess();
       queryClient.invalidateQueries({ queryKey: ['banners'] });
       notification.success({
-        message: '배너 생성 성공',
+        message: '배너 수정 성공',
       });
     },
     onError: (error: AxiosError<Response<unknown>, unknown>) => {
       if (axios.isAxiosError(error)) {
         notification.error({
-          message: '배너 생성 실패',
+          message: '배너 수정 실패',
           description: `${error.response?.data.code}: ${error.response?.data.message}`,
         });
       }

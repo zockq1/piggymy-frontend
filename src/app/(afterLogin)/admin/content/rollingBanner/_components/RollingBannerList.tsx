@@ -16,7 +16,6 @@ export default function RollingBannerList({
   currentBannerId,
 }: RollingBannerListProps) {
   const { data } = useGetBannerList();
-  console.log(data?.data);
 
   return (
     <ContentBox
@@ -46,7 +45,6 @@ export default function RollingBannerList({
               createdDate,
               useYn,
             } = banner;
-            console.log(imagePath);
             return (
               <Banner
                 key={id}

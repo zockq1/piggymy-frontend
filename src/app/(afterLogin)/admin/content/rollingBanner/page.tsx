@@ -8,7 +8,7 @@ import Layout from '@/share/layout/Layout';
 import { usePrefetchBannerList } from '@/share/query/banner/useGetBannerList';
 import { usePrefetchVocaList } from '@/share/query/voca/useGetVocaList';
 
-import RollingBannerForm from './_components/RollingBannerForm';
+import CreateBanner from './_components/CreateBanner';
 import RollingBannerList from './_components/RollingBannerList';
 import RollingBannerPageInfo from './_components/RollingBannerPageInfo';
 
@@ -28,7 +28,7 @@ export default async function RollingBanner() {
           <RollingBannerList />
         </Layout.Content.Full>
         <Layout.Content.Full>
-          <RollingBannerForm />
+          <CreateBanner />
         </Layout.Content.Full>
       </HydrationBoundary>
     </>

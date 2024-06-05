@@ -1,6 +1,7 @@
 import { QueryClient, useQuery } from '@tanstack/react-query';
 
 import { Request, Response } from '@/type/apiType';
+import { BannerResponseJson } from '@/type/bannerType';
 import buildQueryString from '@/utils/buildQueryString';
 
 import axiosInstance from '../axios';
@@ -12,20 +13,7 @@ interface GetBannerListRequestQuery {
 
 interface GetBannerListResponse {
   totalCount: number;
-  list: {
-    id: number;
-    type: string;
-    title: string;
-    imagePath: string;
-    imageName: string;
-    buttonName: string;
-    movePage: number;
-    useYn: boolean;
-    exposureStartDate: string;
-    exposureEndDate: string;
-    createdDate: string;
-    modifiedDate: string;
-  }[];
+  list: BannerResponseJson[];
 }
 
 export const getBannerList = async (
