@@ -17,19 +17,11 @@ export const createGreeting = async (
   greetingData: Request<CreateGreetingRequestJson>,
 ) => {
   const { message, exposureEndDate, exposureStartDate } = greetingData.data;
-  const response = await axiosInstance.post<Response<null>>(
-    `/api/greetings`,
-    {
-      message: message,
-      exposureStartDate: exposureStartDate.format('YYYY-MM-DD'),
-      exposureEndDate: exposureEndDate.format('YYYY-MM-DD'),
-    },
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    },
-  );
+  const response = await axiosInstance.post<Response<null>>(`/api/greetings`, {
+    message: message,
+    exposureStartDate: exposureStartDate.format('YYYY-MM-DD'),
+    exposureEndDate: exposureEndDate.format('YYYY-MM-DD'),
+  });
 
   return response.data;
 };
