@@ -22,7 +22,8 @@ export const CardVariants = cva('', {
 
 interface CardProps {
   id: string;
-  title: string;
+  koreanTitle: string;
+  englishTitle?: string;
   createdDate: Dayjs;
   isActive: boolean;
   isSelected: boolean;
@@ -33,7 +34,8 @@ interface CardProps {
 
 export default function Card({
   id,
-  title,
+  koreanTitle,
+  englishTitle = '',
   createdDate,
   isActive,
   isSelected,
@@ -57,7 +59,8 @@ export default function Card({
         onChange={() => onChangeChecked(id)}
       />
       <Link href={route} className="w-[190px]">
-        <div className="break-keep font-bold">{title}</div>
+        <div className="break-keep font-bold">{koreanTitle}</div>
+        <div className="break-keep font-bold">{englishTitle}</div>
         <div className="text-xs">{createdDate.format('YYYY.MM.DD')}</div>
       </Link>
       <StatusBadge isActive={isActive} />

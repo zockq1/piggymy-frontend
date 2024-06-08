@@ -62,7 +62,7 @@ function StoryCardList() {
           <li key={card.id}>
             <Card
               id={card.id}
-              title={card.title}
+              koreanTitle={card.title}
               createdDate={card.createdDate}
               isActive={card.isActive}
               isChecked={card.isChecked}
@@ -79,7 +79,7 @@ function StoryCardList() {
 
 export const SelectedCard: Story = {
   args: {
-    title: '피치마켓 (peach market)',
+    koreanTitle: '피치마켓 (peach market)',
     id: '1',
     createdDate: dayjs('2023-11-01'),
     isActive: true,
@@ -90,7 +90,7 @@ export const SelectedCard: Story = {
 
 export const UnselectedCard: Story = {
   args: {
-    title: '관치금융',
+    koreanTitle: '관치금융',
     id: '2',
     createdDate: dayjs('2023-11-01'),
     isActive: false,

@@ -1,3 +1,12 @@
+export interface VocaResponseJson {
+  id: number;
+  koreanTitle: string;
+  englishTitle: string;
+  useYn: boolean;
+  createdDate: string;
+  modifiedDate: string;
+}
+
 export interface VocaModel {
   id: number;
   koreanTitle: string;
@@ -60,7 +69,7 @@ export type VocaDownloadResponse = string;
  *  GET /api/voca/list
  */
 
-export interface VocaListResponse {
+export interface VocaListResponseJson {
   totalCount: number;
   list: VocaModel[];
 }

@@ -3,376 +3,68 @@
 import { Form } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
 import Image from 'next/image';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useState } from 'react';
 
 import search from '/public/img/Icon/search.png';
 import Text from '@/share/form/item/Text';
-import { useGetVoca } from '@/share/query/voca/useVoca';
+import { useGetVocaList } from '@/share/query/voca/useGetVocaList';
 import Button from '@/share/ui/button/IconButton';
 import ContentBox from '@/share/ui/content-box/ContentBox';
 import Dropdown from '@/share/ui/dropdown/Dropdown';
 import Add from '@/share/ui/list-item/Add';
 import Card from '@/share/ui/list-item/Card';
 import Title from '@/share/ui/title/Title';
+import { buildQueryString } from '@/share/utils/query';
+import { VocaResponseJson } from '@/type/vocaType';
 
-interface FormExampleValue {}
+interface FormExampleValue {
+  range: Dayjs[];
+  useYn: boolean;
+  keyword: string;
+}
 
 function CardSearchList() {
-  const [cardList, setCardList] = useState<
-    {
-      id: string;
-      title: string;
-      createdDate: Dayjs;
-      isActive: boolean;
-      isSelected: boolean;
-      route: string;
-      isChecked: boolean;
-    }[]
-  >([
-    {
-      title: '피치마켓 (peach market)',
-      id: '1',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: true,
-      isSelected: true,
-      route: '/asd',
-    },
-    {
-      title: '관치금융',
-      id: '2',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: false,
-      isSelected: false,
-      route: '/asd',
-    },
-    {
-      title: '피치마켓 (peach market)',
-      id: '3',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: true,
-      isSelected: true,
-      route: '/asd',
-    },
-    {
-      title: '관치금융',
-      id: '4',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: false,
-      isSelected: false,
-      route: '/asd',
-    },
-    {
-      title: '피치마켓 (peach market)',
-      id: '5',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: true,
-      isSelected: true,
-      route: '/asd',
-    },
-    {
-      title: '관치금융',
-      id: '6',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: false,
-      isSelected: false,
-      route: '/asd',
-    },
-    {
-      title: '피치마켓 (peach market)',
-      id: '1',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: true,
-      isSelected: true,
-      route: '/asd',
-    },
-    {
-      title: '관치금융',
-      id: '2',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: false,
-      isSelected: false,
-      route: '/asd',
-    },
-    {
-      title: '피치마켓 (peach market)',
-      id: '3',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: true,
-      isSelected: true,
-      route: '/asd',
-    },
-    {
-      title: '관치금융',
-      id: '4',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: false,
-      isSelected: false,
-      route: '/asd',
-    },
-    {
-      title: '피치마켓 (peach market)',
-      id: '5',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: true,
-      isSelected: true,
-      route: '/asd',
-    },
-    {
-      title: '관치금융',
-      id: '6',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: false,
-      isSelected: false,
-      route: '/asd',
-    },
-    {
-      title: '피치마켓 (peach market)',
-      id: '1',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: true,
-      isSelected: true,
-      route: '/asd',
-    },
-    {
-      title: '관치금융',
-      id: '2',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: false,
-      isSelected: false,
-      route: '/asd',
-    },
-    {
-      title: '피치마켓 (peach market)',
-      id: '3',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: true,
-      isSelected: true,
-      route: '/asd',
-    },
-    {
-      title: '관치금융',
-      id: '4',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: false,
-      isSelected: false,
-      route: '/asd',
-    },
-    {
-      title: '피치마켓 (peach market)',
-      id: '5',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: true,
-      isSelected: true,
-      route: '/asd',
-    },
-    {
-      title: '관치금융',
-      id: '6',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: false,
-      isSelected: false,
-      route: '/asd',
-    },
-    {
-      title: '피치마켓 (peach market)',
-      id: '1',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: true,
-      isSelected: true,
-      route: '/asd',
-    },
-    {
-      title: '관치금융',
-      id: '2',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: false,
-      isSelected: false,
-      route: '/asd',
-    },
-    {
-      title: '피치마켓 (peach market)',
-      id: '3',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: true,
-      isSelected: true,
-      route: '/asd',
-    },
-    {
-      title: '관치금융',
-      id: '4',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: false,
-      isSelected: false,
-      route: '/asd',
-    },
-    {
-      title: '피치마켓 (peach market)',
-      id: '5',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: true,
-      isSelected: true,
-      route: '/asd',
-    },
-    {
-      title: '관치금융',
-      id: '6',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: false,
-      isSelected: false,
-      route: '/asd',
-    },
-    {
-      title: '피치마켓 (peach market)',
-      id: '1',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: true,
-      isSelected: true,
-      route: '/asd',
-    },
-    {
-      title: '관치금융',
-      id: '2',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: false,
-      isSelected: false,
-      route: '/asd',
-    },
-    {
-      title: '피치마켓 (peach market)',
-      id: '3',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: true,
-      isSelected: true,
-      route: '/asd',
-    },
-    {
-      title: '관치금융',
-      id: '4',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: false,
-      isSelected: false,
-      route: '/asd',
-    },
-    {
-      title: '피치마켓 (peach market)',
-      id: '5',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: true,
-      isSelected: true,
-      route: '/asd',
-    },
-    {
-      title: '관치금융',
-      id: '6',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: false,
-      isSelected: false,
-      route: '/asd',
-    },
-    {
-      title: '피치마켓 (peach market)',
-      id: '1',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: true,
-      isSelected: true,
-      route: '/asd',
-    },
-    {
-      title: '관치금융',
-      id: '2',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: false,
-      isSelected: false,
-      route: '/asd',
-    },
-    {
-      title: '피치마켓 (peach market)',
-      id: '3',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: true,
-      isSelected: true,
-      route: '/asd',
-    },
-    {
-      title: '관치금융',
-      id: '4',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: false,
-      isSelected: false,
-      route: '/asd',
-    },
-    {
-      title: '피치마켓 (peach market)',
-      id: '5',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: true,
-      isSelected: true,
-      route: '/asd',
-    },
-    {
-      title: '관치금융',
-      id: '6',
-      isChecked: false,
-      createdDate: dayjs('2023-11-01'),
-      isActive: false,
-      isSelected: false,
-      route: '/asd',
-    },
-  ]);
+  const searchParams = useSearchParams();
+  const startDate = searchParams.get('start_date');
+  const endDate = searchParams.get('end_date');
+  const useYn = searchParams.get('use_yn');
+  const keyword = searchParams.get('keyword');
+  const router = useRouter();
+  const path = usePathname();
 
-  const a = useGetVoca();
-  console.log(a);
+  const { data } = useGetVocaList({
+    data: {
+      start_date: startDate!,
+      end_date: endDate!,
+      use_yn: useYn!,
+      search_keyword: keyword!,
+    },
+  });
+
+  const [selectCardIds, setSelectCardIds] = useState<number[]>([]);
 
   const handleFinish = (formValue: FormExampleValue) => {
-    for (const [key, value] of Object.entries(formValue)) {
-      console.log(`${key}: ${value}`);
+    const params = {
+      start_date: startDate ?? '',
+      end_date: endDate ?? '',
+      use_yn: useYn ?? '',
+      keyword: formValue.keyword,
+    };
+    if (buildQueryString(params)) {
+      router.replace(`${path}?${buildQueryString(params)}`);
     }
   };
 
   const toggleCheck = (id: string) => {
-    setCardList(
-      cardList.map((card) => {
-        if (card.id === id) {
-          return { ...card, isChecked: !card.isChecked };
-        }
-        return card;
-      }),
-    );
+    const ids = new Set(selectCardIds);
+    if (ids.has(+id)) {
+      ids.delete(+id);
+    } else {
+      ids.add(+id);
+    }
+
+    setSelectCardIds(Array.from(ids));
   };
 
   return (
@@ -405,25 +97,27 @@ function CardSearchList() {
             ]}
           />
         </div>
-        <ul className={'flex flex-col gap-4 overflow-y-auto'}>
-          {cardList.map((card) => {
-            return (
-              <li key={card.id} className={'list-none'}>
-                <Card
-                  id={card.id}
-                  title={card.title}
-                  createdDate={card.createdDate}
-                  isActive={card.isActive}
-                  isChecked={card.isChecked}
-                  route={card.route}
-                  isSelected={card.isSelected}
-                  onChangeChecked={toggleCheck}
-                />
-              </li>
-            );
-          })}
-          <Add type={'card'} isSelected={false} route={'/123'} />
-        </ul>
+        {!!data && !!data.data && !!data.data.list && (
+          <ul className={'flex flex-col gap-4 overflow-y-auto'}>
+            {data.data.list?.map((voca: VocaResponseJson) => {
+              return (
+                <li key={voca.id} className={'list-none'}>
+                  <Card
+                    id={voca.id.toString()}
+                    koreanTitle={voca.koreanTitle}
+                    createdDate={dayjs(voca.createdDate)}
+                    isActive={voca.useYn}
+                    isChecked={selectCardIds.includes(voca.id)}
+                    route={`/admin/quiz/quizManagement/${voca.id}`}
+                    isSelected={selectCardIds.includes(voca.id)}
+                    onChangeChecked={toggleCheck}
+                  />
+                </li>
+              );
+            })}
+            <Add type={'card'} isSelected={false} route={'/123'} />
+          </ul>
+        )}
       </Form>
     </ContentBox>
   );
