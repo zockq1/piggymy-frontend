@@ -77,6 +77,7 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
       movePage,
       useYn,
     } = data.data;
+
     return (
       <RollingBannerForm
         type="update"

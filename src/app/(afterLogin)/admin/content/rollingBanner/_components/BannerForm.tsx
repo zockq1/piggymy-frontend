@@ -119,7 +119,11 @@ export default function RollingBannerForm({
         >
           <Input placeholder="내용을 입력해주세요." />
         </Form.Item>
-        <VocaChoice label="카드 선택" name="movePage" />
+        <VocaChoice
+          label="카드 선택"
+          name="movePage"
+          initialValue={initialValue?.movePage}
+        />
         <Form.Item className="flex w-full justify-center">
           <Button
             onClick={(e) => {
