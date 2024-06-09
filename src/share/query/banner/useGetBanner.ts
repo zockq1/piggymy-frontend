@@ -21,7 +21,7 @@ export const getBanner = async (bannerData: Request<null, GetBannerId>) => {
 
 export function useGetBanner(data: Request<null, GetBannerId>) {
   return useQuery({
-    queryKey: ['banners', data],
+    queryKey: ['banners', data.id?.bannerId],
     queryFn: () => getBanner(data),
   });
 }
@@ -31,7 +31,7 @@ export function usePrefetchBanner(
   data: Request<null, GetBannerId>,
 ) {
   return queryClient.prefetchQuery({
-    queryKey: ['banners', data],
+    queryKey: ['banners', data.id?.bannerId],
     queryFn: () => getBanner(data),
   });
 }

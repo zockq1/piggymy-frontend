@@ -43,7 +43,7 @@ export const updateBanner = async (
   );
 
   const response = await axiosInstance.put<Response<null>>(
-    `/api/banners`,
+    `/api/banners/${bannerData.id?.bannerId}`,
     formData,
     {
       headers: {
