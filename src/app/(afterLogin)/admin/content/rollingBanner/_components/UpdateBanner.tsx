@@ -2,6 +2,7 @@
 
 import { useForm } from 'antd/es/form/Form';
 import dayjs from 'dayjs';
+import { useRouter } from 'next/navigation';
 
 import { useDeleteBanner } from '@/share/query/banner/useDeleteBanner';
 import { useGetBanner } from '@/share/query/banner/useGetBanner';
@@ -16,8 +17,13 @@ interface UpdateBannerProps {
 
 export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
   const [form] = useForm();
+  const router = useRouter();
   const { mutate: updateBanner } = useUpdateBanner({ onSuccess: () => {} });
-  const { mutate: deleteBanner } = useDeleteBanner({ onSuccess: () => {} });
+  const { mutate: deleteBanner } = useDeleteBanner({
+    onSuccess: () => {
+      router.push('/admin/rollingBanner');
+    },
+  });
 
   const { data, isSuccess } = useGetBanner({
     id: { bannerId: currentBannerId },
