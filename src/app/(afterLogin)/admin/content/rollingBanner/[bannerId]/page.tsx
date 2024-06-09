@@ -16,7 +16,7 @@ import UpdateBanner from '../_components/UpdateBanner';
 export default async function Banner({
   params,
 }: {
-  params: { bannerId: number };
+  params: { bannerId: string };
 }) {
   const queryClient = new QueryClient();
   await Promise.all([
@@ -35,10 +35,10 @@ export default async function Banner({
       </Layout.Content.Full>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <Layout.Content.Full>
-          <BannerList currentBannerId={params.bannerId} />
+          <BannerList currentBannerId={Number(params.bannerId)} />
         </Layout.Content.Full>
         <Layout.Content.Full>
-          <UpdateBanner currentBannerId={params.bannerId} />
+          <UpdateBanner currentBannerId={Number(params.bannerId)} />
         </Layout.Content.Full>
       </HydrationBoundary>
     </>
