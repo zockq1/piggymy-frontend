@@ -50,7 +50,7 @@ axiosInstance.interceptors.response.use(
 
         if (refreshToken) {
           const response = await axios.post(
-            `${process.env.NEXT_PUBLIC_BACK_API}/api/member/refresh`,
+            `${process.env.NEXT_PUBLIC_BACK_API}/api/members/refresh`,
             { refreshToken, accessToken },
             {
               headers: {
