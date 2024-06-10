@@ -1,7 +1,6 @@
 import { QueryClient, useQuery } from '@tanstack/react-query';
 
 import { Request, Response } from '@/type/apiType';
-import buildQueryString from '@/utils/buildQueryString';
 
 import axiosInstance from '../axios';
 
@@ -29,9 +28,9 @@ interface GetVocaListResponse {
 }
 
 export const getVocaList = async (query?: Request<GetVocaListRequestQuery>) => {
-  const queryString = query ? buildQueryString(query.data) : '';
   const response = await axiosInstance.get<Response<GetVocaListResponse>>(
-    `/api/vocas${queryString}`,
+    `/api/vocas`,
+    { params: query?.data },
   );
 
   return response.data;
@@ -39,7 +38,7 @@ export const getVocaList = async (query?: Request<GetVocaListRequestQuery>) => {
 
 export function useGetVocaList(data?: Request<GetVocaListRequestQuery>) {
   return useQuery({
-    queryKey: ['vocas', data],
+    queryKey: ['vocas', data?.data],
     queryFn: () => getVocaList(data),
   });
 }
@@ -49,7 +48,7 @@ export function usePrefetchVocaList(
   data?: Request<GetVocaListRequestQuery>,
 ) {
   return queryClient.prefetchQuery({
-    queryKey: ['vocas', data],
+    queryKey: ['vocas', data?.data],
     queryFn: () => getVocaList(data),
   });
 }

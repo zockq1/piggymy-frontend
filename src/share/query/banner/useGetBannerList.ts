@@ -2,7 +2,6 @@ import { QueryClient, useQuery } from '@tanstack/react-query';
 
 import { Request, Response } from '@/type/apiType';
 import { BannerResponseJson } from '@/type/bannerType';
-import buildQueryString from '@/utils/buildQueryString';
 
 import axiosInstance from '../axios';
 
@@ -19,9 +18,9 @@ interface GetBannerListResponse {
 export const getBannerList = async (
   query?: Request<GetBannerListRequestQuery>,
 ) => {
-  const queryString = query ? buildQueryString(query.data) : '';
   const response = await axiosInstance.get<Response<GetBannerListResponse>>(
-    `/api/banners${queryString}`,
+    `/api/banners`,
+    { params: query?.data },
   );
 
   return response.data;
