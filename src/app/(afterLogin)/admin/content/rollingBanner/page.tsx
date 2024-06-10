@@ -16,7 +16,9 @@ export default async function Banner() {
   const queryClient = new QueryClient();
   await Promise.all([
     usePrefetchBannerList(queryClient),
-    usePrefetchVocaList(queryClient),
+    usePrefetchVocaList(queryClient, {
+      data: { page: 1, page_size: 1000 },
+    }),
   ]);
   return (
     <>
