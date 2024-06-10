@@ -11,7 +11,9 @@ import filterOption from '@/utils/filterOption';
 interface VocaChoiceProps extends FormItemProps {}
 
 export default function VocaChoice({ name, initialValue }: VocaChoiceProps) {
-  const { data, isLoading } = useGetVocaList();
+  const { data, isLoading } = useGetVocaList({
+    data: { page: 1, page_size: 1000 },
+  });
   const [status, setStatus] = useState<'all' | 'active' | 'inActive'>('all');
   /* eslint-disable  @typescript-eslint/no-unused-vars */
   const [type, setType] = useState<'all' | 'voca' | 'quiz'>('all');
