@@ -20,27 +20,38 @@ export const updateBanner = async (
     title,
     type,
     buttonName,
-    movePage,
+    moveId,
     exposureEndDate,
     exposureStartDate,
     image,
-    useYn,
   } = bannerData.data;
 
   const formData = new FormData();
-  formData.append('thumbnail', image[0].originFileObj as Blob);
-  formData.append(
-    'banner',
-    JSON.stringify({
-      type: type,
-      title: title,
-      buttonName: buttonName,
-      movePage: movePage,
-      exposureStartDate: exposureStartDate.format('YYYY-MM-DD'),
-      exposureEndDate: exposureEndDate.format('YYYY-MM-DD'),
-      useYn: useYn,
-    }),
+  if (image && image[0].originFileObj) {
+    formData.append(
+      'thumbnail',
+      image[0].originFileObj,
+      image[0].originFileObj?.name,
+    );
+  } else {
+    formData.append('thumbnail', '');
+  }
+
+  const bannerBlob = new Blob(
+    [
+      JSON.stringify({
+        type: type,
+        title: title,
+        buttonName: buttonName,
+        moveId: moveId,
+        exposureStartDate: exposureStartDate.format('YYYY-MM-DD'),
+        exposureEndDate: exposureEndDate.format('YYYY-MM-DD'),
+      }),
+    ],
+    { type: 'application/json' },
   );
+
+  formData.append('banner', bannerBlob);
 
   const response = await axiosInstance.put<Response<null>>(
     `/api/banners/${bannerData.id?.bannerId}`,
@@ -55,17 +66,12 @@ export const updateBanner = async (
   return response.data;
 };
 
-interface UseUpdateBannerProps {
-  onSuccess?: () => void;
-}
-
-export function useUpdateBanner({ onSuccess }: UseUpdateBannerProps) {
+export function useUpdateBanner() {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: updateBanner,
     onSuccess: () => {
-      onSuccess && onSuccess();
       queryClient.invalidateQueries({ queryKey: ['banners'] });
       notification.success({
         message: '배너 수정 성공',

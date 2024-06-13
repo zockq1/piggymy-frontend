@@ -6,10 +6,9 @@ export interface BannerRequestJson {
   type: string;
   title: string;
   buttonName: string;
-  movePage: number;
+  moveId: number;
   exposureStartDate: Dayjs;
   exposureEndDate: Dayjs;
-  useYn: boolean;
 }
 
 export interface BannerResponseJson {
@@ -19,8 +18,7 @@ export interface BannerResponseJson {
   imagePath: string;
   imageName: string;
   buttonName: string;
-  movePage: number;
-  useYn: boolean;
+  moveId: number;
   exposureStartDate: string;
   exposureEndDate: string;
   createdDate: string;
@@ -33,6 +31,5 @@ export interface BannerFormValue {
   title: string;
   image: UploadFile[];
   buttonName: string;
-  movePage: number; //용어카드 id
-  useYn: boolean;
+  moveId: number; //용어카드 id
 }

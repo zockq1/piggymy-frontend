@@ -4,7 +4,6 @@ import { DatePicker, Form, Input } from 'antd';
 import { FormInstance } from 'antd/es/form/Form';
 import dayjs, { Dayjs } from 'dayjs';
 
-import { ActiveCheckbox } from '@/share/form/item/ActiveCheckbox';
 import CreatedDate from '@/share/form/item/CreatedDate';
 import ImageUpload from '@/share/form/item/ImageUpload';
 import Label from '@/share/form/item/Label';
@@ -22,7 +21,6 @@ interface RollingBannerFormProps {
   form: FormInstance;
   type: 'create' | 'update';
   initialValue?: {
-    useYn: boolean;
     createdDate: Dayjs;
     modifiedDate: Dayjs;
     exposureStartDate: Dayjs;
@@ -31,7 +29,7 @@ interface RollingBannerFormProps {
     title: string;
     image: string;
     buttonName: string;
-    movePage: number; //용어카드 id
+    moveId: number; //용어카드 id
   };
 }
 
@@ -54,7 +52,6 @@ export default function RollingBannerForm({
         <CreatedDate
           createdDate={initialValue ? initialValue.createdDate : dayjs()}
         />
-        <ActiveCheckbox />
         <Form.Item
           label={<Label>노출 기간</Label>}
           name="exposureDuration"
@@ -121,8 +118,8 @@ export default function RollingBannerForm({
         </Form.Item>
         <VocaChoice
           label="카드 선택"
-          name="movePage"
-          initialValue={initialValue?.movePage}
+          name="moveId"
+          initialValue={initialValue?.moveId}
         />
         <Form.Item className="flex w-full justify-center">
           <Button

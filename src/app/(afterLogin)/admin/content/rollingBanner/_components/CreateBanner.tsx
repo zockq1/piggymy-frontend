@@ -9,18 +9,11 @@ import RollingBannerForm from './BannerForm';
 
 export default function CreateBanner() {
   const [form] = useForm();
-  const { mutate: create } = useCreateBanner({ onSuccess: () => {} });
+  const { mutate: create } = useCreateBanner();
 
   const handleSubmit = (formValue: BannerFormValue) => {
-    const {
-      exposureDuration,
-      title,
-      type,
-      image,
-      buttonName,
-      movePage,
-      useYn,
-    } = formValue;
+    const { exposureDuration, title, type, image, buttonName, moveId } =
+      formValue;
     const data = {
       title: title,
       exposureEndDate: exposureDuration[1],
@@ -28,8 +21,7 @@ export default function CreateBanner() {
       type: type,
       image: image,
       buttonName: buttonName,
-      movePage: movePage,
-      useYn: useYn,
+      moveId: moveId,
     };
     create({
       data: data,
