@@ -28,6 +28,12 @@ const removeNullValues = (obj: GetVocaListRequestQuery) => {
   );
 };
 
+export const getVocaDetail = async (vocaId: number) => {
+  const response = await axiosInstance.get(`/api/vocas/${vocaId}`, {});
+
+  return response.data;
+};
+
 export const getVocaList = async (query?: Request<GetVocaListRequestQuery>) => {
   const filteredParams = removeNullValues(query?.data || {});
 
@@ -37,6 +43,15 @@ export const getVocaList = async (query?: Request<GetVocaListRequestQuery>) => {
 
   return response.data;
 };
+
+export function useGetVocaDetail(vocaId: number) {
+  return useQuery({
+    queryKey: ['voca', vocaId],
+    queryFn: () => {
+      return getVocaDetail(vocaId);
+    },
+  });
+}
 
 export function useGetVocaListInfinite(
   data?: Request<GetVocaListRequestQuery>,

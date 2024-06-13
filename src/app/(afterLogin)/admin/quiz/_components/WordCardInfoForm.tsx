@@ -3,12 +3,14 @@
 import { Form, Input, Select, UploadFile } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
 import Image from 'next/image';
+import { useParams } from 'next/navigation';
 import React from 'react';
 
 import plus from '/public/img/icon/plus.png';
 import { ActiveCheckbox } from '@/share/form/item/ActiveCheckbox';
 import ImageUpload from '@/share/form/item/ImageUpload';
 import Label from '@/share/form/item/Label';
+import { useGetVocaDetail } from '@/share/query/voca/useGetVocaList';
 import Button from '@/share/ui/button/Button';
 import IconButton from '@/share/ui/button/IconButton';
 import ContentBox from '@/share/ui/content-box/ContentBox';
@@ -33,6 +35,12 @@ interface WordCardInfoFormValue {
 /* <Form.item>{...}</Form.item> 단위로 컴포넌트화를 시켜야할지 고민 */
 
 export default function WordCardInfoForm() {
+  const params = useParams();
+  console.log(params.vocaId);
+
+  const { data } = useGetVocaDetail(+params.vocaId);
+  console.log(data);
+
   const createdDate = dayjs('2024-10-2');
 
   const onFinish = (formValue: WordCardInfoFormValue) => {

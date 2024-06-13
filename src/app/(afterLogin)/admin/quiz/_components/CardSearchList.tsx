@@ -3,7 +3,12 @@
 import { Form } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
 import Image from 'next/image';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
@@ -26,6 +31,8 @@ interface FormExampleValue {
 }
 
 function CardSearchList() {
+  const params = useParams();
+
   const searchParams = useSearchParams();
   const startDate = searchParams.get('start_date');
   const endDate = searchParams.get('end_date');
@@ -147,8 +154,8 @@ function CardSearchList() {
                         createdDate={dayjs(voca.createdDate)}
                         isActive={voca.useYn}
                         isChecked={selectCardIds.includes(voca.id)}
-                        route={`/admin/quiz/quizManagement/${voca.id}`}
-                        isSelected={selectCardIds.includes(voca.id)}
+                        route={`/admin/quiz/vocaManagement/${voca.id}`}
+                        isSelected={+params.vocaId === voca.id}
                         onChangeChecked={toggleCheck}
                       />
                     </li>
