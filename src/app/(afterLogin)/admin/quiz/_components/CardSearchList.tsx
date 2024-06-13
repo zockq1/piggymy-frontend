@@ -124,35 +124,42 @@ function CardSearchList() {
           />
         </div>
         {!!data && data.pages.length > 0 && (
-          <ul id={'list'} className={'max-h-[850px] overflow-y-auto'}>
-            <InfiniteScroll
-              dataLength={vocaList.length}
-              next={fetchNextPage}
-              hasMore={hasNextPage}
-              loader={false}
-              scrollableTarget={'list'}
-              scrollThreshold={0.8}
-              className={'flex flex-col gap-4'}
+          <div className={'relative'}>
+            <ul
+              id={'list'}
+              className={'max-h-[calc(100vh-630px)] overflow-y-auto pb-20'}
             >
-              {vocaList?.map((voca: VocaResponseJson) => {
-                return (
-                  <li key={voca.id} className={'list-none'}>
-                    <Card
-                      id={voca.id.toString()}
-                      koreanTitle={voca.koreanTitle}
-                      createdDate={dayjs(voca.createdDate)}
-                      isActive={voca.useYn}
-                      isChecked={selectCardIds.includes(voca.id)}
-                      route={`/admin/quiz/quizManagement/${voca.id}`}
-                      isSelected={selectCardIds.includes(voca.id)}
-                      onChangeChecked={toggleCheck}
-                    />
-                  </li>
-                );
-              })}
-            </InfiniteScroll>
-            <Add type={'card'} isSelected={false} route={'/123'} />
-          </ul>
+              <InfiniteScroll
+                dataLength={vocaList.length}
+                next={fetchNextPage}
+                hasMore={hasNextPage}
+                loader={false}
+                scrollableTarget={'list'}
+                scrollThreshold={0.8}
+                className={'flex flex-col gap-4'}
+              >
+                {vocaList?.map((voca: VocaResponseJson) => {
+                  return (
+                    <li key={voca.id} className={'list-none'}>
+                      <Card
+                        id={voca.id.toString()}
+                        koreanTitle={voca.koreanTitle}
+                        createdDate={dayjs(voca.createdDate)}
+                        isActive={voca.useYn}
+                        isChecked={selectCardIds.includes(voca.id)}
+                        route={`/admin/quiz/quizManagement/${voca.id}`}
+                        isSelected={selectCardIds.includes(voca.id)}
+                        onChangeChecked={toggleCheck}
+                      />
+                    </li>
+                  );
+                })}
+              </InfiniteScroll>
+            </ul>
+            <div className={'sticky bottom-0'}>
+              <Add type={'card'} isSelected={false} route={'/123'} />
+            </div>
+          </div>
         )}
       </Form>
     </ContentBox>
