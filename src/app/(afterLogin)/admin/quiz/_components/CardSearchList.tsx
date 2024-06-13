@@ -4,11 +4,12 @@ import { Form } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
 import Image from 'next/image';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 import search from '/public/img/Icon/search.png';
 import Text from '@/share/form/item/Text';
-import { useGetVocaList } from '@/share/query/voca/useGetVocaList';
+import { useGetVocaListInfinite } from '@/share/query/voca/useGetVocaList';
 import Button from '@/share/ui/button/IconButton';
 import ContentBox from '@/share/ui/content-box/ContentBox';
 import Dropdown from '@/share/ui/dropdown/Dropdown';
@@ -28,19 +29,38 @@ function CardSearchList() {
   const searchParams = useSearchParams();
   const startDate = searchParams.get('start_date');
   const endDate = searchParams.get('end_date');
-  const useYn = searchParams.get('use_yn');
+  const useYn = searchParams.get('is_use');
   const keyword = searchParams.get('keyword');
   const router = useRouter();
   const path = usePathname();
+  const pageRef = useRef(1);
 
-  const { data } = useGetVocaList({
+  const {
+    data,
+    isSuccess,
+    fetchNextPage,
+    fetchPreviousPage,
+    hasNextPage,
+    hasPreviousPage,
+    isFetchingNextPage,
+    isFetchingPreviousPage,
+  } = useGetVocaListInfinite({
     data: {
+      page_size: 10,
       start_date: startDate!,
       end_date: endDate!,
-      use_yn: useYn!,
+      is_use: useYn!,
       search_keyword: keyword!,
     },
   });
+
+  const vocaList = data?.pages.reduce((acc, page) => {
+    if (!!page && !!page.data) {
+      return [...acc, ...page.data.list];
+    } else {
+      return [...acc];
+    }
+  }, []);
 
   const [selectCardIds, setSelectCardIds] = useState<number[]>([]);
 
@@ -48,7 +68,7 @@ function CardSearchList() {
     const params = {
       start_date: startDate ?? '',
       end_date: endDate ?? '',
-      use_yn: useYn ?? '',
+      is_use: useYn ?? '',
       keyword: formValue.keyword,
     };
     if (buildQueryString(params)) {
@@ -66,6 +86,12 @@ function CardSearchList() {
 
     setSelectCardIds(Array.from(ids));
   };
+
+  useEffect(() => {
+    if (hasNextPage) {
+      pageRef.current = pageRef.current + 1;
+    }
+  }, [hasNextPage]);
 
   return (
     <ContentBox className={'flex h-full max-h-[calc(100vh-400px)] items-start'}>
@@ -97,24 +123,34 @@ function CardSearchList() {
             ]}
           />
         </div>
-        {!!data && !!data.data && !!data.data.list && (
-          <ul className={'flex flex-col gap-4 overflow-y-auto'}>
-            {data.data.list?.map((voca: VocaResponseJson) => {
-              return (
-                <li key={voca.id} className={'list-none'}>
-                  <Card
-                    id={voca.id.toString()}
-                    koreanTitle={voca.koreanTitle}
-                    createdDate={dayjs(voca.createdDate)}
-                    isActive={voca.useYn}
-                    isChecked={selectCardIds.includes(voca.id)}
-                    route={`/admin/quiz/quizManagement/${voca.id}`}
-                    isSelected={selectCardIds.includes(voca.id)}
-                    onChangeChecked={toggleCheck}
-                  />
-                </li>
-              );
-            })}
+        {!!data && data.pages.length > 0 && (
+          <ul id={'list'} className={'max-h-[850px] overflow-y-auto'}>
+            <InfiniteScroll
+              dataLength={vocaList.length}
+              next={fetchNextPage}
+              hasMore={hasNextPage}
+              loader={false}
+              scrollableTarget={'list'}
+              scrollThreshold={0.8}
+              className={'flex flex-col gap-4'}
+            >
+              {vocaList?.map((voca: VocaResponseJson) => {
+                return (
+                  <li key={voca.id} className={'list-none'}>
+                    <Card
+                      id={voca.id.toString()}
+                      koreanTitle={voca.koreanTitle}
+                      createdDate={dayjs(voca.createdDate)}
+                      isActive={voca.useYn}
+                      isChecked={selectCardIds.includes(voca.id)}
+                      route={`/admin/quiz/quizManagement/${voca.id}`}
+                      isSelected={selectCardIds.includes(voca.id)}
+                      onChangeChecked={toggleCheck}
+                    />
+                  </li>
+                );
+              })}
+            </InfiniteScroll>
             <Add type={'card'} isSelected={false} route={'/123'} />
           </ul>
         )}

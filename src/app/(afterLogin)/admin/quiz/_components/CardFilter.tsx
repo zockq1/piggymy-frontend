@@ -14,7 +14,7 @@ import ContentBox from '@/share/ui/content-box/ContentBox';
 import { buildQueryString } from '@/share/utils/query';
 
 interface FormExampleValue {
-  range: Dayjs[];
+  range: (Dayjs | null)[];
   useYn: boolean;
 }
 
@@ -22,18 +22,18 @@ function CardFilter() {
   const searchParams = useSearchParams();
   const startDate = searchParams.get('start_date');
   const endDate = searchParams.get('end_date');
-  const useYn = searchParams.get('use_yn');
+  const useYn = searchParams.get('is_use');
   const router = useRouter();
   const path = usePathname();
 
   const handleFinish = (formValue: FormExampleValue) => {
-    const isRangeSelected = !!formValue.range && formValue.range.length === 2;
+    const isRangeSelected = !formValue.range.includes(null);
     const params = {
       start_date: isRangeSelected
-        ? formValue.range[0].format('YYYY-MM-DD')
+        ? formValue.range[0]!.format('YYYY-MM-DD')
         : '',
-      end_date: isRangeSelected ? formValue.range[1].format('YYYY-MM-DD') : '',
-      use_yn: formValue.useYn,
+      end_date: isRangeSelected ? formValue.range[1]!.format('YYYY-MM-DD') : '',
+      is_use: formValue.useYn,
     };
 
     if (buildQueryString(params)) {

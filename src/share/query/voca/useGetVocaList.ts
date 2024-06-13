@@ -1,4 +1,4 @@
-import { QueryClient, useQuery } from '@tanstack/react-query';
+import { QueryClient, useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 import { Request, Response } from '@/type/apiType';
 import { VocaResponseJson } from '@/type/vocaType';
@@ -13,7 +13,7 @@ interface GetVocaListRequestQuery {
   filter?: string;
   start_date?: string;
   end_date?: string;
-  use_yn?: boolean | string;
+  is_use?: boolean | string;
 }
 
 interface GetVocaListResponse {
@@ -31,18 +31,25 @@ const removeNullValues = (obj: GetVocaListRequestQuery) => {
 export const getVocaList = async (query?: Request<GetVocaListRequestQuery>) => {
   const filteredParams = removeNullValues(query?.data || {});
 
-  const response = await axiosInstance.get<Response<GetVocaListResponse>>(
-    `/api/vocas`,
-    { params: filteredParams },
-  );
+  const response = await axiosInstance.get(`/api/vocas`, {
+    params: filteredParams,
+  });
 
   return response.data;
 };
 
-export function useGetVocaList(data?: Request<GetVocaListRequestQuery>) {
-  return useQuery({
+export function useGetVocaListInfinite(
+  data?: Request<GetVocaListRequestQuery>,
+) {
+  return useInfiniteQuery({
     queryKey: ['vocas', removeNullValues(data?.data || {}) || data],
-    queryFn: () => getVocaList(data),
+    queryFn: ({ pageParam }) => {
+      return getVocaList({ data: { ...data?.data, page: pageParam } });
+    },
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, pages, firstPageParam, allPageParams) => {
+      return allPageParams[allPageParams.length - 1] + 1;
+    },
   });
 }
 
