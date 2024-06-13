@@ -2,7 +2,6 @@
 
 import { useForm } from 'antd/es/form/Form';
 import dayjs from 'dayjs';
-import { useRouter } from 'next/navigation';
 
 import { useDeleteBanner } from '@/share/query/banner/useDeleteBanner';
 import { useGetBanner } from '@/share/query/banner/useGetBanner';
@@ -17,13 +16,8 @@ interface UpdateBannerProps {
 
 export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
   const [form] = useForm();
-  const router = useRouter();
-  const { mutate: updateBanner } = useUpdateBanner({ onSuccess: () => {} });
-  const { mutate: deleteBanner } = useDeleteBanner({
-    onSuccess: () => {
-      router.push('/admin/rollingBanner');
-    },
-  });
+  const { mutate: updateBanner } = useUpdateBanner();
+  const { mutate: deleteBanner } = useDeleteBanner();
 
   const { data, isSuccess } = useGetBanner({
     id: { bannerId: currentBannerId },
@@ -31,15 +25,8 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
   });
 
   const handleSubmit = (formValue: BannerFormValue) => {
-    const {
-      exposureDuration,
-      title,
-      type,
-      image,
-      buttonName,
-      movePage,
-      useYn,
-    } = formValue;
+    const { exposureDuration, title, type, image, buttonName, moveId } =
+      formValue;
     const data = {
       title: title,
       exposureEndDate: exposureDuration[1],
@@ -47,8 +34,7 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
       type: type,
       image: image,
       buttonName: buttonName,
-      movePage: movePage,
-      useYn: useYn,
+      moveId: moveId,
     };
     updateBanner({
       id: { bannerId: currentBannerId },
@@ -74,8 +60,7 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
       imagePath,
       imageName,
       buttonName,
-      movePage,
-      useYn,
+      moveId,
     } = data.data;
 
     return (
@@ -93,8 +78,7 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
           title: title,
           image: imagePath + imageName,
           buttonName: buttonName,
-          movePage: movePage,
-          useYn: useYn,
+          moveId: moveId,
         }}
       />
     );

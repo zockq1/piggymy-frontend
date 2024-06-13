@@ -17,6 +17,7 @@ export default function VocaChoice({ name, initialValue }: VocaChoiceProps) {
   const [status, setStatus] = useState<'all' | 'active' | 'inActive'>('all');
   /* eslint-disable  @typescript-eslint/no-unused-vars */
   const [type, setType] = useState<'all' | 'voca' | 'quiz'>('all');
+
   return (
     <>
       <Form.Item label={<Label>{'카드 선택 옵션'}</Label>}>
@@ -48,7 +49,7 @@ export default function VocaChoice({ name, initialValue }: VocaChoiceProps) {
       <Form.Item
         label={<Label>{'카드 선택'}</Label>}
         name={name}
-        initialValue={initialValue?.movePage}
+        initialValue={initialValue}
         rules={[
           {
             required: true,

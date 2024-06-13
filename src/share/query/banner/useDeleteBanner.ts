@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { notification } from 'antd';
 import axios, { AxiosError } from 'axios';
+import { useRouter } from 'next/navigation';
 
 import { Request, Response } from '@/type/apiType';
 
@@ -13,28 +14,25 @@ interface DeleteBannerId {
 export const deleteBanner = async (
   bannerData: Request<null, DeleteBannerId>,
 ) => {
-  const response = await axiosInstance.put<Response<null>>(
-    `/api/banners${bannerData.id?.bannerId}`,
+  const response = await axiosInstance.delete<Response<null>>(
+    `/api/banners/${bannerData.id?.bannerId}`,
   );
 
   return response.data;
 };
 
-interface UseDeleteBannerProps {
-  onSuccess?: () => void;
-}
-
-export function useDeleteBanner({ onSuccess }: UseDeleteBannerProps) {
+export function useDeleteBanner() {
+  const router = useRouter();
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: deleteBanner,
     onSuccess: () => {
-      onSuccess && onSuccess();
       queryClient.invalidateQueries({ queryKey: ['banners'] });
       notification.success({
         message: '배너 삭제 성공',
       });
+      router.push('/admin/content/rollingBanner');
     },
     onError: (error: AxiosError<Response<unknown>, unknown>) => {
       if (axios.isAxiosError(error)) {
