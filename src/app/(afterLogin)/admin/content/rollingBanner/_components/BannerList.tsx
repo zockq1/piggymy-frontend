@@ -9,6 +9,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 import { useRef } from 'react';
+import { Swiper as SwiperType } from 'swiper';
 import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -27,8 +28,7 @@ export default function RollingBannerList({
   currentBannerId,
 }: RollingBannerListProps) {
   const { data } = useGetBannerList();
-  const prevRef = useRef<HTMLButtonElement>(null);
-  const nextRef = useRef<HTMLButtonElement>(null);
+  const swiperRef = useRef<SwiperType>();
 
   return (
     <ContentBox
@@ -46,7 +46,10 @@ export default function RollingBannerList({
           type="banner"
           isSelected={currentBannerId === undefined}
         />
-        <button ref={prevRef} className="h-[234px] text-primary">
+        <button
+          onClick={() => swiperRef.current?.slidePrev()}
+          className="h-[234px] text-primary"
+        >
           <Icon icon="prev" />
         </button>
         <Swiper
@@ -55,14 +58,14 @@ export default function RollingBannerList({
           pagination={{
             clickable: true,
           }}
-          navigation={{
-            prevEl: prevRef.current,
-            nextEl: nextRef.current,
+          onBeforeInit={(swiper) => {
+            swiperRef.current = swiper;
           }}
           modules={[Pagination, Navigation]}
-          initialSlide={data?.data.list.findIndex(
-            (data) => data.id === currentBannerId,
-          )}
+          initialSlide={
+            data?.data.list.findIndex((data) => data.id === currentBannerId) ||
+            0
+          }
         >
           {data?.data &&
             data?.data.list.map((banner) => {
@@ -99,7 +102,10 @@ export default function RollingBannerList({
               );
             })}
         </Swiper>
-        <button ref={nextRef} className="h-[234px] text-primary">
+        <button
+          onClick={() => swiperRef.current?.slideNext()}
+          className="h-[234px] text-primary"
+        >
           <Icon icon="next" />
         </button>
       </div>
