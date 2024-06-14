@@ -1,6 +1,10 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { deleteCookie, getCookie, getCookies, setCookie } from 'cookies-next';
 
+import { Response } from '@/type/apiType';
+
+import { LoginResponse } from './auth/useLogin';
+
 const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACK_API,
   headers: {
@@ -22,6 +26,7 @@ axiosInstance.interceptors.request.use(
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
+
     return config;
   },
   (error) => Promise.reject(error),
@@ -49,9 +54,9 @@ axiosInstance.interceptors.response.use(
         }
 
         if (refreshToken) {
-          const response = await axios.post(
+          const response = await axios.post<Response<LoginResponse>>(
             `${process.env.NEXT_PUBLIC_BACK_API}/api/members/refresh`,
-            { refreshToken, accessToken },
+            null,
             {
               headers: {
                 Authorization: `Bearer ${accessToken}`,
@@ -59,7 +64,7 @@ axiosInstance.interceptors.response.use(
               },
             },
           );
-          newTokens = response.data;
+          newTokens = response.data.data;
           if (typeof window === 'undefined') {
             // Server-side
             const { cookies } = await import('next/headers');
@@ -91,7 +96,6 @@ axiosInstance.interceptors.response.use(
           return axios(originalRequest);
         }
       } catch (refreshError) {
-        console.error('Token refresh error:', refreshError);
         if (typeof window === 'undefined') {
           // Server-side
           const { cookies } = await import('next/headers');
