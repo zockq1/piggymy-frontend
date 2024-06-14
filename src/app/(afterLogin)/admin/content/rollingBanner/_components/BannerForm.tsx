@@ -1,6 +1,6 @@
 'use client';
 
-import { DatePicker, Form, Input } from 'antd';
+import { DatePicker, Form, Input, Select } from 'antd';
 import { FormInstance } from 'antd/es/form/Form';
 import dayjs, { Dayjs } from 'dayjs';
 
@@ -87,7 +87,11 @@ export default function RollingBannerForm({
           ]}
           initialValue={initialValue?.type}
         >
-          <Input placeholder="내용을 입력해주세요." className="w-[200px]" />
+          <Select>
+            <Select.Option value="EVENT">EVENT</Select.Option>
+            <Select.Option value="QUIZ">QUIZ</Select.Option>
+            <Select.Option value="VOCA">VOCA</Select.Option>
+          </Select>
         </Form.Item>
         <Form.Item
           label={<Label>타이틀</Label>}

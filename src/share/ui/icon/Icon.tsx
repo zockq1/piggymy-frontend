@@ -1,7 +1,9 @@
+import Next from './svg/next';
 import Plus from './svg/plus';
+import Prev from './svg/prev';
 import Search from './svg/search';
 
-export type IconType = 'plus' | 'search';
+export type IconType = 'plus' | 'search' | 'next' | 'prev';
 
 export interface SvgProps {
   color: string;
@@ -22,6 +24,8 @@ export default function Icon({
   const icons = {
     plus: Plus,
     search: Search,
+    prev: Prev,
+    next: Next,
   };
 
   const SelectedIcon = icons[icon];
