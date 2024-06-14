@@ -1,6 +1,10 @@
 'use client';
 
 import dayjs from 'dayjs';
+import isBetween from 'dayjs/plugin/isBetween';
+dayjs.extend(isBetween);
+
+import { useEffect, useRef } from 'react';
 
 import { useGetBannerList } from '@/share/query/banner/useGetBannerList';
 import ContentBox from '@/share/ui/content-box/ContentBox';
@@ -16,6 +20,16 @@ export default function RollingBannerList({
   currentBannerId,
 }: RollingBannerListProps) {
   const { data } = useGetBannerList();
+  const selectedBannerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (selectedBannerRef.current) {
+      selectedBannerRef.current.scrollIntoView({
+        inline: 'center',
+        block: 'nearest',
+      });
+    }
+  }, [currentBannerId]);
 
   return (
     <ContentBox
@@ -43,20 +57,31 @@ export default function RollingBannerList({
               imagePath,
               imageName,
               createdDate,
-              useYn,
+              exposureStartDate,
+              exposureEndDate,
             } = banner;
+
+            const isSelected = currentBannerId === id;
+            const bannerRef = isSelected ? selectedBannerRef : null;
+
             return (
-              <Banner
-                key={id}
-                title={title}
-                category={type}
-                buttonTitle={buttonName}
-                image={imagePath + imageName}
-                isActive={useYn}
-                isSelected={currentBannerId === id}
-                createdDate={dayjs(createdDate)}
-                route={`/admin/content/rollingBanner/${id}`}
-              />
+              <div ref={bannerRef} key={id}>
+                <Banner
+                  title={title}
+                  category={type}
+                  buttonTitle={buttonName}
+                  image={imagePath + imageName}
+                  isActive={dayjs().isBetween(
+                    exposureStartDate,
+                    exposureEndDate,
+                    null,
+                    '[]',
+                  )}
+                  isSelected={currentBannerId === id}
+                  createdDate={dayjs(createdDate)}
+                  route={`/admin/content/rollingBanner/${id}`}
+                />
+              </div>
             );
           })}
       </div>

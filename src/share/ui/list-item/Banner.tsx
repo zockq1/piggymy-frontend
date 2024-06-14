@@ -58,11 +58,11 @@ export default function Banner({
         <p className="mt-2 whitespace-pre-line text-xl font-bold text-gray-2">
           {title}
         </p>
-        {image && (
+        {image ? (
           <div className="absolute right-1 top-1">
             <Image src={image} alt="image" width={110} height={110} />
           </div>
-        )}
+        ) : null}
         <div className="absolute bottom-2 right-4 flex items-center text-xs text-primary">
           {buttonTitle} <Image src={arrow} alt="arrow" width={24} height={24} />
         </div>
