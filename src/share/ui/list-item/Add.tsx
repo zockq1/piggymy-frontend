@@ -11,7 +11,7 @@ export const BadgeVariants = cva('', {
   variants: {
     type: {
       badge: `w-[197px] h-[197px] rounded-2xl`,
-      banner: `w-[390px] h-[231px]`,
+      banner: `w-[390px] h-[261px]`,
       card: `w-[308px] h-[78px] rounded-2xl`,
       theme: `w-[319px] h-[145px] rounded-2xl`,
     },

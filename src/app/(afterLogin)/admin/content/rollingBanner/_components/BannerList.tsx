@@ -4,10 +4,17 @@ import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
 dayjs.extend(isBetween);
 
-import { useEffect, useRef } from 'react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
+import { useRef } from 'react';
+import { Navigation, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { useGetBannerList } from '@/share/query/banner/useGetBannerList';
 import ContentBox from '@/share/ui/content-box/ContentBox';
+import Icon from '@/share/ui/icon/Icon';
 import Add from '@/share/ui/list-item/Add';
 import Banner from '@/share/ui/list-item/Banner';
 import Title from '@/share/ui/title/Title';
@@ -20,16 +27,8 @@ export default function RollingBannerList({
   currentBannerId,
 }: RollingBannerListProps) {
   const { data } = useGetBannerList();
-  const selectedBannerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (selectedBannerRef.current) {
-      selectedBannerRef.current.scrollIntoView({
-        inline: 'center',
-        block: 'nearest',
-      });
-    }
-  }, [currentBannerId]);
+  const prevRef = useRef<HTMLButtonElement>(null);
+  const nextRef = useRef<HTMLButtonElement>(null);
 
   return (
     <ContentBox
@@ -39,51 +38,70 @@ export default function RollingBannerList({
           <Title.H>{data?.data ? data?.data.list.length : 0}</Title.H> 건
         </Title>
       }
-      className={'flex h-[334px] '}
+      className={'flex'}
     >
-      <div className="flex w-full items-start justify-start gap-10 overflow-x-scroll">
+      <div className="mt-4 flex w-full items-start justify-start gap-2">
         <Add
           route="/admin/content/rollingBanner"
           type="banner"
           isSelected={currentBannerId === undefined}
         />
-        {data?.data &&
-          data?.data.list.map((banner) => {
-            const {
-              title,
-              id,
-              type,
-              buttonName,
-              imagePath,
-              imageName,
-              createdDate,
-              exposureStartDate,
-              exposureEndDate,
-            } = banner;
+        <button ref={prevRef} className="h-[234px] text-primary">
+          <Icon icon="prev" />
+        </button>
+        <Swiper
+          slidesPerView={'auto'}
+          spaceBetween={30}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={{
+            prevEl: prevRef.current,
+            nextEl: nextRef.current,
+          }}
+          modules={[Pagination, Navigation]}
+          initialSlide={data?.data.list.findIndex(
+            (data) => data.id === currentBannerId,
+          )}
+        >
+          {data?.data &&
+            data?.data.list.map((banner) => {
+              const {
+                title,
+                id,
+                type,
+                buttonName,
+                imagePath,
+                imageName,
+                createdDate,
+                exposureStartDate,
+                exposureEndDate,
+              } = banner;
 
-            const isSelected = currentBannerId === id;
-            const bannerRef = isSelected ? selectedBannerRef : null;
-
-            return (
-              <div ref={bannerRef} key={id}>
-                <Banner
-                  title={title}
-                  category={type}
-                  buttonTitle={buttonName}
-                  image={imagePath + imageName}
-                  isActive={dayjs().isBetween(
-                    exposureStartDate,
-                    exposureEndDate,
-                    null,
-                    '[]',
-                  )}
-                  isSelected={currentBannerId === id}
-                  createdDate={dayjs(createdDate)}
-                  route={`/admin/content/rollingBanner/${id}`}
-                />
-              </div>
-            );
-          })}
+              return (
+                <SwiperSlide key={id} className="">
+                  <Banner
+                    title={title}
+                    category={type}
+                    buttonTitle={buttonName}
+                    image={imagePath + imageName}
+                    isActive={dayjs().isBetween(
+                      exposureStartDate,
+                      exposureEndDate,
+                      null,
+                      '[]',
+                    )}
+                    isSelected={currentBannerId === id}
+                    createdDate={dayjs(createdDate)}
+                    route={`/admin/content/rollingBanner/${id}`}
+                  />
+                </SwiperSlide>
+              );
+            })}
+        </Swiper>
+        <button ref={nextRef} className="h-[234px] text-primary">
+          <Icon icon="next" />
+        </button>
       </div>
     </ContentBox>
   );

@@ -44,7 +44,7 @@ export default function Banner({
   image,
 }: BannerProps) {
   return (
-    <div className="flex h-[234px] w-[390px] shrink-0 flex-col justify-between">
+    <div className="mb-10 flex h-[234px] w-[390px] shrink-0 flex-col justify-between">
       <Link
         href={route}
         className={cn(
