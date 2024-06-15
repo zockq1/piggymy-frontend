@@ -17,7 +17,6 @@ export default function VocaChoice({ name, initialValue }: VocaChoiceProps) {
   const [status, setStatus] = useState<'all' | 'active' | 'inActive'>('all');
   /* eslint-disable  @typescript-eslint/no-unused-vars */
   const [type, setType] = useState<'all' | 'voca' | 'quiz'>('all');
-  console.log(data);
 
   return (
     <>
