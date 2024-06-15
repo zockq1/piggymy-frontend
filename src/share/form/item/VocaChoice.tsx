@@ -17,6 +17,7 @@ export default function VocaChoice({ name, initialValue }: VocaChoiceProps) {
   const [status, setStatus] = useState<'all' | 'active' | 'inActive'>('all');
   /* eslint-disable  @typescript-eslint/no-unused-vars */
   const [type, setType] = useState<'all' | 'voca' | 'quiz'>('all');
+  console.log(data);
 
   return (
     <>
@@ -63,7 +64,7 @@ export default function VocaChoice({ name, initialValue }: VocaChoiceProps) {
           placeholder="용어/퀴즈카드를 선택해주세요."
           loading={isLoading}
         >
-          {data &&
+          {data?.data &&
             data?.data.list
               .filter((voca) => {
                 if (status === 'active') return voca.useYn === true;
