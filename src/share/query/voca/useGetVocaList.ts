@@ -12,7 +12,7 @@ interface GetVocaListRequestQuery {
   filter?: string;
   start_date?: string;
   end_date?: string;
-  use_yn?: boolean;
+  is_use?: boolean;
 }
 
 interface GetVocaListResponse {
@@ -21,7 +21,7 @@ interface GetVocaListResponse {
     id: number;
     koreanTitle: string;
     englishTitle: string;
-    useYn: boolean;
+    isUse: boolean;
     createdDate: string;
     modifiedDate: string;
   }[];

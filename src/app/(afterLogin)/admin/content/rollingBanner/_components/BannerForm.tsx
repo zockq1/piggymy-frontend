@@ -3,10 +3,12 @@
 import { DatePicker, Form, Input, Select } from 'antd';
 import { FormInstance } from 'antd/es/form/Form';
 import dayjs, { Dayjs } from 'dayjs';
+import { useEffect, useState } from 'react';
 
 import CreatedDate from '@/share/form/item/CreatedDate';
 import ImageUpload from '@/share/form/item/ImageUpload';
 import Label from '@/share/form/item/Label';
+import QuizChoice from '@/share/form/item/QuizChoice';
 import VocaChoice from '@/share/form/item/VocaChoice';
 import Button from '@/share/ui/button/Button';
 import ContentBox from '@/share/ui/content-box/ContentBox';
@@ -19,17 +21,18 @@ interface RollingBannerFormProps {
   onSubmit: (data: BannerFormValue) => void;
   onDelete: () => void;
   form: FormInstance;
-  type: 'create' | 'update';
+  mode: 'create' | 'update';
   initialValue?: {
     createdDate: Dayjs;
     modifiedDate: Dayjs;
     exposureStartDate: Dayjs;
     exposureEndDate: Dayjs;
-    type: string;
+    type: 'VOCA' | 'QUIZ';
     title: string;
     image: string;
     buttonName: string;
-    moveId: number; //용어카드 id
+    moveQuizId: number | null;
+    moveVocaId: number | null;
   };
 }
 
@@ -38,8 +41,18 @@ export default function RollingBannerForm({
   onSubmit,
   onDelete,
   form,
-  type,
+  mode,
 }: RollingBannerFormProps) {
+  const [type, setType] = useState<'VOCA' | 'QUIZ'>('VOCA');
+
+  const handleTypeChange = (value: 'VOCA' | 'QUIZ') => {
+    setType(value);
+  };
+
+  useEffect(() => {
+    initialValue && setType(initialValue.type);
+  }, [initialValue]);
+
   return (
     <ContentBox className={'flex h-full items-start'}>
       <Form
@@ -85,12 +98,11 @@ export default function RollingBannerForm({
               message: '최대 10글자 입니다.',
             },
           ]}
-          initialValue={initialValue?.type}
+          initialValue={type}
         >
-          <Select>
-            <Select.Option value="EVENT">EVENT</Select.Option>
-            <Select.Option value="QUIZ">QUIZ</Select.Option>
-            <Select.Option value="VOCA">VOCA</Select.Option>
+          <Select onChange={handleTypeChange}>
+            <Select.Option value="VOCA">용어</Select.Option>
+            <Select.Option value="QUIZ">퀴즈</Select.Option>
           </Select>
         </Form.Item>
         <Form.Item
@@ -120,11 +132,20 @@ export default function RollingBannerForm({
         >
           <Input placeholder="내용을 입력해주세요." />
         </Form.Item>
-        <VocaChoice
-          label="카드 선택"
-          name="moveId"
-          initialValue={initialValue?.moveId}
-        />
+        {type === 'VOCA' ? (
+          <VocaChoice
+            label="용어 카드 선택"
+            name="moveVocaId"
+            initialValue={initialValue?.moveVocaId}
+          />
+        ) : (
+          <QuizChoice
+            label="퀴즈 카드 선택"
+            name="moveQuizId"
+            initialValue={initialValue?.moveQuizId}
+          />
+        )}
+
         <Form.Item className="flex w-full justify-center">
           <Button
             onClick={(e) => {
@@ -135,10 +156,10 @@ export default function RollingBannerForm({
             className="mx-4"
             color="gray"
           >
-            {type === 'create' ? '취소' : '삭제'}
+            {mode === 'create' ? '취소' : '삭제'}
           </Button>
           <Button type="submit" size="large" className="mx-4">
-            {type === 'create' ? '저장' : '수정'}
+            {mode === 'create' ? '저장' : '수정'}
           </Button>
         </Form.Item>
       </Form>

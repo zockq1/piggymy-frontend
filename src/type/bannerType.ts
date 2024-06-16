@@ -3,22 +3,24 @@ import { Dayjs } from 'dayjs';
 
 export interface BannerRequestJson {
   image: UploadFile[];
-  type: string;
+  type: 'VOCA' | 'QUIZ';
   title: string;
   buttonName: string;
-  moveId: number;
+  moveQuizId: number | null;
+  moveVocaId: number | null;
   exposureStartDate: Dayjs;
   exposureEndDate: Dayjs;
 }
 
 export interface BannerResponseJson {
   id: number;
-  type: string;
+  type: 'VOCA' | 'QUIZ';
   title: string;
   imagePath: string;
   imageName: string;
   buttonName: string;
-  moveId: number;
+  moveQuizId: number | null;
+  moveVocaId: number | null;
   exposureStartDate: string;
   exposureEndDate: string;
   createdDate: string;
@@ -27,9 +29,10 @@ export interface BannerResponseJson {
 
 export interface BannerFormValue {
   exposureDuration: Dayjs[];
-  type: string;
+  type: 'VOCA' | 'QUIZ';
   title: string;
   image: UploadFile[];
   buttonName: string;
-  moveId: number; //용어카드 id
+  moveQuizId: number | null;
+  moveVocaId: number | null;
 }
