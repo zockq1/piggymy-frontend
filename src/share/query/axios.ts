@@ -69,7 +69,7 @@ axiosInstance.interceptors.response.use(
             // Server-side
             const { cookies } = await import('next/headers');
             cookies().set('accessToken', newTokens.accessToken, {
-              maxAge: 6 * 60 * 60,
+              maxAge: 30 * 24 * 60 * 60,
             });
             cookies().set('refreshToken', newTokens.refreshToken, {
               maxAge: 30 * 24 * 60 * 60,
@@ -80,7 +80,7 @@ axiosInstance.interceptors.response.use(
           } else {
             // Client-side
             setCookie('accessToken', newTokens.accessToken, {
-              maxAge: 6 * 60 * 60,
+              maxAge: 30 * 24 * 60 * 60,
             });
             setCookie('refreshToken', newTokens.refreshToken, {
               maxAge: 30 * 24 * 60 * 60,
