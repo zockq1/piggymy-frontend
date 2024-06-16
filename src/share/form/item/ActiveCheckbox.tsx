@@ -10,14 +10,14 @@ import Label from './Label';
  * antd form onFinish의 value 매개변수에 추가되는 값
  * @example
  *  {
- *    useYn: boolean;
+ *    isUse: boolean;
  *  }
  */
 export function ActiveCheckbox() {
   return (
     <Form.Item
       label={<Label>사용여부</Label>}
-      name="useYn"
+      name="isUse"
       rules={[{ required: true }]}
       initialValue={true}
     >
