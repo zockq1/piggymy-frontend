@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { notification } from 'antd';
 import axios, { AxiosError } from 'axios';
+import { useRouter } from 'next/navigation';
 
 import { Request, Response } from '@/type/apiType';
 import { BannerRequestJson } from '@/type/bannerType';
@@ -49,7 +50,7 @@ export const createBanner = async (
 
   formData.append('banner', bannerBlob);
 
-  const response = await axiosInstance.post<Response<null>>(
+  const response = await axiosInstance.post<Response<number>>(
     `/api/banners`,
     formData,
     {
@@ -63,15 +64,17 @@ export const createBanner = async (
 };
 
 export function useCreateBanner() {
+  const router = useRouter();
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: createBanner,
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ['banners'] });
       notification.success({
         message: '배너 생성 성공',
       });
+      router.push(`/admin/content/rollingBanner/${data.data}`);
     },
     onError: (error: AxiosError<Response<unknown>, unknown>) => {
       if (axios.isAxiosError(error)) {
