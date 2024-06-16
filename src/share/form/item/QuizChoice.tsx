@@ -4,20 +4,21 @@ import { Form, FormItemProps, Radio, Select } from 'antd';
 import React, { useState } from 'react';
 
 import Label from '@/share/form/item/Label';
-import { useGetVocaList } from '@/share/query/voca/useGetVocaList';
+import { useGetQuizList } from '@/share/query/quiz/useGetQuizList';
 import StatusBadge from '@/share/ui/badge/StatusBadge';
 import filterOption from '@/utils/filterOption';
 
-interface VocaChoiceProps extends FormItemProps {}
+interface QuizChoiceProps extends FormItemProps {}
 
-export default function VocaChoice({ name, initialValue }: VocaChoiceProps) {
-  const { data, isLoading } = useGetVocaList({
+export default function QuizChoice({ name, initialValue }: QuizChoiceProps) {
+  const { data, isLoading } = useGetQuizList({
     data: { page: 1, page_size: 1000 },
   });
   const [status, setStatus] = useState<'all' | 'active' | 'inActive'>('all');
+
   return (
     <>
-      <Form.Item label={<Label>{'용어 옵션'}</Label>}>
+      <Form.Item label={<Label>{'퀴즈 옵션'}</Label>}>
         <Radio.Group
           options={[
             { label: '전체', value: 'all' },
@@ -33,33 +34,33 @@ export default function VocaChoice({ name, initialValue }: VocaChoiceProps) {
       </Form.Item>
 
       <Form.Item
-        label={<Label>{'용어 선택'}</Label>}
+        label={<Label>{'퀴즈 선택'}</Label>}
         name={name}
         initialValue={initialValue}
         rules={[
           {
             required: true,
-            message: `용어 카드를 선택해 주세요`,
+            message: `퀴즈 카드를 선택해 주세요`,
           },
         ]}
       >
         <Select
           showSearch
           filterOption={filterOption}
-          placeholder="용어카드를 선택해주세요."
+          placeholder="퀴즈카드를 선택해주세요."
           loading={isLoading}
         >
           {data?.data &&
             data?.data.list
-              .filter((voca) => {
-                if (status === 'active') return voca.isUse === true;
-                if (status === 'inActive') return voca.isUse === false;
+              .filter((quiz) => {
+                if (status === 'active') return quiz.isUse === true;
+                if (status === 'inActive') return quiz.isUse === false;
                 return true;
               })
-              .map((voca) => (
-                <Select.Option value={voca.id} key={voca.id}>
-                  <StatusBadge isActive={voca.isUse} className="mr-3" />
-                  {`${voca.koreanTitle}(${voca.englishTitle})`}
+              .map((quiz) => (
+                <Select.Option value={quiz.id} key={quiz.id}>
+                  <StatusBadge isActive={quiz.isUse} className="mr-3" />
+                  {quiz.title}
                 </Select.Option>
               ))}
         </Select>

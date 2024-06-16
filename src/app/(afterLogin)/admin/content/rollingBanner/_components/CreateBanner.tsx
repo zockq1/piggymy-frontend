@@ -12,8 +12,16 @@ export default function CreateBanner() {
   const { mutate: create } = useCreateBanner();
 
   const handleSubmit = (formValue: BannerFormValue) => {
-    const { exposureDuration, title, type, image, buttonName, moveId } =
-      formValue;
+    console.log(formValue);
+    const {
+      exposureDuration,
+      title,
+      type,
+      image,
+      buttonName,
+      moveQuizId,
+      moveVocaId,
+    } = formValue;
     const data = {
       title: title,
       exposureEndDate: exposureDuration[1],
@@ -21,7 +29,8 @@ export default function CreateBanner() {
       type: type,
       image: image,
       buttonName: buttonName,
-      moveId: moveId,
+      moveVocaId: moveVocaId,
+      moveQuizId: moveQuizId,
     };
     create({
       data: data,
@@ -35,7 +44,7 @@ export default function CreateBanner() {
   return (
     <RollingBannerForm
       form={form}
-      type="create"
+      mode="create"
       onDelete={handleCancel}
       onSubmit={handleSubmit}
     />

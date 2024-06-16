@@ -25,8 +25,15 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
   });
 
   const handleSubmit = (formValue: BannerFormValue) => {
-    const { exposureDuration, title, type, image, buttonName, moveId } =
-      formValue;
+    const {
+      exposureDuration,
+      title,
+      type,
+      image,
+      buttonName,
+      moveVocaId,
+      moveQuizId,
+    } = formValue;
     const data = {
       title: title,
       exposureEndDate: exposureDuration[1],
@@ -34,7 +41,8 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
       type: type,
       image: image,
       buttonName: buttonName,
-      moveId: moveId,
+      moveVocaId: moveVocaId,
+      moveQuizId: moveQuizId,
     };
     updateBanner({
       id: { bannerId: currentBannerId },
@@ -60,12 +68,13 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
       imagePath,
       imageName,
       buttonName,
-      moveId,
+      moveVocaId,
+      moveQuizId,
     } = data.data;
 
     return (
       <RollingBannerForm
-        type="update"
+        mode="update"
         form={form}
         onDelete={handleCancel}
         onSubmit={handleSubmit}
@@ -78,7 +87,8 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
           title: title,
           image: imagePath + imageName,
           buttonName: buttonName,
-          moveId: moveId,
+          moveVocaId: moveVocaId,
+          moveQuizId: moveQuizId,
         }}
       />
     );
