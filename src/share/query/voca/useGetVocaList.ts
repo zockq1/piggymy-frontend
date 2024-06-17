@@ -28,7 +28,7 @@ export const getVocaList = async (query?: Request<GetVocaListRequestQuery>) => {
   const response = await axiosInstance.get(`/api/vocas`, {
     params: filteredParams,
   });
-
+  console.log(response);
   return response.data;
 };
 

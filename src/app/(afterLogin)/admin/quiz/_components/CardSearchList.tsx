@@ -36,30 +36,26 @@ function CardSearchList() {
   const searchParams = useSearchParams();
   const startDate = searchParams.get('start_date');
   const endDate = searchParams.get('end_date');
-  const useYn = searchParams.get('is_use');
+  const isUse = searchParams.get('is_use');
   const keyword = searchParams.get('keyword');
   const router = useRouter();
   const path = usePathname();
   const pageRef = useRef(1);
 
-  const {
-    data,
-    isSuccess,
-    fetchNextPage,
-    fetchPreviousPage,
-    hasNextPage,
-    hasPreviousPage,
-    isFetchingNextPage,
-    isFetchingPreviousPage,
-  } = useGetVocaListInfinite({
+  const { data, fetchNextPage, hasNextPage } = useGetVocaListInfinite({
     data: {
       page_size: 10,
       start_date: startDate!,
       end_date: endDate!,
-      is_use: useYn!,
+      is_use: isUse!,
       search_keyword: keyword!,
     },
   });
+
+  const totalCount =
+    !!data?.pages && data?.pages.length > 0
+      ? data?.pages[0].data.totalCount
+      : 0;
 
   const vocaList = data?.pages.reduce((acc, page) => {
     if (!!page && !!page.data) {
@@ -75,7 +71,7 @@ function CardSearchList() {
     const params = {
       start_date: startDate ?? '',
       end_date: endDate ?? '',
-      is_use: useYn ?? '',
+      is_use: isUse ?? '',
       keyword: formValue.keyword,
     };
     if (buildQueryString(params)) {
@@ -119,7 +115,7 @@ function CardSearchList() {
         </div>
         <div className={'flex w-full items-start justify-between'}>
           <Title>
-            카드 모음집 <Title.H>2</Title.H>건
+            전체 용어 <Title.H>{totalCount}</Title.H>건
           </Title>
           <Dropdown
             selectName={'등록일'}
@@ -152,7 +148,7 @@ function CardSearchList() {
                         id={voca.id.toString()}
                         koreanTitle={voca.koreanTitle}
                         createdDate={dayjs(voca.createdDate)}
-                        isActive={voca.useYn}
+                        isActive={voca.isUse}
                         isChecked={selectCardIds.includes(voca.id)}
                         route={`/admin/quiz/vocaManagement/${voca.id}`}
                         isSelected={+params.vocaId === voca.id}

@@ -31,7 +31,7 @@ export default function WordCardInfoForm() {
 
   const onFinish = (formValue: CreateVocaRequestJson) => {
     create({ data: formValue });
-    form.resetFields(); // Reset form fields after successful submission
+    form.resetFields();
   };
 
   useEffect(() => {
