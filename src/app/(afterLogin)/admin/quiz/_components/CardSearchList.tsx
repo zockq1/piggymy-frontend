@@ -15,7 +15,8 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import search from '/public/img/Icon/search.png';
 import Text from '@/share/form/item/Text';
 import { useGetVocaListInfinite } from '@/share/query/voca/useGetVocaList';
-import Button from '@/share/ui/button/IconButton';
+import Button from '@/share/ui/button/Button';
+import IconButton from '@/share/ui/button/IconButton';
 import ContentBox from '@/share/ui/content-box/ContentBox';
 import Dropdown from '@/share/ui/dropdown/Dropdown';
 import Add from '@/share/ui/list-item/Add';
@@ -109,9 +110,9 @@ function CardSearchList() {
             name={'keyword'}
             className={'w-full'}
           />
-          <Button type={'submit'}>
+          <IconButton type={'submit'}>
             <Image src={search} alt="검색" width={18} height={18} />
-          </Button>
+          </IconButton>
         </div>
         <div className={'flex w-full items-start justify-between'}>
           <Title>
@@ -126,11 +127,19 @@ function CardSearchList() {
             ]}
           />
         </div>
+        <div className="flex items-center justify-between gap-4">
+          <Button type="button" size="small" color="blue" onClick={() => {}}>
+            사용여부 일괄변경
+          </Button>
+          <Button type="button" size="small" color="blue" onClick={() => {}}>
+            삭제
+          </Button>
+        </div>
         {!!data && data.pages.length > 0 && (
           <div className={'relative'}>
             <ul
               id={'list'}
-              className={'max-h-[calc(100vh-630px)] overflow-y-auto pb-20'}
+              className={'max-h-[calc(100vh-670px)] overflow-y-auto pb-20'}
             >
               <InfiniteScroll
                 dataLength={vocaList.length}
