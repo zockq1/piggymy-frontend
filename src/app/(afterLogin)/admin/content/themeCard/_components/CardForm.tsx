@@ -135,14 +135,14 @@ export default function CardForm({
         {type === 'VOCA' ? (
           <VocaChoice
             label="용어 카드 선택"
-            name="moveVocaId"
+            name="vocaIdList"
             initialValue={initialValue?.vocaIdList}
             mode="multiple"
           />
         ) : (
           <QuizChoice
             label="퀴즈 카드 선택"
-            name="moveQuizId"
+            name="quizIdList"
             initialValue={initialValue?.quizIdList}
             mode="multiple"
           />
