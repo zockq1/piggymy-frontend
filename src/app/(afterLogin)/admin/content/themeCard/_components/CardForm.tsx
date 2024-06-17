@@ -121,7 +121,7 @@ export default function CardForm({
         </Form.Item>
         <Form.Item
           label={<Label>설명</Label>}
-          name="title"
+          name="content"
           rules={[
             {
               required: true,
