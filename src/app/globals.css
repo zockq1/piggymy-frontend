@@ -6,3 +6,7 @@ body {
   box-sizing: border-box;
   background-color: #efeff4;
 }
+
+.swiper-slide {
+  width: fit-content !important;
+}

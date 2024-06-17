@@ -44,7 +44,7 @@ export default function Banner({
   image,
 }: BannerProps) {
   return (
-    <div className="flex h-[234px] w-[390px] flex-col justify-between">
+    <div className="mb-10 flex h-[234px] w-[390px] shrink-0 flex-col justify-between">
       <Link
         href={route}
         className={cn(
@@ -58,9 +58,11 @@ export default function Banner({
         <p className="mt-2 whitespace-pre-line text-xl font-bold text-gray-2">
           {title}
         </p>
-        <div className="absolute right-1 top-1">
-          <Image src={image} alt="image" width={110} height={110} />
-        </div>
+        {image ? (
+          <div className="absolute right-1 top-1">
+            <Image src={image} alt="image" width={110} height={110} />
+          </div>
+        ) : null}
         <div className="absolute bottom-2 right-4 flex items-center text-xs text-primary">
           {buttonTitle} <Image src={arrow} alt="arrow" width={24} height={24} />
         </div>

@@ -32,7 +32,6 @@ export default function ImageUpload({
       valuePropName="fileList"
       getValueFromEvent={getFile}
       initialValue={initialImage ? [{ url: initialImage }] : null}
-      rules={[{ required: true, message: '이미지를 업로드해 주세요' }]}
     >
       <Upload listType="picture-card" maxCount={1}>
         <button type="button">
