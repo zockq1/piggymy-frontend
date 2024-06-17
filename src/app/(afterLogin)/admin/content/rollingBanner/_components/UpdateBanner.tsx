@@ -34,7 +34,7 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
       moveVocaId,
       moveQuizId,
     } = formValue;
-    const data = {
+    const formData = {
       title: title,
       exposureEndDate: exposureDuration[1],
       exposureStartDate: exposureDuration[0],
@@ -44,10 +44,32 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
       moveVocaId: moveVocaId,
       moveQuizId: moveQuizId,
     };
-    updateBanner({
-      id: { bannerId: currentBannerId },
-      data: data,
-    });
+
+    if (
+      image &&
+      image.length > 0 &&
+      image[0].url ===
+        String(data?.data.imagePath) + String(data?.data.imageName)
+    ) {
+      updateBanner({
+        id: { bannerId: currentBannerId },
+        data: {
+          ...formData,
+          image: [],
+          imageName: String(data?.data.imageName),
+          imagePath: String(data?.data.imagePath),
+        },
+      });
+    } else {
+      updateBanner({
+        id: { bannerId: currentBannerId },
+        data: {
+          ...formData,
+          imageName: '',
+          imagePath: '',
+        },
+      });
+    }
   };
 
   const handleCancel = () => {
