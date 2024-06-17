@@ -1,8 +1,8 @@
 'use client';
 
-import { Form, Input, UploadFile } from 'antd';
+import { Form, Input } from 'antd';
 import { useForm } from 'antd/es/form/Form';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import React, { useEffect } from 'react';
@@ -11,27 +11,14 @@ import plus from '/public/img/icon/plus.png';
 import { ActiveCheckbox } from '@/share/form/item/ActiveCheckbox';
 import ImageUpload from '@/share/form/item/ImageUpload';
 import Label from '@/share/form/item/Label';
+import { useCreateVoca } from '@/share/query/voca/useCreateVoca';
 import { useGetVoca } from '@/share/query/voca/useGetVoca';
 import Button from '@/share/ui/button/Button';
 import IconButton from '@/share/ui/button/IconButton';
 import ContentBox from '@/share/ui/content-box/ContentBox';
+import { CreateVocaRequestJson } from '@/type/vocaType';
 
 const { TextArea } = Input;
-
-interface WordCardInfoFormValue {
-  answer: number;
-  datePicker: Dayjs;
-  image: UploadFile;
-  input: string;
-  option1: string;
-  option2: string;
-  option3: string;
-  option4: string;
-  rangePicker: Dayjs[];
-  select: string;
-  textArea: string;
-  useYn: true;
-}
 
 /* <Form.item>{...}</Form.item> 단위로 컴포넌트화를 시켜야할지 고민 */
 
@@ -40,11 +27,11 @@ export default function WordCardInfoForm() {
   const [form] = useForm();
 
   const { data, isSuccess } = useGetVoca(+params.vocaId);
-  console.log(data);
-  const onFinish = (formValue: WordCardInfoFormValue) => {
-    for (const [key, value] of Object.entries(formValue)) {
-      console.log(`${key}: ${value}`);
-    }
+  const { mutate: create } = useCreateVoca();
+
+  const onFinish = (formValue: CreateVocaRequestJson) => {
+    create({ data: formValue });
+    form.resetFields(); // Reset form fields after successful submission
   };
 
   useEffect(() => {

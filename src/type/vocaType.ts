@@ -1,3 +1,5 @@
+import { UploadFile } from 'antd/es/upload/interface';
+
 export interface VocaListResponseJson {
   id: number;
   koreanTitle: string;
@@ -43,9 +45,23 @@ export interface VocaResponseModel {
 }
 
 /*
- *  POST /api/voca/add
+ *  POST /api/vocas
  *  FormData { thumbnail, voca }
  */
+
+export interface CreateVocaRequestJson {
+  koreanTitle: string;
+  englishTitle: string;
+  koreanCategory: string;
+  englishCategory: string;
+  content: string;
+  sourceName: string;
+  sourceLink: string;
+  thumbnailSourceName: string;
+  thumbnailSourceLink: string;
+  isUse: false;
+  image: UploadFile[];
+}
 
 export type VocaAddRequest = FormData;
 
