@@ -14,7 +14,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import search from '/public/img/Icon/search.png';
 import Text from '@/share/form/item/Text';
-import { useGetVocaListInfinite } from '@/share/query/voca/useGetVocaList';
+import { useGetVocaListInfinite } from '@/share/query/voca/useGetVocas';
 import Button from '@/share/ui/button/Button';
 import IconButton from '@/share/ui/button/IconButton';
 import ContentBox from '@/share/ui/content-box/ContentBox';

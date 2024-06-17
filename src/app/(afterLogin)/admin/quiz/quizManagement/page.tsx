@@ -10,7 +10,7 @@ import CardSearchList from '@/app/(afterLogin)/admin/quiz/_components/CardSearch
 import QuizCardInfoForm from '@/app/(afterLogin)/admin/quiz/_components/QuizCardInfoForm';
 import QuizPageInfo from '@/app/(afterLogin)/admin/quiz/_components/QuizPageInfo';
 import Layout from '@/share/layout/Layout';
-import { usePrefetchVocaList } from '@/share/query/voca/useGetVocaList';
+import { usePrefetchVocaList } from '@/share/query/voca/useGetVocas';
 
 export default async function QuizManagement() {
   const queryClient = new QueryClient();
