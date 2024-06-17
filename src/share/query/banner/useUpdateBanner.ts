@@ -11,7 +11,10 @@ interface UpdateBannerId {
   bannerId: number;
 }
 
-interface UpdateBannerRequestJson extends BannerRequestJson {}
+interface UpdateBannerRequestJson extends BannerRequestJson {
+  imagePath: string;
+  imageName: string;
+}
 
 export const updateBanner = async (
   bannerData: Request<UpdateBannerRequestJson, UpdateBannerId>,
@@ -25,10 +28,12 @@ export const updateBanner = async (
     exposureEndDate,
     exposureStartDate,
     image,
+    imageName,
+    imagePath,
   } = bannerData.data;
 
   const formData = new FormData();
-  if (image && image[0].originFileObj) {
+  if (image && image.length > 0 && image[0].originFileObj) {
     formData.append(
       'thumbnail',
       image[0].originFileObj,
@@ -48,6 +53,8 @@ export const updateBanner = async (
         moveVocaId: moveVocaId || null,
         exposureStartDate: exposureStartDate.format('YYYY-MM-DD'),
         exposureEndDate: exposureEndDate.format('YYYY-MM-DD'),
+        imagePath: imagePath,
+        imageName: imageName,
       }),
     ],
     { type: 'application/json' },
