@@ -17,9 +17,8 @@ export function ActiveCheckbox() {
   return (
     <Form.Item
       label={<Label>사용여부</Label>}
-      name="useYn"
+      name="isUse"
       rules={[{ required: true }]}
-      initialValue={true}
       className={'m-0'}
     >
       <Radio.Group>

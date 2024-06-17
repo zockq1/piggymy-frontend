@@ -1,7 +1,6 @@
-import { QueryClient, useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { QueryClient, useInfiniteQuery } from '@tanstack/react-query';
 
-import { Request, Response } from '@/type/apiType';
-import { VocaResponseJson } from '@/type/vocaType';
+import { Request } from '@/type/apiType';
 
 import axiosInstance from '../axios';
 
@@ -16,22 +15,11 @@ interface GetVocaListRequestQuery {
   is_use?: boolean | string;
 }
 
-interface GetVocaListResponse {
-  totalCount: number;
-  list: VocaResponseJson[];
-}
-
 // Utility function to remove null values from an object
 const removeNullValues = (obj: GetVocaListRequestQuery) => {
   return Object.fromEntries(
     Object.entries(obj).filter(([_, v]) => v !== null && v !== undefined),
   );
-};
-
-export const getVocaDetail = async (vocaId: number) => {
-  const response = await axiosInstance.get(`/api/vocas/${vocaId}`, {});
-
-  return response.data;
 };
 
 export const getVocaList = async (query?: Request<GetVocaListRequestQuery>) => {
@@ -43,15 +31,6 @@ export const getVocaList = async (query?: Request<GetVocaListRequestQuery>) => {
 
   return response.data;
 };
-
-export function useGetVocaDetail(vocaId: number) {
-  return useQuery({
-    queryKey: ['voca', vocaId],
-    queryFn: () => {
-      return getVocaDetail(vocaId);
-    },
-  });
-}
 
 export function useGetVocaListInfinite(
   data?: Request<GetVocaListRequestQuery>,

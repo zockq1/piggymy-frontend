@@ -1,10 +1,32 @@
-export interface VocaResponseJson {
+export interface VocaListResponseJson {
   id: number;
   koreanTitle: string;
   englishTitle: string;
   useYn: boolean;
   createdDate: string;
   modifiedDate: string;
+}
+
+export interface VocaResponseJson {
+  id: number;
+  koreanTitle: string;
+  englishTitle: string;
+  koreanCategory: string;
+  englishCategory: string;
+  content: string;
+  thumbnailPath: string;
+  thumbnailName: string;
+  sourceName: string;
+  sourceLink: string;
+  thumbnailSourceName: string;
+  thumbnailSourceLink: string;
+  helpful: number;
+  isUse: false;
+  bookmarkCount: number;
+  createdDate: string;
+  modifiedDate: string;
+  quizId: number | string | null;
+  quizTitle: number | string | null;
 }
 
 export interface VocaModel {

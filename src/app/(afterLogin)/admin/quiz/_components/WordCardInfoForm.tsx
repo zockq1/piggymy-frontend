@@ -1,16 +1,17 @@
 'use client';
 
-import { Form, Input, Select, UploadFile } from 'antd';
+import { Form, Input, UploadFile } from 'antd';
+import { useForm } from 'antd/es/form/Form';
 import dayjs, { Dayjs } from 'dayjs';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import plus from '/public/img/icon/plus.png';
 import { ActiveCheckbox } from '@/share/form/item/ActiveCheckbox';
 import ImageUpload from '@/share/form/item/ImageUpload';
 import Label from '@/share/form/item/Label';
-import { useGetVocaDetail } from '@/share/query/voca/useGetVocaList';
+import { useGetVoca } from '@/share/query/voca/useGetVoca';
 import Button from '@/share/ui/button/Button';
 import IconButton from '@/share/ui/button/IconButton';
 import ContentBox from '@/share/ui/content-box/ContentBox';
@@ -36,22 +37,35 @@ interface WordCardInfoFormValue {
 
 export default function WordCardInfoForm() {
   const params = useParams();
-  console.log(params.vocaId);
+  const [form] = useForm();
 
-  const { data } = useGetVocaDetail(+params.vocaId);
+  const { data, isSuccess } = useGetVoca(+params.vocaId);
   console.log(data);
-
-  const createdDate = dayjs('2024-10-2');
-
   const onFinish = (formValue: WordCardInfoFormValue) => {
     for (const [key, value] of Object.entries(formValue)) {
       console.log(`${key}: ${value}`);
     }
   };
 
+  useEffect(() => {
+    if (!data) return;
+
+    const initialValues = {
+      koreanTitle: data.koreanTitle,
+      isUse: data.isUse,
+      image: [data.thumbnailPath + data.thumbnailName],
+      thumbnail: data.thumbnailPath + data.thumbnailName,
+      sourceName: data.sourceName,
+      thumbnailSourceName: data.thumbnailSourceName,
+    };
+
+    form.setFieldsValue(initialValues);
+  }, [data, form]);
+
   return (
     <ContentBox className={'flex h-full max-h-[calc(100vh-400px)] items-start'}>
       <Form
+        form={form}
         labelCol={{ span: 2 }}
         layout="horizontal"
         className="h-full w-full overflow-y-auto"
@@ -60,40 +74,14 @@ export default function WordCardInfoForm() {
         <Form.Item label={<Label>등록일</Label>}>
           <div className={'flex w-full items-start justify-between'}>
             <i className={'flex h-8 items-center'}>
-              {createdDate.format('YYYY.MM.DD')}
+              {dayjs(data?.createdDate).format('YYYY-MM-DD')}
             </i>
             <ActiveCheckbox />
           </div>
         </Form.Item>
         <Form.Item
-          label={<Label>필터</Label>}
-          name="select"
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Select>
-            <Select.Option value="demo">Demo</Select.Option>
-          </Select>
-        </Form.Item>
-        <Form.Item
-          label={<Label>필터</Label>}
-          name="select"
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Select>
-            <Select.Option value="demo">Demo</Select.Option>
-          </Select>
-        </Form.Item>
-        <Form.Item
           label={<Label>용어</Label>}
-          name="category"
+          name="koreanTitle"
           rules={[
             {
               required: true,
@@ -106,11 +94,13 @@ export default function WordCardInfoForm() {
         </Form.Item>
         <ImageUpload
           name={'대표이미지'}
-          initialImage="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+          initialImage={
+            isSuccess ? data.thumbnailPath + data.thumbnailName : ''
+          }
         />
         <Form.Item
           label={<Label>대표이미지 출처</Label>}
-          name="imageSrc"
+          name="thumbnailSourceName"
           className={'w-full'}
         >
           <Input placeholder="내용을 입력해주세요." />

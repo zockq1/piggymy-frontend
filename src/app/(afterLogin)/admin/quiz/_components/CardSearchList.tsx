@@ -22,7 +22,7 @@ import Add from '@/share/ui/list-item/Add';
 import Card from '@/share/ui/list-item/Card';
 import Title from '@/share/ui/title/Title';
 import { buildQueryString } from '@/share/utils/query';
-import { VocaResponseJson } from '@/type/vocaType';
+import { VocaListResponseJson } from '@/type/vocaType';
 
 interface FormExampleValue {
   range: Dayjs[];
@@ -145,7 +145,7 @@ function CardSearchList() {
                 scrollThreshold={0.8}
                 className={'flex flex-col gap-4'}
               >
-                {vocaList?.map((voca: VocaResponseJson) => {
+                {vocaList?.map((voca: VocaListResponseJson) => {
                   return (
                     <li key={voca.id} className={'list-none'}>
                       <Card
