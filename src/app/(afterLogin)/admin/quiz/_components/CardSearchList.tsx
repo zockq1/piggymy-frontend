@@ -14,6 +14,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import search from '/public/img/Icon/search.png';
 import Text from '@/share/form/item/Text';
+import { useDeleteVocas } from '@/share/query/voca/useDeleteVocas';
 import { useGetVocaListInfinite } from '@/share/query/voca/useGetVocas';
 import Button from '@/share/ui/button/Button';
 import IconButton from '@/share/ui/button/IconButton';
@@ -42,6 +43,7 @@ function CardSearchList() {
   const router = useRouter();
   const path = usePathname();
   const pageRef = useRef(1);
+  const [selectCardIds, setSelectCardIds] = useState<number[]>([]);
 
   const { data, fetchNextPage, hasNextPage } = useGetVocaListInfinite({
     data: {
@@ -52,6 +54,7 @@ function CardSearchList() {
       search_keyword: keyword!,
     },
   });
+  const { mutate } = useDeleteVocas(selectCardIds);
 
   const totalCount =
     !!data?.pages && data?.pages.length > 0
@@ -65,8 +68,6 @@ function CardSearchList() {
       return [...acc];
     }
   }, []);
-
-  const [selectCardIds, setSelectCardIds] = useState<number[]>([]);
 
   const handleFinish = (formValue: FormExampleValue) => {
     const params = {
