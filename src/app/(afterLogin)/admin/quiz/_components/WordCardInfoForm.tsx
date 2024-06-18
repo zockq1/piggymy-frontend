@@ -29,6 +29,10 @@ export default function WordCardInfoForm() {
   const { data, isSuccess } = useGetVoca(+params.vocaId);
   const { mutate: create } = useCreateVoca();
 
+  const handleCancel = () => {
+    form.resetFields();
+  };
+
   const onFinish = (formValue: CreateVocaRequestJson) => {
     create({ data: formValue });
     form.resetFields();
@@ -48,6 +52,12 @@ export default function WordCardInfoForm() {
 
     form.setFieldsValue(initialValues);
   }, [data, form]);
+
+  useEffect(() => {
+    if (!params.vocaId) {
+      form.resetFields();
+    }
+  }, [params.vocaId]);
 
   return (
     <ContentBox className={'flex h-full max-h-[calc(100vh-400px)] items-start'}>
@@ -82,7 +92,7 @@ export default function WordCardInfoForm() {
         <ImageUpload
           name={'대표이미지'}
           initialImage={
-            isSuccess ? data.thumbnailPath + data.thumbnailName : ''
+            isSuccess ? data!.thumbnailPath + data!.thumbnailName : ''
           }
         />
         <Form.Item
@@ -125,7 +135,13 @@ export default function WordCardInfoForm() {
           </div>
         </Form.Item>
         <Form.Item className="flex w-full justify-center">
-          <Button size="large" color="gray" className="mx-4">
+          <Button
+            type="button"
+            size="large"
+            color="gray"
+            className="mx-4"
+            onClick={handleCancel}
+          >
             취소
           </Button>
           <Button type="submit" size="large" className="mx-4">

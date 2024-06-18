@@ -17,11 +17,17 @@ export const getVocaDetail = async (vocaId: number) => {
   return data;
 };
 
-export function useGetVoca(vocaId: number): UseQueryResult<VocaResponseJson> {
+export function useGetVoca(
+  vocaId: number,
+): UseQueryResult<VocaResponseJson | null> {
   return useQuery({
     queryKey: ['voca', vocaId],
     queryFn: () => {
+      if (vocaId === null || vocaId === undefined) {
+        return Promise.resolve(null); // Return a default value or null when vocaId is null or undefined
+      }
       return getVocaDetail(vocaId);
     },
+    enabled: !isNaN(vocaId) && vocaId !== null && vocaId !== undefined, // Disable the query if vocaId is null or undefined
   });
 }

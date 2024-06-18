@@ -16,7 +16,7 @@ export default function ImageUpload({
   name = '이미지',
   initialImage,
 }: {
-  name: string;
+  name?: string;
   initialImage?: string;
   required?: boolean;
 }) {

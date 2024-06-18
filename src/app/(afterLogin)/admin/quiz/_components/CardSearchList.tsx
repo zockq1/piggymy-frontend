@@ -179,7 +179,11 @@ function CardSearchList() {
               </InfiniteScroll>
             </ul>
             <div className={'sticky bottom-0'}>
-              <Add type={'card'} isSelected={false} route={'/123'} />
+              <Add
+                type={'card'}
+                isSelected={false}
+                route={'/admin/quiz/vocaManagement'}
+              />
             </div>
           </div>
         )}
