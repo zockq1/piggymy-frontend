@@ -13,10 +13,11 @@ import ImageUpload from '@/share/form/item/ImageUpload';
 import Label from '@/share/form/item/Label';
 import { useCreateVoca } from '@/share/query/voca/useCreateVoca';
 import { useGetVoca } from '@/share/query/voca/useGetVoca';
+import { useUpdateVoca } from '@/share/query/voca/useUpdateVoca';
 import Button from '@/share/ui/button/Button';
 import IconButton from '@/share/ui/button/IconButton';
 import ContentBox from '@/share/ui/content-box/ContentBox';
-import { CreateVocaRequestJson } from '@/type/vocaType';
+import { CreateVocaRequestJson, UpdateVocaRequestJson } from '@/type/vocaType';
 
 const { TextArea } = Input;
 
@@ -28,14 +29,21 @@ export default function WordCardInfoForm() {
 
   const { data, isSuccess } = useGetVoca(+params.vocaId);
   const { mutate: create } = useCreateVoca();
+  const { mutate: update } = useUpdateVoca();
 
   const handleCancel = () => {
     form.resetFields();
   };
 
-  const onFinish = (formValue: CreateVocaRequestJson) => {
-    create({ data: formValue });
-    form.resetFields();
+  const onFinish = (
+    formValue: CreateVocaRequestJson | UpdateVocaRequestJson,
+  ) => {
+    if (params.vocaId) {
+      update({ data: { vocaId: +params.vocaId, ...formValue } });
+    } else {
+      create({ data: formValue });
+      form.resetFields();
+    }
   };
 
   useEffect(() => {

@@ -117,8 +117,20 @@ export interface VocaListResponseJson {
  *  FormData { thumbnail, voca }
  */
 
-export type VocaUpdateRequest = FormData;
-
+export interface UpdateVocaRequestJson {
+  vocaId: number;
+  koreanTitle: string;
+  englishTitle: string;
+  koreanCategory: string;
+  englishCategory: string;
+  content: string;
+  sourceName: string;
+  sourceLink: string;
+  thumbnailSourceName: string;
+  thumbnailSourceLink: string;
+  isUse: false;
+  image: UploadFile[];
+}
 export interface VocaUpdateResponse extends VocaResponseModel {}
 
 /*
