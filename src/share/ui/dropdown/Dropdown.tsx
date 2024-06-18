@@ -1,18 +1,19 @@
 'use client';
 
+import { HTMLAttributes } from 'react';
+
 type OptionsType = {
   inputVal: string;
   summary: string;
 };
 
-interface IDropdownProps {
-  selectName: string;
+interface IDropdownProps extends HTMLAttributes<HTMLSelectElement> {
   options: OptionsType[];
 }
 
-export default function Dropdown({ selectName, options }: IDropdownProps) {
+export default function Dropdown({ options, ...props }: IDropdownProps) {
   return (
-    <select name={selectName ? selectName : 'test'}>
+    <select {...props}>
       {options
         ? options.map((item: OptionsType, index: number) => {
             return (

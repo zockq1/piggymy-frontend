@@ -1,5 +1,6 @@
 'use client';
 
+import { useQueryClient } from '@tanstack/react-query';
 import { Form } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
 import Image from 'next/image';
@@ -9,7 +10,7 @@ import {
   useRouter,
   useSearchParams,
 } from 'next/navigation';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import search from '/public/img/Icon/search.png';
@@ -44,14 +45,16 @@ function CardSearchList() {
   const path = usePathname();
   const pageRef = useRef(1);
   const [selectCardIds, setSelectCardIds] = useState<number[]>([]);
+  const [sortType, setSortType] = useState<'CREATED' | 'MODIFIED'>('CREATED');
 
-  const { data, fetchNextPage, hasNextPage } = useGetVocaListInfinite({
+  const { data, fetchNextPage, hasNextPage, refetch } = useGetVocaListInfinite({
     data: {
       page_size: 10,
       start_date: startDate!,
       end_date: endDate!,
       is_use: isUse!,
       search_keyword: keyword!,
+      sort_type: sortType,
     },
   });
   const { mutate: deleteVocas } = useDeleteVocas();
@@ -102,6 +105,10 @@ function CardSearchList() {
     }
   }, [hasNextPage]);
 
+  useEffect(() => {
+    refetch();
+  }, [sortType]);
+
   return (
     <ContentBox className={'flex h-full max-h-[calc(100vh-400px)] items-start'}>
       <Form
@@ -124,12 +131,13 @@ function CardSearchList() {
             전체 용어 <Title.H>{totalCount}</Title.H>건
           </Title>
           <Dropdown
-            selectName={'등록일'}
             options={[
-              { inputVal: 'RECENT', summary: '등록일' },
-              { inputVal: 'used', summary: '사용중' },
-              { inputVal: 'unused', summary: '미사용중' },
+              { inputVal: 'CREATED', summary: '등록일' },
+              { inputVal: 'MODIFIED', summary: '업데이트순' },
             ]}
+            onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+              setSortType(e.target.value as 'CREATED' | 'MODIFIED');
+            }}
           />
         </div>
         <div className="flex items-center justify-between gap-4">
