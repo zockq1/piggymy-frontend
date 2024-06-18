@@ -4,7 +4,7 @@ import { Form, Input } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import dayjs from 'dayjs';
 import Image from 'next/image';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 
 import plus from '/public/img/icon/plus.png';
@@ -23,15 +23,17 @@ const { TextArea } = Input;
 
 /* <Form.item>{...}</Form.item> 단위로 컴포넌트화를 시켜야할지 고민 */
 
-export default function WordCardInfoForm() {
+export default function VocaInfoForm() {
   const params = useParams();
   const [form] = useForm();
+  const router = useRouter();
 
   const { data, isSuccess } = useGetVoca(+params.vocaId);
   const { mutate: create } = useCreateVoca();
   const { mutate: update } = useUpdateVoca();
 
   const handleCancel = () => {
+    router.push(`/admin/quiz/vocaManagement`);
     form.resetFields();
   };
 
