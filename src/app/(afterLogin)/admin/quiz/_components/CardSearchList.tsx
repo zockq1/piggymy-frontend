@@ -54,7 +54,7 @@ function CardSearchList() {
       search_keyword: keyword!,
     },
   });
-  const { mutate } = useDeleteVocas(selectCardIds);
+  const { mutate: deleteVocas } = useDeleteVocas();
 
   const totalCount =
     !!data?.pages && data?.pages.length > 0
@@ -79,6 +79,10 @@ function CardSearchList() {
     if (buildQueryString(params)) {
       router.replace(`${path}?${buildQueryString(params)}`);
     }
+  };
+
+  const handleDeleteVocas = () => {
+    deleteVocas(selectCardIds);
   };
 
   const toggleCheck = (id: string) => {
@@ -132,7 +136,12 @@ function CardSearchList() {
           <Button type="button" size="small" color="blue" onClick={() => {}}>
             사용여부 일괄변경
           </Button>
-          <Button type="button" size="small" color="blue" onClick={() => {}}>
+          <Button
+            type="button"
+            size="small"
+            color="blue"
+            onClick={handleDeleteVocas}
+          >
             삭제
           </Button>
         </div>

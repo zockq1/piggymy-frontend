@@ -25,7 +25,7 @@
     ],
     "*.{css}": [
       "prettier --write",
-      "stylelint --fix \"**/*.css\""
+      "stylelint --fix \"**/*.css\" --allow-empty-input"
     ]
   },
   "dependencies": {
