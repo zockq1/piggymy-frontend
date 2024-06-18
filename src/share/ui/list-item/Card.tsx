@@ -56,7 +56,7 @@ export default function Card({
         name={id}
         className="h-[18px] w-[18px]"
         checked={isChecked}
-        onChange={() => onChangeChecked(id)}
+        onChange={onChangeChecked}
       />
       <Link href={route} className="w-[190px]">
         <div className="break-keep font-bold">{koreanTitle}</div>

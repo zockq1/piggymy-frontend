@@ -91,3 +91,37 @@ export function useUpdateVoca() {
     },
   });
 }
+
+export const patchIsUse = async (
+  updateIsUseData: Request<{ vocaIds: number[]; isUse: boolean }>,
+) => {
+  const response = await axiosInstance.patch<Response<null>>(
+    `/api/vocas/isuse`,
+    updateIsUseData.data,
+  );
+
+  return response.data;
+};
+
+export function usePatchVocasIsUse() {
+  const router = useRouter();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: patchIsUse,
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ['vocas'] });
+      notification.success({
+        message: '용어 사용여부 변경 성공',
+      });
+    },
+    onError: (error: AxiosError<Response<unknown>, unknown>) => {
+      if (axios.isAxiosError(error)) {
+        notification.error({
+          message: '용어 사용여부 변경 실패',
+          description: `${error.response?.data.code}: ${error.response?.data.message}`,
+        });
+      }
+    },
+  });
+}

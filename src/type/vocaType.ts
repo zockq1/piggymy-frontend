@@ -35,7 +35,7 @@ export interface VocaModel {
   id: number;
   koreanTitle: string;
   englishTitle: string;
-  useYn: boolean;
+  isUse: boolean;
   createdDate: string;
   modifiedDate: string;
 }

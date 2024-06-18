@@ -1,6 +1,5 @@
 'use client';
 
-import { useQueryClient } from '@tanstack/react-query';
 import { Form } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
 import Image from 'next/image';
@@ -10,13 +9,22 @@ import {
   useRouter,
   useSearchParams,
 } from 'next/navigation';
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import React, {
+  ChangeEvent,
+  MouseEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import search from '/public/img/Icon/search.png';
 import Text from '@/share/form/item/Text';
+import NoticeModal from '@/share/modal/NoticeModal';
+import { useModal } from '@/share/modal/useModal';
 import { useDeleteVocas } from '@/share/query/voca/useDeleteVocas';
 import { useGetVocaListInfinite } from '@/share/query/voca/useGetVocas';
+import { usePatchVocasIsUse } from '@/share/query/voca/useUpdateVoca';
 import Button from '@/share/ui/button/Button';
 import IconButton from '@/share/ui/button/IconButton';
 import ContentBox from '@/share/ui/content-box/ContentBox';
@@ -25,7 +33,7 @@ import Add from '@/share/ui/list-item/Add';
 import Card from '@/share/ui/list-item/Card';
 import Title from '@/share/ui/title/Title';
 import { buildQueryString } from '@/share/utils/query';
-import { VocaListResponseJson } from '@/type/vocaType';
+import { VocaModel } from '@/type/vocaType';
 
 interface FormExampleValue {
   range: Dayjs[];
@@ -35,17 +43,22 @@ interface FormExampleValue {
 
 function CardSearchList() {
   const params = useParams();
-
+  const router = useRouter();
+  const path = usePathname();
+  const pageRef = useRef(1);
   const searchParams = useSearchParams();
+  const { openModal, closeModal } = useModal();
+
   const startDate = searchParams.get('start_date');
   const endDate = searchParams.get('end_date');
   const isUse = searchParams.get('is_use');
   const keyword = searchParams.get('keyword');
-  const router = useRouter();
-  const path = usePathname();
-  const pageRef = useRef(1);
-  const [selectCardIds, setSelectCardIds] = useState<number[]>([]);
+
+  const [selectVocaList, setSelectVocaList] = useState<VocaModel[]>([]);
   const [sortType, setSortType] = useState<'CREATED' | 'MODIFIED'>('CREATED');
+
+  const selectVocaIds = selectVocaList.map((voca) => voca.id);
+  const selectVocaIsUseValues = selectVocaList.map((voca) => voca.isUse);
 
   const { data, fetchNextPage, hasNextPage, refetch } = useGetVocaListInfinite({
     data: {
@@ -58,6 +71,7 @@ function CardSearchList() {
     },
   });
   const { mutate: deleteVocas } = useDeleteVocas();
+  const { mutate: patchVocas } = usePatchVocasIsUse();
 
   const totalCount =
     !!data?.pages && data?.pages.length > 0
@@ -84,19 +98,59 @@ function CardSearchList() {
     }
   };
 
-  const handleDeleteVocas = () => {
-    deleteVocas(selectCardIds);
+  const handleIsUseChange: MouseEventHandler = (e) => {
+    e.preventDefault();
+
+    if (
+      selectVocaIsUseValues.every((value) => value) ||
+      selectVocaIsUseValues.every((value) => !value)
+    ) {
+      openModal(
+        'isUseChange',
+        <NoticeModal
+          message={`체크된 항목 ${selectVocaList.length}건이 있습니다.\n모두 ‘${selectVocaIsUseValues.every((value) => value) ? '미사용' : '사용'}'으로 변경하시겠습니까??`}
+          onConfirm={() => {
+            patchVocas({
+              data: {
+                vocaIds: selectVocaIds,
+                isUse: !selectVocaIsUseValues.every((value) => value),
+              },
+            });
+            setSelectVocaList([]);
+            closeModal('isUseChange');
+          }}
+          onCancel={() => {
+            closeModal('isUseChange');
+          }}
+        />,
+        { clickableOverlay: false },
+      );
+    } else {
+      openModal(
+        'isUseChange',
+        <NoticeModal
+          type={'question'}
+          message={'사용여부가 같은 항목들끼리만 체크해주세요.'}
+          onConfirm={() => {
+            closeModal('isUseChange');
+          }}
+        />,
+        { clickableOverlay: true },
+      );
+    }
   };
 
-  const toggleCheck = (id: string) => {
-    const ids = new Set(selectCardIds);
-    if (ids.has(+id)) {
-      ids.delete(+id);
-    } else {
-      ids.add(+id);
-    }
+  const handleDeleteVocas = () => {
+    deleteVocas({ data: { vocaIds: selectVocaIds } });
+  };
 
-    setSelectCardIds(Array.from(ids));
+  const toggleCheck = (voca: VocaModel) => {
+    const ids = new Set(selectVocaIds);
+    if (ids.has(+voca.id)) {
+      setSelectVocaList((prev) => prev.filter((item) => item.id !== voca.id));
+    } else {
+      setSelectVocaList((prev) => [...prev, voca]);
+    }
   };
 
   useEffect(() => {
@@ -141,7 +195,13 @@ function CardSearchList() {
           />
         </div>
         <div className="flex items-center justify-between gap-4">
-          <Button type="button" size="small" color="blue" onClick={() => {}}>
+          <Button
+            type="button"
+            size="small"
+            color="blue"
+            onClick={handleIsUseChange}
+            disabled={selectVocaIds.length < 1}
+          >
             사용여부 일괄변경
           </Button>
           <Button
@@ -168,7 +228,7 @@ function CardSearchList() {
                 scrollThreshold={0.8}
                 className={'flex flex-col gap-4'}
               >
-                {vocaList?.map((voca: VocaListResponseJson) => {
+                {vocaList?.map((voca: VocaModel) => {
                   return (
                     <li key={voca.id} className={'list-none'}>
                       <Card
@@ -176,10 +236,12 @@ function CardSearchList() {
                         koreanTitle={voca.koreanTitle}
                         createdDate={dayjs(voca.createdDate)}
                         isActive={voca.isUse}
-                        isChecked={selectCardIds.includes(voca.id)}
+                        isChecked={selectVocaList
+                          .map((voca) => voca.id)
+                          .includes(voca.id)}
                         route={`/admin/quiz/vocaManagement/${voca.id}`}
                         isSelected={+params.vocaId === voca.id}
-                        onChangeChecked={toggleCheck}
+                        onChangeChecked={() => toggleCheck(voca)}
                       />
                     </li>
                   );

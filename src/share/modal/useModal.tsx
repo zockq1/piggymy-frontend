@@ -6,7 +6,7 @@ import {
   modalPowerState,
 } from '@/share/modal/Modal.recoil';
 
-export const useModalHook = () => {
+export const useModal = () => {
   const [, setModalPower] = useRecoilState(modalPowerState);
   const [, setModals] = useRecoilState(modalChildrenState);
 

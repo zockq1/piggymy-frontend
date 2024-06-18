@@ -3,8 +3,10 @@ import './globals.css';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
+import React from 'react';
 
 import ReactQueryProvider from '@/app/_component/ReactQueryProvider';
+import ModalProvider from '@/share/modal/ModalProvider';
 
 import CheckAuth from './_component/CheckAuth';
 import RecoilRootProvider from './_component/RecoilRootProvider';
@@ -26,12 +28,13 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={notoSansKr.className}>
-        <ReactQueryProvider>
-          <CheckAuth />
-          <RecoilRootProvider>
+        <RecoilRootProvider>
+          <ReactQueryProvider>
+            <CheckAuth />
             <AntdRegistry>{children}</AntdRegistry>
-          </RecoilRootProvider>
-        </ReactQueryProvider>
+          </ReactQueryProvider>
+          <ModalProvider />
+        </RecoilRootProvider>
       </body>
     </html>
   );

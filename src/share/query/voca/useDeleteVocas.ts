@@ -3,14 +3,16 @@ import { notification } from 'antd';
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 
-import { Response } from '@/type/apiType';
+import { Request, Response } from '@/type/apiType';
 
 import axiosInstance from '../axios';
 
-export const deleteVocaList = async (vocaIds: number[]) => {
+export const deleteVocaList = async (
+  deleteData: Request<{ vocaIds: number[] }>,
+) => {
   const response = await axiosInstance.post<Response<number>>(
     `/api/vocas/delete`,
-    { vocaIds },
+    deleteData.data,
   );
 
   return response.data;
