@@ -31,7 +31,6 @@ export default function CreateCard() {
       quizIdList: quizIdList,
       isUse: isUse,
     };
-    console.log(data);
     create({
       data: data,
     });
