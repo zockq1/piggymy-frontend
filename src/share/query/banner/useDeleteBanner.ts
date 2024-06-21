@@ -11,11 +11,9 @@ interface DeleteBannerId {
   bannerId: number;
 }
 
-export const deleteBanner = async (
-  bannerData: Request<null, DeleteBannerId>,
-) => {
+export const deleteBanner = async (request: Request<null, DeleteBannerId>) => {
   const response = await axiosInstance.delete<Response<null>>(
-    `/api/banners/${bannerData.id?.bannerId}`,
+    `/api/banners/${request.id?.bannerId}`,
   );
 
   return response.data;

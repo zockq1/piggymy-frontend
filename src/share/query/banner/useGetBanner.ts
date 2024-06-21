@@ -11,27 +11,27 @@ interface GetBannerId {
 
 interface GetBannerResponse extends BannerResponseJson {}
 
-export const getBanner = async (bannerData: Request<null, GetBannerId>) => {
+export const getBanner = async (request: Request<null, GetBannerId>) => {
   const response = await axiosInstance.get<Response<GetBannerResponse>>(
-    `/api/banners/${bannerData.id?.bannerId}`,
+    `/api/banners/${request.id?.bannerId}`,
   );
 
   return response.data;
 };
 
-export function useGetBanner(data: Request<null, GetBannerId>) {
+export function useGetBanner(request: Request<null, GetBannerId>) {
   return useQuery({
-    queryKey: ['banners', data.id?.bannerId],
-    queryFn: () => getBanner(data),
+    queryKey: ['banners', request.id?.bannerId],
+    queryFn: () => getBanner(request),
   });
 }
 
 export function usePrefetchBanner(
   queryClient: QueryClient,
-  data: Request<null, GetBannerId>,
+  request: Request<null, GetBannerId>,
 ) {
   return queryClient.prefetchQuery({
-    queryKey: ['banners', data.id?.bannerId],
-    queryFn: () => getBanner(data),
+    queryKey: ['banners', request.id?.bannerId],
+    queryFn: () => getBanner(request),
   });
 }

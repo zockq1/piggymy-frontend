@@ -17,7 +17,7 @@ interface UpdateBannerRequestJson extends BannerRequestJson {
 }
 
 export const updateBanner = async (
-  bannerData: Request<UpdateBannerRequestJson, UpdateBannerId>,
+  request: Request<UpdateBannerRequestJson, UpdateBannerId>,
 ) => {
   const {
     title,
@@ -30,7 +30,7 @@ export const updateBanner = async (
     image,
     imageName,
     imagePath,
-  } = bannerData.data;
+  } = request.data;
 
   const formData = new FormData();
   if (image && image.length > 0 && image[0].originFileObj) {
@@ -63,7 +63,7 @@ export const updateBanner = async (
   formData.append('banner', bannerBlob);
 
   const response = await axiosInstance.put<Response<null>>(
-    `/api/banners/${bannerData.id?.bannerId}`,
+    `/api/banners/${request.id?.bannerId}`,
     formData,
     {
       headers: {
