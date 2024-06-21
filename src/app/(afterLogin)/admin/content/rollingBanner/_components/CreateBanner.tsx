@@ -12,7 +12,6 @@ export default function CreateBanner() {
   const { mutate: create } = useCreateBanner();
 
   const handleSubmit = (formValue: BannerFormValue) => {
-    console.log(formValue);
     const {
       exposureDuration,
       title,
