@@ -11,27 +11,27 @@ interface GetCardId {
 
 interface GetCardResponse extends CardResponseJson {}
 
-export const getCard = async (cardData: Request<null, GetCardId>) => {
+export const getCard = async (request: Request<null, GetCardId>) => {
   const response = await axiosInstance.get<Response<GetCardResponse>>(
-    `/api/cards/${cardData.id?.cardId}`,
+    `/api/cards/${request.id?.cardId}`,
   );
 
   return response.data;
 };
 
-export function useGetCard(data: Request<null, GetCardId>) {
+export function useGetCard(request: Request<null, GetCardId>) {
   return useQuery({
-    queryKey: ['cards', data.id?.cardId],
-    queryFn: () => getCard(data),
+    queryKey: ['cards', request.id?.cardId],
+    queryFn: () => getCard(request),
   });
 }
 
 export function usePrefetchCard(
   queryClient: QueryClient,
-  data: Request<null, GetCardId>,
+  request: Request<null, GetCardId>,
 ) {
   return queryClient.prefetchQuery({
-    queryKey: ['cards', data.id?.cardId],
-    queryFn: () => getCard(data),
+    queryKey: ['cards', request.id?.cardId],
+    queryFn: () => getCard(request),
   });
 }

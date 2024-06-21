@@ -10,19 +10,21 @@ interface GetCardListRequestQuery {
   page_size?: number;
 }
 
-export const getCardList = async (query?: Request<GetCardListRequestQuery>) => {
+export const getCardList = async (
+  request?: Request<GetCardListRequestQuery>,
+) => {
   const response = await axiosInstance.get<Response<CardResponseJson[]>>(
     `/api/cards`,
-    { params: query?.data },
+    { params: request?.data },
   );
 
   return response.data;
 };
 
-export function useGetCardList(data?: Request<GetCardListRequestQuery>) {
+export function useGetCardList(request?: Request<GetCardListRequestQuery>) {
   return useQuery({
-    queryKey: ['cards', data?.data],
-    queryFn: () => getCardList(data),
+    queryKey: ['cards', request?.data],
+    queryFn: () => getCardList(request),
   });
 }
 

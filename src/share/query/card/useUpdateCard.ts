@@ -14,7 +14,7 @@ interface UpdateCardId {
 interface UpdateCardRequestJson extends CardRequestJson {}
 
 export const updateCard = async (
-  cardData: Request<UpdateCardRequestJson, UpdateCardId>,
+  request: Request<UpdateCardRequestJson, UpdateCardId>,
 ) => {
   const {
     title,
@@ -25,10 +25,10 @@ export const updateCard = async (
     isUse,
     vocaIdList,
     quizIdList,
-  } = cardData.data;
+  } = request.data;
 
   const response = await axiosInstance.put<Response<null>>(
-    `/api/cards/${cardData.id?.cardId}`,
+    `/api/cards/${request.id?.cardId}`,
     {
       type: type,
       title: title,

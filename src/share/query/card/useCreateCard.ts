@@ -10,7 +10,7 @@ import axiosInstance from '../axios';
 
 interface CreateCardRequestJson extends CardRequestJson {}
 
-export const createCard = async (cardData: Request<CreateCardRequestJson>) => {
+export const createCard = async (request: Request<CreateCardRequestJson>) => {
   const {
     title,
     type,
@@ -20,7 +20,7 @@ export const createCard = async (cardData: Request<CreateCardRequestJson>) => {
     isUse,
     vocaIdList,
     quizIdList,
-  } = cardData.data;
+  } = request.data;
 
   const response = await axiosInstance.post<Response<number>>(`/api/cards`, {
     type: type,
@@ -42,12 +42,12 @@ export function useCreateCard() {
 
   return useMutation({
     mutationFn: createCard,
-    onSuccess: (data) => {
+    onSuccess: (response) => {
       queryClient.invalidateQueries({ queryKey: ['cards'] });
       notification.success({
         message: '테마별 카드모음집 생성 성공',
       });
-      router.push(`/admin/content/themeCard/${data.data}`);
+      router.push(`/admin/content/themeCard/${response.data}`);
     },
     onError: (error: AxiosError<Response<unknown>, unknown>) => {
       if (axios.isAxiosError(error)) {

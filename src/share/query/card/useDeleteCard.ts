@@ -11,9 +11,9 @@ interface DeleteCardId {
   cardId: number;
 }
 
-export const deleteCard = async (cardData: Request<null, DeleteCardId>) => {
+export const deleteCard = async (request: Request<null, DeleteCardId>) => {
   const response = await axiosInstance.delete<Response<null>>(
-    `/api/cards/${cardData.id?.cardId}`,
+    `/api/cards/${request.id?.cardId}`,
   );
 
   return response.data;
