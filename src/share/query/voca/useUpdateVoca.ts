@@ -1,7 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { notification } from 'antd';
 import axios, { AxiosError } from 'axios';
-import { useRouter } from 'next/navigation';
 
 import { Request, Response } from '@/type/apiType';
 import { UpdateVocaRequestJson } from '@/type/vocaType';
@@ -69,17 +68,15 @@ export const updateVoca = async (vocaData: Request<UpdateVocaRequestJson>) => {
 };
 
 export function useUpdateVoca() {
-  const router = useRouter();
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: updateVoca,
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ['vocas'] });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['vocas'] });
       notification.success({
         message: '용어 수정 성공',
       });
-      router.push(`/admin/quiz/vocaManagement/${data.data}`);
     },
     onError: (error: AxiosError<Response<unknown>, unknown>) => {
       if (axios.isAxiosError(error)) {
@@ -104,13 +101,12 @@ export const patchIsUse = async (
 };
 
 export function usePatchVocasIsUse() {
-  const router = useRouter();
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: patchIsUse,
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ['vocas'] });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['vocas'] });
       notification.success({
         message: '용어 사용여부 변경 성공',
       });

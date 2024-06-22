@@ -6,7 +6,7 @@ import PageInfo from '@/app/(afterLogin)/admin/quiz/_components/PageInfo';
 import VocaInfoForm from '@/app/(afterLogin)/admin/quiz/_components/VocaInfoForm';
 import Layout from '@/share/layout/Layout';
 
-export default function VocaLayout() {
+export default function QuizLayout() {
   return (
     <>
       <Layout.Content.Full>

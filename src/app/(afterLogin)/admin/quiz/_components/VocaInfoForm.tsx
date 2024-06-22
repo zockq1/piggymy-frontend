@@ -28,7 +28,7 @@ export default function VocaInfoForm() {
   const [form] = useForm();
   const router = useRouter();
 
-  const { data, isSuccess } = useGetVoca(+params.vocaId);
+  const { data } = useGetVoca(+params.vocaId);
   const { mutate: create } = useCreateVoca();
   const { mutate: update } = useUpdateVoca();
 
@@ -37,7 +37,7 @@ export default function VocaInfoForm() {
     form.resetFields();
   };
 
-  const onFinish = (
+  const handleFinish = (
     formValue: CreateVocaRequestJson | UpdateVocaRequestJson,
   ) => {
     if (params.vocaId) {
@@ -54,7 +54,10 @@ export default function VocaInfoForm() {
     const initialValues = {
       koreanTitle: data.koreanTitle,
       isUse: data.isUse,
-      image: [data.thumbnailPath + data.thumbnailName],
+      image:
+        data.thumbnailPath && data.thumbnailName
+          ? [{ url: data.thumbnailPath + data.thumbnailName }]
+          : null,
       thumbnail: data.thumbnailPath + data.thumbnailName,
       sourceName: data.sourceName,
       thumbnailSourceName: data.thumbnailSourceName,
@@ -67,16 +70,16 @@ export default function VocaInfoForm() {
     if (!params.vocaId) {
       form.resetFields();
     }
-  }, [params.vocaId]);
+  }, [form, params.vocaId]);
 
   return (
-    <ContentBox className={'flex h-full max-h-[calc(100vh-400px)] items-start'}>
+    <ContentBox className={'flex h-full items-start'}>
       <Form
         form={form}
         labelCol={{ span: 2 }}
         layout="horizontal"
         className="h-full w-full overflow-y-auto"
-        onFinish={onFinish}
+        onFinish={handleFinish}
       >
         <Form.Item label={<Label>등록일</Label>}>
           <div className={'flex w-full items-start justify-between'}>
@@ -99,12 +102,7 @@ export default function VocaInfoForm() {
         >
           <Input placeholder="내용을 입력해주세요." />
         </Form.Item>
-        <ImageUpload
-          name={'대표이미지'}
-          initialImage={
-            isSuccess ? data!.thumbnailPath + data!.thumbnailName : ''
-          }
-        />
+        <ImageUpload name={'대표이미지'} />
         <Form.Item
           label={<Label>대표이미지 출처</Label>}
           name="thumbnailSourceName"

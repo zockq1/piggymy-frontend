@@ -57,6 +57,7 @@ export default function QuizCardInfoForm() {
             <ActiveCheckbox />
           </div>
         </Form.Item>
+
         <Form.Item label={<Label>퀴즈</Label>} name="quiz">
           <TextArea rows={2} />
         </Form.Item>

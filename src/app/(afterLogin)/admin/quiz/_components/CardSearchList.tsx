@@ -160,11 +160,11 @@ function CardSearchList() {
   }, [hasNextPage]);
 
   useEffect(() => {
-    refetch();
-  }, [sortType]);
+    refetch().then();
+  }, [sortType, refetch]);
 
   return (
-    <ContentBox className={'flex h-full max-h-[calc(100vh-400px)] items-start'}>
+    <ContentBox className={'flex h-full items-start'}>
       <Form
         className={'flex h-full w-full flex-col gap-4'}
         onFinish={handleFinish}
@@ -214,11 +214,8 @@ function CardSearchList() {
           </Button>
         </div>
         {!!data && data.pages.length > 0 && (
-          <div className={'relative'}>
-            <ul
-              id={'list'}
-              className={'max-h-[calc(100vh-670px)] overflow-y-auto pb-20'}
-            >
+          <div className={'relative h-full'}>
+            <ul id={'list'} className={'overflow-y-auto pb-20'}>
               <InfiniteScroll
                 dataLength={vocaList.length}
                 next={fetchNextPage}
@@ -248,7 +245,7 @@ function CardSearchList() {
                 })}
               </InfiniteScroll>
             </ul>
-            <div className={'sticky bottom-0'}>
+            <div className={'absolute bottom-0'}>
               <Add
                 type={'card'}
                 isSelected={false}

@@ -3,10 +3,9 @@
 import React from 'react';
 
 import Breadcrumb from '@/share/ui/breadcrumb/Breadcrumb';
-import Button from '@/share/ui/button/Button';
 import Title from '@/share/ui/title/Title';
 
-function WordPageInfo() {
+function PageInfo() {
   return (
     <div className="flex items-center justify-start gap-5">
       <div className="flex justify-start py-1">
@@ -17,4 +16,4 @@ function WordPageInfo() {
   );
 }
 
-export default WordPageInfo;
+export default PageInfo;
