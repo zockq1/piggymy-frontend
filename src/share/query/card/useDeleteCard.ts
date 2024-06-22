@@ -30,7 +30,7 @@ export function useDeleteCard() {
       notification.success({
         message: '테마별 카드모음집 삭제 성공',
       });
-      router.push('/admin/content/rollingCard');
+      router.push('/admin/content/themeCard');
     },
     onError: (error: AxiosError<Response<unknown>, unknown>) => {
       if (axios.isAxiosError(error)) {
