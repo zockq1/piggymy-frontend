@@ -10,10 +10,18 @@ interface GetCardListRequestQuery {
   page_size?: number;
 }
 
+interface GetCardListResponse {
+  totalCount: number;
+  list: Omit<
+    CardResponseJson,
+    'exposureStartDate' | 'exposureEndDate' | 'vocaIdList' | 'vocaIdList'
+  >[];
+}
+
 export const getCardList = async (
   request?: Request<GetCardListRequestQuery>,
 ) => {
-  const response = await axiosInstance.get<Response<CardResponseJson[]>>(
+  const response = await axiosInstance.get<Response<GetCardListResponse>>(
     `/api/cards`,
     { params: request?.data },
   );

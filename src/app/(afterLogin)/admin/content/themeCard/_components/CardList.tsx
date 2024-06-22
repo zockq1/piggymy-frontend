@@ -33,7 +33,7 @@ export default function CardList({ currentCardId }: CardListProps) {
       topLeft={
         <Title>
           생성된 테마별 카드 모음집
-          <Title.H>{data?.data ? data?.data.length : 0}</Title.H> 건
+          <Title.H>{data?.data ? data?.data.list.length : 0}</Title.H> 건
         </Title>
       }
       className={'flex'}
@@ -61,11 +61,11 @@ export default function CardList({ currentCardId }: CardListProps) {
           }}
           modules={[Pagination, Navigation]}
           initialSlide={
-            data?.data.findIndex((data) => data.id === currentCardId) || 0
+            data?.data.list.findIndex((data) => data.id === currentCardId) || 0
           }
         >
           {data?.data &&
-            data?.data.map((card) => {
+            data?.data.list.map((card) => {
               const {
                 title,
                 id,
