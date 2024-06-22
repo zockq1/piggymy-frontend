@@ -12,10 +12,7 @@ interface GetCardListRequestQuery {
 
 interface GetCardListResponse {
   totalCount: number;
-  list: Omit<
-    CardResponseJson,
-    'exposureStartDate' | 'exposureEndDate' | 'vocaIdList' | 'vocaIdList'
-  >[];
+  list: Omit<CardResponseJson, 'vocaIdList' | 'vocaIdList'>[];
 }
 
 export const getCardList = async (

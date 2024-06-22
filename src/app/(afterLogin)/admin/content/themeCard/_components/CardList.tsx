@@ -73,6 +73,7 @@ export default function CardList({ currentCardId }: CardListProps) {
                 createdDate,
                 exposureStartDate,
                 exposureEndDate,
+                isUse,
               } = card;
 
               return (
@@ -80,12 +81,14 @@ export default function CardList({ currentCardId }: CardListProps) {
                   <Theme
                     description={content}
                     title={title}
-                    isActive={dayjs().isBetween(
-                      exposureStartDate,
-                      exposureEndDate,
-                      null,
-                      '[]',
-                    )}
+                    isActive={
+                      dayjs().isBetween(
+                        exposureStartDate,
+                        exposureEndDate,
+                        null,
+                        '[]',
+                      ) && isUse
+                    }
                     isSelected={currentCardId === id}
                     createdDate={dayjs(createdDate)}
                     route={`/admin/content/themeCard/${id}`}
