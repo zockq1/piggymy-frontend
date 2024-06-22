@@ -86,7 +86,7 @@ export default function BadgeForm({
         </Form.Item>
         <ImageUpload initialImage={initialValue?.image} />
         <Form.Item
-          label={<Label>버튼명</Label>}
+          label={<Label>배지 상세 설명</Label>}
           name="description"
           rules={[
             {
