@@ -11,21 +11,14 @@ import axiosInstance from '../axios';
 interface CreateBadgeRequestJson extends BadgeRequestJson {}
 
 export const createBadge = async (request: Request<CreateBadgeRequestJson>) => {
-  const {
-    title,
-    description,
-    exposureEndDate,
-    exposureStartDate,
-    image,
-    isUse,
-  } = request.data;
+  const { title, description, month, thumbnail, isUse } = request.data;
 
   const formData = new FormData();
-  if (image && image[0].originFileObj) {
+  if (thumbnail && thumbnail[0].originFileObj) {
     formData.append(
       'thumbnail',
-      image[0].originFileObj,
-      image[0].originFileObj?.name,
+      thumbnail[0].originFileObj,
+      thumbnail[0].originFileObj?.name,
     );
   } else {
     formData.append('thumbnail', '');
@@ -37,8 +30,7 @@ export const createBadge = async (request: Request<CreateBadgeRequestJson>) => {
         description: description,
         title: title,
         isUse: isUse,
-        exposureStartDate: exposureStartDate.format('YYYY-MM-DD'),
-        exposureEndDate: exposureEndDate.format('YYYY-MM-DD'),
+        month: month,
       }),
     ],
     { type: 'application/json' },
@@ -47,7 +39,7 @@ export const createBadge = async (request: Request<CreateBadgeRequestJson>) => {
   formData.append('badge', badgeBlob);
 
   const response = await axiosInstance.post<Response<number>>(
-    `/api/badges`,
+    `/api/badges/attendance`,
     formData,
     {
       headers: {
@@ -70,7 +62,7 @@ export function useCreateBadge() {
       notification.success({
         message: '뱃지 생성 성공',
       });
-      router.push(`/admin/content/rollingBadge/${response.data}`);
+      router.push(`/admin/content/badge/${response.data}`);
     },
     onError: (error: AxiosError<Response<unknown>, unknown>) => {
       if (axios.isAxiosError(error)) {

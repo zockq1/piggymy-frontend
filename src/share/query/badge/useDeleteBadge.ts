@@ -13,7 +13,7 @@ interface DeleteBadgeId {
 
 export const deleteBadge = async (request: Request<null, DeleteBadgeId>) => {
   const response = await axiosInstance.delete<Response<null>>(
-    `/api/badges/${request.id?.badgeId}`,
+    `/api/badges/attendance/${request.id?.badgeId}`,
   );
 
   return response.data;

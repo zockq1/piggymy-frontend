@@ -13,7 +13,7 @@ interface GetBadgeResponse extends BadgeResponseJson {}
 
 export const getBadge = async (request: Request<null, GetBadgeId>) => {
   const response = await axiosInstance.get<Response<GetBadgeResponse>>(
-    `/api/badges/${request.id?.badgeId}`,
+    `/api/badges/attendance/${request.id?.badgeId}`,
   );
 
   return response.data;

@@ -12,8 +12,8 @@ interface UpdateBadgeId {
 }
 
 interface UpdateBadgeRequestJson extends BadgeRequestJson {
-  imagePath: string;
-  imageName: string;
+  thumbnailPath: string;
+  thumbnailName: string;
 }
 
 export const updateBadge = async (
@@ -22,20 +22,19 @@ export const updateBadge = async (
   const {
     title,
     description,
-    exposureEndDate,
-    exposureStartDate,
-    image,
-    imageName,
-    imagePath,
+    month,
+    thumbnail,
+    thumbnailPath,
+    thumbnailName,
     isUse,
   } = request.data;
 
   const formData = new FormData();
-  if (image && image.length > 0 && image[0].originFileObj) {
+  if (thumbnail && thumbnail.length > 0 && thumbnail[0].originFileObj) {
     formData.append(
       'thumbnail',
-      image[0].originFileObj,
-      image[0].originFileObj?.name,
+      thumbnail[0].originFileObj,
+      thumbnail[0].originFileObj?.name,
     );
   } else {
     formData.append('thumbnail', '');
@@ -47,10 +46,9 @@ export const updateBadge = async (
         description: description,
         title: title,
         isUse: isUse,
-        exposureStartDate: exposureStartDate.format('YYYY-MM-DD'),
-        exposureEndDate: exposureEndDate.format('YYYY-MM-DD'),
-        imagePath: imagePath,
-        imageName: imageName,
+        month: month,
+        thumbnailPath: thumbnailPath,
+        thumbnailName: thumbnailName,
       }),
     ],
     { type: 'application/json' },
@@ -59,7 +57,7 @@ export const updateBadge = async (
   formData.append('badge', badgeBlob);
 
   const response = await axiosInstance.put<Response<null>>(
-    `/api/badges/${request.id?.badgeId}`,
+    `/api/badges/attendance/${request.id?.badgeId}`,
     formData,
     {
       headers: {

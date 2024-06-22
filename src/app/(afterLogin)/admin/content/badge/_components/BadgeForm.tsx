@@ -1,6 +1,6 @@
 'use client';
 
-import { DatePicker, Form, Input } from 'antd';
+import { Form, Input, Select } from 'antd';
 import { FormInstance } from 'antd/es/form/Form';
 import dayjs, { Dayjs } from 'dayjs';
 
@@ -12,8 +12,6 @@ import Button from '@/share/ui/button/Button';
 import ContentBox from '@/share/ui/content-box/ContentBox';
 import { BadgeFormValue } from '@/type/badgeType';
 
-const { RangePicker } = DatePicker;
-
 interface BadgeFormProps {
   onSubmit: (data: BadgeFormValue) => void;
   onDelete: () => void;
@@ -22,10 +20,9 @@ interface BadgeFormProps {
   initialValue?: {
     createdDate: Dayjs;
     modifiedDate: Dayjs;
-    exposureStartDate: Dayjs;
-    exposureEndDate: Dayjs;
+    month: number;
     title: string;
-    image: string;
+    thumbnail: string;
     description: string;
     isUse: boolean;
   };
@@ -50,26 +47,27 @@ export default function BadgeForm({
         <CreatedDate
           createdDate={initialValue ? initialValue.createdDate : dayjs()}
         />
-        <ActiveCheckbox />
+        <ActiveCheckbox initialValue={initialValue?.isUse} />
         <Form.Item
-          label={<Label>노출 기간</Label>}
-          name="exposureDuration"
+          label={<Label>월</Label>}
+          name="month"
           rules={[
             {
               required: true,
-              message: '노출 기간을 입력해주세요.',
+              message: '내용을 입력해주세요.',
             },
           ]}
-          initialValue={
-            initialValue
-              ? [
-                  dayjs(initialValue?.exposureStartDate),
-                  dayjs(initialValue?.exposureEndDate),
-                ]
-              : null
-          }
+          initialValue={initialValue?.month}
         >
-          <RangePicker />
+          <Select className="w-[200px]">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((month) => {
+              return (
+                <Select.Option value={month} key={month}>
+                  {month}월
+                </Select.Option>
+              );
+            })}
+          </Select>
         </Form.Item>
         <Form.Item
           label={<Label>타이틀</Label>}
@@ -84,7 +82,7 @@ export default function BadgeForm({
         >
           <Input placeholder="내용을 입력해주세요." />
         </Form.Item>
-        <ImageUpload initialImage={initialValue?.image} />
+        <ImageUpload initialImage={initialValue?.thumbnail} name="thumbnail" />
         <Form.Item
           label={<Label>배지 상세 설명</Label>}
           name="description"

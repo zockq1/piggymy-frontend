@@ -12,13 +12,13 @@ export default function CreateBadge() {
   const { mutate: create } = useCreateBadge();
 
   const handleSubmit = (formValue: BadgeFormValue) => {
-    const { exposureDuration, title, isUse, image, description } = formValue;
+    const { month, title, isUse, thumbnail, description } = formValue;
+    console.log(formValue);
     const data = {
       title: title,
-      exposureEndDate: exposureDuration[1],
-      exposureStartDate: exposureDuration[0],
+      month: month,
       description: description,
-      image: image,
+      thumbnail: thumbnail,
       isUse: isUse,
     };
     create({

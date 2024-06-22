@@ -1,12 +1,10 @@
 import { UploadFile } from 'antd';
-import { Dayjs } from 'dayjs';
 
 export interface BadgeRequestJson {
-  image: UploadFile[];
+  thumbnail: UploadFile[];
   title: string;
   description: string;
-  exposureStartDate: Dayjs;
-  exposureEndDate: Dayjs;
+  month: number;
   isUse: boolean;
 }
 
@@ -14,19 +12,18 @@ export interface BadgeResponseJson {
   id: number;
   title: string;
   description: string;
-  imagePath: string;
-  imageName: string;
-  exposureStartDate: string;
-  exposureEndDate: string;
+  thumbnailPath: string;
+  thumbnailName: string;
+  month: number;
   createdDate: string;
   modifiedDate: string;
   isUse: boolean;
 }
 
 export interface BadgeFormValue {
-  exposureDuration: Dayjs[];
+  month: number;
   title: string;
   description: string;
-  image: UploadFile[];
+  thumbnail: UploadFile[];
   isUse: boolean;
 }

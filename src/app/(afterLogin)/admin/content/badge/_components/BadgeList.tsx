@@ -1,13 +1,10 @@
 'use client';
 
-import dayjs from 'dayjs';
-import isBetween from 'dayjs/plugin/isBetween';
-dayjs.extend(isBetween);
-
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
+import dayjs from 'dayjs';
 import { useRef } from 'react';
 import { Swiper as SwiperType } from 'swiper';
 import { Navigation, Pagination } from 'swiper/modules';
@@ -69,24 +66,18 @@ export default function BadgeList({ currentBadgeId }: BadgeListProps) {
               const {
                 title,
                 id,
-                imagePath,
-                imageName,
+                isUse,
                 createdDate,
-                exposureStartDate,
-                exposureEndDate,
+                thumbnailName,
+                thumbnailPath,
               } = badge;
 
               return (
                 <SwiperSlide key={id} className="">
                   <Badge
                     title={title}
-                    image={imagePath + imageName}
-                    isActive={dayjs().isBetween(
-                      exposureStartDate,
-                      exposureEndDate,
-                      null,
-                      '[]',
-                    )}
+                    image={thumbnailPath + thumbnailName}
+                    isActive={isUse}
                     isSelected={currentBadgeId === id}
                     createdDate={dayjs(createdDate)}
                     route={`/admin/content/badge/${id}`}

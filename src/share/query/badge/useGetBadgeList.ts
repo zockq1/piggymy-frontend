@@ -23,7 +23,7 @@ export const getBadgeList = async (
   request?: Request<GetBadgeListRequestQuery>,
 ) => {
   const response = await axiosInstance.get<Response<GetBadgeListResponse>>(
-    `/api/badges`,
+    `/api/badges/attendance`,
     { params: request?.data },
   );
 

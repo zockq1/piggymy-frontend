@@ -13,9 +13,12 @@ import Label from './Label';
  *  }
  */
 export default function ImageUpload({
+  name = '이미지',
   initialImage,
 }: {
+  name?: string;
   initialImage?: string;
+  required?: boolean;
 }) {
   /* eslint-disable  @typescript-eslint/no-explicit-any */
   const getFile = (e: any) => {
@@ -28,7 +31,7 @@ export default function ImageUpload({
   return (
     <Form.Item
       label={<Label>이미지</Label>}
-      name="image"
+      name={name}
       valuePropName="fileList"
       getValueFromEvent={getFile}
       initialValue={initialImage ? [{ url: initialImage }] : null}

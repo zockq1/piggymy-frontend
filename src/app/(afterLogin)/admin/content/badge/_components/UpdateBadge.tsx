@@ -25,29 +25,28 @@ export default function UpdateBadge({ currentBadgeId }: UpdateBadgeProps) {
   });
 
   const handleSubmit = (formValue: BadgeFormValue) => {
-    const { exposureDuration, title, description, image, isUse } = formValue;
+    const { month, title, description, thumbnail, isUse } = formValue;
     const formData = {
       title: title,
-      exposureEndDate: exposureDuration[1],
-      exposureStartDate: exposureDuration[0],
+      month: month,
       description: description,
-      image: image,
+      thumbnail: thumbnail,
       isUse: isUse,
     };
 
     if (
-      image &&
-      image.length > 0 &&
-      image[0].url ===
-        String(data?.data.imagePath) + String(data?.data.imageName)
+      thumbnail &&
+      thumbnail.length > 0 &&
+      thumbnail[0].url ===
+        String(data?.data.thumbnailPath) + String(data?.data.thumbnailName)
     ) {
       updateBadge({
         id: { badgeId: currentBadgeId },
         data: {
           ...formData,
-          image: [],
-          imageName: String(data?.data.imageName),
-          imagePath: String(data?.data.imagePath),
+          thumbnail: [],
+          thumbnailName: String(data?.data.thumbnailName),
+          thumbnailPath: String(data?.data.thumbnailPath),
         },
       });
     } else {
@@ -55,8 +54,8 @@ export default function UpdateBadge({ currentBadgeId }: UpdateBadgeProps) {
         id: { badgeId: currentBadgeId },
         data: {
           ...formData,
-          imageName: '',
-          imagePath: '',
+          thumbnailName: '',
+          thumbnailPath: '',
         },
       });
     }
@@ -73,12 +72,11 @@ export default function UpdateBadge({ currentBadgeId }: UpdateBadgeProps) {
     const {
       createdDate,
       modifiedDate,
-      exposureEndDate,
-      exposureStartDate,
+      month,
       title,
       description,
-      imagePath,
-      imageName,
+      thumbnailName,
+      thumbnailPath,
       isUse,
     } = data.data;
 
@@ -91,11 +89,10 @@ export default function UpdateBadge({ currentBadgeId }: UpdateBadgeProps) {
         initialValue={{
           createdDate: dayjs(createdDate),
           modifiedDate: dayjs(modifiedDate),
-          exposureStartDate: dayjs(exposureStartDate),
-          exposureEndDate: dayjs(exposureEndDate),
+          month: month,
           isUse: isUse,
           title: title,
-          image: imagePath + imageName,
+          thumbnail: thumbnailPath + thumbnailName,
           description: description,
         }}
       />
