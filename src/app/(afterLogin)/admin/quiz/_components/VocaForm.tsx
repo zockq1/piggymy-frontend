@@ -1,77 +1,26 @@
-'use client';
-
 import { Form, Input } from 'antd';
-import { useForm } from 'antd/es/form/Form';
+import { FormInstance } from 'antd/es/form/Form';
+import TextArea from 'antd/es/input/TextArea';
 import dayjs from 'dayjs';
 import Image from 'next/image';
-import { useParams, useRouter } from 'next/navigation';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import plus from '/public/img/icon/plus.png';
 import { ActiveCheckbox } from '@/share/form/item/ActiveCheckbox';
 import ImageUpload from '@/share/form/item/ImageUpload';
 import Label from '@/share/form/item/Label';
-import { useCreateVoca } from '@/share/query/voca/useCreateVoca';
-import { useGetVoca } from '@/share/query/voca/useGetVoca';
-import { useUpdateVoca } from '@/share/query/voca/useUpdateVoca';
 import Button from '@/share/ui/button/Button';
 import IconButton from '@/share/ui/button/IconButton';
 import ContentBox from '@/share/ui/content-box/ContentBox';
 import { CreateVocaRequestJson, UpdateVocaRequestJson } from '@/type/vocaType';
 
-const { TextArea } = Input;
+interface VocaFormProps {
+  form: FormInstance;
+  onFinish: (formValue: CreateVocaRequestJson | UpdateVocaRequestJson) => void;
+  onCancel: () => void;
+}
 
-/* <Form.item>{...}</Form.item> 단위로 컴포넌트화를 시켜야할지 고민 */
-
-export default function VocaInfoForm() {
-  const params = useParams();
-  const [form] = useForm();
-  const router = useRouter();
-
-  const { data } = useGetVoca(+params.vocaId);
-  const { mutate: create } = useCreateVoca();
-  const { mutate: update } = useUpdateVoca();
-
-  const handleCancel = () => {
-    router.push(`/admin/quiz/vocaManagement`);
-    form.resetFields();
-  };
-
-  const handleFinish = (
-    formValue: CreateVocaRequestJson | UpdateVocaRequestJson,
-  ) => {
-    if (params.vocaId) {
-      update({ data: { vocaId: +params.vocaId, ...formValue } });
-    } else {
-      create({ data: formValue });
-      form.resetFields();
-    }
-  };
-
-  useEffect(() => {
-    if (!data) return;
-
-    const initialValues = {
-      koreanTitle: data.koreanTitle,
-      isUse: data.isUse,
-      image:
-        data.thumbnailPath && data.thumbnailName
-          ? [{ url: data.thumbnailPath + data.thumbnailName }]
-          : null,
-      thumbnail: data.thumbnailPath + data.thumbnailName,
-      sourceName: data.sourceName,
-      thumbnailSourceName: data.thumbnailSourceName,
-    };
-
-    form.setFieldsValue(initialValues);
-  }, [data, form]);
-
-  useEffect(() => {
-    if (!params.vocaId) {
-      form.resetFields();
-    }
-  }, [form, params.vocaId]);
-
+function VocaForm({ form, onCancel, onFinish }: VocaFormProps) {
   return (
     <ContentBox className={'flex h-full items-start'}>
       <Form
@@ -79,12 +28,12 @@ export default function VocaInfoForm() {
         labelCol={{ span: 2 }}
         layout="horizontal"
         className="h-full w-full overflow-y-auto"
-        onFinish={handleFinish}
+        onFinish={onFinish}
       >
         <Form.Item label={<Label>등록일</Label>}>
           <div className={'flex w-full items-start justify-between'}>
             <i className={'flex h-8 items-center'}>
-              {dayjs(data?.createdDate).format('YYYY-MM-DD')}
+              {dayjs().format('YYYY-MM-DD')}
             </i>
             <ActiveCheckbox />
           </div>
@@ -148,7 +97,7 @@ export default function VocaInfoForm() {
             size="large"
             color="gray"
             className="mx-4"
-            onClick={handleCancel}
+            onClick={onCancel}
           >
             취소
           </Button>
@@ -160,3 +109,5 @@ export default function VocaInfoForm() {
     </ContentBox>
   );
 }
+
+export default VocaForm;

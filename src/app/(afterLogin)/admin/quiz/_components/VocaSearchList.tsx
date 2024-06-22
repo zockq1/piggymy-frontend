@@ -41,7 +41,7 @@ interface FormExampleValue {
   keyword: string;
 }
 
-function CardSearchList() {
+function VocaSearchList() {
   const params = useParams();
   const router = useRouter();
   const path = usePathname();
@@ -74,9 +74,7 @@ function CardSearchList() {
   const { mutate: patchVocas } = usePatchVocasIsUse();
 
   const totalCount =
-    !!data?.pages && data?.pages.length > 0
-      ? data?.pages[0].data.totalCount
-      : 0;
+    !!data?.pages && data?.pages[0].data ? data?.pages[0].data.totalCount : 0;
 
   const vocaList = data?.pages.reduce((acc, page) => {
     if (!!page && !!page.data) {
@@ -91,10 +89,13 @@ function CardSearchList() {
       start_date: startDate ?? '',
       end_date: endDate ?? '',
       is_use: isUse ?? '',
-      keyword: formValue.keyword,
+      keyword: formValue.keyword ?? '',
     };
+
     if (buildQueryString(params)) {
       router.replace(`${path}?${buildQueryString(params)}`);
+    } else {
+      router.replace(`${path}`);
     }
   };
 
@@ -142,6 +143,7 @@ function CardSearchList() {
 
   const handleDeleteVocas = () => {
     deleteVocas({ data: { vocaIds: selectVocaIds } });
+    setSelectVocaList([]);
   };
 
   const toggleCheck = (voca: VocaModel) => {
@@ -259,4 +261,4 @@ function CardSearchList() {
   );
 }
 
-export default CardSearchList;
+export default VocaSearchList;

@@ -1,9 +1,9 @@
 import React from 'react';
 
 import CardFilter from '@/app/(afterLogin)/admin/quiz/_components/CardFilter';
-import CardSearchList from '@/app/(afterLogin)/admin/quiz/_components/CardSearchList';
 import PageInfo from '@/app/(afterLogin)/admin/quiz/_components/PageInfo';
-import VocaInfoForm from '@/app/(afterLogin)/admin/quiz/_components/VocaInfoForm';
+import VocaCreateForm from '@/app/(afterLogin)/admin/quiz/_components/VocaCreateForm';
+import VocaSearchList from '@/app/(afterLogin)/admin/quiz/_components/VocaSearchList';
 import Layout from '@/share/layout/Layout';
 
 export default function QuizLayout() {
@@ -17,10 +17,10 @@ export default function QuizLayout() {
       </Layout.Content.Full>
 
       <Layout.Content.Left>
-        <CardSearchList />
+        <VocaSearchList />
       </Layout.Content.Left>
       <Layout.Content.Right>
-        <VocaInfoForm />
+        <VocaCreateForm />
       </Layout.Content.Right>
     </>
   );

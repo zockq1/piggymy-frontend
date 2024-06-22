@@ -1,5 +1,7 @@
 import React from 'react';
 
-export default async function TermManagement() {
-  return <></>;
+import VocaUpdateForm from '@/app/(afterLogin)/admin/quiz/_components/VocaUpdateForm';
+
+export default async function VocaUpdate() {
+  return <VocaUpdateForm />;
 }
