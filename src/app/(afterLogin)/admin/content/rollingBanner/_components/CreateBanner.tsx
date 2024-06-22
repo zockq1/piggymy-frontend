@@ -20,6 +20,7 @@ export default function CreateBanner() {
       buttonName,
       moveQuizId,
       moveVocaId,
+      isUse,
     } = formValue;
     const data = {
       title: title,
@@ -30,6 +31,7 @@ export default function CreateBanner() {
       buttonName: buttonName,
       moveVocaId: moveVocaId,
       moveQuizId: moveQuizId,
+      isUse: isUse,
     };
     create({
       data: data,

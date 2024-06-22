@@ -33,6 +33,7 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
       buttonName,
       moveVocaId,
       moveQuizId,
+      isUse,
     } = formValue;
     const formData = {
       title: title,
@@ -43,6 +44,7 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
       buttonName: buttonName,
       moveVocaId: moveVocaId,
       moveQuizId: moveQuizId,
+      isUse: isUse,
     };
 
     if (
@@ -92,6 +94,7 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
       buttonName,
       moveVocaId,
       moveQuizId,
+      isUse,
     } = data.data;
 
     return (
@@ -111,6 +114,7 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
           buttonName: buttonName,
           moveVocaId: moveVocaId,
           moveQuizId: moveQuizId,
+          isUse: isUse,
         }}
       />
     );
