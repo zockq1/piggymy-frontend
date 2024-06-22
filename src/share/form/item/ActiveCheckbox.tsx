@@ -13,13 +13,17 @@ import Label from './Label';
  *    useYn: boolean;
  *  }
  */
-export function ActiveCheckbox() {
+export function ActiveCheckbox({
+  initialValue = true,
+}: {
+  initialValue?: boolean;
+}) {
   return (
     <Form.Item
       label={<Label>사용여부</Label>}
-      name="useYn"
+      name="isUse"
       rules={[{ required: true }]}
-      initialValue={true}
+      initialValue={initialValue}
     >
       <Radio.Group>
         <Radio value={true}>
