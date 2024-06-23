@@ -13,7 +13,10 @@ export default function VocaLayout({ children }: VocaLayoutProps) {
   return (
     <>
       <Layout.Content.Full>
-        <PageInfo />
+        <PageInfo
+          title={'용어카드 관리'}
+          path={['용어 퀴즈', '용어카드 관리']}
+        />
       </Layout.Content.Full>
       <Layout.Content.Full>
         <CardFilter />

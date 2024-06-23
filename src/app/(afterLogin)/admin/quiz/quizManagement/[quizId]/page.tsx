@@ -1,5 +1,7 @@
 import React from 'react';
 
-export default async function TermManagement() {
-  return <></>;
+import UpdateQuiz from '../../_components/UpdateQuiz';
+
+export default async function QuizManagement() {
+  return <UpdateQuiz />;
 }

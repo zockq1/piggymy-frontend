@@ -1,12 +1,41 @@
-export interface QuizModel {
+export interface QuizListResponseJson {
+  id: number;
+  koreanTitle: string;
+  englishTitle: string;
+  isUse: boolean;
+  createdDate: string;
+  modifiedDate: string;
+}
+
+export interface QuizResponseJson {
+  id: number;
   title: string;
-  answer: 1 | 2 | 3 | 4;
+  answer: number;
   option1: string;
   option2: string;
   option3: string;
   option4: string;
-  useYn: boolean;
+  isUse: boolean;
   vocaId: number;
+  quizHistoryCount: number;
+  bookmarkCount: number;
+  createdDate: string;
+  modifiedDate: string;
+  hit: number;
+  bookmark: boolean;
+}
+
+export interface QuizModel {
+  id: number;
+  title: string;
+  answer: string;
+  option1: string;
+  option2: string;
+  option3: string;
+  option4: string;
+  isUse: boolean;
+  createdDate: string;
+  modifiedDate: string;
 }
 
 export interface QuizResponseModel {
@@ -14,10 +43,22 @@ export interface QuizResponseModel {
 }
 
 /*
- *  POST /api/quiz/add
+ *  POST /api/quizzes
+ *  FormData { thumbnail, quiz }
  */
 
-export interface QuizAddRequest extends QuizModel {}
+export interface CreateQuizRequestJson {
+  vocaId: number;
+  title: string;
+  answer: string;
+  option1: string;
+  option2: string;
+  option3: string;
+  option4: string;
+  isUse: false;
+}
+
+export type QuizAddRequest = FormData;
 
 export interface QuizAddResponse extends QuizResponseModel {}
 
@@ -33,14 +74,20 @@ export interface QuizDeleteResponse extends QuizResponseModel {}
  *  GET /api/quiz/detail
  */
 
-export interface QuizDetailResponse extends Omit<QuizModel, 'vocaId'> {
-  id: number;
-  quizHistoryCount: number;
-  isBookmark: boolean;
+export interface QuizDetailResponse extends QuizModel {
+  koreanCategory: string;
+  englishCategory: string;
+  content: string;
+  thumbnailPath: string;
+  thumbnailName: string;
+  sourceName: string;
+  sourceLink: string;
+  thumbnailSourceName: string;
+  thumbnailSourceLink: string;
+  helpful: number;
   bookmarkCount: number;
-  createdDate: string;
-  modifiedDate: string;
-  view: number;
+  quizId: number;
+  quizTitle: string;
 }
 
 /*
@@ -55,19 +102,26 @@ export type QuizDownloadResponse = string;
  *  GET /api/quiz/list
  */
 
-export interface QuizListResponse {
+export interface QuizListResponseJson {
   totalCount: number;
-  list: Partial<QuizDetailResponse>[];
+  list: QuizModel[];
 }
 
 /*
  *  PUT /api/quiz/update
+ *  FormData { thumbnail, quiz }
  */
 
-export interface QuizUpdateRequest extends QuizModel {
-  id: number;
+export interface UpdateQuizRequestJson {
+  vocaId: number;
+  title: string;
+  answer: string;
+  option1: string;
+  option2: string;
+  option3: string;
+  option4: string;
+  isUse: false;
 }
-
 export interface QuizUpdateResponse extends QuizResponseModel {}
 
 /*

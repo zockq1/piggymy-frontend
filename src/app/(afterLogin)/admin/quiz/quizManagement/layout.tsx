@@ -1,27 +1,31 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import CardFilter from '@/app/(afterLogin)/admin/quiz/_components/CardFilter';
-import CreateVoca from '@/app/(afterLogin)/admin/quiz/_components/CreateVoca';
 import PageInfo from '@/app/(afterLogin)/admin/quiz/_components/PageInfo';
-import VocaSearchList from '@/app/(afterLogin)/admin/quiz/_components/VocaSearchList';
+import QuizSearchList from '@/app/(afterLogin)/admin/quiz/_components/QuizSearchList';
 import Layout from '@/share/layout/Layout';
 
-export default function QuizLayout() {
+interface VocaLayoutProps {
+  children: ReactNode;
+}
+
+export default function QuizLayout({ children }: VocaLayoutProps) {
   return (
     <>
       <Layout.Content.Full>
-        <PageInfo />
+        <PageInfo
+          title={'퀴즈카드 관리'}
+          path={['용어 퀴즈', '퀴즈카드 관리']}
+        />
       </Layout.Content.Full>
       <Layout.Content.Full>
         <CardFilter />
       </Layout.Content.Full>
 
       <Layout.Content.Left>
-        <VocaSearchList />
+        <QuizSearchList />
       </Layout.Content.Left>
-      <Layout.Content.Right>
-        <CreateVoca />
-      </Layout.Content.Right>
+      <Layout.Content.Right>{children}</Layout.Content.Right>
     </>
   );
 }

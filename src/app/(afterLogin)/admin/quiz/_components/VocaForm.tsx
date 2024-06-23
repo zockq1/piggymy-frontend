@@ -25,7 +25,7 @@ function VocaForm({ form, onCancel, onFinish }: VocaFormProps) {
     <ContentBox className={'flex h-full items-start'}>
       <Form
         form={form}
-        labelCol={{ span: 2 }}
+        labelCol={{ span: 5 }}
         layout="horizontal"
         className="h-full w-full overflow-y-auto"
         onFinish={onFinish}

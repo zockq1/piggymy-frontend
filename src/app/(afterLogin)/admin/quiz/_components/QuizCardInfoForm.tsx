@@ -63,7 +63,7 @@ export default function QuizCardInfoForm() {
         </Form.Item>
         <ChoiceList />
         <Form.Item
-          label={<Label>{'용어카드 선택'}</Label>}
+          label={<Label>{'퀴즈카드 선택'}</Label>}
           colon={false}
           name={`reference${2}`}
           className={'w-full'}
