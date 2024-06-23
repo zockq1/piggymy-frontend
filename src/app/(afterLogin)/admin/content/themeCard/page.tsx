@@ -6,6 +6,7 @@ import {
 
 import Layout from '@/share/layout/Layout';
 import { usePrefetchCardList } from '@/share/query/card/useGetCardList';
+import { usePrefetchQuizList } from '@/share/query/quiz/useGetQuizList';
 import { usePrefetchVocaList } from '@/share/query/voca/useGetVocaList';
 
 import CardList from './_components/CardList';
@@ -17,6 +18,9 @@ export default async function Card() {
   await Promise.all([
     usePrefetchCardList(queryClient),
     usePrefetchVocaList(queryClient, {
+      data: { page: 1, page_size: 1000 },
+    }),
+    usePrefetchQuizList(queryClient, {
       data: { page: 1, page_size: 1000 },
     }),
   ]);
