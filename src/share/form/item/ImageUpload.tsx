@@ -5,6 +5,13 @@ import { Form, Upload } from 'antd';
 
 import Label from './Label';
 
+interface ImageUploadProps {
+  initialImage?: string;
+  name?: string;
+  label?: string;
+  maxCount?: number;
+}
+
 /**
  * antd form onFinish의 value 매개변수에 추가되는 값
  * @example
@@ -13,15 +20,11 @@ import Label from './Label';
  *  }
  */
 export default function ImageUpload({
-  name = '이미지',
   initialImage,
-  maxCount = 1,
-}: {
-  name?: string;
-  initialImage?: string;
-  required?: boolean;
-  maxCount?: number;
-}) {
+  name = 'image',
+  label = '이미지',
+  maxCount,
+}: ImageUploadProps) {
   /* eslint-disable  @typescript-eslint/no-explicit-any */
   const getFile = (e: any) => {
     if (Array.isArray(e)) {
@@ -32,8 +35,8 @@ export default function ImageUpload({
 
   return (
     <Form.Item
-      label={<Label>{name}</Label>}
-      name="image"
+      label={<Label>{label}</Label>}
+      name={name}
       valuePropName="fileList"
       getValueFromEvent={getFile}
       initialValue={initialImage ? [{ url: initialImage }] : null}
