@@ -22,6 +22,7 @@ export const createBanner = async (
     exposureEndDate,
     exposureStartDate,
     image,
+    isUse,
   } = request.data;
 
   const formData = new FormData();
@@ -43,6 +44,7 @@ export const createBanner = async (
         buttonName: buttonName,
         moveQuizId: moveQuizId || null,
         moveVocaId: moveVocaId || null,
+        isUse: isUse,
         exposureStartDate: exposureStartDate.format('YYYY-MM-DD'),
         exposureEndDate: exposureEndDate.format('YYYY-MM-DD'),
       }),

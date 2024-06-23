@@ -30,6 +30,7 @@ export const updateBanner = async (
     image,
     imageName,
     imagePath,
+    isUse,
   } = request.data;
 
   const formData = new FormData();
@@ -55,6 +56,7 @@ export const updateBanner = async (
         exposureEndDate: exposureEndDate.format('YYYY-MM-DD'),
         imagePath: imagePath,
         imageName: imageName,
+        isUse: isUse,
       }),
     ],
     { type: 'application/json' },

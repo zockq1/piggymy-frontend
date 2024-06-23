@@ -45,7 +45,9 @@ export default function RollingBannerForm({
   form,
   mode,
 }: RollingBannerFormProps) {
-  const [type, setType] = useState<'VOCA' | 'QUIZ'>('VOCA');
+  const [type, setType] = useState<'VOCA' | 'QUIZ'>(
+    initialValue ? initialValue.type : 'VOCA',
+  );
 
   const handleTypeChange = (value: 'VOCA' | 'QUIZ') => {
     setType(value);
