@@ -7,9 +7,10 @@ import { UpdateVocaRequestJson } from '@/type/vocaType';
 
 import axiosInstance from '../axios';
 
-export const updateVoca = async (vocaData: Request<UpdateVocaRequestJson>) => {
+export const updateVoca = async (
+  request: Request<UpdateVocaRequestJson, number>,
+) => {
   const {
-    vocaId,
     koreanTitle,
     englishTitle,
     koreanCategory,
@@ -17,14 +18,16 @@ export const updateVoca = async (vocaData: Request<UpdateVocaRequestJson>) => {
     content,
     sourceName,
     sourceLink,
+    thumbnailPath,
+    thumbnailName,
     thumbnailSourceName,
     thumbnailSourceLink,
     isUse,
     image,
-  } = vocaData.data;
+  } = request.data;
 
   const formData = new FormData();
-  if (image && image[0].originFileObj) {
+  if (image.length > 0 && image[0].originFileObj) {
     formData.append(
       'thumbnail',
       image[0].originFileObj,
@@ -44,6 +47,8 @@ export const updateVoca = async (vocaData: Request<UpdateVocaRequestJson>) => {
         content: content || '가나다라마',
         sourceName: sourceName || 'abc',
         sourceLink: sourceLink || 'abc',
+        thumbnailPath,
+        thumbnailName,
         thumbnailSourceName: thumbnailSourceName || 'abc',
         thumbnailSourceLink: thumbnailSourceLink || 'abc',
         isUse: isUse,
@@ -55,7 +60,7 @@ export const updateVoca = async (vocaData: Request<UpdateVocaRequestJson>) => {
   formData.append('voca', vocaBlob);
 
   const response = await axiosInstance.put<Response<number>>(
-    `/api/vocas/${vocaId}`,
+    `/api/vocas/${request.id}`,
     formData,
     {
       headers: {
@@ -71,6 +76,7 @@ export function useUpdateVoca() {
   const queryClient = useQueryClient();
 
   return useMutation({
+    mutationKey: ['updateVoca'],
     mutationFn: updateVoca,
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['vocas'] });

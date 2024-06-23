@@ -51,7 +51,7 @@ function VocaForm({ form, onCancel, onFinish }: VocaFormProps) {
         >
           <Input placeholder="내용을 입력해주세요." />
         </Form.Item>
-        <ImageUpload name={'대표이미지'} />
+        <ImageUpload name={'대표이미지'} maxCount={1} />
         <Form.Item
           label={<Label>대표이미지 출처</Label>}
           name="thumbnailSourceName"

@@ -126,6 +126,8 @@ export interface UpdateVocaRequestJson {
   content: string;
   sourceName: string;
   sourceLink: string;
+  thumbnailPath: string;
+  thumbnailName: string;
   thumbnailSourceName: string;
   thumbnailSourceLink: string;
   isUse: false;

@@ -15,10 +15,12 @@ import Label from './Label';
 export default function ImageUpload({
   name = '이미지',
   initialImage,
+  maxCount = 1,
 }: {
   name?: string;
   initialImage?: string;
   required?: boolean;
+  maxCount?: number;
 }) {
   /* eslint-disable  @typescript-eslint/no-explicit-any */
   const getFile = (e: any) => {
@@ -36,7 +38,7 @@ export default function ImageUpload({
       getValueFromEvent={getFile}
       initialValue={initialImage ? [{ url: initialImage }] : null}
     >
-      <Upload listType="picture-card" maxCount={1}>
+      <Upload listType="picture-card" maxCount={maxCount}>
         <button type="button">
           <PlusOutlined />
           <div>Upload</div>
