@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 
 import CardFilter from '@/app/(afterLogin)/admin/quiz/_components/CardFilter';
 import PageInfo from '@/app/(afterLogin)/admin/quiz/_components/PageInfo';
-import VocaSearchList from '@/app/(afterLogin)/admin/quiz/_components/VocaSearchList';
+import VocaSearchList from '@/app/(afterLogin)/admin/quiz/vocaManagement/_components/VocaSearchList';
 import Layout from '@/share/layout/Layout';
 
 interface VocaLayoutProps {

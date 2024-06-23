@@ -4,7 +4,7 @@ import { useForm } from 'antd/es/form/Form';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useMemo } from 'react';
 
-import QuizForm from '@/app/(afterLogin)/admin/quiz/_components/QuizForm';
+import QuizForm from '@/app/(afterLogin)/admin/quiz/quizManagement/_components/QuizForm';
 import { useGetQuiz } from '@/share/query/quiz/useGetQuiz';
 import { useUpdateQuiz } from '@/share/query/quiz/useUpdateQuiz';
 import { CreateQuizRequestJson, UpdateQuizRequestJson } from '@/type/quizType';

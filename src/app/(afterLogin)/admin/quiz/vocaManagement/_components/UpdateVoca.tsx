@@ -4,7 +4,7 @@ import { useForm } from 'antd/es/form/Form';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useMemo } from 'react';
 
-import VocaForm from '@/app/(afterLogin)/admin/quiz/_components/VocaForm';
+import VocaForm from '@/app/(afterLogin)/admin/quiz/vocaManagement/_components/VocaForm';
 import { useGetVoca } from '@/share/query/voca/useGetVoca';
 import { useUpdateVoca } from '@/share/query/voca/useUpdateVoca';
 import { CreateVocaRequestJson, UpdateVocaRequestJson } from '@/type/vocaType';
