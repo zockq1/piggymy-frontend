@@ -1,7 +1,7 @@
 import React from 'react';
 
-import VocaCreateForm from '@/app/(afterLogin)/admin/quiz/_components/VocaCreateForm';
+import CreateVoca from '@/app/(afterLogin)/admin/quiz/_components/CreateVoca';
 
 export default async function TermManagement() {
-  return <VocaCreateForm />;
+  return <CreateVoca />;
 }

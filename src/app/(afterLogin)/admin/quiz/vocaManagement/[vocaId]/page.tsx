@@ -1,7 +1,7 @@
 import React from 'react';
 
-import VocaUpdateForm from '@/app/(afterLogin)/admin/quiz/_components/VocaUpdateForm';
+import UpdateVoca from '@/app/(afterLogin)/admin/quiz/_components/UpdateVoca';
 
 export default async function VocaUpdate() {
-  return <VocaUpdateForm />;
+  return <UpdateVoca />;
 }

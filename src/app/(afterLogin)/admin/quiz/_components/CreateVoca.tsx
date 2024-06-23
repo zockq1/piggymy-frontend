@@ -8,7 +8,7 @@ import VocaForm from '@/app/(afterLogin)/admin/quiz/_components/VocaForm';
 import { useCreateVoca } from '@/share/query/voca/useCreateVoca';
 import { CreateVocaRequestJson, UpdateVocaRequestJson } from '@/type/vocaType';
 
-export default function VocaCreateForm() {
+export default function CreateVoca() {
   const params = useParams();
   const [form] = useForm();
 

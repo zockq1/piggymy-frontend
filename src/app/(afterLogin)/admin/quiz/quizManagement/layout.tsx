@@ -1,8 +1,8 @@
 import React from 'react';
 
 import CardFilter from '@/app/(afterLogin)/admin/quiz/_components/CardFilter';
+import CreateVoca from '@/app/(afterLogin)/admin/quiz/_components/CreateVoca';
 import PageInfo from '@/app/(afterLogin)/admin/quiz/_components/PageInfo';
-import VocaCreateForm from '@/app/(afterLogin)/admin/quiz/_components/VocaCreateForm';
 import VocaSearchList from '@/app/(afterLogin)/admin/quiz/_components/VocaSearchList';
 import Layout from '@/share/layout/Layout';
 
@@ -20,7 +20,7 @@ export default function QuizLayout() {
         <VocaSearchList />
       </Layout.Content.Left>
       <Layout.Content.Right>
-        <VocaCreateForm />
+        <CreateVoca />
       </Layout.Content.Right>
     </>
   );

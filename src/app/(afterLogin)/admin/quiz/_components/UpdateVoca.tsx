@@ -9,7 +9,7 @@ import { useGetVoca } from '@/share/query/voca/useGetVoca';
 import { useUpdateVoca } from '@/share/query/voca/useUpdateVoca';
 import { CreateVocaRequestJson, UpdateVocaRequestJson } from '@/type/vocaType';
 
-export default function VocaUpdateForm() {
+export default function UpdateVoca() {
   const params = useParams();
   const [form] = useForm();
 
