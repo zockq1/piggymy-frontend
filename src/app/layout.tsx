@@ -1,6 +1,7 @@
 import './globals.css';
 
 import { AntdRegistry } from '@ant-design/nextjs-registry';
+import { ConfigProvider } from 'antd';
 import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
 import React from 'react';
@@ -31,7 +32,20 @@ export default function RootLayout({
         <RecoilRootProvider>
           <ReactQueryProvider>
             <CheckAuth />
-            <AntdRegistry>{children}</AntdRegistry>
+            <ConfigProvider
+              theme={{
+                token: { colorLink: 'inherit' },
+                components: {
+                  Table: {
+                    headerBg: '#F4F5F8',
+                    headerBorderRadius: 0,
+                    borderColor: '#CDD1D9',
+                  },
+                },
+              }}
+            >
+              <AntdRegistry>{children}</AntdRegistry>
+            </ConfigProvider>
           </ReactQueryProvider>
           <ModalProvider />
         </RecoilRootProvider>

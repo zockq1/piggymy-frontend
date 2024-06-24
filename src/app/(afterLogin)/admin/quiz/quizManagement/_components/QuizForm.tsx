@@ -23,7 +23,7 @@ function QuizForm({ form, onCancel, onFinish }: QuizFormProps) {
     <ContentBox className={'flex h-full items-start'}>
       <Form
         form={form}
-        labelCol={{ span: 5 }}
+        labelCol={{ span: 3 }}
         layout="horizontal"
         className="h-full w-full overflow-y-auto"
         onFinish={onFinish}
