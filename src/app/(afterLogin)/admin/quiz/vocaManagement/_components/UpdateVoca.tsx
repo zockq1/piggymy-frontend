@@ -1,5 +1,6 @@
 'use client';
 
+import { UploadFile } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useMemo } from 'react';
@@ -7,7 +8,7 @@ import React, { useEffect, useMemo } from 'react';
 import VocaForm from '@/app/(afterLogin)/admin/quiz/vocaManagement/_components/VocaForm';
 import { useGetVoca } from '@/share/query/voca/useGetVoca';
 import { useUpdateVoca } from '@/share/query/voca/useUpdateVoca';
-import { CreateVocaRequestJson, UpdateVocaRequestJson } from '@/type/vocaType';
+import { UpdateVocaRequestJson } from '@/type/vocaType';
 
 export default function UpdateVoca() {
   const params = useParams();
@@ -19,15 +20,24 @@ export default function UpdateVoca() {
   const initialValues = useMemo(
     () => ({
       koreanTitle: data?.koreanTitle ?? '',
+      englishTitle: data?.englishTitle ?? '',
+      koreanCategory: data?.koreanCategory ?? '',
+      englishCategory: data?.englishCategory ?? '',
       isUse: data?.isUse ?? false,
       image:
         data?.thumbnailPath && data?.thumbnailName
-          ? [{ url: data?.thumbnailPath + data?.thumbnailName }]
-          : null,
+          ? ([
+              { url: data?.thumbnailPath + data?.thumbnailName },
+            ] as UploadFile[])
+          : [],
       thumbnailPath: data?.thumbnailPath ?? '',
       thumbnailName: data?.thumbnailName ?? '',
       sourceName: data?.sourceName ?? '',
+      sourceLink: data?.sourceLink ?? '',
       thumbnailSourceName: data?.thumbnailSourceName ?? '',
+      thumbnailSourceLink: data?.thumbnailSourceLink ?? '',
+      createdDate: data?.createdDate ?? '',
+      content: data?.content ?? '',
     }),
     [data],
   );
@@ -36,9 +46,7 @@ export default function UpdateVoca() {
     form.setFieldsValue(initialValues);
   };
 
-  const handleFinish = (
-    formValue: CreateVocaRequestJson | UpdateVocaRequestJson,
-  ) => {
+  const handleFinish = (formValue: UpdateVocaRequestJson) => {
     if (
       formValue.image &&
       formValue.image.length > 0 &&
@@ -75,6 +83,11 @@ export default function UpdateVoca() {
   }, [data, form, initialValues]);
 
   return (
-    <VocaForm form={form} onCancel={handleCancel} onFinish={handleFinish} />
+    <VocaForm
+      initialValues={initialValues}
+      form={form}
+      onCancel={handleCancel}
+      onFinish={handleFinish}
+    />
   );
 }

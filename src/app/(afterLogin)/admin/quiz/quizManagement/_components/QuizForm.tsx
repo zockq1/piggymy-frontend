@@ -13,12 +13,13 @@ import ContentBox from '@/share/ui/content-box/ContentBox';
 import { CreateQuizRequestJson, UpdateQuizRequestJson } from '@/type/quizType';
 
 interface QuizFormProps {
+  initialValues?: UpdateQuizRequestJson;
   form: FormInstance;
   onFinish: (formValue: CreateQuizRequestJson | UpdateQuizRequestJson) => void;
   onCancel: () => void;
 }
 
-function QuizForm({ form, onCancel, onFinish }: QuizFormProps) {
+function QuizForm({ initialValues, form, onCancel, onFinish }: QuizFormProps) {
   return (
     <ContentBox className={'flex h-full items-start'}>
       <Form
@@ -28,10 +29,12 @@ function QuizForm({ form, onCancel, onFinish }: QuizFormProps) {
         className="h-full w-full overflow-y-auto"
         onFinish={onFinish}
       >
-        <Form.Item label={<Label>등록일</Label>}>
+        <Form.Item label={<Label>등록일</Label>} name={'createDate'}>
           <div className={'flex w-full items-start justify-between'}>
             <i className={'flex h-8 items-center'}>
-              {dayjs().format('YYYY-MM-DD')}
+              {initialValues?.createdDate
+                ? dayjs(initialValues?.createdDate).format('YYYY-MM-DD')
+                : ''}
             </i>
             <ActiveCheckbox />
           </div>

@@ -18,14 +18,15 @@ export default function UpdateQuiz() {
 
   const initialValues = useMemo(
     () => ({
-      title: data?.title ?? '',
-      answer: data?.answer ?? '',
-      option1: data?.option1 ?? '',
-      option2: data?.option2 ?? '',
-      option3: data?.option3 ?? '',
-      option4: data?.option4 ?? '',
-      vocaId: data?.vocaId ?? null,
-      isUse: data?.isUse ?? false,
+      title: data?.title || '',
+      answer: data?.answer || '',
+      option1: data?.option1 || '',
+      option2: data?.option2 || '',
+      option3: data?.option3 || '',
+      option4: data?.option4 || '',
+      vocaId: data?.vocaId,
+      isUse: data?.isUse || false,
+      createdDate: data?.createdDate || '',
     }),
     [data],
   );
@@ -40,7 +41,7 @@ export default function UpdateQuiz() {
     update({
       id: +params.quizId,
       data: {
-        ...formValue,
+        ...(formValue as UpdateQuizRequestJson),
       },
     });
   };
@@ -52,6 +53,11 @@ export default function UpdateQuiz() {
   }, [data, form, initialValues]);
 
   return (
-    <QuizForm form={form} onCancel={handleCancel} onFinish={handleFinish} />
+    <QuizForm
+      initialValues={initialValues}
+      form={form}
+      onCancel={handleCancel}
+      onFinish={handleFinish}
+    />
   );
 }

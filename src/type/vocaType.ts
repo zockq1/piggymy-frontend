@@ -50,6 +50,7 @@ export interface VocaResponseModel {
  */
 
 export interface CreateVocaRequestJson {
+  vocaId: number;
   koreanTitle: string;
   englishTitle: string;
   koreanCategory: string;
@@ -57,10 +58,13 @@ export interface CreateVocaRequestJson {
   content: string;
   sourceName: string;
   sourceLink: string;
+  thumbnailPath: string;
+  thumbnailName: string;
   thumbnailSourceName: string;
   thumbnailSourceLink: string;
   isUse: false;
   image: UploadFile[];
+  createdDate: string;
 }
 
 export type VocaAddRequest = FormData;
@@ -118,7 +122,7 @@ export interface VocaListResponseJson {
  */
 
 export interface UpdateVocaRequestJson {
-  vocaId: number;
+  vocaId?: number;
   koreanTitle: string;
   englishTitle: string;
   koreanCategory: string;
@@ -132,6 +136,7 @@ export interface UpdateVocaRequestJson {
   thumbnailSourceLink: string;
   isUse: false;
   image: UploadFile[];
+  createdDate: string;
 }
 export interface VocaUpdateResponse extends VocaResponseModel {}
 

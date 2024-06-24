@@ -21,7 +21,7 @@ export default function CreateQuiz() {
   const handleFinish = (
     formValue: CreateQuizRequestJson | UpdateQuizRequestJson,
   ) => {
-    create({ data: formValue });
+    create({ data: formValue as CreateQuizRequestJson });
     form.resetFields();
   };
 

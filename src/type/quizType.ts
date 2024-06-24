@@ -10,7 +10,7 @@ export interface QuizListResponseJson {
 export interface QuizResponseJson {
   id: number;
   title: string;
-  answer: number;
+  answer: string;
   option1: string;
   option2: string;
   option3: string;
@@ -113,14 +113,20 @@ export interface QuizListResponseJson {
  */
 
 export interface UpdateQuizRequestJson {
-  vocaId: number;
+  vocaId?: number;
   title: string;
   answer: string;
   option1: string;
   option2: string;
   option3: string;
   option4: string;
-  isUse: false;
+  isUse: boolean;
+  quizHistoryCount?: number;
+  bookmarkCount?: number;
+  createdDate: string;
+  modifiedDate?: string;
+  hit?: number;
+  bookmark?: boolean;
 }
 export interface QuizUpdateResponse extends QuizResponseModel {}
 

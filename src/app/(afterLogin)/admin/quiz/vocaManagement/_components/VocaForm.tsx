@@ -15,12 +15,13 @@ import ContentBox from '@/share/ui/content-box/ContentBox';
 import { CreateVocaRequestJson, UpdateVocaRequestJson } from '@/type/vocaType';
 
 interface VocaFormProps {
+  initialValues?: UpdateVocaRequestJson;
   form: FormInstance;
   onFinish: (formValue: CreateVocaRequestJson | UpdateVocaRequestJson) => void;
   onCancel: () => void;
 }
 
-function VocaForm({ form, onCancel, onFinish }: VocaFormProps) {
+function VocaForm({ initialValues, form, onCancel, onFinish }: VocaFormProps) {
   return (
     <ContentBox className={'flex h-full items-start'}>
       <Form
@@ -33,7 +34,9 @@ function VocaForm({ form, onCancel, onFinish }: VocaFormProps) {
         <Form.Item label={<Label>등록일</Label>}>
           <div className={'flex w-full items-start justify-between'}>
             <i className={'flex h-8 items-center'}>
-              {dayjs().format('YYYY-MM-DD')}
+              {initialValues?.createdDate
+                ? dayjs(initialValues?.createdDate).format('YYYY-MM-DD')
+                : ''}
             </i>
             <ActiveCheckbox />
           </div>
