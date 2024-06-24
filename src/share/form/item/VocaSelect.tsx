@@ -17,7 +17,7 @@ export default function VocaSelect({ name, initialValue }: VocaSelectProps) {
 
   return (
     <Form.Item
-      label={<Label>{'용어 선택'}</Label>}
+      label={<Label>{'관련 용어카드'}</Label>}
       name={name}
       initialValue={initialValue}
       rules={[

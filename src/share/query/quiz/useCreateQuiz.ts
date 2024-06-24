@@ -9,59 +9,9 @@ import { CreateQuizRequestJson } from '@/type/quizType';
 import axiosInstance from '../axios';
 
 export const createQuiz = async (quizData: Request<CreateQuizRequestJson>) => {
-  const {
-    koreanTitle,
-    englishTitle,
-    koreanCategory,
-    englishCategory,
-    content,
-    sourceName,
-    sourceLink,
-    thumbnailSourceName,
-    thumbnailSourceLink,
-    isUse,
-    image,
-  } = quizData.data;
-
-  const formData = new FormData();
-  if (image && image[0].originFileObj) {
-    formData.append(
-      'thumbnail',
-      image[0].originFileObj,
-      image[0].originFileObj?.name,
-    );
-  } else {
-    formData.append('thumbnail', '');
-  }
-
-  const quizBlob = new Blob(
-    [
-      JSON.stringify({
-        koreanTitle: koreanTitle || '가나다',
-        englishTitle: englishTitle || 'abc',
-        koreanCategory: koreanCategory || 'r',
-        englishCategory: englishCategory || 'a',
-        content: content || '가나다라마',
-        sourceName: sourceName || 'abc',
-        sourceLink: sourceLink || 'abc',
-        thumbnailSourceName: thumbnailSourceName || 'abc',
-        thumbnailSourceLink: thumbnailSourceLink || 'abc',
-        isUse: isUse,
-      }),
-    ],
-    { type: 'application/json' },
-  );
-
-  formData.append('quiz', quizBlob);
-
   const response = await axiosInstance.post<Response<number>>(
     `/api/quizzes`,
-    formData,
-    {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    },
+    quizData.data,
   );
 
   return response.data;
