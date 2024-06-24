@@ -7,11 +7,11 @@ import { Request, Response } from '@/type/apiType';
 import axiosInstance from '../axios';
 
 export const deleteQuizList = async (
-  deleteData: Request<{ quizIds: number[] }>,
+  request: Request<{ quizIds: number[] }>,
 ) => {
   const response = await axiosInstance.post<Response<number>>(
     `/api/quizzes/delete`,
-    deleteData.data,
+    request.data,
   );
 
   return response.data;
@@ -22,8 +22,8 @@ export function useDeleteQuizzes() {
 
   return useMutation({
     mutationFn: deleteQuizList,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['quizzes'] });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['quizzes'] });
       notification.success({
         message: '용어 삭제 성공',
       });

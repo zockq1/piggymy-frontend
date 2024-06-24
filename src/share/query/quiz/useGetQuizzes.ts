@@ -22,8 +22,10 @@ const removeNullValues = (obj: GetQuizListRequestQuery) => {
   );
 };
 
-export const getQuizList = async (query?: Request<GetQuizListRequestQuery>) => {
-  const filteredParams = removeNullValues(query?.data || {});
+export const getQuizList = async (
+  request?: Request<GetQuizListRequestQuery>,
+) => {
+  const filteredParams = removeNullValues(request?.data || {});
 
   const response = await axiosInstance.get(`/api/quizzes`, {
     params: filteredParams,
@@ -41,7 +43,7 @@ export function useGetQuizListInfinite(
       return getQuizList({ data: { ...data?.data, page: pageParam } });
     },
     initialPageParam: 1,
-    getNextPageParam: (lastPage, pages, firstPageParam, allPageParams) => {
+    getNextPageParam: (_lastPage, _pages, _firstPageParam, allPageParams) => {
       return allPageParams[allPageParams.length - 1] + 1;
     },
   });

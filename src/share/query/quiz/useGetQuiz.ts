@@ -1,27 +1,19 @@
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
-import { QuizResponseJson } from '@/type/quizType';
+import { Request } from '@/type/apiType';
 
 import axiosInstance from '../axios';
 
-export const getQuizDetail = async (quizId: number) => {
+export const getQuizDetail = async (request: Request<number>) => {
   const {
     data: { data },
-  } = await axiosInstance.get(`/api/quizzes/${quizId}`);
+  } = await axiosInstance.get(`/api/quizzes/${request.data}`);
   return data;
 };
 
-export function useGetQuiz(
-  quizId: number,
-): UseQueryResult<QuizResponseJson | null> {
+export function useGetQuiz(quizId: number) {
   return useQuery({
     queryKey: ['quiz', quizId],
-    queryFn: () => {
-      if (quizId === null || quizId === undefined) {
-        return Promise.resolve(null); // Return a default value or null when quizId is null or undefined
-      }
-      return getQuizDetail(quizId);
-    },
-    enabled: !isNaN(quizId) && quizId !== null && quizId !== undefined, // Disable the query if quizId is null or undefined
+    queryFn: () => getQuizDetail({ data: quizId }),
   });
 }

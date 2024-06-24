@@ -42,11 +42,11 @@ export function useUpdateQuiz() {
 }
 
 export const patchIsUse = async (
-  updateIsUseData: Request<{ quizIds: number[]; isUse: boolean }>,
+  request: Request<{ quizIds: number[]; isUse: boolean }>,
 ) => {
   const response = await axiosInstance.patch<Response<null>>(
     `/api/quizzes/isuse`,
-    updateIsUseData.data,
+    request.data,
   );
 
   return response.data;

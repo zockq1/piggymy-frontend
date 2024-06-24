@@ -8,10 +8,10 @@ import { CreateQuizRequestJson } from '@/type/quizType';
 
 import axiosInstance from '../axios';
 
-export const createQuiz = async (quizData: Request<CreateQuizRequestJson>) => {
+export const createQuiz = async (request: Request<CreateQuizRequestJson>) => {
   const response = await axiosInstance.post<Response<number>>(
     `/api/quizzes`,
-    quizData.data,
+    request.data,
   );
 
   return response.data;
@@ -23,8 +23,8 @@ export function useCreateQuiz() {
 
   return useMutation({
     mutationFn: createQuiz,
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ['quizzes'] });
+    onSuccess: async (data) => {
+      await queryClient.invalidateQueries({ queryKey: ['quizzes'] });
       notification.success({
         message: '용어 생성 성공',
       });

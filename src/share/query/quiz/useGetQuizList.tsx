@@ -26,10 +26,12 @@ interface GetQuizListResponse {
   }[];
 }
 
-export const getQuizList = async (query?: Request<GetQuizListRequestQuery>) => {
+export const getQuizList = async (
+  request?: Request<GetQuizListRequestQuery>,
+) => {
   const response = await axiosInstance.get<Response<GetQuizListResponse>>(
     `/api/quizzes`,
-    { params: query?.data },
+    { params: request?.data },
   );
 
   return response.data;
