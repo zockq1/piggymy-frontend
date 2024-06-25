@@ -21,7 +21,7 @@ export default function CreateVoca() {
   const handleFinish = (
     formValue: CreateVocaRequestJson | UpdateVocaRequestJson,
   ) => {
-    create({ data: formValue });
+    create({ data: formValue as CreateVocaRequestJson });
     form.resetFields();
   };
 

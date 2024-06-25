@@ -74,7 +74,7 @@ export function useCreateVoca() {
   return useMutation({
     mutationFn: createVoca,
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ['vocas'] });
+      queryClient.invalidateQueries({ queryKey: ['createVoca'] });
       notification.success({
         message: '용어 생성 성공',
       });

@@ -27,7 +27,7 @@ export const updateVoca = async (
   } = request.data;
 
   const formData = new FormData();
-  if (image.length > 0 && image[0].originFileObj) {
+  if (!!image && image.length > 0 && image[0].originFileObj) {
     formData.append(
       'thumbnail',
       image[0].originFileObj,
@@ -85,6 +85,7 @@ export function useUpdateVoca() {
       });
     },
     onError: (error: AxiosError<Response<unknown>, unknown>) => {
+      console.log(error);
       if (axios.isAxiosError(error)) {
         notification.error({
           message: '용어 수정 실패',
