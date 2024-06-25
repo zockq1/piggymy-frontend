@@ -217,7 +217,10 @@ function QuizSearchList() {
         </div>
         {!!data && data.pages.length > 0 && (
           <div className={'relative h-full'}>
-            <ul id={'list'} className={'overflow-y-auto pb-20'}>
+            <ul
+              id={'list'}
+              className={'min-h-[calc(94px*11)] overflow-y-auto pb-20'}
+            >
               <InfiniteScroll
                 dataLength={quizList.length}
                 next={fetchNextPage}
