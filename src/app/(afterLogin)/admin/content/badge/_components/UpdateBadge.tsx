@@ -25,14 +25,7 @@ export default function UpdateBadge({ currentBadgeId }: UpdateBadgeProps) {
   });
 
   const handleSubmit = (formValue: BadgeFormValue) => {
-    const { month, title, description, thumbnail, isUse } = formValue;
-    const formData = {
-      title: title,
-      month: month,
-      description: description,
-      thumbnail: thumbnail,
-      isUse: isUse,
-    };
+    const { thumbnail } = formValue;
 
     if (
       thumbnail &&
@@ -43,7 +36,7 @@ export default function UpdateBadge({ currentBadgeId }: UpdateBadgeProps) {
       updateBadge({
         id: { badgeId: currentBadgeId },
         data: {
-          ...formData,
+          ...formValue,
           thumbnail: [],
           thumbnailName: String(data?.data.thumbnailName),
           thumbnailPath: String(data?.data.thumbnailPath),
@@ -53,7 +46,7 @@ export default function UpdateBadge({ currentBadgeId }: UpdateBadgeProps) {
       updateBadge({
         id: { badgeId: currentBadgeId },
         data: {
-          ...formData,
+          ...formValue,
           thumbnailName: '',
           thumbnailPath: '',
         },
