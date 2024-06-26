@@ -43,18 +43,8 @@ export default function UpdateCard({ currentCardId }: UpdateCardProps) {
   };
 
   if (isSuccess) {
-    const {
-      createdDate,
-      modifiedDate,
-      exposureEndDate,
-      exposureStartDate,
-      title,
-      type,
-      quizIdList,
-      vocaIdList,
-      content,
-      isUse,
-    } = data.data;
+    const { createdDate, modifiedDate, exposureEndDate, exposureStartDate } =
+      data.data;
 
     return (
       <CardForm
@@ -63,16 +53,11 @@ export default function UpdateCard({ currentCardId }: UpdateCardProps) {
         onDelete={handleCancel}
         onSubmit={handleSubmit}
         initialValue={{
+          ...data.data,
           createdDate: dayjs(createdDate),
           modifiedDate: dayjs(modifiedDate),
           exposureStartDate: dayjs(exposureStartDate),
           exposureEndDate: dayjs(exposureEndDate),
-          type: type,
-          title: title,
-          content: content,
-          isUse: isUse,
-          quizIdList: quizIdList,
-          vocaIdList: vocaIdList,
         }}
       />
     );
