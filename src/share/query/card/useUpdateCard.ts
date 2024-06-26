@@ -49,8 +49,8 @@ export function useUpdateCard() {
 
   return useMutation({
     mutationFn: updateCard,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['cards'] });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['cards'] });
       notification.success({
         message: '테마별 카드모음집 수정 성공',
       });
