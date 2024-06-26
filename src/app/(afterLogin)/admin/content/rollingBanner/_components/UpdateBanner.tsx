@@ -25,27 +25,7 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
   });
 
   const handleSubmit = (formValue: BannerFormValue) => {
-    const {
-      exposureDuration,
-      title,
-      type,
-      image,
-      buttonName,
-      moveVocaId,
-      moveQuizId,
-      isUse,
-    } = formValue;
-    const formData = {
-      title: title,
-      exposureEndDate: exposureDuration[1],
-      exposureStartDate: exposureDuration[0],
-      type: type,
-      image: image,
-      buttonName: buttonName,
-      moveVocaId: moveVocaId,
-      moveQuizId: moveQuizId,
-      isUse: isUse,
-    };
+    const { exposureDuration, image } = formValue;
 
     if (
       image &&
@@ -56,7 +36,9 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
       updateBanner({
         id: { bannerId: currentBannerId },
         data: {
-          ...formData,
+          ...formValue,
+          exposureEndDate: exposureDuration[1],
+          exposureStartDate: exposureDuration[0],
           image: [],
           imageName: String(data?.data.imageName),
           imagePath: String(data?.data.imagePath),
@@ -66,7 +48,9 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
       updateBanner({
         id: { bannerId: currentBannerId },
         data: {
-          ...formData,
+          ...formValue,
+          exposureEndDate: exposureDuration[1],
+          exposureStartDate: exposureDuration[0],
           imageName: '',
           imagePath: '',
         },

@@ -12,29 +12,12 @@ export default function CreateBanner() {
   const { mutate: create } = useCreateBanner();
 
   const handleSubmit = (formValue: BannerFormValue) => {
-    const {
-      exposureDuration,
-      title,
-      type,
-      image,
-      buttonName,
-      moveQuizId,
-      moveVocaId,
-      isUse,
-    } = formValue;
-    const data = {
-      title: title,
-      exposureEndDate: exposureDuration[1],
-      exposureStartDate: exposureDuration[0],
-      type: type,
-      image: image,
-      buttonName: buttonName,
-      moveVocaId: moveVocaId,
-      moveQuizId: moveQuizId,
-      isUse: isUse,
-    };
     create({
-      data: data,
+      data: {
+        ...formValue,
+        exposureEndDate: formValue.exposureDuration[1],
+        exposureStartDate: formValue.exposureDuration[0],
+      },
     });
   };
 
