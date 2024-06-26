@@ -71,14 +71,8 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
       modifiedDate,
       exposureEndDate,
       exposureStartDate,
-      title,
-      type,
       imagePath,
       imageName,
-      buttonName,
-      moveVocaId,
-      moveQuizId,
-      isUse,
     } = data.data;
 
     return (
@@ -88,17 +82,12 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
         onDelete={handleCancel}
         onSubmit={handleSubmit}
         initialValue={{
+          ...data.data,
           createdDate: dayjs(createdDate),
           modifiedDate: dayjs(modifiedDate),
           exposureStartDate: dayjs(exposureStartDate),
           exposureEndDate: dayjs(exposureEndDate),
-          type: type,
-          title: title,
           image: imagePath + imageName,
-          buttonName: buttonName,
-          moveVocaId: moveVocaId,
-          moveQuizId: moveQuizId,
-          isUse: isUse,
         }}
       />
     );
