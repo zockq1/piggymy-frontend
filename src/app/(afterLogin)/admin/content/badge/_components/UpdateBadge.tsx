@@ -62,16 +62,8 @@ export default function UpdateBadge({ currentBadgeId }: UpdateBadgeProps) {
   };
 
   if (isSuccess) {
-    const {
-      createdDate,
-      modifiedDate,
-      month,
-      title,
-      description,
-      thumbnailName,
-      thumbnailPath,
-      isUse,
-    } = data.data;
+    const { createdDate, modifiedDate, thumbnailName, thumbnailPath } =
+      data.data;
 
     return (
       <BadgeForm
@@ -80,13 +72,10 @@ export default function UpdateBadge({ currentBadgeId }: UpdateBadgeProps) {
         onDelete={handleCancel}
         onSubmit={handleSubmit}
         initialValue={{
+          ...data.data,
           createdDate: dayjs(createdDate),
           modifiedDate: dayjs(modifiedDate),
-          month: month,
-          isUse: isUse,
-          title: title,
           thumbnail: thumbnailPath + thumbnailName,
-          description: description,
         }}
       />
     );
