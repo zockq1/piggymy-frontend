@@ -25,28 +25,13 @@ export default function UpdateCard({ currentCardId }: UpdateCardProps) {
   });
 
   const handleSubmit = (formValue: CardFormValue) => {
-    const {
-      exposureDuration,
-      title,
-      type,
-      content,
-      isUse,
-      vocaIdList,
-      quizIdList,
-    } = formValue;
-    const data = {
-      title: title,
-      exposureEndDate: exposureDuration[1],
-      exposureStartDate: exposureDuration[0],
-      type: type,
-      content: content,
-      isUse: isUse,
-      vocaIdList: vocaIdList,
-      quizIdList: quizIdList,
-    };
     updateCard({
       id: { cardId: currentCardId },
-      data: data,
+      data: {
+        ...formValue,
+        exposureEndDate: formValue.exposureDuration[1],
+        exposureStartDate: formValue.exposureDuration[0],
+      },
     });
   };
 
