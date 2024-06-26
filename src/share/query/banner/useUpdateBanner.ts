@@ -80,8 +80,8 @@ export function useUpdateBanner() {
 
   return useMutation({
     mutationFn: updateBanner,
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['banners'] });
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['banners'] });
       notification.success({
         message: '배너 수정 성공',
       });

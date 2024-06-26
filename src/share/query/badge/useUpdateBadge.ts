@@ -74,8 +74,8 @@ export function useUpdateBadge() {
 
   return useMutation({
     mutationFn: updateBadge,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['badges'] });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['badges'] });
       notification.success({
         message: '뱃지 수정 성공',
       });
