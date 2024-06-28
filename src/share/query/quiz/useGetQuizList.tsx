@@ -12,7 +12,7 @@ interface GetQuizListRequestQuery {
   search_keyword?: string;
   start_date?: string;
   end_date?: string;
-  use_yn?: boolean;
+  is_use?: string | null;
 }
 
 interface GetQuizListResponse {

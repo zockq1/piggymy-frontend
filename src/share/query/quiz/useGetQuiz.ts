@@ -1,13 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { Request } from '@/type/apiType';
+import { Request, Response } from '@/type/apiType';
+import { QuizResponseJson } from '@/type/quizType';
 
 import axiosInstance from '../axios';
 
 export const getQuizDetail = async (request: Request<number>) => {
   const {
     data: { data },
-  } = await axiosInstance.get(`/api/quizzes/${request.data}`);
+  } = await axiosInstance.get<Response<QuizResponseJson>>(
+    `/api/quizzes/${request.data}`,
+  );
   return data;
 };
 

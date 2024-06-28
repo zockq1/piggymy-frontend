@@ -1,6 +1,6 @@
 'use client';
 
-import { Form } from 'antd';
+import { Form, Pagination } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
 import Image from 'next/image';
 import {
@@ -13,17 +13,15 @@ import React, {
   ChangeEvent,
   MouseEventHandler,
   useEffect,
-  useRef,
   useState,
 } from 'react';
-import InfiniteScroll from 'react-infinite-scroll-component';
 
 import search from '/public/img/Icon/search.png';
 import Text from '@/share/form/item/Text';
 import NoticeModal from '@/share/modal/NoticeModal';
 import { useModal } from '@/share/modal/useModal';
 import { useDeleteQuizzes } from '@/share/query/quiz/useDeleteQuizzes';
-import { useGetQuizListInfinite } from '@/share/query/quiz/useGetQuizzes';
+import { useGetQuizList } from '@/share/query/quiz/useGetQuizList';
 import { usePatchQuizzesIsUse } from '@/share/query/quiz/useUpdateQuiz';
 import Button from '@/share/ui/button/Button';
 import IconButton from '@/share/ui/button/IconButton';
@@ -45,7 +43,6 @@ function QuizSearchList() {
   const params = useParams();
   const router = useRouter();
   const path = usePathname();
-  const pageRef = useRef(1);
   const searchParams = useSearchParams();
   const { openModal, closeModal } = useModal();
 
@@ -55,17 +52,19 @@ function QuizSearchList() {
   const keyword = searchParams.get('keyword');
 
   const [selectQuizList, setSelectQuizList] = useState<QuizModel[]>([]);
+  const [page, setPage] = useState(1);
   const [sortType, setSortType] = useState<'CREATED' | 'MODIFIED'>('CREATED');
 
   const selectQuizIds = selectQuizList.map((quiz) => quiz.id);
   const selectQuizIsUseValues = selectQuizList.map((quiz) => quiz.isUse);
 
-  const { data, fetchNextPage, hasNextPage, refetch } = useGetQuizListInfinite({
+  const { data, refetch } = useGetQuizList({
     data: {
+      page,
       page_size: 10,
       start_date: startDate!,
       end_date: endDate!,
-      is_use: isUse!,
+      is_use: isUse,
       search_keyword: keyword!,
       sort_type: sortType,
     },
@@ -73,16 +72,9 @@ function QuizSearchList() {
   const { mutate: deleteQuizzes } = useDeleteQuizzes();
   const { mutate: patchQuizzes } = usePatchQuizzesIsUse();
 
-  const totalCount =
-    !!data?.pages && data?.pages[0].data ? data?.pages[0].data.totalCount : 0;
-
-  const quizList = data?.pages.reduce((acc, page) => {
-    if (!!page && !!page.data) {
-      return [...acc, ...page.data.list];
-    } else {
-      return [...acc];
-    }
-  }, []);
+  const totalCount = data?.data.totalCount;
+  console.log(data?.data);
+  const quizList = data?.data.list ?? [];
 
   const handleFinish = (formValue: FormExampleValue) => {
     const params = {
@@ -156,14 +148,8 @@ function QuizSearchList() {
   };
 
   useEffect(() => {
-    if (hasNextPage) {
-      pageRef.current = pageRef.current + 1;
-    }
-  }, [hasNextPage]);
-
-  useEffect(() => {
     refetch().then();
-  }, [sortType, refetch]);
+  }, [sortType, page, refetch]);
 
   return (
     <ContentBox className={'flex h-full items-start'}>
@@ -215,50 +201,52 @@ function QuizSearchList() {
             삭제
           </Button>
         </div>
-        {!!data && data.pages.length > 0 && (
-          <div className={'relative h-full'}>
-            <ul
-              id={'list'}
-              className={'min-h-[calc(94px*11)] overflow-y-auto pb-20'}
-            >
-              <InfiniteScroll
-                dataLength={quizList.length}
-                next={fetchNextPage}
-                hasMore={hasNextPage}
-                loader={false}
-                scrollableTarget={'list'}
-                scrollThreshold={0.8}
-                className={'flex flex-col gap-4'}
-              >
-                {quizList?.map((quiz: QuizModel) => {
-                  return (
-                    <li key={quiz.id} className={'list-none'}>
-                      <Card
-                        id={quiz.id.toString()}
-                        koreanTitle={quiz.title}
-                        createdDate={dayjs(quiz.createdDate)}
-                        isActive={quiz.isUse}
-                        isChecked={selectQuizList
-                          .map((quiz) => quiz.id)
-                          .includes(quiz.id)}
-                        route={`/admin/quiz/quizManagement/${quiz.id}`}
-                        isSelected={+params.quizId === quiz.id}
-                        onChangeChecked={() => toggleCheck(quiz)}
-                      />
-                    </li>
-                  );
-                })}
-              </InfiniteScroll>
-            </ul>
-            <div className={'absolute bottom-0'}>
-              <Add
-                type={'card'}
-                isSelected={false}
-                route={'/admin/quiz/quizManagement'}
-              />
-            </div>
+        <div className={'relative h-full'}>
+          <ul
+            id={'list'}
+            className={
+              'flex min-h-[calc(94px*11)] flex-col gap-4 overflow-y-auto pb-20'
+            }
+          >
+            {quizList?.map((quiz: QuizModel) => {
+              return (
+                <li key={quiz.id} className={'list-none'}>
+                  <Card
+                    id={quiz.id.toString()}
+                    koreanTitle={quiz.title}
+                    createdDate={dayjs(quiz.createdDate)}
+                    isActive={quiz.isUse}
+                    isChecked={selectQuizList
+                      .map((quiz) => quiz.id)
+                      .includes(quiz.id)}
+                    route={`/admin/quiz/quizManagement/${quiz.id}`}
+                    isSelected={+params.quizId === quiz.id}
+                    onChangeChecked={() => toggleCheck(quiz)}
+                  />
+                </li>
+              );
+            })}
+          </ul>
+          <div className={'absolute bottom-0'}>
+            <Add
+              type={'card'}
+              isSelected={false}
+              route={'/admin/quiz/quizManagement'}
+            />
           </div>
-        )}
+        </div>
+        <div className={'flex w-full items-center justify-center'}>
+          <Pagination
+            current={page}
+            showLessItems
+            showSizeChanger={false}
+            total={totalCount}
+            onChange={async (page) => {
+              setPage(page);
+              await refetch();
+            }}
+          />
+        </div>
       </Form>
     </ContentBox>
   );

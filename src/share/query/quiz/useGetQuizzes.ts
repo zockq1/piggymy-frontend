@@ -1,6 +1,7 @@
 import { QueryClient, useInfiniteQuery } from '@tanstack/react-query';
 
-import { Request } from '@/type/apiType';
+import { Request, Response } from '@/type/apiType';
+import { QuizListResponseJson } from '@/type/quizType';
 
 import axiosInstance from '../axios';
 
@@ -27,9 +28,12 @@ export const getQuizList = async (
 ) => {
   const filteredParams = removeNullValues(request?.data || {});
 
-  const response = await axiosInstance.get(`/api/quizzes`, {
-    params: filteredParams,
-  });
+  const response = await axiosInstance.get<Response<QuizListResponseJson>>(
+    `/api/quizzes`,
+    {
+      params: filteredParams,
+    },
+  );
 
   return response.data;
 };
