@@ -1,6 +1,6 @@
 export interface QuizListResponseJson {
   totalCount: number;
-  list: QuizResponseJson[];
+  list: QuizModel[];
 }
 
 export interface QuizResponseJson {
@@ -32,11 +32,6 @@ export interface CreateQuizRequestJson {
   option3: string;
   option4: string;
   isUse: false;
-}
-
-export interface QuizListResponseJson {
-  totalCount: number;
-  list: QuizModel[];
 }
 
 export interface UpdateQuizRequestJson {
