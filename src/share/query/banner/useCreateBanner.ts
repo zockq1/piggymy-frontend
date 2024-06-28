@@ -11,7 +11,7 @@ import axiosInstance from '../axios';
 interface CreateBannerRequestJson extends BannerRequestJson {}
 
 export const createBanner = async (
-  bannerData: Request<CreateBannerRequestJson>,
+  request: Request<CreateBannerRequestJson>,
 ) => {
   const {
     title,
@@ -22,7 +22,7 @@ export const createBanner = async (
     exposureEndDate,
     exposureStartDate,
     image,
-  } = bannerData.data;
+  } = request.data;
 
   const formData = new FormData();
   if (image && image[0].originFileObj) {
@@ -71,8 +71,8 @@ export function useCreateBanner() {
 
   return useMutation({
     mutationFn: createBanner,
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ['banners'] });
+    onSuccess: async (data) => {
+      await queryClient.invalidateQueries({ queryKey: ['banners'] });
       notification.success({
         message: '배너 생성 성공',
       });

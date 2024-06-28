@@ -24,6 +24,7 @@ export function ActiveCheckbox({
       name="isUse"
       rules={[{ required: true }]}
       initialValue={initialValue}
+      className={'m-0'}
     >
       <Radio.Group>
         <Radio value={true}>

@@ -11,9 +11,9 @@ interface GetBannerId {
 
 interface GetBannerResponse extends BannerResponseJson {}
 
-export const getBanner = async (bannerData: Request<null, GetBannerId>) => {
+export const getBanner = async (request: Request<null, GetBannerId>) => {
   const response = await axiosInstance.get<Response<GetBannerResponse>>(
-    `/api/banners/${bannerData.id?.bannerId}`,
+    `/api/banners/${request.id?.bannerId}`,
   );
 
   return response.data;

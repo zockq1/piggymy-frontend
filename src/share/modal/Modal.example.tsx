@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 
 import CardSettingModal from '@/share/modal/CardSettingModal';
 import NoticeModal from '@/share/modal/NoticeModal';
-import { useModalHook } from '@/share/modal/useModalHook';
+import { useModal } from '@/share/modal/useModal';
 import UserFeedbackModal from '@/share/modal/UserFeedbackModal';
 import Button from '@/share/ui/button/Button';
 
@@ -15,7 +15,7 @@ export const ModalSystem = ({
 }: {
   clickableOverlay: boolean;
 }) => {
-  const { openModal, closeModal } = useModalHook();
+  const { openModal, closeModal } = useModal();
 
   return (
     <Button
@@ -53,7 +53,7 @@ export function DefaultModalSystem({
 }: {
   clickableOverlay: boolean;
 }) {
-  const { openModal, closeModal } = useModalHook();
+  const { openModal, closeModal } = useModal();
 
   const handleConfirm = () => {
     // Do something
@@ -87,7 +87,7 @@ export function CustomModalSystem({
 }: {
   clickableOverlay: boolean;
 }) {
-  const { openModal, closeModal } = useModalHook();
+  const { openModal, closeModal } = useModal();
 
   return (
     <>

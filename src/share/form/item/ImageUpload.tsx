@@ -9,6 +9,7 @@ interface ImageUploadProps {
   initialImage?: string;
   name?: string;
   label?: string;
+  maxCount?: number;
 }
 
 /**
@@ -22,6 +23,7 @@ export default function ImageUpload({
   initialImage,
   name = 'image',
   label = '이미지',
+  maxCount,
 }: ImageUploadProps) {
   /* eslint-disable  @typescript-eslint/no-explicit-any */
   const getFile = (e: any) => {
@@ -39,7 +41,7 @@ export default function ImageUpload({
       getValueFromEvent={getFile}
       initialValue={initialImage ? [{ url: initialImage }] : null}
     >
-      <Upload listType="picture-card" maxCount={1}>
+      <Upload listType="picture-card" maxCount={maxCount}>
         <button type="button">
           <PlusOutlined />
           <div>Upload</div>
