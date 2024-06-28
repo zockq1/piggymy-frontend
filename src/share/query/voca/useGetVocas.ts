@@ -1,6 +1,7 @@
 import { QueryClient, useInfiniteQuery } from '@tanstack/react-query';
 
-import { Request } from '@/type/apiType';
+import { Request, Response } from '@/type/apiType';
+import { VocaListResponseJson } from '@/type/vocaType';
 
 import axiosInstance from '../axios';
 
@@ -18,16 +19,19 @@ interface GetVocaListRequestQuery {
 // Utility function to remove null values from an object
 const removeNullValues = (obj: GetVocaListRequestQuery) => {
   return Object.fromEntries(
-    Object.entries(obj).filter(([_, v]) => v !== null && v !== undefined),
+    Object.entries(obj).filter(([, v]) => v !== null && v !== undefined),
   );
 };
 
 export const getVocaList = async (query?: Request<GetVocaListRequestQuery>) => {
   const filteredParams = removeNullValues(query?.data || {});
 
-  const response = await axiosInstance.get(`/api/vocas`, {
-    params: filteredParams,
-  });
+  const response = await axiosInstance.get<Response<VocaListResponseJson>>(
+    `/api/vocas`,
+    {
+      params: filteredParams,
+    },
+  );
 
   return response.data;
 };

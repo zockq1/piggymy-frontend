@@ -80,10 +80,14 @@ export type VocaDeleteRequest = number[];
 export interface VocaDeleteResponse extends VocaResponseModel {}
 
 /*
- *  GET /api/voca/detail
+ *  GET /api/voca/${vocaId}
  */
 
-export interface VocaDetailResponse extends VocaModel {
+export interface VocaDetailResponseJson {
+  id: number;
+  koreanTitle: string;
+  englishTitle: string;
+  isUse: boolean;
   koreanCategory: string;
   englishCategory: string;
   content: string;
@@ -97,6 +101,8 @@ export interface VocaDetailResponse extends VocaModel {
   bookmarkCount: number;
   quizId: number;
   quizTitle: string;
+  createdDate: string;
+  modifiedDate: string;
 }
 
 /*

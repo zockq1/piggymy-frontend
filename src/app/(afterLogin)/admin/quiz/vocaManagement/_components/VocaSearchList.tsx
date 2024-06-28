@@ -1,6 +1,6 @@
 'use client';
 
-import { Form } from 'antd';
+import { Form, Pagination } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
 import Image from 'next/image';
 import {
@@ -13,17 +13,15 @@ import React, {
   ChangeEvent,
   MouseEventHandler,
   useEffect,
-  useRef,
   useState,
 } from 'react';
-import InfiniteScroll from 'react-infinite-scroll-component';
 
 import search from '/public/img/Icon/search.png';
 import Text from '@/share/form/item/Text';
 import NoticeModal from '@/share/modal/NoticeModal';
 import { useModal } from '@/share/modal/useModal';
 import { useDeleteVocas } from '@/share/query/voca/useDeleteVocas';
-import { useGetVocaListInfinite } from '@/share/query/voca/useGetVocas';
+import { useGetVocaList } from '@/share/query/voca/useGetVocaList';
 import { usePatchVocasIsUse } from '@/share/query/voca/useUpdateVoca';
 import Button from '@/share/ui/button/Button';
 import IconButton from '@/share/ui/button/IconButton';
@@ -45,7 +43,6 @@ function VocaSearchList() {
   const params = useParams();
   const router = useRouter();
   const path = usePathname();
-  const pageRef = useRef(1);
   const searchParams = useSearchParams();
   const { openModal, closeModal } = useModal();
 
@@ -55,17 +52,19 @@ function VocaSearchList() {
   const keyword = searchParams.get('keyword');
 
   const [selectVocaList, setSelectVocaList] = useState<VocaModel[]>([]);
+  const [page, setPage] = useState(1);
   const [sortType, setSortType] = useState<'CREATED' | 'MODIFIED'>('CREATED');
 
   const selectVocaIds = selectVocaList.map((voca) => voca.id);
   const selectVocaIsUseValues = selectVocaList.map((voca) => voca.isUse);
 
-  const { data, fetchNextPage, hasNextPage, refetch } = useGetVocaListInfinite({
+  const { data, refetch } = useGetVocaList({
     data: {
+      page,
       page_size: 10,
       start_date: startDate!,
       end_date: endDate!,
-      is_use: isUse!,
+      is_use: isUse,
       search_keyword: keyword!,
       sort_type: sortType,
     },
@@ -73,16 +72,8 @@ function VocaSearchList() {
   const { mutate: deleteVocas } = useDeleteVocas();
   const { mutate: patchVocas } = usePatchVocasIsUse();
 
-  const totalCount =
-    !!data?.pages && data?.pages[0].data ? data?.pages[0].data.totalCount : 0;
-
-  const vocaList = data?.pages.reduce((acc, page) => {
-    if (!!page && !!page.data) {
-      return [...acc, ...page.data.list];
-    } else {
-      return [...acc];
-    }
-  }, []);
+  const totalCount = data?.data.totalCount;
+  const vocaList = data?.data.list ?? [];
 
   const handleFinish = (formValue: FormExampleValue) => {
     const params = {
@@ -156,14 +147,8 @@ function VocaSearchList() {
   };
 
   useEffect(() => {
-    if (hasNextPage) {
-      pageRef.current = pageRef.current + 1;
-    }
-  }, [hasNextPage]);
-
-  useEffect(() => {
     refetch().then();
-  }, [sortType, refetch]);
+  }, [sortType, page, refetch]);
 
   return (
     <ContentBox className={'flex h-full items-start'}>
@@ -215,50 +200,52 @@ function VocaSearchList() {
             삭제
           </Button>
         </div>
-        {!!data && data.pages.length > 0 && (
-          <div className={'relative h-full'}>
-            <ul
-              id={'list'}
-              className={'min-h-[calc(94px*11)] overflow-y-auto pb-20'}
-            >
-              <InfiniteScroll
-                dataLength={vocaList.length}
-                next={fetchNextPage}
-                hasMore={hasNextPage}
-                loader={false}
-                scrollableTarget={'list'}
-                scrollThreshold={0.8}
-                className={'flex flex-col gap-4'}
-              >
-                {vocaList?.map((voca: VocaModel) => {
-                  return (
-                    <li key={voca.id} className={'list-none'}>
-                      <Card
-                        id={voca.id.toString()}
-                        koreanTitle={voca.koreanTitle}
-                        createdDate={dayjs(voca.createdDate)}
-                        isActive={voca.isUse}
-                        isChecked={selectVocaList
-                          .map((voca) => voca.id)
-                          .includes(voca.id)}
-                        route={`/admin/quiz/vocaManagement/${voca.id}`}
-                        isSelected={+params.vocaId === voca.id}
-                        onChangeChecked={() => toggleCheck(voca)}
-                      />
-                    </li>
-                  );
-                })}
-              </InfiniteScroll>
-            </ul>
-            <div className={'absolute bottom-0'}>
-              <Add
-                type={'card'}
-                isSelected={false}
-                route={'/admin/quiz/vocaManagement'}
-              />
-            </div>
+        <div className={'relative h-full'}>
+          <ul
+            id={'list'}
+            className={
+              'flex min-h-[calc(94px*11)] flex-col gap-4 overflow-y-auto pb-20'
+            }
+          >
+            {vocaList?.map((voca: VocaModel) => {
+              return (
+                <li key={voca.id} className={'list-none'}>
+                  <Card
+                    id={voca.id.toString()}
+                    koreanTitle={voca.koreanTitle}
+                    createdDate={dayjs(voca.createdDate)}
+                    isActive={voca.isUse}
+                    isChecked={selectVocaList
+                      .map((voca) => voca.id)
+                      .includes(voca.id)}
+                    route={`/admin/quiz/vocaManagement/${voca.id}`}
+                    isSelected={+params.vocaId === voca.id}
+                    onChangeChecked={() => toggleCheck(voca)}
+                  />
+                </li>
+              );
+            })}
+          </ul>
+          <div className={'absolute bottom-0'}>
+            <Add
+              type={'card'}
+              isSelected={false}
+              route={'/admin/quiz/vocaManagement'}
+            />
           </div>
-        )}
+        </div>
+        <div className={'flex w-full items-center justify-center'}>
+          <Pagination
+            current={page}
+            showLessItems
+            showSizeChanger={false}
+            total={totalCount}
+            onChange={async (page) => {
+              setPage(page);
+              await refetch();
+            }}
+          />
+        </div>
       </Form>
     </ContentBox>
   );
