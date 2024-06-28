@@ -29,7 +29,6 @@ export function useDeleteQuizzes() {
       });
     },
     onError: (error: AxiosError<Response<unknown>, unknown>) => {
-      console.log(error);
       if (axios.isAxiosError(error)) {
         notification.error({
           message: '용어 삭제 실패',

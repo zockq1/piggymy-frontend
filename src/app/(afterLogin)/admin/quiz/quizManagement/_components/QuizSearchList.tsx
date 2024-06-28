@@ -73,7 +73,6 @@ function QuizSearchList() {
   const { mutate: patchQuizzes } = usePatchQuizzesIsUse();
 
   const totalCount = data?.data.totalCount;
-  console.log(data?.data);
   const quizList = data?.data.list ?? [];
 
   const handleFinish = (formValue: FormExampleValue) => {

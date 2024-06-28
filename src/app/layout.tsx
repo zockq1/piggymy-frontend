@@ -29,26 +29,26 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={notoSansKr.className}>
-        <RecoilRootProvider>
-          <ReactQueryProvider>
-            <CheckAuth />
-            <ConfigProvider
-              theme={{
-                token: { colorLink: 'inherit' },
-                components: {
-                  Table: {
-                    headerBg: '#F4F5F8',
-                    headerBorderRadius: 0,
-                    borderColor: '#CDD1D9',
-                  },
-                },
-              }}
-            >
+        <ConfigProvider
+          theme={{
+            token: { colorLink: 'inherit' },
+            components: {
+              Table: {
+                headerBg: '#F4F5F8',
+                headerBorderRadius: 0,
+                borderColor: '#CDD1D9',
+              },
+            },
+          }}
+        >
+          <RecoilRootProvider>
+            <ReactQueryProvider>
+              <CheckAuth />
               <AntdRegistry>{children}</AntdRegistry>
-            </ConfigProvider>
-          </ReactQueryProvider>
-          <ModalProvider />
-        </RecoilRootProvider>
+            </ReactQueryProvider>
+            <ModalProvider />
+          </RecoilRootProvider>
+        </ConfigProvider>
       </body>
     </html>
   );
