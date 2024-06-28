@@ -10,7 +10,7 @@ import Label from './Label';
  * antd form onFinish의 value 매개변수에 추가되는 값
  * @example
  *  {
- *    useYn: boolean;
+ *    isUse: boolean;
  *  }
  */
 export function ActiveCheckbox({
