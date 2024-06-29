@@ -1,22 +1,26 @@
 'use client';
 
+import { useQueryClient } from '@tanstack/react-query';
 import { Form, Pagination } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
 import Image from 'next/image';
-import {
-  useParams,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from 'next/navigation';
-import React, { ChangeEvent, MouseEventHandler, useState } from 'react';
+import { useParams, usePathname, useRouter } from 'next/navigation';
+import React, {
+  ChangeEvent,
+  MouseEventHandler,
+  useEffect,
+  useState,
+} from 'react';
 
 import search from '/public/img/Icon/search.png';
 import Text from '@/share/form/item/Text';
 import NoticeModal from '@/share/modal/NoticeModal';
 import { useModal } from '@/share/modal/useModal';
 import { useDeleteVocas } from '@/share/query/voca/useDeleteVocas';
-import { useGetVocaList } from '@/share/query/voca/useGetVocaList';
+import {
+  prefetchVocaList,
+  useGetVocaList,
+} from '@/share/query/voca/useGetVocaList';
 import { usePatchVocasIsUse } from '@/share/query/voca/useUpdateVoca';
 import Button from '@/share/ui/button/Button';
 import IconButton from '@/share/ui/button/IconButton';
@@ -34,17 +38,21 @@ interface FormExampleValue {
   keyword: string;
 }
 
-function VocaSearchList() {
-  const params = useParams();
+interface VocaSearchListProps {
+  searchParams: {
+    start_date?: string;
+    end_date?: string;
+    is_use?: string;
+    search_keyword?: string;
+  };
+}
+
+function VocaSearchList({ searchParams }: VocaSearchListProps) {
+  const { vocaId } = useParams();
   const router = useRouter();
   const path = usePathname();
-  const searchParams = useSearchParams();
   const { openModal, closeModal } = useModal();
-
-  const startDate = searchParams.get('start_date');
-  const endDate = searchParams.get('end_date');
-  const isUse = searchParams.get('is_use');
-  const keyword = searchParams.get('keyword');
+  const queryClient = useQueryClient();
 
   const [selectVocaList, setSelectVocaList] = useState<VocaModel[]>([]);
   const [page, setPage] = useState(1);
@@ -57,11 +65,8 @@ function VocaSearchList() {
     data: {
       page,
       page_size: 10,
-      start_date: startDate!,
-      end_date: endDate!,
-      is_use: isUse,
-      search_keyword: keyword!,
       sort_type: sortType,
+      ...searchParams,
     },
   });
   const { mutate: deleteVocas } = useDeleteVocas();
@@ -70,12 +75,21 @@ function VocaSearchList() {
   const totalCount = data?.data.totalCount;
   const vocaList = data?.data.list ?? [];
 
+  useEffect(() => {
+    prefetchVocaList(queryClient, {
+      data: {
+        page: page + 1,
+        page_size: 10,
+        sort_type: sortType,
+        ...searchParams,
+      },
+    }).then();
+  }, [page, sortType, queryClient]);
+
   const handleFinish = (formValue: FormExampleValue) => {
     const params = {
-      start_date: startDate ?? '',
-      end_date: endDate ?? '',
-      is_use: isUse ?? '',
-      keyword: formValue.keyword ?? '',
+      ...searchParams,
+      search_keyword: formValue.keyword ?? '',
     };
 
     if (buildQueryString(params)) {
@@ -210,7 +224,7 @@ function VocaSearchList() {
                       .map((voca) => voca.id)
                       .includes(voca.id)}
                     route={`/admin/quiz/vocaManagement/${voca.id}`}
-                    isSelected={+params.vocaId === voca.id}
+                    isSelected={+vocaId === voca.id}
                     onChangeChecked={() => toggleCheck(voca)}
                   />
                 </li>

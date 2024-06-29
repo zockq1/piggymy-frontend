@@ -44,7 +44,7 @@ export function useGetVocaList(request: Request<GetVocaListRequestQuery>) {
   });
 }
 
-export function usePrefetchVocaList(
+export function prefetchVocaList(
   queryClient: QueryClient,
   request: Request<GetVocaListRequestQuery>,
 ) {
