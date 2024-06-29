@@ -1,8 +1,8 @@
 import { cva } from 'class-variance-authority';
 import { ButtonHTMLAttributes } from 'react';
 
+import { ExcludeNullVariantProp } from '@/type/ExcludeNullVariantProp';
 import { cn } from '@/utils/cn';
-import { ExcludeNullVariantProp } from '@/utils/ExcludeNullVariantProp';
 
 export const ButtonVariants = cva(
   `
