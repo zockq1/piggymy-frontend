@@ -1,7 +1,7 @@
 # 경제 용어 학습 서비스 피기미 Admin
 
-<img src="docs/mobile.png" width="200"/>
-<img src="docs/form.png" width="200"/>
+<img src="docs/mobile.png" height="300"/>
+<img src="docs/form.png" height="300"/>
 <br>
 
 ## 서비스 소개
