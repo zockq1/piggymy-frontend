@@ -6,7 +6,19 @@ function Layout({ children }: { children?: ReactNode }) {
       style={{
         display: 'grid',
         gridTemplate: `'header header ' 70px
-                       'side   content' minmax(calc(100vh - 70px), max-content) / 240px auto`,
+                       'side   content' minmax(calc(100vh - 70px), max-content) / 240px calc(100% - 240px)`,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+function Header({ children }: { children?: ReactNode }) {
+  return (
+    <div
+      style={{
+        gridArea: 'header',
       }}
     >
       {children}
@@ -24,8 +36,11 @@ function Content({ children }: { children?: ReactNode }) {
       style={{
         gridArea: 'content',
         display: 'grid',
-        gridTemplateColumns: '380px auto',
-        gridTemplateRows: 'max-content',
+        gridTemplateColumns: `355px calc(100% - 375px)`,
+        gridTemplateRows: `repeat(5, max-content)`,
+        maxWidth: '1400px',
+        gap: '20px',
+        padding: '20px',
       }}
     >
       {children}
@@ -45,6 +60,7 @@ function RightContent({ children }: { children?: ReactNode }) {
   return <div className="col-start-2 col-end-3">{children}</div>;
 }
 
+Layout.Header = Header;
 Layout.LeftSideMenu = LeftSideMenu;
 Layout.Content = Content;
 Content.Left = LeftContent;

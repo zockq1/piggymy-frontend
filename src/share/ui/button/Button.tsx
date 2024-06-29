@@ -1,8 +1,8 @@
 import { cva } from 'class-variance-authority';
 import { ButtonHTMLAttributes } from 'react';
 
+import { ExcludeNullVariantProp } from '@/type/ExcludeNullVariantProp';
 import { cn } from '@/utils/cn';
-import { ExcludeNullVariantProp } from '@/utils/ExcludeNullVariantProp';
 
 export const ButtonVariants = cva(
   `
@@ -35,10 +35,14 @@ export default function Button({
   color,
   size,
   children,
+  className,
   ...props
 }: ButtonProps) {
   return (
-    <button className={cn(ButtonVariants({ color, size }))} {...props}>
+    <button
+      className={cn(ButtonVariants({ color, size }), className)}
+      {...props}
+    >
       {children && children}
     </button>
   );

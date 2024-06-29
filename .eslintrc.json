@@ -34,13 +34,10 @@
     "no-unused-vars": "off",
     "@typescript-eslint/no-explicit-any": ["error", { "ignoreRestArgs": true }],
     "@typescript-eslint/no-unused-vars": "error",
+    "@tanstack/query/exhaustive-deps": "off",
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
     "react/react-in-jsx-scope": "off",
-    "react/jsx-curly-brace-presence": [
-      "error",
-      { "props": "never", "children": "never" }
-    ],
     "@typescript-eslint/naming-convention": [
       "error",
       {
@@ -61,7 +58,6 @@
         "selector": "typeAlias"
       }
     ],
-    "@tanstack/query/exhaustive-deps": "error",
     "@tanstack/query/no-rest-destructuring": "warn",
     "@tanstack/query/stable-query-client": "error"
   }
