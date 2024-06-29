@@ -9,12 +9,7 @@ import {
   useRouter,
   useSearchParams,
 } from 'next/navigation';
-import React, {
-  ChangeEvent,
-  MouseEventHandler,
-  useEffect,
-  useState,
-} from 'react';
+import React, { ChangeEvent, MouseEventHandler, useState } from 'react';
 
 import search from '/public/img/Icon/search.png';
 import Text from '@/share/form/item/Text';
@@ -58,7 +53,7 @@ function VocaSearchList() {
   const selectVocaIds = selectVocaList.map((voca) => voca.id);
   const selectVocaIsUseValues = selectVocaList.map((voca) => voca.isUse);
 
-  const { data, refetch } = useGetVocaList({
+  const { data } = useGetVocaList({
     data: {
       page,
       page_size: 10,
@@ -145,10 +140,6 @@ function VocaSearchList() {
       setSelectVocaList((prev) => [...prev, voca]);
     }
   };
-
-  useEffect(() => {
-    refetch().then();
-  }, [sortType, page, refetch]);
 
   return (
     <ContentBox className={'flex h-full items-start'}>
@@ -242,7 +233,6 @@ function VocaSearchList() {
             total={totalCount}
             onChange={async (page) => {
               setPage(page);
-              await refetch();
             }}
           />
         </div>
