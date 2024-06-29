@@ -47,7 +47,11 @@ export default function Badge({
           'flex h-[170px] flex-col items-center rounded-2xl py-[18px]',
         )}
       >
-        <Image src={image} alt="image" width={110} height={110} />
+        {image ? (
+          <Image src={image} alt="image" width={110} height={110} />
+        ) : (
+          <div className="h-[110px]" />
+        )}
         <h1 className="h-[36px] font-semibold">{title}</h1>
       </Link>
       <div className="flex items-center justify-between">

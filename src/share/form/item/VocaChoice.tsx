@@ -8,9 +8,15 @@ import { useGetVocaList } from '@/share/query/voca/useGetVocaList';
 import StatusBadge from '@/share/ui/badge/StatusBadge';
 import filterOption from '@/utils/filterOption';
 
-interface VocaChoiceProps extends FormItemProps {}
+interface VocaChoiceProps extends FormItemProps {
+  mode?: 'single' | 'multiple';
+}
 
-export default function VocaChoice({ name, initialValue }: VocaChoiceProps) {
+export default function VocaChoice({
+  name,
+  initialValue,
+  mode = 'single',
+}: VocaChoiceProps) {
   const { data, isLoading } = useGetVocaList({
     data: { page: 1, page_size: 1000 },
   });
@@ -48,6 +54,7 @@ export default function VocaChoice({ name, initialValue }: VocaChoiceProps) {
           filterOption={filterOption}
           placeholder="용어카드를 선택해주세요."
           loading={isLoading}
+          mode={mode === 'multiple' ? 'multiple' : undefined}
         >
           {data?.data &&
             data?.data.list

@@ -1,0 +1,93 @@
+'use client';
+
+import { UploadFile } from 'antd';
+import { useForm } from 'antd/es/form/Form';
+import { useParams } from 'next/navigation';
+import React, { useEffect, useMemo } from 'react';
+
+import VocaForm from '@/app/(afterLogin)/admin/quiz/vocaManagement/_components/VocaForm';
+import { useGetVoca } from '@/share/query/voca/useGetVoca';
+import { useUpdateVoca } from '@/share/query/voca/useUpdateVoca';
+import { UpdateVocaRequestJson } from '@/type/vocaType';
+
+export default function UpdateVoca() {
+  const params = useParams();
+  const [form] = useForm();
+
+  const { data } = useGetVoca(+params.vocaId);
+  const { mutate: update } = useUpdateVoca();
+
+  const initialValues = useMemo(
+    () => ({
+      koreanTitle: data?.koreanTitle ?? '',
+      englishTitle: data?.englishTitle ?? '',
+      koreanCategory: data?.koreanCategory ?? '',
+      englishCategory: data?.englishCategory ?? '',
+      isUse: data?.isUse ?? false,
+      image:
+        data?.thumbnailPath && data?.thumbnailName
+          ? ([
+              { url: data?.thumbnailPath + data?.thumbnailName },
+            ] as UploadFile[])
+          : [],
+      thumbnailPath: data?.thumbnailPath ?? '',
+      thumbnailName: data?.thumbnailName ?? '',
+      sourceName: data?.sourceName ?? '',
+      sourceLink: data?.sourceLink ?? '',
+      thumbnailSourceName: data?.thumbnailSourceName ?? '',
+      thumbnailSourceLink: data?.thumbnailSourceLink ?? '',
+      createdDate: data?.createdDate ?? '',
+      content: data?.content ?? '',
+    }),
+    [data],
+  );
+
+  const handleCancel = () => {
+    form.setFieldsValue(initialValues);
+  };
+
+  const handleFinish = (formValue: UpdateVocaRequestJson) => {
+    if (
+      formValue.image &&
+      formValue.image.length > 0 &&
+      formValue.image[0].url ===
+        String(data?.thumbnailPath) + String(data?.thumbnailName)
+    ) {
+      update({
+        id: +params.vocaId,
+        data: {
+          ...formValue,
+          vocaId: +params.vocaId,
+          image: [],
+          thumbnailPath: String(data?.thumbnailPath),
+          thumbnailName: String(data?.thumbnailName),
+        },
+      });
+    } else {
+      update({
+        id: +params.vocaId,
+        data: {
+          ...formValue,
+          vocaId: +params.vocaId,
+          thumbnailPath: '',
+          thumbnailName: '',
+        },
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (!data) return;
+
+    form.setFieldsValue(initialValues);
+  }, [data, form, initialValues]);
+
+  return (
+    <VocaForm
+      initialValues={initialValues}
+      form={form}
+      onCancel={handleCancel}
+      onFinish={handleFinish}
+    />
+  );
+}

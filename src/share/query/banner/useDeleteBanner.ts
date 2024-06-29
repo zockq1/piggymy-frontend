@@ -25,8 +25,8 @@ export function useDeleteBanner() {
 
   return useMutation({
     mutationFn: deleteBanner,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['banners'] });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['banners'] });
       notification.success({
         message: '배너 삭제 성공',
       });

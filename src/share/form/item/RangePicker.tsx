@@ -11,7 +11,12 @@ interface RangePickerProps extends FormItemProps {
 
 function RangePicker({ label, name, ...props }: RangePickerProps) {
   return (
-    <Form.Item label={<Label>{label}</Label>} name={name} {...props}>
+    <Form.Item
+      label={<Label>{label}</Label>}
+      name={name}
+      initialValue={props.initialValue}
+      {...props}
+    >
       <DatePicker.RangePicker className={'w-full'} />
     </Form.Item>
   );

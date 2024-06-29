@@ -12,7 +12,7 @@ export const contentList: ListType[] = [
 ];
 
 export const vocaQuizList: ListType[] = [
-  { title: '용어카드 관리', route: '/admin/quiz/termManagement' },
+  { title: '용어카드 관리', route: '/admin/quiz/vocaManagement' },
   { title: '퀴즈카드 관리', route: '/admin/quiz/quizManagement' },
 ];
 

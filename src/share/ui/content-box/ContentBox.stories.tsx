@@ -23,7 +23,7 @@ export const InTheLayout: Story = {
       >
         <Link href="/admin">홈</Link>&nbsp;&nbsp;
         <Link href="/admin/content/greetingMessage">콘텐츠</Link>&nbsp;&nbsp;
-        <Link href="/admin/quiz/termManagement">용어/퀴즈</Link>&nbsp;&nbsp;
+        <Link href="/admin/quiz/vocaManagement">용어/퀴즈</Link>&nbsp;&nbsp;
         <Link href="/admin/setting/termsOfUse">설정</Link>&nbsp;&nbsp;
         <Link href="/admin/user/basicInfo">회원</Link>&nbsp;&nbsp;
         <Link href="/admin/management/basicInfo">관리자</Link>

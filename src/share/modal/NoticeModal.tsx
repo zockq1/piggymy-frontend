@@ -19,7 +19,7 @@ function NoticeModal({
   return (
     <div
       className={
-        'w-[296px]: flex flex-col items-center justify-center gap-2 text-center'
+        'w-[296px]: flex flex-col items-center justify-center gap-2 whitespace-pre text-center'
       }
     >
       <Image

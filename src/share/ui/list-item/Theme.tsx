@@ -38,7 +38,7 @@ export default function Theme({
   route,
 }: ThemeProps) {
   return (
-    <div className="flex h-[153px] w-[318px] flex-col justify-between">
+    <div className="mb-10 flex h-[153px] w-[318px] flex-col justify-between">
       <Link
         href={route}
         className={cn(

@@ -73,8 +73,8 @@ export function useCreateBanner() {
 
   return useMutation({
     mutationFn: createBanner,
-    onSuccess: (response) => {
-      queryClient.invalidateQueries({ queryKey: ['banners'] });
+    onSuccess: async (response) => {
+      await queryClient.invalidateQueries({ queryKey: ['banners'] });
       notification.success({
         message: '배너 생성 성공',
       });

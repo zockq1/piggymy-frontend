@@ -8,9 +8,15 @@ import { useGetQuizList } from '@/share/query/quiz/useGetQuizList';
 import StatusBadge from '@/share/ui/badge/StatusBadge';
 import filterOption from '@/utils/filterOption';
 
-interface QuizChoiceProps extends FormItemProps {}
+interface QuizChoiceProps extends FormItemProps {
+  mode?: 'single' | 'multiple';
+}
 
-export default function QuizChoice({ name, initialValue }: QuizChoiceProps) {
+export default function QuizChoice({
+  name,
+  initialValue,
+  mode = 'single',
+}: QuizChoiceProps) {
   const { data, isLoading } = useGetQuizList({
     data: { page: 1, page_size: 1000 },
   });
@@ -49,6 +55,7 @@ export default function QuizChoice({ name, initialValue }: QuizChoiceProps) {
           filterOption={filterOption}
           placeholder="퀴즈카드를 선택해주세요."
           loading={isLoading}
+          mode={mode === 'multiple' ? 'multiple' : undefined}
         >
           {data?.data &&
             data?.data.list

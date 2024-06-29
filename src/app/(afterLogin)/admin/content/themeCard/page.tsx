@@ -1,38 +1,42 @@
-import Link from 'next/link';
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query';
 
 import Layout from '@/share/layout/Layout';
-import Sidebar from '@/share/layout/sidebar/Sidebar';
-import { contentList } from '@/share/route/routes';
+import { usePrefetchCardList } from '@/share/query/card/useGetCardList';
+import { usePrefetchQuizList } from '@/share/query/quiz/useGetQuizList';
+import { usePrefetchVocaList } from '@/share/query/voca/useGetVocaList';
 
-export default async function ThemeCard() {
+import CardList from './_components/CardList';
+import CardPageInfo from './_components/CardPageInfo';
+import CreateCard from './_components/CreateCard';
+
+export default async function Card() {
+  const queryClient = new QueryClient();
+  await Promise.all([
+    usePrefetchCardList(queryClient),
+    usePrefetchVocaList(queryClient, {
+      data: { page: 1, page_size: 1000 },
+    }),
+    usePrefetchQuizList(queryClient, {
+      data: { page: 1, page_size: 1000 },
+    }),
+  ]);
   return (
-    <Layout>
-      <div
-        style={{
-          gridArea: 'header',
-        }}
-      >
-        <Link href="/admin">홈</Link>&nbsp;&nbsp;
-        <Link href="/admin/content/greetingMessage">콘텐츠</Link>&nbsp;&nbsp;
-        <Link href="/admin/quiz/termManagement">용어/퀴즈</Link>&nbsp;&nbsp;
-        <Link href="/admin/setting/termsOfUse">설정</Link>&nbsp;&nbsp;
-        <Link href="/admin/user/basicInfo">회원</Link>&nbsp;&nbsp;
-        <Link href="/admin/management/basicInfo">관리자</Link>
-      </div>
-      <Layout.LeftSideMenu>
-        <Sidebar sidebarList={contentList} />
-      </Layout.LeftSideMenu>
-      <Layout.Content>
+    <>
+      <Layout.Content.Full>
+        <CardPageInfo />
+      </Layout.Content.Full>
+      <HydrationBoundary state={dehydrate(queryClient)}>
         <Layout.Content.Full>
-          <div className="h-[100px] bg-primary">라우팅 타이틀</div>
+          <CardList />
         </Layout.Content.Full>
         <Layout.Content.Full>
-          <div className="h-[200px] bg-secondary">테마 카드 선택</div>
+          <CreateCard />
         </Layout.Content.Full>
-        <Layout.Content.Full>
-          <div className="h-[500px] bg-primary">테마 카드 관리 폼</div>
-        </Layout.Content.Full>
-      </Layout.Content>
-    </Layout>
+      </HydrationBoundary>
+    </>
   );
 }

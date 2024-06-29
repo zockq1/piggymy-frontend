@@ -5,7 +5,7 @@ import Label from './Label';
 
 export default function CreatedDate({ createdDate }: { createdDate: Dayjs }) {
   return (
-    <Form.Item label={<Label>생성일</Label>}>
+    <Form.Item label={<Label>등록일</Label>} labelCol={{ span: 100 }}>
       <i>{createdDate.format('YYYY.MM.DD')}</i>
     </Form.Item>
   );
