@@ -42,12 +42,12 @@ export function useGetLinkList(request?: Request<GetLinkListRequestQuery>) {
   });
 }
 
-export function usePrefetchLinkList(
+export function prefetchLinkList(
   queryClient: QueryClient,
-  data?: Request<GetLinkListRequestQuery>,
+  request?: Request<GetLinkListRequestQuery>,
 ) {
   return queryClient.prefetchQuery({
-    queryKey: ['links', data?.data],
-    queryFn: () => getLinkList(data),
+    queryKey: ['links', request?.data],
+    queryFn: () => getLinkList(request),
   });
 }

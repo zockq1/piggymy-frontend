@@ -1,12 +1,16 @@
 'use client';
 
+import { useQueryClient } from '@tanstack/react-query';
 import { PaginationProps } from 'antd';
 import { TableProps as AntdTableProps } from 'antd/es/table/InternalTable';
 import Link from 'next/link';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { useDeleteLinkList } from '@/share/query/link/useDeleteLinkList';
-import { useGetLinkList } from '@/share/query/link/useGetLinkList';
+import {
+  prefetchLinkList,
+  useGetLinkList,
+} from '@/share/query/link/useGetLinkList';
 import Button from '@/share/ui/button/Button';
 import ContentBox from '@/share/ui/content-box/ContentBox';
 import Table from '@/share/ui/table/Table';
@@ -81,6 +85,7 @@ const columns: AntdTableProps<DataType>['columns'] = [
 ];
 
 export default function LinkList() {
+  const queryClient = useQueryClient();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [checkedIdList, setCheckedIdList] = useState<number[]>([]);
   const { data } = useGetLinkList({
@@ -117,6 +122,12 @@ export default function LinkList() {
         })
       : [];
   }, [data]);
+
+  useEffect(() => {
+    prefetchLinkList(queryClient, {
+      data: { page: currentPage + 1, page_size: 10 },
+    });
+  }, [currentPage, queryClient]);
 
   const handleChangePage: PaginationProps['onChange'] = (page) => {
     setCurrentPage(page);
