@@ -1,7 +1,7 @@
 # 경제 용어 학습 서비스 피기미 Admin
 
-![프로젝트 이미지](이미지 링크 혹은 경로)
-
+<img src="docs/mobile.png" width="200"/>
+<img src="docs/form.png" width="200"/>
 <br>
 
 ## 서비스 소개
