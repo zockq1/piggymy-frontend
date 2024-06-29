@@ -1,6 +1,13 @@
 import { Dayjs } from 'dayjs';
 
-export type LinkType = 'NEWS' | 'YOUTUBE' | 'MOVIE' | 'DRAMA';
+// export type LinkType = 'NEWS' | 'YOUTUBE' | 'MOVIE' | 'DRAMA';
+
+export const enum LinkType {
+  NEWS = 'NEWS',
+  YOUTUBE = 'YOUTUBE',
+  MOVIE = 'MOVIE',
+  DRAMA = 'DRAMA',
+}
 
 export interface LinkFormValue {
   category: LinkType;

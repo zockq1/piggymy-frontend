@@ -68,10 +68,10 @@ export default function LinkForm({
           initialValue={initialValue?.category}
         >
           <Select>
-            <Select.Option value="NEWS">뉴스</Select.Option>
-            <Select.Option value="YOUTUBE">유튜브</Select.Option>
-            <Select.Option value="MOVIE">영화</Select.Option>
-            <Select.Option value="DRAMA">드라마</Select.Option>
+            <Select.Option value={LinkType.NEWS}>뉴스</Select.Option>
+            <Select.Option value={LinkType.YOUTUBE}>유튜브</Select.Option>
+            <Select.Option value={LinkType.MOVIE}>영화</Select.Option>
+            <Select.Option value={LinkType.DRAMA}>드라마</Select.Option>
           </Select>
         </Form.Item>
 
