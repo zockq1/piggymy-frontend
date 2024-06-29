@@ -1,20 +1,30 @@
+import React from 'react';
+
+import CardFilter from '@/app/(afterLogin)/admin/quiz/_components/CardFilter';
+import PageInfo from '@/app/(afterLogin)/admin/quiz/_components/PageInfo';
+import QuizSearchList from '@/app/(afterLogin)/admin/quiz/quizManagement/_components/QuizSearchList';
 import Layout from '@/share/layout/Layout';
+
+import CreateQuiz from './_components/CreateQuiz';
 
 export default async function QuizManagement() {
   return (
     <>
       <Layout.Content.Full>
-        <div className=" h-[50px] bg-primary">라우팅 타이틀</div>
+        <PageInfo
+          title={'퀴즈카드 관리'}
+          path={['용어 퀴즈', '퀴즈카드 관리']}
+        />
       </Layout.Content.Full>
       <Layout.Content.Full>
-        <div className=" h-[100px] bg-secondary">퀴즈 카드 검색</div>
+        <CardFilter />
       </Layout.Content.Full>
 
       <Layout.Content.Left>
-        <div className=" h-[700px] bg-gray-3">퀴즈 카드 검색</div>
+        <QuizSearchList />
       </Layout.Content.Left>
       <Layout.Content.Right>
-        <div className=" h-[800px] bg-warning">퀴즈 카드 폼</div>
+        <CreateQuiz />
       </Layout.Content.Right>
     </>
   );

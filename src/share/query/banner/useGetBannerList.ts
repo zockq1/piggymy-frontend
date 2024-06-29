@@ -16,11 +16,11 @@ interface GetBannerListResponse {
 }
 
 export const getBannerList = async (
-  query?: Request<GetBannerListRequestQuery>,
+  request?: Request<GetBannerListRequestQuery>,
 ) => {
   const response = await axiosInstance.get<Response<GetBannerListResponse>>(
     `/api/banners`,
-    { params: query?.data },
+    { params: request?.data },
   );
 
   return response.data;

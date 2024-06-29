@@ -1,8 +1,4 @@
-import {
-  ConfigProvider,
-  Table as AntdTable,
-  TableProps as AntdTableProps,
-} from 'antd';
+import { Table as AntdTable, TableProps as AntdTableProps } from 'antd';
 import * as React from 'react';
 import { ReactNode } from 'react';
 
@@ -31,26 +27,14 @@ const Table = ({ dataSource, columns, hasSelection, ...props }: TableProps) => {
   };
 
   return (
-    <ConfigProvider
-      theme={{
-        components: {
-          Table: {
-            headerBg: '#F4F5F8',
-            headerBorderRadius: 0,
-            borderColor: '#CDD1D9',
-          },
-        },
-      }}
-    >
-      <AntdTable
-        columns={columns}
-        dataSource={dataSource}
-        bordered
-        rowSelection={hasSelection ? rowSelection : undefined}
-        pagination={false}
-        {...props}
-      />
-    </ConfigProvider>
+    <AntdTable
+      columns={columns}
+      dataSource={dataSource}
+      bordered
+      rowSelection={hasSelection ? rowSelection : undefined}
+      pagination={false}
+      {...props}
+    />
   );
 };
 

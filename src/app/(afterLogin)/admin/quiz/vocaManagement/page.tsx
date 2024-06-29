@@ -1,26 +1,29 @@
 import React from 'react';
 
 import CardFilter from '@/app/(afterLogin)/admin/quiz/_components/CardFilter';
-import CardInfoForm from '@/app/(afterLogin)/admin/quiz/_components/CardInfoForm';
-import CardSearchList from '@/app/(afterLogin)/admin/quiz/_components/CardSearchList';
-import WordPageInfo from '@/app/(afterLogin)/admin/quiz/_components/WordPageInfo';
+import PageInfo from '@/app/(afterLogin)/admin/quiz/_components/PageInfo';
+import CreateVoca from '@/app/(afterLogin)/admin/quiz/vocaManagement/_components/CreateVoca';
+import VocaSearchList from '@/app/(afterLogin)/admin/quiz/vocaManagement/_components/VocaSearchList';
 import Layout from '@/share/layout/Layout';
 
 export default async function TermManagement() {
   return (
     <>
       <Layout.Content.Full>
-        <WordPageInfo />
+        <PageInfo
+          title={'용어카드 관리'}
+          path={['용어 퀴즈', '용어카드 관리']}
+        />
       </Layout.Content.Full>
       <Layout.Content.Full>
         <CardFilter />
       </Layout.Content.Full>
 
       <Layout.Content.Left>
-        <CardSearchList />
+        <VocaSearchList />
       </Layout.Content.Left>
       <Layout.Content.Right>
-        <CardInfoForm />
+        <CreateVoca />
       </Layout.Content.Right>
     </>
   );
