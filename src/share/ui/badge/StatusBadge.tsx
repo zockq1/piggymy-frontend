@@ -19,10 +19,12 @@ export const StatusBadgeVariants = cva('', {
 
 interface StatusBadgeProps extends HTMLAttributes<HTMLDivElement> {
   isActive: boolean;
+  labels?: string[];
 }
 
 export default function StatusBadge({
   isActive,
+  labels = ['사용중', '미사용'],
   className,
   ...props
 }: StatusBadgeProps) {
@@ -37,7 +39,7 @@ export default function StatusBadge({
       )}
       {...props}
     >
-      {isActive ? '사용중' : '미사용'}
+      {isActive ? labels[0] : labels[1]}
     </div>
   );
 }

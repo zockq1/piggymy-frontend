@@ -1,6 +1,15 @@
 'use client';
 
-import { DatePicker, Form, Input, Select, UploadFile } from 'antd';
+import {
+  Checkbox,
+  Col,
+  DatePicker,
+  Form,
+  Input,
+  Row,
+  Select,
+  UploadFile,
+} from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
 
 import Button from '../ui/button/Button';
@@ -81,6 +90,31 @@ export default function FormExample() {
             <DatePicker />
           </Form.Item>
           <ImageUpload initialImage="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" />
+          <Form.Item
+            name="checkbox-group"
+            label={<Label>서비스 약관 및 정책</Label>}
+          >
+            <Checkbox.Group>
+              <Row>
+                <Col>
+                  <Checkbox
+                    value="A"
+                    style={{ lineHeight: '32px', whiteSpace: 'nowrap' }}
+                  >
+                    서비스 이용 약관
+                  </Checkbox>
+                </Col>
+                <Col>
+                  <Checkbox
+                    value="B"
+                    style={{ lineHeight: '32px', whiteSpace: 'nowrap' }}
+                  >
+                    개인정보처리방침
+                  </Checkbox>
+                </Col>
+              </Row>
+            </Checkbox.Group>
+          </Form.Item>
           <Form.Item className="flex w-full justify-center">
             <Button size="large" color="gray" className="mx-4">
               취소
