@@ -1,10 +1,10 @@
 import React from 'react';
 
 import CardFilter from '@/app/(afterLogin)/admin/quiz/_components/CardFilter';
-import PageInfo from '@/app/(afterLogin)/admin/quiz/_components/PageInfo';
 import QuizSearchList from '@/app/(afterLogin)/admin/quiz/quizManagement/_components/QuizSearchList';
 import Layout from '@/share/layout/Layout';
 
+import PageInfo from '../../_components/PageInfo';
 import CreateQuiz from './_components/CreateQuiz';
 
 export default async function QuizManagement() {
