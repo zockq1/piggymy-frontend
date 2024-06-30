@@ -43,7 +43,7 @@ export default function Header() {
         </div>
         <div className="h-2/3 w-1/2 pl-1">
           <p className="h-1/2 w-full text-sm leading-7">관리자</p>
-          <p className="h-1/2 w-full text-sm leading-5">asd</p>
+          <p className="h-1/2 w-full text-sm leading-5"></p>
         </div>
       </div>
     </header>

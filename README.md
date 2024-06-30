@@ -1,7 +1,8 @@
 # 경제 용어 학습 서비스 피기미 Admin
 
-<img src="docs/mobile.png" height="300"/>
-<img src="docs/form.png" height="300"/>
+<p align="center">
+<img src="docs/mobile.png" height="300"/><img src="docs/form.png" height="300"/></p>
+출처: https://0soo.tistory.com/227 [Lifealong:티스토리]
 <br>
 
 ## 서비스 소개
@@ -37,16 +38,51 @@ share
 type
 ```
 
-## 각 페이지 소개
+## 개발
+
+### 0. 공용 컴포넌트
+
+- 탁재민
+  - button, list-item(배너, 뱃지, 카드, 테마, 코멘트 등), post 컴포넌트 구현
+  - 레이아웃 시스템 구현(https://tak-fe.tistory.com/48)
+- 윤희구
+  - breadmrumb, content-box, segmented, title 컴포넌트 구현
+- 강민혁
+  - 헤더, 사이드 메뉴 구현
 
 ### 1. 로그인, 홈 화면
 
+![login](/docs/login.png)
+![login](/docs/home.png)
+
+- 탁재민
+  - JWT 인증 로직 구현
+    - 쿠키를 이용한 Next 서버와의 인증 상태 공유
+    - axios를 이용한 refresh 인증 로직 구현
+  - 홈 화면 UI 구현
+- 강민혁
+  - 로그인 UI 구현
+
 ### 2. 콘텐츠
+
+![login](/docs/form.png)
+
+- 탁재민
+  - 그리팅 메시지 관리 페이지 구현
+  - 배너 관리 페이지 구현
+  - 카드 모음집 페이지 관리 구현
+  - 링크 관리 구현(진행중)
 
 ### 3. 용어/퀴즈
 
-### 4. 설정
+![login](/docs/quiz.png)
 
-### 5. 회원
+- 윤희구
+  - 용어 관리 페이지 구현
+  - 퀴즈 관리 페이지 구현
 
-### 6. 관리자
+### 4. 설정(개발 예정)
+
+### 5. 회원(개발 예정)
+
+### 6. 관리자(개발 예정)
