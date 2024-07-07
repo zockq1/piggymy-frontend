@@ -7,10 +7,11 @@ import {
 import Layout from '@/share/layout/Layout';
 import { usePrefetchBanner } from '@/share/query/banner/useGetBanner';
 import { usePrefetchBannerList } from '@/share/query/banner/useGetBannerList';
+import { usePrefetchQuizList } from '@/share/query/quiz/useGetQuizList';
 import { prefetchVocaList } from '@/share/query/voca/useGetVocaList';
 
+import PageInfo from '../../../_components/PageInfo';
 import BannerList from '../_components/BannerList';
-import BannerPageInfo from '../_components/BannerPageInfo';
 import UpdateBanner from '../_components/UpdateBanner';
 
 export default async function Banner({
@@ -24,6 +25,9 @@ export default async function Banner({
     prefetchVocaList(queryClient, {
       data: { page: 1, page_size: 1000 },
     }),
+    usePrefetchQuizList(queryClient, {
+      data: { page: 1, page_size: 1000 },
+    }),
     usePrefetchBanner(queryClient, {
       id: { bannerId: Number(params.bannerId) },
       data: null,
@@ -33,7 +37,7 @@ export default async function Banner({
   return (
     <>
       <Layout.Content.Full>
-        <BannerPageInfo />
+        <PageInfo title="롤링 배너 관리" path={['콘텐츠', '롤링 배너 관리']} />
       </Layout.Content.Full>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <Layout.Content.Full>

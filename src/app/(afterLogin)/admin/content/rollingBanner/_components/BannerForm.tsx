@@ -5,6 +5,7 @@ import { FormInstance } from 'antd/es/form/Form';
 import dayjs, { Dayjs } from 'dayjs';
 import { useEffect, useState } from 'react';
 
+import { ActiveCheckbox } from '@/share/form/item/ActiveCheckbox';
 import CreatedDate from '@/share/form/item/CreatedDate';
 import ImageUpload from '@/share/form/item/ImageUpload';
 import Label from '@/share/form/item/Label';
@@ -33,6 +34,7 @@ interface RollingBannerFormProps {
     buttonName: string;
     moveQuizId: number | null;
     moveVocaId: number | null;
+    isUse: boolean;
   };
 }
 
@@ -43,7 +45,9 @@ export default function RollingBannerForm({
   form,
   mode,
 }: RollingBannerFormProps) {
-  const [type, setType] = useState<'VOCA' | 'QUIZ'>('VOCA');
+  const [type, setType] = useState<'VOCA' | 'QUIZ'>(
+    initialValue ? initialValue.type : 'VOCA',
+  );
 
   const handleTypeChange = (value: 'VOCA' | 'QUIZ') => {
     setType(value);
@@ -65,6 +69,7 @@ export default function RollingBannerForm({
         <CreatedDate
           createdDate={initialValue ? initialValue.createdDate : dayjs()}
         />
+        <ActiveCheckbox initialValue={initialValue?.isUse} />
         <Form.Item
           label={<Label>노출 기간</Label>}
           name="exposureDuration"

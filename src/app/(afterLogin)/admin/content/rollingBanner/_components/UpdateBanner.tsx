@@ -25,25 +25,7 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
   });
 
   const handleSubmit = (formValue: BannerFormValue) => {
-    const {
-      exposureDuration,
-      title,
-      type,
-      image,
-      buttonName,
-      moveVocaId,
-      moveQuizId,
-    } = formValue;
-    const formData = {
-      title: title,
-      exposureEndDate: exposureDuration[1],
-      exposureStartDate: exposureDuration[0],
-      type: type,
-      image: image,
-      buttonName: buttonName,
-      moveVocaId: moveVocaId,
-      moveQuizId: moveQuizId,
-    };
+    const { exposureDuration, image } = formValue;
 
     if (
       image &&
@@ -54,7 +36,9 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
       updateBanner({
         id: { bannerId: currentBannerId },
         data: {
-          ...formData,
+          ...formValue,
+          exposureEndDate: exposureDuration[1],
+          exposureStartDate: exposureDuration[0],
           image: [],
           imageName: String(data?.data.imageName),
           imagePath: String(data?.data.imagePath),
@@ -64,7 +48,9 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
       updateBanner({
         id: { bannerId: currentBannerId },
         data: {
-          ...formData,
+          ...formValue,
+          exposureEndDate: exposureDuration[1],
+          exposureStartDate: exposureDuration[0],
           imageName: '',
           imagePath: '',
         },
@@ -85,13 +71,8 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
       modifiedDate,
       exposureEndDate,
       exposureStartDate,
-      title,
-      type,
       imagePath,
       imageName,
-      buttonName,
-      moveVocaId,
-      moveQuizId,
     } = data.data;
 
     return (
@@ -101,16 +82,12 @@ export default function UpdateBanner({ currentBannerId }: UpdateBannerProps) {
         onDelete={handleCancel}
         onSubmit={handleSubmit}
         initialValue={{
+          ...data.data,
           createdDate: dayjs(createdDate),
           modifiedDate: dayjs(modifiedDate),
           exposureStartDate: dayjs(exposureStartDate),
           exposureEndDate: dayjs(exposureEndDate),
-          type: type,
-          title: title,
           image: imagePath + imageName,
-          buttonName: buttonName,
-          moveVocaId: moveVocaId,
-          moveQuizId: moveQuizId,
         }}
       />
     );

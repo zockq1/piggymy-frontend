@@ -9,8 +9,8 @@ import { usePrefetchCardList } from '@/share/query/card/useGetCardList';
 import { usePrefetchQuizList } from '@/share/query/quiz/useGetQuizList';
 import { prefetchVocaList } from '@/share/query/voca/useGetVocaList';
 
+import PageInfo from '../../_components/PageInfo';
 import CardList from './_components/CardList';
-import CardPageInfo from './_components/CardPageInfo';
 import CreateCard from './_components/CreateCard';
 
 export default async function Card() {
@@ -27,7 +27,10 @@ export default async function Card() {
   return (
     <>
       <Layout.Content.Full>
-        <CardPageInfo />
+        <PageInfo
+          title="테마별 카드모음집 관리"
+          path={['콘텐츠', '테마별 카드모음집 관리']}
+        />
       </Layout.Content.Full>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <Layout.Content.Full>
