@@ -20,12 +20,6 @@ export default function VocaSelect({ name, initialValue }: VocaSelectProps) {
       label={<Label>{'관련 용어카드'}</Label>}
       name={name}
       initialValue={initialValue}
-      rules={[
-        {
-          required: true,
-          message: `용어 카드를 선택해 주세요`,
-        },
-      ]}
     >
       <Select
         showSearch

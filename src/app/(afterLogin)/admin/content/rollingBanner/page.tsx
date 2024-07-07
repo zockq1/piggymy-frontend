@@ -6,7 +6,7 @@ import {
 
 import Layout from '@/share/layout/Layout';
 import { usePrefetchBannerList } from '@/share/query/banner/useGetBannerList';
-import { usePrefetchQuizList } from '@/share/query/quiz/useGetQuizList';
+import { prefetchQuizList } from '@/share/query/quiz/useGetQuizList';
 import { prefetchVocaList } from '@/share/query/voca/useGetVocaList';
 
 import PageInfo from '../../_components/PageInfo';
@@ -20,7 +20,7 @@ export default async function Banner() {
     prefetchVocaList(queryClient, {
       data: { page: 1, page_size: 1000 },
     }),
-    usePrefetchQuizList(queryClient, {
+    prefetchQuizList(queryClient, {
       data: { page: 1, page_size: 1000 },
     }),
   ]);

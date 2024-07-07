@@ -7,7 +7,7 @@ import {
 import Layout from '@/share/layout/Layout';
 import { usePrefetchCard } from '@/share/query/card/useGetCard';
 import { usePrefetchCardList } from '@/share/query/card/useGetCardList';
-import { usePrefetchQuizList } from '@/share/query/quiz/useGetQuizList';
+import { prefetchQuizList } from '@/share/query/quiz/useGetQuizList';
 import { prefetchVocaList } from '@/share/query/voca/useGetVocaList';
 
 import PageInfo from '../../../_components/PageInfo';
@@ -21,7 +21,7 @@ export default async function Card({ params }: { params: { cardId: string } }) {
     prefetchVocaList(queryClient, {
       data: { page: 1, page_size: 1000 },
     }),
-    usePrefetchQuizList(queryClient, {
+    prefetchQuizList(queryClient, {
       data: { page: 1, page_size: 1000 },
     }),
     usePrefetchCard(queryClient, {

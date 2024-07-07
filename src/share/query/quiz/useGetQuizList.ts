@@ -26,30 +26,40 @@ interface GetQuizListResponse {
   }[];
 }
 
+const removeNullValues = (obj: GetQuizListRequestQuery) => {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([, v]) => v !== null && v !== undefined),
+  );
+};
+
 export const getQuizList = async (
-  request?: Request<GetQuizListRequestQuery>,
+  request: Request<GetQuizListRequestQuery>,
 ) => {
+  const filteredParams = removeNullValues(request.data);
+
   const response = await axiosInstance.get<Response<GetQuizListResponse>>(
     `/api/quizzes`,
-    { params: request?.data },
+    {
+      params: filteredParams,
+    },
   );
 
   return response.data;
 };
 
-export function useGetQuizList(data?: Request<GetQuizListRequestQuery>) {
+export function useGetQuizList(request: Request<GetQuizListRequestQuery>) {
   return useQuery({
-    queryKey: ['quizzes', data?.data],
-    queryFn: () => getQuizList(data),
+    queryKey: ['quizzes', request?.data],
+    queryFn: () => getQuizList(request),
   });
 }
 
-export function usePrefetchQuizList(
+export function prefetchQuizList(
   queryClient: QueryClient,
-  data?: Request<GetQuizListRequestQuery>,
+  request: Request<GetQuizListRequestQuery>,
 ) {
   return queryClient.prefetchQuery({
-    queryKey: ['quizzes', data?.data],
-    queryFn: () => getQuizList(data),
+    queryKey: ['quizzes', request?.data],
+    queryFn: () => getQuizList(request),
   });
 }
