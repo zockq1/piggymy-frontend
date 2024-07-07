@@ -45,6 +45,7 @@ export interface CreateVocaRequestJson {
   isUse: false;
   image: UploadFile[];
   createdDate: string;
+  quizId: number | string;
 }
 
 export interface UpdateVocaRequestJson {
@@ -63,4 +64,5 @@ export interface UpdateVocaRequestJson {
   isUse: false;
   image: UploadFile[];
   createdDate: string;
+  quizId?: number | string;
 }

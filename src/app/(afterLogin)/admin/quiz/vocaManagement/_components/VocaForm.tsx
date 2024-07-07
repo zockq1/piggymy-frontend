@@ -2,15 +2,13 @@ import { Form, Input } from 'antd';
 import { FormInstance } from 'antd/es/form/Form';
 import TextArea from 'antd/es/input/TextArea';
 import dayjs from 'dayjs';
-import Image from 'next/image';
 import React from 'react';
 
-import plus from '/public/img/icon/plus.png';
 import { ActiveCheckbox } from '@/share/form/item/ActiveCheckbox';
 import ImageUpload from '@/share/form/item/ImageUpload';
 import Label from '@/share/form/item/Label';
+import QuizSelect from '@/share/form/item/QuizSelect';
 import Button from '@/share/ui/button/Button';
-import IconButton from '@/share/ui/button/IconButton';
 import ContentBox from '@/share/ui/content-box/ContentBox';
 import { CreateVocaRequestJson, UpdateVocaRequestJson } from '@/type/vocaType';
 
@@ -62,23 +60,24 @@ function VocaForm({ initialValues, form, onCancel, onFinish }: VocaFormProps) {
         >
           <Input placeholder="내용을 입력해주세요." />
         </Form.Item>
-        <Form.Item label={<Label>뜻</Label>} name="meaning">
+        <Form.Item label={<Label>뜻</Label>} name="content">
           <TextArea rows={8} />
         </Form.Item>
         <Form.Item
           label={<Label>뜻 출처</Label>}
-          name="meaningSrc"
+          name="sourceName"
           className={'w-full'}
         >
           <Input placeholder="내용을 입력해주세요." />
         </Form.Item>
         <Form.Item
           label={<Label>관련 링크</Label>}
-          name="reference1"
+          name="sourceLink"
           className={'w-full'}
         >
           <Input placeholder="내용을 입력해주세요." />
         </Form.Item>
+        {/*
         <Form.Item
           label={<Label>{''}</Label>}
           colon={false}
@@ -87,13 +86,15 @@ function VocaForm({ initialValues, form, onCancel, onFinish }: VocaFormProps) {
         >
           <div className={'flex w-full items-start justify-between gap-4'}>
             <Input placeholder="내용을 입력해주세요." />
-            <IconButton type={'submit'}>
+            <IconButton type={'button'}>
               <div className={'flex items-center justify-center gap-1'}>
-                <Image src={plus} alt="검색" width={14} height={14} />
+                <Image src={plus} alt="링크 추가" width={14} height={14} />
               </div>
             </IconButton>
           </div>
         </Form.Item>
+        */}
+        <QuizSelect name="quizId" initialValue={initialValues?.quizId} />
         <Form.Item className="flex w-full justify-center">
           <Button
             type="button"
