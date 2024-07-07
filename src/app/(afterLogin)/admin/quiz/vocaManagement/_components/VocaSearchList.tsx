@@ -84,7 +84,7 @@ function VocaSearchList({ searchParams }: VocaSearchListProps) {
         ...searchParams,
       },
     }).then();
-  }, [page, sortType, queryClient]);
+  }, [page, sortType, queryClient, searchParams]);
 
   const handleFinish = (formValue: FormExampleValue) => {
     const params = {
