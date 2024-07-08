@@ -16,6 +16,7 @@ import Button from '@/share/ui/button/Button';
 import ContentBox from '@/share/ui/content-box/ContentBox';
 import Table from '@/share/ui/table/Table';
 import Title from '@/share/ui/title/Title';
+import { LinkType } from '@/type/linkType';
 
 interface DataType {
   key: React.Key;
@@ -90,9 +91,11 @@ const columns: AntdTableProps<DataType>['columns'] = [
 export default function LinkList() {
   const queryClient = useQueryClient();
   const searchParams = useSearchParams();
-  const startDate = searchParams.get('start_date');
-  const endDate = searchParams.get('end_date');
+  const startDate = searchParams.get('startDate');
+  const endDate = searchParams.get('endDate');
   const title = searchParams.get('title');
+  const publishName = searchParams.get('publishName');
+  const category = searchParams.get('category');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [checkedIdList, setCheckedIdList] = useState<number[]>([]);
   const { data } = useGetLinkList({
@@ -102,6 +105,8 @@ export default function LinkList() {
       start_date: startDate!,
       end_date: endDate!,
       title: title!,
+      publish_name: publishName!,
+      category: category as LinkType,
     },
   });
   const { mutate: deleteLinkList } = useDeleteLinkList();
