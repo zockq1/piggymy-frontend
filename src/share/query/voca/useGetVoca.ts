@@ -6,17 +6,22 @@ import { VocaResponseJson } from '@/type/vocaType';
 import axiosInstance from '../axios';
 
 export const getVocaDetail = async (request: Request<number>) => {
-  const {
-    data: { data },
-  } = await axiosInstance.get<Response<VocaResponseJson>>(
-    `/api/vocas/${request.data}`,
-  );
-  return data;
+  try {
+    const {
+      data: { data },
+    } = await axiosInstance.get<Response<VocaResponseJson>>(
+      `/api/vocas/${request.data}`,
+    );
+    return data;
+  } catch (error) {
+    throw new Error('error while getting voca');
+  }
 };
 
 export function useGetVoca(vocaId: number) {
   return useQuery({
     queryKey: ['voca', vocaId],
     queryFn: () => getVocaDetail({ data: vocaId }),
+    retryDelay: 300,
   });
 }
