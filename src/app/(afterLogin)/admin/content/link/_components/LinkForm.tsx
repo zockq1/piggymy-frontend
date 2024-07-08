@@ -12,8 +12,6 @@ import Button from '@/share/ui/button/Button';
 import ContentBox from '@/share/ui/content-box/ContentBox';
 import { LinkFormValue, LinkType } from '@/type/linkType';
 
-const { RangePicker } = DatePicker;
-
 interface LinkFormProps {
   onSubmit: (data: LinkFormValue) => void;
   onDelete: () => void;
@@ -90,7 +88,7 @@ export default function LinkForm({
         </Form.Item>
         <Form.Item
           label={<Label>링크 URL</Label>}
-          name="title"
+          name="sourceLink"
           rules={[
             {
               required: true,
@@ -125,7 +123,7 @@ export default function LinkForm({
           ]}
           initialValue={initialValue ? dayjs(initialValue?.publishDate) : null}
         >
-          <RangePicker />
+          <DatePicker />
         </Form.Item>
 
         <VocaChoice

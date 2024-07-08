@@ -4,6 +4,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { PaginationProps } from 'antd';
 import { TableProps as AntdTableProps } from 'antd/es/table/InternalTable';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 
 import { useDeleteLinkList } from '@/share/query/link/useDeleteLinkList';
@@ -49,7 +50,9 @@ const columns: AntdTableProps<DataType>['columns'] = [
     key: 'title',
     width: 300,
     render: (text: { title: string; id: string }) => (
-      <Link href={`/admin/content/link/${text.id}`}>{text.title}</Link>
+      <Link href={`/admin/content/link/${text.id}`} className="underline">
+        {text.title}
+      </Link>
     ),
   },
   {
@@ -86,10 +89,20 @@ const columns: AntdTableProps<DataType>['columns'] = [
 
 export default function LinkList() {
   const queryClient = useQueryClient();
+  const searchParams = useSearchParams();
+  const startDate = searchParams.get('start_date');
+  const endDate = searchParams.get('end_date');
+  const title = searchParams.get('title');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [checkedIdList, setCheckedIdList] = useState<number[]>([]);
   const { data } = useGetLinkList({
-    data: { page: currentPage, page_size: 10 },
+    data: {
+      page: currentPage,
+      page_size: 10,
+      start_date: startDate!,
+      end_date: endDate!,
+      title: title!,
+    },
   });
   const { mutate: deleteLinkList } = useDeleteLinkList();
   const totalCount = data?.data ? data?.data.totalCount : 0;
@@ -125,16 +138,22 @@ export default function LinkList() {
 
   useEffect(() => {
     prefetchLinkList(queryClient, {
-      data: { page: currentPage + 1, page_size: 10 },
+      data: {
+        page: currentPage + 1,
+        page_size: 10,
+        start_date: startDate!,
+        end_date: endDate!,
+        title: title!,
+      },
     });
-  }, [currentPage, queryClient]);
+  }, [currentPage, queryClient, endDate, startDate, title]);
 
   const handleChangePage: PaginationProps['onChange'] = (page) => {
     setCurrentPage(page);
   };
 
   const handleDelete = () => {
-    deleteLinkList({ data: { linkIds: checkedIdList } });
+    deleteLinkList({ data: { contentIds: checkedIdList } });
   };
 
   return (

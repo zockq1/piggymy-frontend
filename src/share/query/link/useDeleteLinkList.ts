@@ -7,7 +7,7 @@ import { Request, Response } from '@/type/apiType';
 import axiosInstance from '../axios';
 
 export const deleteLinkList = async (
-  request: Request<{ linkIds: number[] }>,
+  request: Request<{ contentIds: number[] }>,
 ) => {
   const response = await axiosInstance.post<Response<number>>(
     `/api/contents/delete`,

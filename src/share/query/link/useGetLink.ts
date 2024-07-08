@@ -13,7 +13,7 @@ interface GetLinkResponse extends LinkResponseJson {}
 
 export const getLink = async (request: Request<null, GetLinkId>) => {
   const response = await axiosInstance.get<Response<GetLinkResponse>>(
-    `/api/constents/${request.id?.linkId}`,
+    `/api/contents/${request.id?.linkId}`,
   );
 
   return response.data;
