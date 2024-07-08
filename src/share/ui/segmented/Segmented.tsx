@@ -47,7 +47,7 @@ const Segment = ({
 interface SegmentedProps {
   segmentList: Segment[];
   activeSegment: string;
-  controlType: 'route' | 'state';
+  controlType?: 'route' | 'state';
   onClick?: (segment: Segment) => void;
 }
 
