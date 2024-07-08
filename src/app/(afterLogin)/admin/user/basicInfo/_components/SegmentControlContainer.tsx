@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 
+import UserBadges from '@/app/(afterLogin)/admin/user/basicInfo/_components/UserBadges';
 import UserInfo from '@/app/(afterLogin)/admin/user/basicInfo/_components/UserInfo';
 import Segmented, { Segment } from '@/share/ui/segmented/Segmented';
 
@@ -26,6 +27,7 @@ function SegmentControlContainer() {
         onClick={handleSegmentClick}
       />
       {currentSegment === 'userInfo' && <UserInfo />}
+      {currentSegment === 'badges' && <UserBadges />}
     </div>
   );
 }

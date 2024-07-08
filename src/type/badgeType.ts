@@ -1,5 +1,10 @@
 import { UploadFile } from 'antd';
 
+export interface BadgeListResponseJson {
+  totalCount: number;
+  list: BadgeResponseJson[];
+}
+
 export interface BadgeRequestJson {
   thumbnail: UploadFile[];
   title: string;
