@@ -30,6 +30,7 @@ interface CardProps {
   route: string;
   isChecked: boolean;
   onChangeChecked: (...args: any[]) => void;
+  labels?: string[];
 }
 
 export default function Card({
@@ -42,6 +43,7 @@ export default function Card({
   route,
   isChecked,
   onChangeChecked,
+  labels,
 }: CardProps) {
   return (
     <div
@@ -63,7 +65,7 @@ export default function Card({
         <div className="break-keep font-bold">{englishTitle}</div>
         <div className="text-xs">{createdDate.format('YYYY.MM.DD')}</div>
       </Link>
-      <StatusBadge isActive={isActive} />
+      <StatusBadge isActive={isActive} labels={labels} />
     </div>
   );
 }
