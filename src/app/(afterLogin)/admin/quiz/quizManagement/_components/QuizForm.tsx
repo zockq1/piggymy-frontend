@@ -47,7 +47,11 @@ function QuizForm({ initialValues, form, onCancel, onFinish }: QuizFormProps) {
           <TextArea rows={2} />
         </Form.Item>
         <ChoiceList />
-        <VocaSelect label="관련 용어카드" name="vocaId" initialValue={48} />
+        <VocaSelect
+          label="관련 용어카드"
+          name="vocaId"
+          initialValue={initialValues?.vocaId}
+        />
         <Form.Item className="flex w-full justify-center">
           <Button
             type="button"

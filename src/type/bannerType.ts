@@ -10,6 +10,7 @@ export interface BannerRequestJson {
   moveVocaId: number | null;
   exposureStartDate: Dayjs;
   exposureEndDate: Dayjs;
+  isUse: boolean;
 }
 
 export interface BannerResponseJson {
@@ -25,6 +26,7 @@ export interface BannerResponseJson {
   exposureEndDate: string;
   createdDate: string;
   modifiedDate: string;
+  isUse: boolean;
 }
 
 export interface BannerFormValue {
@@ -35,4 +37,5 @@ export interface BannerFormValue {
   buttonName: string;
   moveQuizId: number | null;
   moveVocaId: number | null;
+  isUse: boolean;
 }

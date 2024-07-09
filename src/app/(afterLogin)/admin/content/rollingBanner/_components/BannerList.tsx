@@ -79,6 +79,7 @@ export default function RollingBannerList({
                 createdDate,
                 exposureStartDate,
                 exposureEndDate,
+                isUse,
               } = banner;
 
               return (
@@ -88,12 +89,14 @@ export default function RollingBannerList({
                     category={type}
                     buttonTitle={buttonName}
                     image={imagePath + imageName}
-                    isActive={dayjs().isBetween(
-                      exposureStartDate,
-                      exposureEndDate,
-                      null,
-                      '[]',
-                    )}
+                    isActive={
+                      dayjs().isBetween(
+                        exposureStartDate,
+                        exposureEndDate,
+                        null,
+                        '[]',
+                      ) && isUse
+                    }
                     isSelected={currentBannerId === id}
                     createdDate={dayjs(createdDate)}
                     route={`/admin/content/rollingBanner/${id}`}

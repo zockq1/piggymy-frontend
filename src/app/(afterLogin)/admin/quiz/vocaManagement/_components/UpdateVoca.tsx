@@ -2,7 +2,7 @@
 
 import { UploadFile } from 'antd';
 import { useForm } from 'antd/es/form/Form';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import React, { useEffect, useMemo } from 'react';
 
 import VocaForm from '@/app/(afterLogin)/admin/quiz/vocaManagement/_components/VocaForm';
@@ -12,9 +12,10 @@ import { UpdateVocaRequestJson } from '@/type/vocaType';
 
 export default function UpdateVoca() {
   const params = useParams();
+  const router = useRouter();
   const [form] = useForm();
 
-  const { data } = useGetVoca(+params.vocaId);
+  const { data, isError } = useGetVoca(+params.vocaId);
   const { mutate: update } = useUpdateVoca();
 
   const initialValues = useMemo(
@@ -38,6 +39,7 @@ export default function UpdateVoca() {
       thumbnailSourceLink: data?.thumbnailSourceLink ?? '',
       createdDate: data?.createdDate ?? '',
       content: data?.content ?? '',
+      quizId: data?.quizId ?? undefined,
     }),
     [data],
   );
@@ -81,6 +83,12 @@ export default function UpdateVoca() {
 
     form.setFieldsValue(initialValues);
   }, [data, form, initialValues]);
+
+  useEffect(() => {
+    if (isError) {
+      router.push('/admin/quiz/vocaManagement');
+    }
+  }, [isError, router]);
 
   return (
     <VocaForm

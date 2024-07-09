@@ -8,8 +8,8 @@ import Layout from '@/share/layout/Layout';
 import { usePrefetchBadge } from '@/share/query/badge/useGetBadge';
 import { usePrefetchBadgeList } from '@/share/query/badge/useGetBadgeList';
 
+import PageInfo from '../../../_components/PageInfo';
 import BadgeList from '../_components/BadgeList';
-import BadgePageInfo from '../_components/BadgePageInfo';
 import UpdateBadge from '../_components/UpdateBadge';
 
 export default async function Badge({
@@ -29,7 +29,7 @@ export default async function Badge({
   return (
     <>
       <Layout.Content.Full>
-        <BadgePageInfo />
+        <PageInfo title="배지 관리" path={['콘텐츠', '배지 관리']} />
       </Layout.Content.Full>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <Layout.Content.Full>

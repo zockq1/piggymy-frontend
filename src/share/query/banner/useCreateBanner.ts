@@ -22,6 +22,7 @@ export const createBanner = async (
     exposureEndDate,
     exposureStartDate,
     image,
+    isUse,
   } = request.data;
 
   const formData = new FormData();
@@ -43,6 +44,7 @@ export const createBanner = async (
         buttonName: buttonName,
         moveQuizId: moveQuizId || null,
         moveVocaId: moveVocaId || null,
+        isUse: isUse,
         exposureStartDate: exposureStartDate.format('YYYY-MM-DD'),
         exposureEndDate: exposureEndDate.format('YYYY-MM-DD'),
       }),
@@ -71,12 +73,12 @@ export function useCreateBanner() {
 
   return useMutation({
     mutationFn: createBanner,
-    onSuccess: async (data) => {
+    onSuccess: async (response) => {
       await queryClient.invalidateQueries({ queryKey: ['banners'] });
       notification.success({
         message: '배너 생성 성공',
       });
-      router.push(`/admin/content/rollingBanner/${data.data}`);
+      router.push(`/admin/content/rollingBanner/${response.data}`);
     },
     onError: (error: AxiosError<Response<unknown>, unknown>) => {
       if (axios.isAxiosError(error)) {
