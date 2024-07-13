@@ -17,14 +17,14 @@ export const vocaQuizList: ListType[] = [
 ];
 
 export const settingList: ListType[] = [
-  { title: '전체 알림', route: '/admin/setting/' },
-  { title: '신규 알림 등록', route: '/admin/setting/' },
-  { title: '전체 공지 사항', route: '/admin/setting/' },
-  { title: '신규 공지 사항 등록', route: '/admin/setting/' },
-  { title: '전체 FAQ', route: '/admin/setting/' },
-  { title: '신규 FAQ 등록', route: '/admin/setting/' },
-  { title: '서비스 이용 약관', route: '/admin/setting/' },
-  { title: '개인 정보 처리 방침', route: '/admin/setting/' },
+  // { title: '전체 알림', route: '/admin/setting/' },
+  // { title: '신규 알림 등록', route: '/admin/setting/' },
+  // { title: '전체 공지 사항', route: '/admin/setting/' },
+  // { title: '신규 공지 사항 등록', route: '/admin/setting/' },
+  // { title: '전체 FAQ', route: '/admin/setting/' },
+  // { title: '신규 FAQ 등록', route: '/admin/setting/' },
+  { title: '서비스 이용 약관', route: '/admin/setting/agreement' },
+  { title: '개인 정보 처리 방침', route: '/admin/setting/privacy' },
 ];
 
 export const userList: ListType[] = [

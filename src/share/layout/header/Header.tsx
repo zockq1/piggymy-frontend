@@ -10,7 +10,7 @@ export default function Header() {
     { title: '홈', route: '/admin' },
     { title: '콘텐츠', route: '/admin/content/greetingMessage' },
     { title: '용어/퀴즈', route: '/admin/quiz/vocaManagement' },
-    { title: '설정', route: '/admin/setting/privacyPolicy' },
+    { title: '설정', route: '/admin/setting/agreement' },
     { title: '회원', route: '/admin/user/basicInfo' },
     { title: '관리자', route: '/admin/management/basicInfo' },
   ];
