@@ -115,7 +115,7 @@ function UserSearchList() {
         </div>
         <div className={'flex w-full items-start justify-between'}>
           <Title>
-            전체 회원 <Title.H>{totalCount}</Title.H>건
+            전체 회원 <Title.H>{totalCount}</Title.H>명
           </Title>
           <Dropdown
             options={[

@@ -1,14 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { Response } from '@/type/apiType';
-import { BadgeListResponseJson } from '@/type/badgeType';
+import { OpinionListResponseJson } from '@/type/opinionType';
 
 import axiosInstance from '../axios';
 
 export const getUserOpinions = async (userId: number) => {
   const {
     data: { data },
-  } = await axiosInstance.get<Response<BadgeListResponseJson>>(
+  } = await axiosInstance.get<Response<OpinionListResponseJson>>(
     `/api/users/${userId}/opinions`,
   );
 

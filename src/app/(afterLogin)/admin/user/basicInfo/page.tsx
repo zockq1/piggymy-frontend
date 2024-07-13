@@ -6,8 +6,6 @@ import SegmentControlContainer from '@/app/(afterLogin)/admin/user/basicInfo/_co
 import UserSearchList from '@/app/(afterLogin)/admin/user/basicInfo/_components/UserSearchList';
 import Layout from '@/share/layout/Layout';
 
-import PageInfo from '../../_components/PageInfo';
-
 export default async function UserManagement() {
   return (
     <>

@@ -1,23 +1,30 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { Response } from '@/type/apiType';
-import { BadgeListResponseJson } from '@/type/badgeType';
+import { Request, Response } from '@/type/apiType';
+import { BookmarkListResponseJson } from '@/type/bookmarkType';
 
 import axiosInstance from '../axios';
 
-export const getUserBookmarks = async (userId: number) => {
-  const {
-    data: { data },
-  } = await axiosInstance.get<Response<BadgeListResponseJson>>(
-    `/api/users/${userId}/bookmarks`,
+interface GetQuizListRequestQuery {
+  userId: number;
+  page?: number;
+  page_size?: number;
+  sort_type: 'CREATED' | 'MODIFIED';
+}
+
+export const getUserBookmarks = async (
+  request: Request<GetQuizListRequestQuery>,
+) => {
+  const { data } = await axiosInstance.get<Response<BookmarkListResponseJson>>(
+    `/api/users/${request.data}/bookmarks`,
   );
 
   return data;
 };
 
-export function useGetUserBookmarks(userId: number) {
+export function useGetUserBookmarks(request: Request<GetQuizListRequestQuery>) {
   return useQuery({
-    queryKey: ['user', userId],
-    queryFn: () => getUserBookmarks(userId),
+    queryKey: ['user', request.data],
+    queryFn: () => getUserBookmarks(request),
   });
 }

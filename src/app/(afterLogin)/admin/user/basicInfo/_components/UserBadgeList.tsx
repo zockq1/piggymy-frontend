@@ -9,14 +9,15 @@ import { useGetUserBadges } from '@/share/query/user/useGetUserBadges';
 import ContentBox from '@/share/ui/content-box/ContentBox';
 import Badge from '@/share/ui/list-item/Badge';
 
-export default function UserBadges() {
+export default function UserBadgeList() {
   const { userId } = useParams();
 
   const { data } = useGetUserBadges(+userId);
+  const badgeList = data ? data.data.list : [];
 
   return (
     <ContentBox className={'grid w-full grid-cols-4'}>
-      {data?.list.map((badge) => (
+      {badgeList.map((badge) => (
         <Badge
           key={badge.id}
           title={badge.title}

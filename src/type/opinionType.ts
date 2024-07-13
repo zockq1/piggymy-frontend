@@ -24,3 +24,8 @@ export interface OpinionResponseJson {
   createdDate: string;
   modifiedDate: string;
 }
+
+export interface OpinionListResponseJson {
+  totalCount: number;
+  list: OpinionResponseJson[];
+}
