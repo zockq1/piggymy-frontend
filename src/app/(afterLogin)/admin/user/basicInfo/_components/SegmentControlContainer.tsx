@@ -3,7 +3,9 @@
 import React, { useState } from 'react';
 
 import UserBadges from '@/app/(afterLogin)/admin/user/basicInfo/_components/UserBadges';
+import UserBookmarks from '@/app/(afterLogin)/admin/user/basicInfo/_components/UserBookmarks';
 import UserInfo from '@/app/(afterLogin)/admin/user/basicInfo/_components/UserInfo';
+import UserOpinions from '@/app/(afterLogin)/admin/user/basicInfo/_components/UserOpinions';
 import Segmented, { Segment } from '@/share/ui/segmented/Segmented';
 
 function SegmentControlContainer() {
@@ -28,6 +30,8 @@ function SegmentControlContainer() {
       />
       {currentSegment === 'userInfo' && <UserInfo />}
       {currentSegment === 'badges' && <UserBadges />}
+      {currentSegment === 'bookmarks' && <UserBookmarks />}
+      {currentSegment === 'opinions' && <UserOpinions />}
     </div>
   );
 }
