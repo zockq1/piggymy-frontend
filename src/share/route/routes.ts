@@ -29,6 +29,7 @@ export const settingList: ListType[] = [
 
 export const userList: ListType[] = [
   { title: '기본 정보 관리', route: '/admin/user/basicInfo' },
+  { title: '회원 의견 관리', route: '/admin/user/comment' },
 ];
 export const managerList: ListType[] = [
   { title: '전체 게시판', route: '/admin/management/basicInfo' },
