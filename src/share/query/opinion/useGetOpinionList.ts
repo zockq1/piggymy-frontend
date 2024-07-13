@@ -25,7 +25,7 @@ export const getOpinionList = async (
   request?: Request<GetOpinionListRequestQuery>,
 ) => {
   const response = await axiosInstance.get<Response<GetOpinionListResponse>>(
-    `/api/users/opinions`,
+    `/api/opinions`,
     { params: request?.data },
   );
 
