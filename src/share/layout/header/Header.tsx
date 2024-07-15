@@ -12,7 +12,7 @@ export default function Header() {
     { title: '용어/퀴즈', route: '/admin/quiz/vocaManagement' },
     { title: '설정', route: '/admin/setting/agreement' },
     { title: '회원', route: '/admin/user/basicInfo' },
-    { title: '관리자', route: '/admin/management/basicInfo' },
+    { title: '관리자', route: '/admin/member/basicInfo' },
   ];
 
   return (
