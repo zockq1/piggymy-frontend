@@ -26,7 +26,7 @@ export const InTheLayout: Story = {
         <Link href="/admin/quiz/vocaManagement">용어/퀴즈</Link>&nbsp;&nbsp;
         <Link href="/admin/setting/termsOfUse">설정</Link>&nbsp;&nbsp;
         <Link href="/admin/user/basicInfo">회원</Link>&nbsp;&nbsp;
-        <Link href="/admin/management/basicInfo">관리자</Link>
+        <Link href="/admin/member/basicInfo">관리자</Link>
       </div>
       <Layout.LeftSideMenu>
         <div className="h-full bg-gray-5">

@@ -5,7 +5,7 @@ import bottomArrow from '/public/img/Icon/Name=Chevron-off@3x.png';
 import HeaderList from '@/share/layout/header/HeaderList';
 import {
   contentList,
-  managerList,
+  memberList,
   settingList,
   userList,
   vocaQuizList,
@@ -46,7 +46,7 @@ export default function HeaderDetail() {
           <HeaderList items={vocaQuizList} title="용어/퀴즈" />
           <HeaderList items={settingList} title="설정" />
           <HeaderList items={userList} title="회원" />
-          <HeaderList items={managerList} title="관리자" />
+          <HeaderList items={memberList} title="관리자" />
         </div>
       )}
     </div>
