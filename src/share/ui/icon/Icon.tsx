@@ -1,9 +1,12 @@
+import Down from '@/share/ui/icon/svg/down';
+import Up from '@/share/ui/icon/svg/up';
+
 import Next from './svg/next';
 import Plus from './svg/plus';
 import Prev from './svg/prev';
 import Search from './svg/search';
 
-export type IconType = 'plus' | 'search' | 'next' | 'prev';
+export type IconType = 'plus' | 'search' | 'next' | 'prev' | 'up' | 'down';
 
 export interface SvgProps {
   color: string;
@@ -26,6 +29,8 @@ export default function Icon({
     search: Search,
     prev: Prev,
     next: Next,
+    up: Up,
+    down: Down,
   };
 
   const SelectedIcon = icons[icon];
