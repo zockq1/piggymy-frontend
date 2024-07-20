@@ -3,11 +3,12 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 
 import down from '/public/img/Icon/down.png';
-import search from '/public/img/Icon/search.png';
 import up from '/public/img/Icon/up.png';
 import Text from '@/share/form/item/Text';
 import Button from '@/share/ui/button/IconButton';
+import IconButton from '@/share/ui/button/IconButton';
 import ContentBox from '@/share/ui/content-box/ContentBox';
+import Icon from '@/share/ui/icon/Icon';
 
 import Dropdown from './item/Dropdown';
 import RangePicker from './item/RangePicker';
@@ -60,11 +61,9 @@ function ContentSearchExample() {
                     <Button onClick={handleExpand}>
                       <Image src={down} alt="검색" width={18} height={18} />
                     </Button>
-                    <Button type={'submit'}>
-                      <div className={'flex items-center justify-center gap-1'}>
-                        <Image src={search} alt="검색" width={18} height={18} />
-                      </div>
-                    </Button>
+                    <IconButton type={'submit'}>
+                      <Icon icon={'search'} size={18} />
+                    </IconButton>
                   </>
                 )}
               </div>
@@ -113,7 +112,7 @@ function ContentSearchExample() {
                 </Button>
                 <Button type={'submit'}>
                   <div className={'flex items-center justify-center gap-1'}>
-                    <Image src={search} alt="검색" width={18} height={18} />
+                    <Icon icon={'search'} size={18} />
                     검색하기
                   </div>
                 </Button>
@@ -160,11 +159,9 @@ function WordSearchExample() {
                 name={'use'}
               />
             </div>
-            <Button type={'submit'}>
-              <div className={'flex items-center justify-center gap-1'}>
-                <Image src={search} alt="검색" width={18} height={18} />
-              </div>
-            </Button>
+            <IconButton type={'submit'}>
+              <Icon icon={'search'} size={18} />
+            </IconButton>
           </div>
         </Form>
       </ContentBox>
@@ -225,11 +222,9 @@ function ManagerSearchExample() {
                     <Button onClick={handleExpand}>
                       <Image src={down} alt="검색" width={18} height={18} />
                     </Button>
-                    <Button type={'submit'}>
-                      <div className={'flex items-center justify-center gap-1'}>
-                        <Image src={search} alt="검색" width={18} height={18} />
-                      </div>
-                    </Button>
+                    <IconButton type={'submit'}>
+                      <Icon icon={'search'} size={18} />
+                    </IconButton>
                   </>
                 )}
               </div>
@@ -259,7 +254,7 @@ function ManagerSearchExample() {
                   </Button>
                   <Button type={'submit'}>
                     <div className={'flex items-center justify-center gap-1'}>
-                      <Image src={search} alt="검색" width={18} height={18} />
+                      <Icon icon={'search'} size={18} />
                       검색하기
                     </div>
                   </Button>
@@ -296,9 +291,9 @@ function TextSearchExample() {
               name={'keyword'}
               className={'w-full'}
             />
-            <Button type={'submit'}>
-              <Image src={search} alt="검색" width={18} height={18} />
-            </Button>
+            <IconButton type={'submit'}>
+              <Icon icon={'search'} size={18} />
+            </IconButton>
           </div>
         </Form>
       </ContentBox>

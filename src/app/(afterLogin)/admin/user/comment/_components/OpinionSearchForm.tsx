@@ -2,15 +2,14 @@
 
 import { Form, Input, Select } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
-import Image from 'next/image';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
 
-import search from '/public/img/Icon/search.png';
 import Label from '@/share/form/item/Label';
 import RangePicker from '@/share/form/item/RangePicker';
-import Button from '@/share/ui/button/IconButton';
+import IconButton from '@/share/ui/button/IconButton';
 import ContentBox from '@/share/ui/content-box/ContentBox';
+import Icon from '@/share/ui/icon/Icon';
 import { OpinionType } from '@/type/opinionType';
 import { buildQueryString } from '@/utils/query';
 
@@ -72,11 +71,9 @@ export default function OpinionSearchForm() {
               <Input placeholder="내용을 입력해주세요." />
             </Form.Item>
           </div>
-          <Button type={'submit'}>
-            <div className={'flex items-center justify-center gap-1'}>
-              <Image src={search} alt="검색" width={18} height={18} />
-            </div>
-          </Button>
+          <IconButton type={'submit'}>
+            <Icon icon={'search'} size={18} />
+          </IconButton>
         </div>
         <div className={'flex w-full items-start justify-between gap-x-10'}>
           <div className={'flex gap-x-10'}>

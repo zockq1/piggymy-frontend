@@ -2,15 +2,14 @@
 
 import { Form } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
-import Image from 'next/image';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
 
-import search from '/public/img/Icon/search.png';
 import Dropdown from '@/share/form/item/Dropdown';
 import RangePicker from '@/share/form/item/RangePicker';
-import Button from '@/share/ui/button/IconButton';
+import IconButton from '@/share/ui/button/IconButton';
 import ContentBox from '@/share/ui/content-box/ContentBox';
+import Icon from '@/share/ui/icon/Icon';
 import { buildQueryString } from '@/share/utils/query';
 
 interface FormExampleValue {
@@ -69,11 +68,9 @@ function CardFilter() {
               initialValue={useYn}
             />
           </div>
-          <Button type={'submit'}>
-            <div className={'flex items-center justify-center gap-1'}>
-              <Image src={search} alt="검색" width={18} height={18} />
-            </div>
-          </Button>
+          <IconButton type={'submit'}>
+            <Icon icon={'search'} size={16} />
+          </IconButton>
         </div>
       </Form>
     </ContentBox>

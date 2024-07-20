@@ -2,7 +2,6 @@
 
 import { Form, Pagination } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
-import Image from 'next/image';
 import {
   useParams,
   usePathname,
@@ -11,7 +10,6 @@ import {
 } from 'next/navigation';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 
-import search from '/public/img/Icon/search.png';
 import Text from '@/share/form/item/Text';
 import { useDeleteMembers } from '@/share/query/member/useDeleteMembers';
 import { useGetMemberList } from '@/share/query/member/useGetMemberList';
@@ -19,6 +17,7 @@ import Button from '@/share/ui/button/Button';
 import IconButton from '@/share/ui/button/IconButton';
 import ContentBox from '@/share/ui/content-box/ContentBox';
 import Dropdown from '@/share/ui/dropdown/Dropdown';
+import Icon from '@/share/ui/icon/Icon';
 import Card from '@/share/ui/list-item/Card';
 import Title from '@/share/ui/title/Title';
 import { buildQueryString } from '@/share/utils/query';
@@ -112,7 +111,7 @@ function MemberSearchList() {
             className={'w-full'}
           />
           <IconButton type={'submit'}>
-            <Image src={search} alt="검색" width={18} height={18} />
+            <Icon icon={'search'} size={18} />
           </IconButton>
         </div>
         <div className={'flex w-full items-start justify-between'}>

@@ -3,7 +3,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { Form, Pagination } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
-import Image from 'next/image';
 import { useParams, usePathname, useRouter } from 'next/navigation';
 import React, {
   ChangeEvent,
@@ -12,7 +11,6 @@ import React, {
   useState,
 } from 'react';
 
-import search from '/public/img/Icon/search.png';
 import Text from '@/share/form/item/Text';
 import NoticeModal from '@/share/modal/NoticeModal';
 import { useModal } from '@/share/modal/useModal';
@@ -26,6 +24,7 @@ import Button from '@/share/ui/button/Button';
 import IconButton from '@/share/ui/button/IconButton';
 import ContentBox from '@/share/ui/content-box/ContentBox';
 import Dropdown from '@/share/ui/dropdown/Dropdown';
+import Icon from '@/share/ui/icon/Icon';
 import Add from '@/share/ui/list-item/Add';
 import Card from '@/share/ui/list-item/Card';
 import Title from '@/share/ui/title/Title';
@@ -169,7 +168,7 @@ function VocaSearchList({ searchParams }: VocaSearchListProps) {
             className={'w-full'}
           />
           <IconButton type={'submit'}>
-            <Image src={search} alt="검색" width={18} height={18} />
+            <Icon icon={'search'} size={16} />
           </IconButton>
         </div>
         <div className={'flex w-full items-start justify-between'}>
