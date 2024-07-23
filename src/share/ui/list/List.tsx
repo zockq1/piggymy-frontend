@@ -6,8 +6,9 @@ import Icon from '@/share/ui/icon/Icon';
 
 interface ListProps {
   itemList: {
+    thumbnail?: string;
     title: string;
-    createDate: string;
+    subtitle: string;
     handleClick: MouseEventHandler<HTMLDivElement>;
   }[];
   loadMore?: () => void;
@@ -27,12 +28,21 @@ function List({ itemList, loadMore, showLoadMore = true }: ListProps) {
       bordered
       dataSource={itemList}
       renderItem={(item) => (
-        <AntdList.Item className={'bg-white'} onClick={item.handleClick}>
-          <div className={'flex justify-start bg-white'}>
-            <Image src={''} width={96} height={56} alt="thumbnail" />
-            <div className={'flex flex-col bg-white'}>
-              <div>{item.title}</div>
-              <div>{item.createDate}</div>
+        <AntdList.Item
+          className={'cursor-pointer bg-white'}
+          onClick={item.handleClick}
+        >
+          <div className={'flex items-center justify-start gap-2 bg-white'}>
+            {item?.thumbnail && (
+              <div className={'relative h-[56px] w-[96px]'}>
+                <Image src={item.thumbnail} alt="thumbnail" fill />
+              </div>
+            )}
+            <div className={'flex flex-col gap-1 bg-white'}>
+              <div className={'font-bold'}>{item.title}</div>
+              <div className={'text-[12px] text-[#616161]'}>
+                {item.subtitle}
+              </div>
             </div>
           </div>
           <Icon icon={'next'} size={18} />
