@@ -16,7 +16,7 @@ export default function VocaImage() {
           <Image
             src={data.thumbnailPath + data.thumbnailName}
             alt="img"
-            width={400}
+            width={768}
             className="min-h-[184px] bg-gray-6"
           />
           <p className="p-4 text-xs font-normal text-gray-3">
@@ -28,7 +28,7 @@ export default function VocaImage() {
           <Image
             src={update}
             alt="img"
-            width={400}
+            width={768}
             className="min-h-[184px] bg-gray-6"
           />
           <p className="p-4 text-xs font-normal text-gray-3">

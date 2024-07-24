@@ -7,7 +7,7 @@ function MobileLayout({ children }: { children?: ReactNode }) {
         display: 'grid',
         gridTemplate: `'content' minmax(calc(100vh), max-content)`,
       }}
-      className="m-auto max-w-[400px] bg-white"
+      className="m-auto max-w-[768px] bg-white"
     >
       {children}
     </div>
