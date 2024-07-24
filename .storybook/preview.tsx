@@ -33,6 +33,7 @@ const preview: Preview = {
                 headerBg: '#ffffff',
                 borderRadiusLG: 0,
               },
+              List: { footerBg: '#ffffff' },
             },
           }}
         >
