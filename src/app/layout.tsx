@@ -38,6 +38,12 @@ export default function RootLayout({
                 headerBorderRadius: 0,
                 borderColor: '#CDD1D9',
               },
+              Collapse: {
+                contentBg: '#f5f5f5',
+                contentPadding: 0,
+                headerBg: '#ffffff',
+                borderRadiusLG: 0,
+              },
             },
           }}
         >

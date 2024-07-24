@@ -15,7 +15,7 @@ function Collapse({ title, content }: CollapseProps) {
         {
           key: '1',
           label: <h3 className={'font-bold'}>{title}</h3>,
-          children: <p className={'bg-[#f5f5f5] p-4'}>{content}</p>,
+          children: <p className={'bg-gray-6 p-4'}>{content}</p>,
         },
       ]}
       expandIcon={({ isActive }) => (
@@ -23,6 +23,7 @@ function Collapse({ title, content }: CollapseProps) {
       )}
       expandIconPosition={'end'}
       bordered={false}
+      defaultActiveKey={'1'}
     />
   );
 }
