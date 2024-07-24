@@ -5,7 +5,7 @@ import Icon from '@/share/ui/icon/Icon';
 
 interface CollapseProps {
   title: string;
-  content: ReactNode;
+  content?: ReactNode;
 }
 
 function Collapse({ title, content }: CollapseProps) {
@@ -15,13 +15,14 @@ function Collapse({ title, content }: CollapseProps) {
         {
           key: '1',
           label: <h3 className={'font-bold'}>{title}</h3>,
-          children: content,
+          children: <p className={'bg-[#f5f5f5] p-4'}>{content}</p>,
         },
       ]}
       expandIcon={({ isActive }) => (
         <Icon icon={isActive ? 'up' : 'down'} size={16} />
       )}
       expandIconPosition={'end'}
+      bordered={false}
     />
   );
 }
