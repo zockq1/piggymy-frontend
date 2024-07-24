@@ -2,7 +2,6 @@
 
 <p align="center">
 <img src="docs/mobile.png" height="300"/><img src="docs/form.png" height="300"/></p>
-출처: https://0soo.tistory.com/227 [Lifealong:티스토리]
 <br>
 
 ## 서비스 소개
