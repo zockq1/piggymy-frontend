@@ -29,6 +29,7 @@ const preview: Preview = {
               },
               Collapse: {
                 contentBg: '#f5f5f5',
+                contentPadding: 0,
                 headerBg: '#ffffff',
                 borderRadiusLG: 0,
               },
