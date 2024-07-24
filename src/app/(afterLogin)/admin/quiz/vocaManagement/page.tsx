@@ -1,12 +1,24 @@
 import React from 'react';
 
 import CardFilter from '@/app/(afterLogin)/admin/quiz/_components/CardFilter';
-import PageInfo from '@/app/(afterLogin)/admin/quiz/_components/PageInfo';
 import CreateVoca from '@/app/(afterLogin)/admin/quiz/vocaManagement/_components/CreateVoca';
 import VocaSearchList from '@/app/(afterLogin)/admin/quiz/vocaManagement/_components/VocaSearchList';
 import Layout from '@/share/layout/Layout';
 
-export default async function TermManagement() {
+import PageInfo from '../../_components/PageInfo';
+
+export default async function VocaManagement({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | undefined };
+}) {
+  const params = {
+    start_date: searchParams['start_date'],
+    end_date: searchParams['end_date'],
+    is_use: searchParams['is_use'],
+    search_keyword: searchParams['search_keyword'],
+  };
+
   return (
     <>
       <Layout.Content.Full>
@@ -18,9 +30,8 @@ export default async function TermManagement() {
       <Layout.Content.Full>
         <CardFilter />
       </Layout.Content.Full>
-
       <Layout.Content.Left>
-        <VocaSearchList />
+        <VocaSearchList searchParams={params} />
       </Layout.Content.Left>
       <Layout.Content.Right>
         <CreateVoca />

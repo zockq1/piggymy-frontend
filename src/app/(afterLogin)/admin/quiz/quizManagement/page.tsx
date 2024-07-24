@@ -1,13 +1,24 @@
 import React from 'react';
 
 import CardFilter from '@/app/(afterLogin)/admin/quiz/_components/CardFilter';
-import PageInfo from '@/app/(afterLogin)/admin/quiz/_components/PageInfo';
 import QuizSearchList from '@/app/(afterLogin)/admin/quiz/quizManagement/_components/QuizSearchList';
 import Layout from '@/share/layout/Layout';
 
+import PageInfo from '../../_components/PageInfo';
 import CreateQuiz from './_components/CreateQuiz';
 
-export default async function QuizManagement() {
+export default async function QuizManagement({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | undefined };
+}) {
+  const params = {
+    start_date: searchParams['start_date'],
+    end_date: searchParams['end_date'],
+    is_use: searchParams['is_use'],
+    search_keyword: searchParams['search_keyword'],
+  };
+
   return (
     <>
       <Layout.Content.Full>
@@ -19,9 +30,8 @@ export default async function QuizManagement() {
       <Layout.Content.Full>
         <CardFilter />
       </Layout.Content.Full>
-
       <Layout.Content.Left>
-        <QuizSearchList />
+        <QuizSearchList searchParams={params} />
       </Layout.Content.Left>
       <Layout.Content.Right>
         <CreateQuiz />

@@ -26,19 +26,19 @@ export const getBannerList = async (
   return response.data;
 };
 
-export function useGetBannerList(data?: Request<GetBannerListRequestQuery>) {
+export function useGetBannerList(request?: Request<GetBannerListRequestQuery>) {
   return useQuery({
-    queryKey: ['banners', data?.data],
-    queryFn: () => getBannerList(data),
+    queryKey: ['banners', request?.data],
+    queryFn: () => getBannerList(request),
   });
 }
 
 export function usePrefetchBannerList(
   queryClient: QueryClient,
-  data?: Request<GetBannerListRequestQuery>,
+  request?: Request<GetBannerListRequestQuery>,
 ) {
   return queryClient.prefetchQuery({
-    queryKey: ['banners', data?.data],
-    queryFn: () => getBannerList(data),
+    queryKey: ['banners', request?.data],
+    queryFn: () => getBannerList(request),
   });
 }

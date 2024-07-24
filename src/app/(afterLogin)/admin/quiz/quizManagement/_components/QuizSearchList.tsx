@@ -1,14 +1,9 @@
 'use client';
 
+import { useQueryClient } from '@tanstack/react-query';
 import { Form, Pagination } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
-import Image from 'next/image';
-import {
-  useParams,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 import React, {
   ChangeEvent,
   MouseEventHandler,
@@ -16,17 +11,20 @@ import React, {
   useState,
 } from 'react';
 
-import search from '/public/img/Icon/search.png';
 import Text from '@/share/form/item/Text';
 import NoticeModal from '@/share/modal/NoticeModal';
 import { useModal } from '@/share/modal/useModal';
 import { useDeleteQuizzes } from '@/share/query/quiz/useDeleteQuizzes';
-import { useGetQuizList } from '@/share/query/quiz/useGetQuizList';
+import {
+  prefetchQuizList,
+  useGetQuizList,
+} from '@/share/query/quiz/useGetQuizList';
 import { usePatchQuizzesIsUse } from '@/share/query/quiz/useUpdateQuiz';
 import Button from '@/share/ui/button/Button';
 import IconButton from '@/share/ui/button/IconButton';
 import ContentBox from '@/share/ui/content-box/ContentBox';
 import Dropdown from '@/share/ui/dropdown/Dropdown';
+import Icon from '@/share/ui/icon/Icon';
 import Add from '@/share/ui/list-item/Add';
 import Card from '@/share/ui/list-item/Card';
 import Title from '@/share/ui/title/Title';
@@ -39,17 +37,21 @@ interface FormExampleValue {
   keyword: string;
 }
 
-function QuizSearchList() {
-  const params = useParams();
+interface QuizSearchListProps {
+  searchParams: {
+    start_date?: string;
+    end_date?: string;
+    is_use?: string;
+    search_keyword?: string;
+  };
+}
+
+function QuizSearchList({ searchParams }: QuizSearchListProps) {
+  const { quizId } = useParams();
   const router = useRouter();
   const path = usePathname();
-  const searchParams = useSearchParams();
   const { openModal, closeModal } = useModal();
-
-  const startDate = searchParams.get('start_date');
-  const endDate = searchParams.get('end_date');
-  const isUse = searchParams.get('is_use');
-  const keyword = searchParams.get('keyword');
+  const queryClient = useQueryClient();
 
   const [selectQuizList, setSelectQuizList] = useState<QuizModel[]>([]);
   const [page, setPage] = useState(1);
@@ -58,15 +60,12 @@ function QuizSearchList() {
   const selectQuizIds = selectQuizList.map((quiz) => quiz.id);
   const selectQuizIsUseValues = selectQuizList.map((quiz) => quiz.isUse);
 
-  const { data, refetch } = useGetQuizList({
+  const { data } = useGetQuizList({
     data: {
       page,
       page_size: 10,
-      start_date: startDate!,
-      end_date: endDate!,
-      is_use: isUse,
-      search_keyword: keyword!,
       sort_type: sortType,
+      ...searchParams,
     },
   });
   const { mutate: deleteQuizzes } = useDeleteQuizzes();
@@ -75,12 +74,21 @@ function QuizSearchList() {
   const totalCount = data?.data.totalCount;
   const quizList = data?.data.list ?? [];
 
+  useEffect(() => {
+    prefetchQuizList(queryClient, {
+      data: {
+        page: page + 1,
+        page_size: 10,
+        sort_type: sortType,
+        ...searchParams,
+      },
+    }).then();
+  }, [page, sortType, queryClient, searchParams]);
+
   const handleFinish = (formValue: FormExampleValue) => {
     const params = {
-      start_date: startDate ?? '',
-      end_date: endDate ?? '',
-      is_use: isUse ?? '',
-      keyword: formValue.keyword ?? '',
+      ...searchParams,
+      search_keyword: formValue.keyword ?? '',
     };
 
     if (buildQueryString(params)) {
@@ -146,10 +154,6 @@ function QuizSearchList() {
     }
   };
 
-  useEffect(() => {
-    refetch().then();
-  }, [sortType, page, refetch]);
-
   return (
     <ContentBox className={'flex h-full items-start'}>
       <Form
@@ -164,7 +168,7 @@ function QuizSearchList() {
             className={'w-full'}
           />
           <IconButton type={'submit'}>
-            <Image src={search} alt="검색" width={18} height={18} />
+            <Icon icon={'search'} size={18} />
           </IconButton>
         </div>
         <div className={'flex w-full items-start justify-between'}>
@@ -215,11 +219,9 @@ function QuizSearchList() {
                     koreanTitle={quiz.title}
                     createdDate={dayjs(quiz.createdDate)}
                     isActive={quiz.isUse}
-                    isChecked={selectQuizList
-                      .map((quiz) => quiz.id)
-                      .includes(quiz.id)}
+                    isChecked={selectQuizIds.includes(quiz.id)}
                     route={`/admin/quiz/quizManagement/${quiz.id}`}
-                    isSelected={+params.quizId === quiz.id}
+                    isSelected={+quizId === quiz.id}
                     onChangeChecked={() => toggleCheck(quiz)}
                   />
                 </li>
@@ -240,9 +242,8 @@ function QuizSearchList() {
             showLessItems
             showSizeChanger={false}
             total={totalCount}
-            onChange={async (page) => {
+            onChange={(page) => {
               setPage(page);
-              await refetch();
             }}
           />
         </div>

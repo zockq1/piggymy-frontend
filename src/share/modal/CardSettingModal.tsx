@@ -6,12 +6,12 @@ import Image from 'next/image';
 import React, { ReactNode, useState } from 'react';
 
 import refreshIcon from '/public/img/Icon/refresh.svg';
-import search from '/public/img/Icon/search.png';
 import Text from '@/share/form/item/Text';
 import StatusBadge from '@/share/ui/badge/StatusBadge';
 import WordBadge from '@/share/ui/badge/WordBadge';
 import Button from '@/share/ui/button/Button';
 import IconButton from '@/share/ui/button/IconButton';
+import Icon from '@/share/ui/icon/Icon';
 import Table from '@/share/ui/table/Table';
 import Title from '@/share/ui/title/Title';
 
@@ -165,9 +165,7 @@ function CardSettingModal({ onConfirm, onCancel }: CardSettingProps) {
             ]}
           />
           <IconButton type={'submit'}>
-            <div className={'flex items-center justify-center gap-1'}>
-              <Image src={search} alt="검색" width={18} height={18} />
-            </div>
+            <Icon icon={'search'} size={18} />
           </IconButton>
         </div>
       </Form>

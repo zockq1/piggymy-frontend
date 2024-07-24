@@ -1,13 +1,16 @@
 import Layout from '@/share/layout/Layout';
 
+import PageInfo from '../../_components/PageInfo';
 import GreetingMessageForm from './_components/GreetingMessageForm';
-import GreetingMessagePageInfo from './_components/GreetingMessagePageInfo';
 
 export default async function GreetingMessage() {
   return (
     <>
       <Layout.Content.Full>
-        <GreetingMessagePageInfo />
+        <PageInfo
+          title="그리팅 메시지 관리"
+          path={['콘텐츠', '그리팅 메시지 관리']}
+        />
       </Layout.Content.Full>
       <Layout.Content.Full>
         <GreetingMessageForm />

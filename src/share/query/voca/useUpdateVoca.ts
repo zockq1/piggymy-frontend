@@ -44,7 +44,7 @@ export const updateVoca = async (
         englishTitle: englishTitle || 'abc',
         koreanCategory: koreanCategory || 'r',
         englishCategory: englishCategory || 'a',
-        content: content || '가나다라마',
+        content: content || '',
         sourceName: sourceName || 'abc',
         sourceLink: sourceLink || 'abc',
         thumbnailPath,

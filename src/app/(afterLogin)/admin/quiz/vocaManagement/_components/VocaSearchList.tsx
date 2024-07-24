@@ -1,14 +1,9 @@
 'use client';
 
+import { useQueryClient } from '@tanstack/react-query';
 import { Form, Pagination } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
-import Image from 'next/image';
-import {
-  useParams,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 import React, {
   ChangeEvent,
   MouseEventHandler,
@@ -16,17 +11,20 @@ import React, {
   useState,
 } from 'react';
 
-import search from '/public/img/Icon/search.png';
 import Text from '@/share/form/item/Text';
 import NoticeModal from '@/share/modal/NoticeModal';
 import { useModal } from '@/share/modal/useModal';
 import { useDeleteVocas } from '@/share/query/voca/useDeleteVocas';
-import { useGetVocaList } from '@/share/query/voca/useGetVocaList';
+import {
+  prefetchVocaList,
+  useGetVocaList,
+} from '@/share/query/voca/useGetVocaList';
 import { usePatchVocasIsUse } from '@/share/query/voca/useUpdateVoca';
 import Button from '@/share/ui/button/Button';
 import IconButton from '@/share/ui/button/IconButton';
 import ContentBox from '@/share/ui/content-box/ContentBox';
 import Dropdown from '@/share/ui/dropdown/Dropdown';
+import Icon from '@/share/ui/icon/Icon';
 import Add from '@/share/ui/list-item/Add';
 import Card from '@/share/ui/list-item/Card';
 import Title from '@/share/ui/title/Title';
@@ -39,17 +37,21 @@ interface FormExampleValue {
   keyword: string;
 }
 
-function VocaSearchList() {
-  const params = useParams();
+interface VocaSearchListProps {
+  searchParams: {
+    start_date?: string;
+    end_date?: string;
+    is_use?: string;
+    search_keyword?: string;
+  };
+}
+
+function VocaSearchList({ searchParams }: VocaSearchListProps) {
+  const { vocaId } = useParams();
   const router = useRouter();
   const path = usePathname();
-  const searchParams = useSearchParams();
   const { openModal, closeModal } = useModal();
-
-  const startDate = searchParams.get('start_date');
-  const endDate = searchParams.get('end_date');
-  const isUse = searchParams.get('is_use');
-  const keyword = searchParams.get('keyword');
+  const queryClient = useQueryClient();
 
   const [selectVocaList, setSelectVocaList] = useState<VocaModel[]>([]);
   const [page, setPage] = useState(1);
@@ -58,15 +60,12 @@ function VocaSearchList() {
   const selectVocaIds = selectVocaList.map((voca) => voca.id);
   const selectVocaIsUseValues = selectVocaList.map((voca) => voca.isUse);
 
-  const { data, refetch } = useGetVocaList({
+  const { data } = useGetVocaList({
     data: {
       page,
       page_size: 10,
-      start_date: startDate!,
-      end_date: endDate!,
-      is_use: isUse,
-      search_keyword: keyword!,
       sort_type: sortType,
+      ...searchParams,
     },
   });
   const { mutate: deleteVocas } = useDeleteVocas();
@@ -75,12 +74,21 @@ function VocaSearchList() {
   const totalCount = data?.data.totalCount;
   const vocaList = data?.data.list ?? [];
 
+  useEffect(() => {
+    prefetchVocaList(queryClient, {
+      data: {
+        page: page + 1,
+        page_size: 10,
+        sort_type: sortType,
+        ...searchParams,
+      },
+    }).then();
+  }, [page, sortType, queryClient, searchParams]);
+
   const handleFinish = (formValue: FormExampleValue) => {
     const params = {
-      start_date: startDate ?? '',
-      end_date: endDate ?? '',
-      is_use: isUse ?? '',
-      keyword: formValue.keyword ?? '',
+      ...searchParams,
+      search_keyword: formValue.keyword ?? '',
     };
 
     if (buildQueryString(params)) {
@@ -146,10 +154,6 @@ function VocaSearchList() {
     }
   };
 
-  useEffect(() => {
-    refetch().then();
-  }, [sortType, page, refetch]);
-
   return (
     <ContentBox className={'flex h-full items-start'}>
       <Form
@@ -164,7 +168,7 @@ function VocaSearchList() {
             className={'w-full'}
           />
           <IconButton type={'submit'}>
-            <Image src={search} alt="검색" width={18} height={18} />
+            <Icon icon={'search'} size={16} />
           </IconButton>
         </div>
         <div className={'flex w-full items-start justify-between'}>
@@ -219,7 +223,7 @@ function VocaSearchList() {
                       .map((voca) => voca.id)
                       .includes(voca.id)}
                     route={`/admin/quiz/vocaManagement/${voca.id}`}
-                    isSelected={+params.vocaId === voca.id}
+                    isSelected={+vocaId === voca.id}
                     onChangeChecked={() => toggleCheck(voca)}
                   />
                 </li>
@@ -242,7 +246,6 @@ function VocaSearchList() {
             total={totalCount}
             onChange={async (page) => {
               setPage(page);
-              await refetch();
             }}
           />
         </div>
